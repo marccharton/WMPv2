@@ -1,0 +1,17 @@
+c:\users\marc\documents\visual studio 2010\Projects\TagId3\TagId3\bin\Debug\TagId3.exe
+c:\users\marc\documents\visual studio 2010\Projects\TagId3\TagId3\bin\Debug\TagId3.pdb
+c:\users\marc\documents\visual studio 2010\Projects\TagId3\TagId3\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\marc\documents\visual studio 2010\Projects\TagId3\TagId3\obj\x86\Debug\MainWindow.baml
+c:\users\marc\documents\visual studio 2010\Projects\TagId3\TagId3\obj\x86\Debug\MainWindow.g.cs
+c:\users\marc\documents\visual studio 2010\Projects\TagId3\TagId3\obj\x86\Debug\App.g.cs
+c:\users\marc\documents\visual studio 2010\Projects\TagId3\TagId3\obj\x86\Debug\TagId3_MarkupCompile.cache
+c:\users\marc\documents\visual studio 2010\Projects\TagId3\TagId3\obj\x86\Debug\TagId3.g.resources
+c:\users\marc\documents\visual studio 2010\Projects\TagId3\TagId3\obj\x86\Debug\TagId3.Properties.Resources.resources
+c:\users\marc\documents\visual studio 2010\Projects\TagId3\TagId3\obj\x86\Debug\GenerateResource.read.1.tlog
+c:\users\marc\documents\visual studio 2010\Projects\TagId3\TagId3\obj\x86\Debug\GenerateResource.write.1.tlog
+c:\users\marc\documents\visual studio 2010\Projects\TagId3\TagId3\obj\x86\Debug\TagId3.exe
+c:\users\marc\documents\visual studio 2010\Projects\TagId3\TagId3\obj\x86\Debug\TagId3.pdb
+c:\users\marc\documents\visual studio 2010\Projects\TagId3\TagId3\bin\Debug\Id3Lib.pdb
+c:\users\marc\documents\visual studio 2010\Projects\TagId3\TagId3\bin\Debug\Mp3Lib.pdb
+c:\users\marc\documents\visual studio 2010\Projects\TagId3\TagId3\bin\Debug\Id3Lib.xml
+C:\Users\Marc\documents\visual studio 2010\Projects\TagId3\TagId3\bin\Debug\taglib-sharp.dll

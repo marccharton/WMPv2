@@ -1,0 +1,13 @@
+C:\Users\Marc\documents\visual studio 2010\Projects\TagId3\mediaPlayer\bin\Debug\mediaPlayer.exe
+C:\Users\Marc\documents\visual studio 2010\Projects\TagId3\mediaPlayer\bin\Debug\mediaPlayer.pdb
+C:\Users\Marc\documents\visual studio 2010\Projects\TagId3\mediaPlayer\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Marc\documents\visual studio 2010\Projects\TagId3\mediaPlayer\obj\x86\Debug\MainWindow.baml
+C:\Users\Marc\documents\visual studio 2010\Projects\TagId3\mediaPlayer\obj\x86\Debug\MainWindow.g.cs
+C:\Users\Marc\documents\visual studio 2010\Projects\TagId3\mediaPlayer\obj\x86\Debug\App.g.cs
+C:\Users\Marc\documents\visual studio 2010\Projects\TagId3\mediaPlayer\obj\x86\Debug\mediaPlayer_MarkupCompile.cache
+C:\Users\Marc\documents\visual studio 2010\Projects\TagId3\mediaPlayer\obj\x86\Debug\mediaPlayer.g.resources
+C:\Users\Marc\documents\visual studio 2010\Projects\TagId3\mediaPlayer\obj\x86\Debug\mediaPlayer.Properties.Resources.resources
+C:\Users\Marc\documents\visual studio 2010\Projects\TagId3\mediaPlayer\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Marc\documents\visual studio 2010\Projects\TagId3\mediaPlayer\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Marc\documents\visual studio 2010\Projects\TagId3\mediaPlayer\obj\x86\Debug\mediaPlayer.exe
+C:\Users\Marc\documents\visual studio 2010\Projects\TagId3\mediaPlayer\obj\x86\Debug\mediaPlayer.pdb

@@ -1,0 +1,9 @@
+﻿<Window x:Class="mediaPlayer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Button x:Name="btnPlay" Content="Play" Width="100px" Height="30px" Click="btnPlay_Click" Margin="162,140,241,141" />
+        <Button x:Name="btnStop" Content="Stop" Width="100px" Height="30px" Margin="268,140,135,141" Click="btnStop_Click" />
+    </Grid>
+</Window>
