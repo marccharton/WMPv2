@@ -1,0 +1,50 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" x:Name="window" mc:Ignorable="d" x:Class="MyMiniVLC.MainWindow"
+        xmlns:local="clr-namespace:MyMiniVLC"
+        Title="MainWindow" Height="350" Width="525" Loaded="window_Loaded">
+	<Window.Resources>
+		<ControlTemplate x:Key="ButtonControlTemplateMyMiniVLC" TargetType="{x:Type Button}">
+			<Border BorderThickness="20,2" CornerRadius="50" BorderBrush="{x:Null}" Width="Auto" Margin="1,0,4.2,0">
+				<Border.Background>
+					<LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+						<GradientStop Color="Black" Offset="1"/>
+						<GradientStop Color="White"/>
+					</LinearGradientBrush>
+				</Border.Background>
+				<Grid Background="#00000000">
+					<TextBlock Margin="0" TextWrapping="Wrap" Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+				</Grid>
+			</Border>
+		</ControlTemplate>
+	</Window.Resources>
+	<Window.Background>
+		<LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+			<GradientStop Color="Black" Offset="1"/>
+			<GradientStop Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
+		</LinearGradientBrush>
+	</Window.Background>
+
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static local:MainWindow.fileDialogRoutedCommand}" Executed="ExecutedCustomCommand"/>
+    </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Command="{x:Static local:MainWindow.fileDialogRoutedCommand}" Key="O" Modifiers="Control"/>
+    </Window.InputBindings>
+
+    <Grid Margin="0">
+		<Grid Margin="0,0.8,0,74" d:IsHidden="True">
+			<MediaElement x:Name="videoPlayer" LoadedBehavior="Manual"/>
+		</Grid>
+		<Grid Height="21.6" Margin="0,0,0,51.2" VerticalAlignment="Bottom">
+			<Slider Background="{x:Null}" x:Name="sliderTime"/>
+		</Grid>
+		<Grid Height="51.2" VerticalAlignment="Bottom">
+			<DockPanel LastChildFill="False" Margin="0" HorizontalAlignment="Center">
+				<Button Content="Play" Margin="0" Width="150" x:Name="buttonPlay" Click="buttonPlay_Click"/>
+				<Button Content="Pause" Margin="0" Width="150" x:Name="buttonPause" Click ="buttonPause_Click"/>
+			</DockPanel>
+		</Grid>
+	</Grid>
+</Window>
