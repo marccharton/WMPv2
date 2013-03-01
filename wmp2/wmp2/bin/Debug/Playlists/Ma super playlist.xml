@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<Playlist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>Ma super playlist</Name>
+  <Description>Alors c'est une playlist qui envoie grave du lourd parcque ben tout simplement parceque elle est trop bien</Description>
+  <CreationDate>2013-03-01T15:51:53.9979346+01:00</CreationDate>
+  <Like>0</Like>
+  <Songs>
+    <string>C:\Users\Marc\Google Drive\[Partages]\KramAyrtoogle\dotNet\BDD\Music\01 Normal.m4a</string>
+    <string>C:\Users\Marc\Google Drive\[Partages]\KramAyrtoogle\dotNet\BDD\Music\01 Normal.m4a</string>
+    <string>C:\Users\Marc\Google Drive\[Partages]\KramAyrtoogle\dotNet\BDD\Music\01 Normal.m4a</string>
+    <string>C:\Users\Marc\Google Drive\[Partages]\KramAyrtoogle\dotNet\BDD\Music\01 Normal.m4a</string>
+    <string>E:\Programs Files\Itunes\Music\Bumblefoot\Normal\04 Rockstar For a Day.m4a</string>
+  </Songs>
+</Playlist>
