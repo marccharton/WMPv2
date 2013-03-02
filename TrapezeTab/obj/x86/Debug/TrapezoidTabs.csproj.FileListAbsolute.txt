@@ -1,0 +1,16 @@
+C:\Users\Marc\Documents\Visual Studio 2010\Projects\TrapezeTab\bin\Debug\TrapezoidTabs.exe
+C:\Users\Marc\Documents\Visual Studio 2010\Projects\TrapezeTab\bin\Debug\TrapezoidTabs.pdb
+C:\Users\Marc\Documents\Visual Studio 2010\Projects\TrapezeTab\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Marc\Documents\Visual Studio 2010\Projects\TrapezeTab\obj\x86\Debug\MainWindow.baml
+C:\Users\Marc\Documents\Visual Studio 2010\Projects\TrapezeTab\obj\x86\Debug\App.baml
+C:\Users\Marc\Documents\Visual Studio 2010\Projects\TrapezeTab\obj\x86\Debug\MainWindow.g.cs
+C:\Users\Marc\Documents\Visual Studio 2010\Projects\TrapezeTab\obj\x86\Debug\App.g.cs
+C:\Users\Marc\Documents\Visual Studio 2010\Projects\TrapezeTab\obj\x86\Debug\TrapezoidTabs_MarkupCompile.cache
+C:\Users\Marc\Documents\Visual Studio 2010\Projects\TrapezeTab\obj\x86\Debug\TrapezoidTabs_MarkupCompile.lref
+C:\Users\Marc\Documents\Visual Studio 2010\Projects\TrapezeTab\obj\x86\Debug\Styles\TabControl.baml
+C:\Users\Marc\Documents\Visual Studio 2010\Projects\TrapezeTab\obj\x86\Debug\TrapezoidTabs.g.resources
+C:\Users\Marc\Documents\Visual Studio 2010\Projects\TrapezeTab\obj\x86\Debug\TrapezoidTabs.Properties.Resources.resources
+C:\Users\Marc\Documents\Visual Studio 2010\Projects\TrapezeTab\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Marc\Documents\Visual Studio 2010\Projects\TrapezeTab\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Marc\Documents\Visual Studio 2010\Projects\TrapezeTab\obj\x86\Debug\TrapezoidTabs.exe
+C:\Users\Marc\Documents\Visual Studio 2010\Projects\TrapezeTab\obj\x86\Debug\TrapezoidTabs.pdb
