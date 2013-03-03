@@ -1,0 +1,14 @@
+G:\Epitech\Semestre_06\Dot NET\MyMiniVLC\MyMiniVLC\bin\Release\MyMiniVLC.exe
+G:\Epitech\Semestre_06\Dot NET\MyMiniVLC\MyMiniVLC\bin\Release\MyMiniVLC.pdb
+G:\Epitech\Semestre_06\Dot NET\MyMiniVLC\MyMiniVLC\obj\x86\Release\ResolveAssemblyReference.cache
+G:\Epitech\Semestre_06\Dot NET\MyMiniVLC\MyMiniVLC\obj\x86\Release\MainWindow.g.cs
+G:\Epitech\Semestre_06\Dot NET\MyMiniVLC\MyMiniVLC\obj\x86\Release\App.g.cs
+G:\Epitech\Semestre_06\Dot NET\MyMiniVLC\MyMiniVLC\obj\x86\Release\MyMiniVLC_MarkupCompile.cache
+G:\Epitech\Semestre_06\Dot NET\MyMiniVLC\MyMiniVLC\obj\x86\Release\MyMiniVLC_MarkupCompile.lref
+G:\Epitech\Semestre_06\Dot NET\MyMiniVLC\MyMiniVLC\obj\x86\Release\MainWindow.baml
+G:\Epitech\Semestre_06\Dot NET\MyMiniVLC\MyMiniVLC\obj\x86\Release\MyMiniVLC.g.resources
+G:\Epitech\Semestre_06\Dot NET\MyMiniVLC\MyMiniVLC\obj\x86\Release\MyMiniVLC.Properties.Resources.resources
+G:\Epitech\Semestre_06\Dot NET\MyMiniVLC\MyMiniVLC\obj\x86\Release\GenerateResource.read.1.tlog
+G:\Epitech\Semestre_06\Dot NET\MyMiniVLC\MyMiniVLC\obj\x86\Release\GenerateResource.write.1.tlog
+G:\Epitech\Semestre_06\Dot NET\MyMiniVLC\MyMiniVLC\obj\x86\Release\MyMiniVLC.exe
+G:\Epitech\Semestre_06\Dot NET\MyMiniVLC\MyMiniVLC\obj\x86\Release\MyMiniVLC.pdb
