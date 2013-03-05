@@ -10,6 +10,7 @@ namespace wmp2
         public string Name { get; set; }
         public string Description { get; set; }
         public int Like { get; set; }
+        public Artist Artist { get; set; }
         public List<Song> Songs { get; set; }
 
         public Album()

@@ -1,0 +1,14 @@
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\MyMiniVLC\bin\Debug\MyMiniVLC.exe
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\MyMiniVLC\bin\Debug\MyMiniVLC.pdb
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\MainWindow.g.cs
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\App.g.cs
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\MyMiniVLC_MarkupCompile.cache
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\MyMiniVLC_MarkupCompile.lref
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\MainWindow.baml
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\MyMiniVLC.g.resources
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\MyMiniVLC.Properties.Resources.resources
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\MyMiniVLC.exe
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\MyMiniVLC.pdb

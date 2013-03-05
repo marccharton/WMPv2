@@ -22,28 +22,40 @@ namespace wmp2
             foreach (Artist art in lib.Artists)
                 Console.WriteLine(art.Name);
 
-            Console.WriteLine("J'ai trouve " + lib.Artists.Count + " Artist(s)");
-            Console.WriteLine("J'ai trouve " + lib.Albums.Count + " Album(s)");
-            Console.WriteLine("J'ai trouve " + lib.Songs.Count + " Song(s)");
+            Console.WriteLine("J'ai trouvé " + lib.Artists.Count + " Artist(s)");
+            Console.WriteLine("J'ai trouvé " + lib.Albums.Count + " Album(s)");
+            Console.WriteLine("J'ai trouvé " + lib.Songs.Count + " Song(s)");
+
+            Console.WriteLine("La liste des songs de 'BUMBLEFOOT' : ");
+            foreach (Song s in lib.GetSongsByArtist("BUMBLEFOOT"))
+            {
+                Console.WriteLine(s.Title + ", " + s.Artist.Name);
+            }
+
+            Console.WriteLine("La liste des songs de 'BUMBLEFOOT' : ");
+            foreach (Album alb in lib.GetAlbumsByArtist("BUMBLEFOOT"))
+            {
+                Console.WriteLine(alb.Name);
+            }
 
             #endregion
 
 
-            #region playlist
+            //#region playlist
             
-            Playlist p = new Playlist() { Name = "Ma super playlist" , Description = "Alors c'est une playlist qui envoie grave du lourd parcque ben tout simplement parceque elle est trop bien"};
-            p.AddSong(lib.GetSongWithPath(@"C:\Users\Marc\Google Drive\[Partages]\KramAyrtoogle\dotNet\BDD\Music\01 Normal.m4a"));
-            p.AddSong(lib.GetSongWithPath(@"C:\Users\Marc\Google Drive\[Partages]\KramAyrtoogle\dotNet\BDD\Music\01 Normal.m4a"));
-            p.AddSong(lib.GetSongWithPath(@"C:\Users\Marc\Google Drive\[Partages]\KramAyrtoogle\dotNet\BDD\Music\01 Normal.m4a"));
-            p.AddSong(lib.GetSongWithPath(@"C:\Users\Marc\Google Drive\[Partages]\KramAyrtoogle\dotNet\BDD\Music\01 Normal.m4a"));
-            p.AddSong(lib.GetSongWithPath(@"E:\Programs Files\Itunes\Music\Bumblefoot\Normal\04 Rockstar For a Day.m4a"));
+            //Playlist p = new Playlist() { Name = "Ma super playlist" , Description = "Alors c'est une playlist qui envoie grave du lourd parcque ben tout simplement parceque elle est trop bien"};
+            //p.AddSong(lib.GetSongWithPath(@"C:\Users\Marc\Google Drive\[Partages]\KramAyrtoogle\dotNet\BDD\Music\01 Normal.m4a"));
+            //p.AddSong(lib.GetSongWithPath(@"C:\Users\Marc\Google Drive\[Partages]\KramAyrtoogle\dotNet\BDD\Music\01 Normal.m4a"));
+            //p.AddSong(lib.GetSongWithPath(@"C:\Users\Marc\Google Drive\[Partages]\KramAyrtoogle\dotNet\BDD\Music\01 Normal.m4a"));
+            //p.AddSong(lib.GetSongWithPath(@"C:\Users\Marc\Google Drive\[Partages]\KramAyrtoogle\dotNet\BDD\Music\01 Normal.m4a"));
+            //p.AddSong(lib.GetSongWithPath(@"E:\Programs Files\Itunes\Music\Bumblefoot\Normal\04 Rockstar For a Day.m4a"));
             
-            p.Serialize();
-            lib.Playlists.Add(p);
+            //p.Serialize();
+            //lib.Playlists.Add(p);
             
-            Console.WriteLine(p.toString());
+            //Console.WriteLine(p.toString());
             
-            #endregion
+            //#endregion
 
             // Affichage des arguments
             foreach (string str in args)

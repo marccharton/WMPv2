@@ -530,7 +530,16 @@
         <Grid Height="47.733" VerticalAlignment="Bottom">
             <Button x:Name="buttonPlay" Content="{Binding PlayPauseButtonText}"  Margin="0,0,75.733,0" Command="{Binding PlayRequest}" HorizontalAlignment="Right" Width="99.4"/>
             <TextBlock x:Name="timeLabel" HorizontalAlignment="Left" TextWrapping="Wrap" Width="122.667" Foreground="White" TextAlignment="Center" Text="{Binding CurrentSourceMedia}"/>
-            <Button x:Name="openButton" Content="..." HorizontalAlignment="Right" Width="75.733" Command="{Binding OpenDialogCommand}"/>
+            <Button x:Name="openButton" Content="..." HorizontalAlignment="Right" Width="75.733" Command="{Binding OpenDialogCommand}">
+            	<Button.Background>
+            		<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+            			<GradientStop Color="#FFF3F3F3" Offset="0"/>
+            			<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+            			<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+            			<GradientStop Color="White" Offset="1"/>
+            		</LinearGradientBrush>
+            	</Button.Background>
+            </Button>
             <Button x:Name="stopButton" Content="Stop" Margin="139.467,0,175.133,0" Command="{Binding StopRequest}"/>
             <CheckBox x:Name="repeatCheckBox" Content="CheckBox" HorizontalAlignment="Left" Margin="122.667,0,0,0" Width="12.8" Command="{Binding RepeatCommand}" IsChecked="{Binding IsRepeat}"/>
         </Grid>
