@@ -10,6 +10,8 @@ namespace wmp2
     {
         static void Main(string[] args)
         {
+            setDisplay();
+            
             #region library
 
             Library lib = new Library(Tools.DefaultPathFileLibrary);
@@ -40,6 +42,11 @@ namespace wmp2
 
             #endregion
 
+            //Console.BackgroundColor = ConsoleColor.Cyan;
+            
+            Console.ReadKey();
+
+            Console.ForegroundColor = ConsoleColor.Green;
 
             #region playlist
             
@@ -53,6 +60,7 @@ namespace wmp2
 
             Playlist p = lib.GetPLaylistWithName("Ma super playlist");
 
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.ReadKey();
 
             for (int i = 0; i < 4; ++i)
@@ -64,17 +72,36 @@ namespace wmp2
 
             Console.WriteLine(p.ToString());
 
-            p.AddSong(lib.GetSongWithPath(@"E:\Programs Files\Itunes\Music\Bumblefoot\Normal\04 Rockstar For a Day.m4a"));
-            p.Serialize();
-
-            Console.WriteLine(p.ToString());
-
             #endregion
 
             // Affichage des arguments
             foreach (string str in args)
                 Console.WriteLine(str);
             Console.ReadKey();
+        }
+
+        private static void setDisplay()
+        {
+            Console.Title = "Gestion de La bibliotheque";
+ 
+            //Donner des dimensions agréables ET pratiques...
+            Console.BufferHeight = 300;
+            Console.WindowHeight = 42;
+            Console.BufferWidth = 90 ;  
+            Console.WindowWidth = 90;
+ 
+            //Ajouter un peu de couleur dans ce monde binaire... Fond et texte !
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            //Une raz du buffer peut être utile pour que les nouvelles couleurs soient effectives !
+            Console.Clear();
+ 
+            //Et cerise sur le gâteau, une barre d'avancement quand un traitement doit être suivi!
+            Console.BackgroundColor = ConsoleColor.Cyan;
+            Console.SetCursorPosition(20, 7);
+            //Construction de la barre d'avancement avec temporisation
+     
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
         }
     }
 }
