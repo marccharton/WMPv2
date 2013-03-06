@@ -12,7 +12,7 @@ namespace wmp2
         {
             #region library
 
-            Library lib = new Library("library.xml");
+            Library lib = new Library(Tools.DefaultPathFileLibrary);
             lib.Init();
 
             lib.ImportDir(@"E:\Programs Files\Itunes\Music");
@@ -41,21 +41,35 @@ namespace wmp2
             #endregion
 
 
-            //#region playlist
+            #region playlist
             
-            //Playlist p = new Playlist() { Name = "Ma super playlist" , Description = "Alors c'est une playlist qui envoie grave du lourd parcque ben tout simplement parceque elle est trop bien"};
-            //p.AddSong(lib.GetSongWithPath(@"C:\Users\Marc\Google Drive\[Partages]\KramAyrtoogle\dotNet\BDD\Music\01 Normal.m4a"));
-            //p.AddSong(lib.GetSongWithPath(@"C:\Users\Marc\Google Drive\[Partages]\KramAyrtoogle\dotNet\BDD\Music\01 Normal.m4a"));
-            //p.AddSong(lib.GetSongWithPath(@"C:\Users\Marc\Google Drive\[Partages]\KramAyrtoogle\dotNet\BDD\Music\01 Normal.m4a"));
-            //p.AddSong(lib.GetSongWithPath(@"C:\Users\Marc\Google Drive\[Partages]\KramAyrtoogle\dotNet\BDD\Music\01 Normal.m4a"));
-            //p.AddSong(lib.GetSongWithPath(@"E:\Programs Files\Itunes\Music\Bumblefoot\Normal\04 Rockstar For a Day.m4a"));
-            
-            //p.Serialize();
-            //lib.Playlists.Add(p);
-            
-            //Console.WriteLine(p.toString());
-            
-            //#endregion
+            Console.WriteLine("--------");
+            lib.OpenPlaylists();
+            Console.WriteLine("--------");
+            foreach (Playlist pl in lib.Playlists)
+            {
+                Console.WriteLine(pl.ToString());
+            }
+
+            Playlist p = lib.GetPLaylistWithName("Ma super playlist");
+
+            Console.ReadKey();
+
+            for (int i = 0; i < 4; ++i)
+                p.AddSong(lib.GetSongWithPath(@"C:\Users\Marc\Google Drive\[Partages]\KramAyrtoogle\dotNet\BDD\Music\01 Normal.m4a"));
+            p.AddSong(lib.GetSongWithPath(@"E:\Programs Files\Itunes\Music\Bumblefoot\Normal\04 Rockstar For a Day.m4a"));
+
+            p.Serialize();
+            lib.Playlists.Add(p);
+
+            Console.WriteLine(p.ToString());
+
+            p.AddSong(lib.GetSongWithPath(@"E:\Programs Files\Itunes\Music\Bumblefoot\Normal\04 Rockstar For a Day.m4a"));
+            p.Serialize();
+
+            Console.WriteLine(p.ToString());
+
+            #endregion
 
             // Affichage des arguments
             foreach (string str in args)

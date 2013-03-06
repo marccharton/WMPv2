@@ -19,7 +19,7 @@ namespace wmp2
             Albums = new List<Album>();
         }
         
-        public string toString()
+        public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
 
@@ -31,14 +31,14 @@ namespace wmp2
             {
                 sb.Append("{Albums}\n");
                 foreach (Album alb in Albums)
-                    sb.Append(alb.toString() + "\n");
+                    sb.Append(alb.ToString() + "\n");
             }
 
             if (Songs != null)
             {
                 sb.Append("{Songs}\n");
                 foreach (Song song in Songs)
-                    sb.Append("  " + song.toString() + "\n");
+                    sb.Append("  " + song.ToString() + "\n");
             }
             return sb.ToString();
         }

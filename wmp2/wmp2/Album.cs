@@ -18,7 +18,7 @@ namespace wmp2
             Songs = new List<Song>();
         }
 
-        public string toString()
+        public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
 
@@ -30,7 +30,7 @@ namespace wmp2
             {
                 sb.Append("{Songs}");
                 foreach (Song song in Songs)
-                    sb.Append("  " + song.toString());
+                    sb.Append("  " + song.ToString());
             }
             return sb.ToString();
         }

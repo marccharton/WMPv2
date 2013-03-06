@@ -29,9 +29,8 @@ namespace wmp2
         public int Track { get; set; }
 
         public string Path { get; set; }
-        
 
-        public string toString()
+        public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
 

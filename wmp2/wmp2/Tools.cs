@@ -8,6 +8,10 @@ namespace wmp2
 {
     class Tools
     {
+        public static string DefaultPathFolderPlaylist = @"Playlists/";
+
+        public static string DefaultPathFileLibrary = @"library.xml";
+
         public static bool checkFormat(string name)
         {
             string extension = Path.GetExtension(name);

@@ -261,5 +261,47 @@ namespace wmp2
 
             return ret;
         }
+
+        public void OpenPlaylists()
+        {
+            string path = Tools.DefaultPathFolderPlaylist;
+            string[] files = Directory.GetFiles(path);
+
+            foreach (String file in files)
+            {
+                if (Path.GetExtension(file) == ".xml")
+                {
+                    Console.WriteLine(Path.GetFileName(file));
+                    Playlist tmp = new Playlist();
+                    tmp.Unserialize(Path.GetFileName(file));
+                    Playlists.Add(tmp);
+                }
+            }
+        }
+
+        public void AddPlaylist(string name, string desc)
+        {
+            IEnumerable<Playlist> pls = from pl in Playlists
+                                        where pl.Name == name
+                                        select pl;
+
+            if (!pls.Any())
+            {
+                Playlists.Add(new Playlist()
+                {
+                    Name = name,
+                    Description = desc
+                });
+            }
+        }
+
+        public Playlist GetPLaylistWithName(string name)
+        {
+            IEnumerable<Playlist> pls = from pl in Playlists
+                                        where pl.Name == name
+                                        select pl;
+
+            return pls.First();
+        }
     }
 }

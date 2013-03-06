@@ -15,20 +15,37 @@ namespace wmp2
             {
                 try
                 {
+                    Console.WriteLine("[Serialisation] file: " + Path.GetFullPath(path));
                     XmlSerializer xml = new XmlSerializer(type);
                     xml.Serialize(fs, obj);
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Console.WriteLine("[Failed]\n" + ex.Message);
                     return false;
                 }
             }
+            Console.WriteLine("Succeed");
             return true;
         }
 
-        public static void Deserialize(Object obj, string path, FileMode fmode, Type type)
+        public static Object Deserialize<T>(string path, FileMode fmode)
         {
-            
+            using (var fs = new FileStream(path, fmode))
+            {
+                try
+                {
+                    Console.WriteLine("[Deserialisation] file: " + Path.GetFullPath(path));
+                    XmlSerializer xml = new XmlSerializer(typeof(T));
+                    Console.WriteLine("Succeed");
+                    return xml.Deserialize(fs) as Object;
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine("[Failed]\n" + ex.Message);
+                    return null;
+                }
+            }
         }
     }
 }

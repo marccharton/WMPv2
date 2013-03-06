@@ -23,33 +23,38 @@ namespace wmp2
             Songs = new List<string>();
         }
 
-        public bool AddSong(Song sg)
+        public bool AddSong(Song song)
         {
-            Songs.Add(sg.Path);
+            // Song (path) exists ?
+            IEnumerable<string> sgs = from sg in Songs
+                                      where sg == song.Path
+                                      select sg;
+            // -> Yes
+            if (sgs.Any())
+            {   Console.WriteLine("La chanson existe deja..."); return false; }
+            // -> No
+            Songs.Add(song.Path);
             return true;
         }
 
         public void Unserialize(string name)
         {
-            Playlist tmp = new Playlist();
-            
-            using (var fs = new FileStream("Playlists/" + name, FileMode.Open))
-            {
-                XmlSerializer xml = new XmlSerializer(typeof(Playlist));
-                tmp = xml.Deserialize(fs) as Playlist;
-            }
+            Playlist tmp = Serializer.Deserialize<Playlist>(Tools.DefaultPathFolderPlaylist + name, FileMode.Open) as Playlist;
+            if (tmp == null)
+                return;
             this.Name = tmp.Name;
             this.Description = tmp.Description;
             this.CreationDate = tmp.CreationDate;
             this.Like = tmp.Like;
+            this.Songs = tmp.Songs;
         }
 
         public void Serialize()
         {
-            Serializer.Serialize(this, @"Playlists/" + this.Name + ".xml", FileMode.OpenOrCreate, typeof(Playlist));
+            Serializer.Serialize(this, Tools.DefaultPathFolderPlaylist + this.Name + ".xml", FileMode.OpenOrCreate, typeof(Playlist));
         }
 
-        public string toString()
+        public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
 
@@ -63,7 +68,7 @@ namespace wmp2
                 sb.Append("{Songs}\n");
                 foreach (string sg in Songs)
                 {
-                    sb.Append(sg);
+                    sb.Append(sg + "\n");
                 }
             }
             return sb.ToString();
