@@ -44,6 +44,7 @@ namespace wmp2
             sb.Append("Genre: " + Genre + "\n");
             sb.Append("Duration: " + Duration + "\n");
             sb.Append("Like: " + Like + " / 5\n");
+            sb.Append("Path: " + Path + "\n");
             
             return sb.ToString();
         }

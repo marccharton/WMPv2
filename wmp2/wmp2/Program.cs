@@ -17,8 +17,8 @@ namespace wmp2
             Library lib = new Library(Tools.DefaultPathFileLibrary);
             lib.Init();
 
-            lib.ImportDir(@"E:\Programs Files\Itunes\Music");
-            lib.ImportFile(@"C:\Users\Marc\Google Drive\[Partages]\KramAyrtoogle\dotNet\BDD\Music\01 Normal.m4a");
+            //lib.ImportDir(@"E:\Programs Files\Itunes\Music");
+            //lib.ImportFile(@"C:\Users\Marc\Google Drive\[Partages]\KramAyrtoogle\dotNet\BDD\Music\01 Normal.m4a");
 
             Console.WriteLine("Voici la liste des artistes :");
             foreach (Artist art in lib.Artists)
@@ -49,7 +49,7 @@ namespace wmp2
             Console.ForegroundColor = ConsoleColor.Green;
 
             #region playlist
-            
+
             Console.WriteLine("--------");
             lib.OpenPlaylists();
             Console.WriteLine("--------");
@@ -58,7 +58,10 @@ namespace wmp2
                 Console.WriteLine(pl.ToString());
             }
 
-            Playlist p = lib.GetPLaylistWithName("Ma super playlist");
+            Playlist p = null;
+            p = lib.GetPLaylistWithName("Ma super playlist");
+            if (p == null)
+                p = new Playlist() { Name = "Ma super playlist", Description = "yo ca ca dechire comme playlist mon gars !! " };
 
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.ReadKey();

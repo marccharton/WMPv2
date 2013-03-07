@@ -33,7 +33,10 @@ namespace wmp2
             if (sgs.Any())
             {   Console.WriteLine("La chanson existe deja..."); return false; }
             // -> No
-            Songs.Add(song.Path);
+            if (song != null)
+                Songs.Add(song.Path);
+            else
+                Console.WriteLine("[Playlist] Tentative d'ajout d'une Song null");
             return true;
         }
 

@@ -12,6 +12,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using wmp2;
+using System.Collections.ObjectModel;
+
 namespace LibraryView
 {
     /// <summary>
@@ -19,9 +22,52 @@ namespace LibraryView
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        public ObservableCollection<Artist> Artists { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
         }
+
+        public void LoadLibrary(object sender, RoutedEventArgs e)
+        {
+            Tools.DefaultPathFileLibrary = @"C:\Users\Marc\Documents\Depots\wmpv2\wmp2\wmp2\bin\Debug\library.xml";
+            Library lib = new Library(Tools.DefaultPathFileLibrary);
+            lib.Init();
+
+            this.lstArtists.ItemsSource = lib.Artists;
+        }
+
+        private void lstArtists_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (lstArtists.SelectedItem != null)
+             {
+                Artist at = lstArtists.SelectedItem as Artist; 
+                //MessageBox.Show(at.Name);
+                lstAlbums.ItemsSource = at.Albums;
+                lstSongs.ItemsSource = null;
+             }
+        }
+
+        private void lstAlbums_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (lstAlbums.SelectedItem != null)
+            {
+                Album al = lstAlbums.SelectedItem as Album;
+                //MessageBox.Show(al.Name);
+                lstSongs.ItemsSource = al.Songs;
+            }
+        }
+
+        private void lstSongs_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (lstSongs.SelectedItem != null)
+            {
+                Song sg = lstSongs.SelectedItem as Song;
+                MessageBox.Show(sg.ToString());
+            }
+        }
+
     }
 }

@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8F500746-73FF-4D71-B055-9A8CDF465DBE}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>wmp2</RootNamespace>
     <AssemblyName>wmp2</AssemblyName>
@@ -35,6 +35,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Treetog-I-Audio-File.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="policy.2.0.taglib-sharp">

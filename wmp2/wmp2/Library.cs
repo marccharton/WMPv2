@@ -55,7 +55,8 @@ namespace wmp2
         }
 
         public bool Unserialize()
-        {   
+        {
+            Console.WriteLine("[deserialize] file : " + PathOfLibFile);
             if (File.Exists(PathOfLibFile))
                 using (var fs = new FileStream(PathOfLibFile, FileMode.Open))
                 {
@@ -122,6 +123,7 @@ namespace wmp2
 
             Album curAlb = new Album();
 
+            Console.WriteLine("Est ce que Mon album existe ?");
             // Does this album already exist in list ?
             IEnumerable<Album> album = from a in Albums
                                        where a.Name == songTag.Album.ToUpper()
@@ -130,6 +132,7 @@ namespace wmp2
             // yes -> Catch it and match with my current song
             if (album.Any())
             {
+                Console.WriteLine("Mon album existe");
                 foreach (Album alb in album)
                 {
                     song.Album = alb;
@@ -141,6 +144,7 @@ namespace wmp2
             // no -> Create a new album et push it in my albums List
             else
             {
+                Console.WriteLine("Mon album n'existe pas");
                 Album alb = new Album() { Name = songTag.Album.ToUpper() };
                 Albums.Add(alb);
                 song.Album = alb;
@@ -150,8 +154,14 @@ namespace wmp2
             }
             #endregion
 
-            curArt.Albums.Add(curAlb);
-            curAlb.Artist = curArt;
+            IEnumerable<Album> artAlbum = from a in curArt.Albums
+                                           where a.Name == curAlb.Name.ToUpper()
+                                           select a;
+            if (!artAlbum.Any())
+            {
+                curArt.Albums.Add(curAlb);
+                curAlb.Artist = curArt;
+            }
 
             // peutetre idem avec genre
             return song;
@@ -218,8 +228,9 @@ namespace wmp2
             Song s = new Song();
             s = null;
             if (enum_sg.Any())
-                foreach (Song sg in enum_sg)
-                    s = sg;
+                s = enum_sg.First();
+            else
+                s = CreateSong(path);
             return s;
         }
 
@@ -301,6 +312,8 @@ namespace wmp2
                                         where pl.Name == name
                                         select pl;
 
+            if (!pls.Any())
+                return null;
             return pls.First();
         }
     }

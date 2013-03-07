@@ -6,7 +6,7 @@ using System.IO;
 
 namespace wmp2
 {
-    class Tools
+    public class Tools
     {
         public static string DefaultPathFolderPlaylist = @"Playlists/";
 

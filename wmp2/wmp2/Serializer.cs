@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace wmp2
 {
-    class Serializer
+    public class Serializer
     {
         public static bool Serialize(Object obj, string path, FileMode fmode, Type type)
         {
