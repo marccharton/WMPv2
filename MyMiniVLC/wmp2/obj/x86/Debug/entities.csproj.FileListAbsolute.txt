@@ -14,3 +14,11 @@ C:\Users\Marc\Documents\Depots\wmpv2\wmp2\wmp2\bin\Debug\policy.2.0.taglib-sharp
 C:\Users\Marc\Documents\Depots\wmpv2\wmp2\wmp2\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Marc\Documents\Depots\wmpv2\wmp2\wmp2\bin\Debug\wmp2.dll
 C:\Users\Marc\Documents\Depots\wmpv2\wmp2\wmp2\obj\x86\Debug\wmp2.dll
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\wmp2\bin\Debug\wmp2.dll
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\wmp2\bin\Debug\wmp2.pdb
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\wmp2\bin\Debug\policy.2.0.taglib-sharp.dll
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\wmp2\bin\Debug\taglib-sharp.dll
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\wmp2\bin\Debug\policy.2.0.taglib-sharp.config
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\wmp2\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\wmp2\obj\x86\Debug\wmp2.dll
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\wmp2\obj\x86\Debug\wmp2.pdb

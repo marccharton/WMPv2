@@ -24,7 +24,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <TextBlock Margin="512,0,-159,295"> Songs </TextBlock>
-        <ListBox Width="250px" HorizontalAlignment="Left" Margin="512,22,0,0" x:Name="lstSongs" MouseDoubleClick="lstSongs_MouseDoubleClick" MouseWheel="lstSongs_MouseWheel">
+        <ListBox Width="250px" HorizontalAlignment="Left" Margin="512,22,0,0" x:Name="lstSongs" MouseDoubleClick="lstSongs_MouseDoubleClick">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
