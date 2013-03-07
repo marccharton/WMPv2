@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:SlideBarMVVM" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" mc:Ignorable="d" x:Class="SlideBarMVVM.MainWindow"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525" Background="{x:Null}" >
     <Window.Resources>
         <local:MediaPlayerViewModel x:Key="ViewModelDataSource" d:IsDataSource="True"/>
         <LinearGradientBrush x:Key="HorizontalSliderThumbHoverBackgroundInverted" EndPoint="0,0" StartPoint="0,1">
@@ -517,64 +517,65 @@
         </Style>
         <Style x:Key="PathStyle" TargetType="{x:Type Path}"/>
     </Window.Resources>
-    <Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-            <GradientStop Color="Black" Offset="1"/>
-            <GradientStop Color="#FF0072F1"/>
-        </LinearGradientBrush>
-    </Window.Background>
-    <Grid DataContext="{Binding Source={StaticResource ViewModelDataSource}}">
-        <Grid Height="23.8" Margin="0,0,0,47.733" VerticalAlignment="Bottom">
-            <local:SpecialSlider x:Name="slider" Maximum="{Binding Path=Maximum, ElementName=MediaElementBehavior}" Minimum="0.0" Background="{x:Null}" Foreground="{x:Null}" Style="{DynamicResource SliderStyle}" IsMoveToPointEnabled="True" Value="{Binding Path=Position, ElementName=MediaElementBehavior, Mode=TwoWay}"/>
-        </Grid>
-        <Grid Height="47.733" VerticalAlignment="Bottom">
-            <Button x:Name="buttonPlay" Content="{Binding PlayPauseButtonText}"  Margin="0,0,75.733,0" Command="{Binding PlayRequest}" HorizontalAlignment="Right" Width="99.4"/>
-            <TextBlock x:Name="timeLabel" HorizontalAlignment="Left" TextWrapping="Wrap" Width="122.667" Foreground="White" TextAlignment="Center" Text="{Binding CurrentSourceMedia}"/>
-            <Button x:Name="openButton" Content="..." HorizontalAlignment="Right" Width="75.733" Command="{Binding OpenDialogCommand}">
-            	<Button.Background>
-            		<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-            			<GradientStop Color="#FFF3F3F3" Offset="0"/>
-            			<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
-            			<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
-            			<GradientStop Color="White" Offset="1"/>
-            		</LinearGradientBrush>
-            	</Button.Background>
-            </Button>
-            <Button x:Name="stopButton" Content="Stop" Margin="139.467,0,175.133,0" Command="{Binding StopRequest}"/>
-            <CheckBox x:Name="repeatCheckBox" Content="CheckBox" HorizontalAlignment="Left" Margin="122.667,0,0,0" Width="12.8" Command="{Binding RepeatCommand}" IsChecked="{Binding IsRepeat}"/>
-        </Grid>
-        <Grid Margin="0,-0.533,0,75.533">
-            <MediaElement LoadedBehavior="Manual" x:Name="Trou_de_balle" Source="{Binding CurrentSourceMedia}">
-                <i:Interaction.Behaviors>
-                    <local:MediaElementBehaviorTest x:Name="MediaElementBehavior"/>
-                </i:Interaction.Behaviors>
-                <i:Interaction.Triggers>
-                    <i:EventTrigger SourceName="Trou_de_balle" EventName="MediaOpened">
-                        <i:InvokeCommandAction Command="{Binding MediaOpenedCommand}"/>
-                    </i:EventTrigger>   
-                    <i:EventTrigger SourceName="Trou_de_balle" EventName="MediaFailed">
-                        <i:InvokeCommandAction Command="{Binding MediaFailedCommand}"/>
-                    </i:EventTrigger>
-                    <i:EventTrigger SourceName="Trou_de_balle" EventName="MediaEnded">
-                        <i:InvokeCommandAction Command="{Binding MediaEndedCommand}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-                <MediaElement.Style>
-                    <Style>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding PlayState}" Value="Play" >
-                                <Setter Property="local:MediaElementStyle.Play" Value="Play"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding PlayState}" Value="Pause" >
-                                <Setter Property="local:MediaElementStyle.Play" Value="Pause"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding PlayState}" Value="Stop" >
-                                <Setter Property="local:MediaElementStyle.Play" Value="Stop"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </MediaElement.Style>
-            </MediaElement>
-        </Grid>
-    </Grid>
+    <TabControl x:Name="tabControl" Margin="0" DataContext="{Binding Source={StaticResource ViewModelDataSource}}">
+		<TabItem x:Name="tabPlayer" Header="TabItem">
+			<Grid Margin="0">
+				<Grid.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="Black" Offset="1"/>
+						<GradientStop Color="#FF0058FF"/>
+					</LinearGradientBrush>
+				</Grid.Background>
+				<Grid x:Name="gridPlayerSlider" Height="23.8" Margin="0,0,0,47.04" VerticalAlignment="Bottom" d:IsHidden="True">
+					<local:SpecialSlider x:Name="slider" Maximum="{Binding Maximum, ElementName=MediaElementBehavior}" Minimum="0.0" Background="{x:Null}" Foreground="{x:Null}" Style="{DynamicResource SliderStyle}" IsMoveToPointEnabled="True" Value="{Binding Position, ElementName=MediaElementBehavior, Mode=TwoWay}"/>
+				</Grid>
+				<Grid x:Name="gridControlAction" Height="47.733" VerticalAlignment="Bottom" d:IsHidden="True">
+					<Button x:Name="buttonPlay" Content="{Binding PlayPauseButtonText}"  Margin="0,0,185.333,0" Command="{Binding PlayRequest}" HorizontalAlignment="Right" Width="69.8"/>
+					<TextBlock x:Name="timeLabel" HorizontalAlignment="Left" TextWrapping="Wrap" Width="102.667" Foreground="White" TextAlignment="Center" Text="{Binding CurrentSourceMedia}"/>
+					<Button x:Name="openButton" Content="..." HorizontalAlignment="Right" Width="45.333" Command="{Binding OpenDialogCommand}"/>
+					<Button x:Name="stopButton" Content="Stop" Margin="189.8,0,255.133,0" Command="{Binding StopRequest}"/>
+					<Button x:Name="repeatButton" Content="{Binding RepeatButtonText}" Margin="102.667,0,0,0" Command="{Binding RepeatCommand}" HorizontalAlignment="Left" Width="62.4"/>
+					<Slider x:Name="volumeSlider" HorizontalAlignment="Right" Margin="0,17.6,45.333,8" Width="115.267" Style="{DynamicResource SliderStyle}" Minimum="0.0" Maximum="1.0" Value="{Binding Volume, ElementName=MediaElementBehavior, Mode=TwoWay}" IsMoveToPointEnabled="True"/>
+					<Button x:Name="prevButton" Content="&lt;&lt;" HorizontalAlignment="Left" Margin="165.067,0,0,0" Width="24.733" Command="{Binding PrevCommand}"/>
+					<Button x:Name="nextButton" Content="&gt;&gt;" HorizontalAlignment="Right" Margin="0,0,160.6,0" Width="24.733" Command="{Binding NextCommand}"/>
+				</Grid>
+				<Grid x:Name="gridMediaElement" Margin="0,0,0,74.84" d:LayoutOverrides="HorizontalAlignment" d:IsHidden="True">
+					<MediaElement LoadedBehavior="Manual" UnloadedBehavior="Manual" x:Name="Trou_de_balle" Source="{Binding CurrentSourceMedia}" AllowDrop="True">
+						<i:Interaction.Behaviors>
+							<local:MediaElementBehaviorTest x:Name="MediaElementBehavior"/>
+						</i:Interaction.Behaviors>
+						<i:Interaction.Triggers>
+							<i:EventTrigger SourceName="Trou_de_balle" EventName="MediaOpened">
+								<i:InvokeCommandAction Command="{Binding MediaOpenedCommand}"/>
+							</i:EventTrigger>   
+							<i:EventTrigger SourceName="Trou_de_balle" EventName="MediaFailed">
+								<i:InvokeCommandAction Command="{Binding MediaFailedCommand}"/>
+							</i:EventTrigger>
+							<i:EventTrigger SourceName="Trou_de_balle" EventName="MediaEnded">
+								<i:InvokeCommandAction Command="{Binding MediaEndedCommand}"/>
+							</i:EventTrigger>
+						</i:Interaction.Triggers>
+						<MediaElement.Style>
+							<Style>
+								<Style.Triggers>
+									<DataTrigger Binding="{Binding PlayState}" Value="Play" >
+										<Setter Property="local:MediaElementStyle.Play" Value="Play"/>
+									</DataTrigger>
+									<DataTrigger Binding="{Binding PlayState}" Value="Pause" >
+										<Setter Property="local:MediaElementStyle.Play" Value="Pause"/>
+									</DataTrigger>
+									<DataTrigger Binding="{Binding PlayState}" Value="Stop" >
+										<Setter Property="local:MediaElementStyle.Play" Value="Stop"/>
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</MediaElement.Style>
+					</MediaElement>
+				</Grid>
+			</Grid>
+		</TabItem>
+		<TabItem x:Name="tabLibrary" Header="TabItem">
+			<Grid Background="#FFE5E5E5"/>
+		</TabItem>
+	</TabControl>
 </Window>

@@ -22,6 +22,7 @@ namespace SlideBarMVVM
         public MainWindow()
         {
             InitializeComponent();
+            
         }
     }
 }
