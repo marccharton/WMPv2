@@ -1,0 +1,16 @@
+C:\Users\Marc\Documents\Depots\wmpv2\wmp2\LibraryView\bin\Debug\LibraryView.exe
+C:\Users\Marc\Documents\Depots\wmpv2\wmp2\LibraryView\bin\Debug\LibraryView.pdb
+C:\Users\Marc\Documents\Depots\wmpv2\wmp2\LibraryView\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Marc\Documents\Depots\wmpv2\wmp2\LibraryView\obj\x86\Debug\MainWindow.baml
+C:\Users\Marc\Documents\Depots\wmpv2\wmp2\LibraryView\obj\x86\Debug\MainWindow.g.cs
+C:\Users\Marc\Documents\Depots\wmpv2\wmp2\LibraryView\obj\x86\Debug\App.g.cs
+C:\Users\Marc\Documents\Depots\wmpv2\wmp2\LibraryView\obj\x86\Debug\LibraryView_MarkupCompile.cache
+C:\Users\Marc\Documents\Depots\wmpv2\wmp2\LibraryView\obj\x86\Debug\LibraryView.g.resources
+C:\Users\Marc\Documents\Depots\wmpv2\wmp2\LibraryView\obj\x86\Debug\LibraryView.Properties.Resources.resources
+C:\Users\Marc\Documents\Depots\wmpv2\wmp2\LibraryView\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Marc\Documents\Depots\wmpv2\wmp2\LibraryView\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Marc\Documents\Depots\wmpv2\wmp2\LibraryView\obj\x86\Debug\LibraryView.exe
+C:\Users\Marc\Documents\Depots\wmpv2\wmp2\LibraryView\obj\x86\Debug\LibraryView.pdb
+C:\Users\Marc\Documents\Depots\wmpv2\wmp2\LibraryView\bin\Debug\taglib-sharp.dll
+C:\Users\Marc\Documents\Depots\wmpv2\wmp2\LibraryView\bin\Debug\wmp2.pdb
+C:\Users\Marc\Documents\Depots\wmpv2\wmp2\LibraryView\bin\Debug\wmp2.dll
