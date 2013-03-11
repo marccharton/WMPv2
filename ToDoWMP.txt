@@ -1,0 +1,25 @@
+===============================================================================================================
+						Partie Media Player
+===============================================================================================================
+
+	- Gestion Playlist courante																					~
+	- Bouton Next																								V
+	- Bouton Prev																								V
+	- Accelération																								X
+	- Ralenti																									X
+	- Image durant lecture musique																				X
+	- Gestion curseur (eviter les bug lorsque le curseur suit la souris)										X
+	- Gestion ouverture image après musique ou video (curseur invalide)											V
+	- Gestion commande active/inactive																			V
+	- Ctrl + O																									V
+	- Remise en forme code (changement nom des classes, changement nom du projet, nom des composants, ...)		X
+	- Correction bug son																						V
+	- Gestion Drag & Drop																						X
+	- Correction bug repeat																						X	
+
+
+===============================================================================================================
+						Partie Librairie
+===============================================================================================================
+
+
