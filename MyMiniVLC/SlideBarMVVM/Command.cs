@@ -10,10 +10,23 @@ namespace SlideBarMVVM
     public class Command : ICommand
     {
         private Action _action;
-        
+        private Boolean _execute;
+        public Boolean CanExec
+        {
+            set
+            {
+                if (_execute != value)
+                {
+                    _execute = value;
+                    if (CanExecuteChanged != null)
+                        CanExecuteChanged(this, new EventArgs());
+                }
+            }
+        }
+
         public bool CanExecute(object parameter)
         {
-            return (true);
+            return (_execute);
         }
 
         public event EventHandler CanExecuteChanged;
@@ -23,9 +36,16 @@ namespace SlideBarMVVM
             this._action();
         }
 
-        public Command(Action a) 
+        public Command(Action a)
         {
             _action = a;
+            this.CanExec = true;
+        }
+
+        public Command(Action a, Boolean b)
+        {
+            _action = a;
+            this.CanExec = b;
         }
     }
 }

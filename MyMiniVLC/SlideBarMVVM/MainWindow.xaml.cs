@@ -29,14 +29,14 @@ namespace SlideBarMVVM
 
         public void LoadLibrary(object sender, RoutedEventArgs e)
         {
-            Tools.DefaultPathFileLibrary = @"C:\Users\Marc\Documents\Depots\wmpv2\wmp2\wmp2\bin\Debug\library.xml";
-            Library lib = new Library(Tools.DefaultPathFileLibrary);
-            lib.Init();
+            //Tools.DefaultPathFileLibrary = @"C:\Users\Marc\Documents\Depots\wmpv2\wmp2\wmp2\bin\Debug\library.xml";
+            //Library lib = new Library(Tools.DefaultPathFileLibrary);
+            //lib.Init();
 
             //lib.ImportDir(@"E:\Programs Files\Itunes\Music");
             //lib.ImportFile(@"C:\Users\Marc\Google Drive\[Partages]\KramAyrtoogle\dotNet\BDD\Music\01 Normal.m4a");
 
-            this.lstArtists.ItemsSource = lib.Artists;
+            //this.lstArtists.ItemsSource = lib.Artists;
         }
 
         private void lstArtists_MouseDoubleClick(object sender, MouseButtonEventArgs e)

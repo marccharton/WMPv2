@@ -60,7 +60,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CurrentList.cs" />
-    <Compile Include="MediaElementBehavior.cs" />
     <Compile Include="MediaElementBehaviorTest.cs" />
     <Compile Include="MediaElementStyle.cs" />
     <Compile Include="MediaPlayerViewModel.cs" />

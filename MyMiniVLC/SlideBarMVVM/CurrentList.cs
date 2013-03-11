@@ -81,5 +81,11 @@ namespace SlideBarMVVM
         {
             idx = 0;
         }
+
+        public static void ResetList() 
+        {
+            idx = 0;
+            list.Clear();
+        }
     }
 }

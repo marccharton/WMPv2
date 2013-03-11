@@ -14,10 +14,11 @@ namespace SlideBarMVVM
     {
         Play = 1,
         Pause = 2,
-        Stop = 4
+        Stop = 4,
+        Restart = 8
     }
 
-    public enum RepeatState 
+    public enum RepeatState
     {
         NoRepeat = 1,
         Repeat = 2,
@@ -29,7 +30,7 @@ namespace SlideBarMVVM
         public event PropertyChangedEventHandler PropertyChanged;
         public SlideBarViewModel SbViewModel { get; set; }
 
-        public ICommand OpenDialogCommand { get; set; }
+        public Command OpenDialogCommand { get; set; }
         private Uri _currentSourceMedia;
         public Uri CurrentSourceMedia
         {
@@ -87,16 +88,16 @@ namespace SlideBarMVVM
 
         private Boolean _isOpened;
 
-        private String  _repeatButtonText;
-        public String RepeatButtonText 
+        private String _repeatButtonText;
+        public String RepeatButtonText
         {
-            get 
+            get
             {
                 return (this._repeatButtonText);
             }
-            set 
+            set
             {
-                if (this._repeatButtonText != value) 
+                if (this._repeatButtonText != value)
                 {
                     this._repeatButtonText = value;
                     if (this.PropertyChanged != null)
@@ -106,37 +107,34 @@ namespace SlideBarMVVM
         }
         private RepeatState _repeatState;
 
-        public ICommand PlayRequest { get; set; }
-        public ICommand StopRequest { get; set; }
+        public Command PlayRequest { get; set; }
+        public Command StopRequest { get; set; }
+        public Command NextCommand { get; set; }
+        public Command PrevCommand { get; set; }
         public ICommand MediaOpenedCommand { get; set; }
         public ICommand MediaFailedCommand { get; set; }
         public ICommand MediaEndedCommand { get; set; }
         public ICommand RepeatCommand { get; set; }
-        public ICommand NextCommand { get; set; }
-        public ICommand PrevCommand { get; set; }
 
-        private void Init() 
+        private void Init()
         {
-            if (CurrentList.getSize() > 0)
-            {
-                this.CurrentSourceMedia = new Uri(CurrentList.getCurrentElement());
-                this.PlayState = PlayerState.Play;
-            }
+            //if (CurrentList.getSize() > 0)
+            //{
+            //    this.CurrentSourceMedia = new Uri(CurrentList.getCurrentElement());
+            //    this.PlayState = PlayerState.Play;
+            //}
         }
 
-        private void Test() 
+        private void Test()
         {
             CurrentList.addElement(@"C:\Users\S@suke\Google Drive\KramAyrtoogle\dotNet\BDD\Video\4 Univers ou multivers.mp4");
-            CurrentList.addElement(@"C:\Users\S@suke\Google Drive\KramAyrtoogle\dotNet\BDD\Music\01 Normal.mp3");
-
+            //CurrentList.addElement(@"C:\Users\S@suke\Google Drive\KramAyrtoogle\dotNet\BDD\Music\01 Normal.mp3");
+            CurrentList.addElement(@"C:\Users\S@suke\Desktop\3194648_Bangarang_feat__Sirah_Original_Mix.mp3");
         }
 
 
         public MediaPlayerViewModel()
         {
-
-
-            MessageBox.Show("View Model construction");
 
             this._isOpened = false;
             this.PlayPauseButtonText = "Play";
@@ -147,13 +145,17 @@ namespace SlideBarMVVM
             {
                 OpenFileDialog ofd = new OpenFileDialog();
                 // Video files (*.avi, *.mp4, *.wmv)|*.avi; *.mp4; *.wmv
+                ofd.Multiselect = true;
                 ofd.Filter = "All files (*.*)|*.*";
                 try
                 {
                     if (ofd.ShowDialog() == true)
                     {
-                        this.CurrentSourceMedia = new Uri(ofd.FileName);
+                        CurrentList.ResetList();
+                        foreach (string name in ofd.FileNames) 
+                            CurrentList.addElement(name);
                         this.PlayState = PlayerState.Stop;
+                        this.CurrentSourceMedia = new Uri(CurrentList.getCurrentElement());
                         this.PlayState = PlayerState.Play;
                     }
                 }
@@ -162,13 +164,19 @@ namespace SlideBarMVVM
                     MessageBox.Show(ex.Message);
                 }
             }));
+            //this.PropertyChanged(this, new PropertyChangedEventArgs("OpenDialogCommand"));
             #endregion
 
             #region PlayRequestCommand
             this.PlayRequest = new Command(new Action(() =>
             {
-                if (this.PlayState == PlayerState.Pause || this.PlayState == PlayerState.Stop)
+                if (this.PlayState == PlayerState.Pause)
                     this.PlayState = PlayerState.Play;
+                else if (this.PlayState == PlayerState.Stop && CurrentList.getSize() > 0)
+                {
+                    this.CurrentSourceMedia = new Uri(CurrentList.getCurrentElement());
+                    this.PlayState = PlayerState.Play;
+                }
                 else
                     this.PlayState = PlayerState.Pause;
                 if (this._isOpened)
@@ -186,6 +194,9 @@ namespace SlideBarMVVM
             {
                 this._isOpened = true;
                 this.PlayPauseButtonText = "Pause";
+                this.StopRequest.CanExec = true;
+                this.NextCommand.CanExec = true;
+                this.PrevCommand.CanExec = true;
             }));
             #endregion
 
@@ -195,6 +206,9 @@ namespace SlideBarMVVM
                 this._isOpened = false;
                 this.PlayState = PlayerState.Stop;
                 this.PlayPauseButtonText = "Play";
+                this.StopRequest.CanExec = false;
+                this.NextCommand.CanExec = false;
+                this.PrevCommand.CanExec = false;
                 MessageBox.Show("Error: Can't load file: Unknwon format");
             }));
             #endregion
@@ -204,7 +218,8 @@ namespace SlideBarMVVM
             {
                 this.PlayState = PlayerState.Stop;
                 this.PlayPauseButtonText = "Play";
-            }));
+                this.StopRequest.CanExec = false;
+            }), false);
             #endregion
 
             this._repeatState = RepeatState.NoRepeat;
@@ -213,7 +228,7 @@ namespace SlideBarMVVM
             #region RepeatCommand
             this.RepeatCommand = new Command(new Action(() =>
             {
-                if (this._repeatState == RepeatState.NoRepeat) 
+                if (this._repeatState == RepeatState.NoRepeat)
                 {
                     this._repeatState = RepeatState.Repeat;
                     this.RepeatButtonText = "Repeat";
@@ -223,7 +238,7 @@ namespace SlideBarMVVM
                     this._repeatState = RepeatState.RepeatAll;
                     this.RepeatButtonText = "Repeat All";
                 }
-                else 
+                else
                 {
                     this._repeatState = RepeatState.NoRepeat;
                     this.RepeatButtonText = "No Repeat";
@@ -267,15 +282,38 @@ namespace SlideBarMVVM
             #region NextCommand
             this.NextCommand = new Command(new Action(() =>
             {
-                MessageBox.Show("Next");
-            }));
+                PlayerState tmp = this.PlayState;
+
+                if (tmp != PlayerState.Stop) 
+                    this.PlayState = PlayerState.Stop;
+                this.CurrentSourceMedia = new Uri(CurrentList.moveToNextElement());
+                if (tmp == PlayerState.Play)
+                    this.PlayState = PlayerState.Play;
+                else if (tmp == PlayerState.Pause)
+                {
+                    this.PlayState = PlayerState.Pause;
+                    this.PlayPauseButtonText = "Play";
+                    //MessageBox.Show("la");
+                }
+            }), false);
             #endregion
 
             #region PrevCommand
             this.PrevCommand = new Command(new Action(() =>
             {
-                MessageBox.Show("Previous");
-            }));
+                PlayerState tmp = this.PlayState;
+
+                if (tmp != PlayerState.Stop)
+                    this.PlayState = PlayerState.Stop;
+                this.CurrentSourceMedia = new Uri(CurrentList.moveToPrevElement());
+                if (tmp == PlayerState.Play)
+                    this.PlayState = PlayerState.Play;
+                else if (tmp == PlayerState.Pause)
+                {
+                    this.PlayState = PlayerState.Pause;
+                    this.PlayPauseButtonText = "Play";
+                }
+            }), false);
             #endregion
 
             this.Test();

@@ -6,17 +6,18 @@ using System.Windows.Interactivity;
 using System.Windows.Controls;
 using System.Windows;
 using System.Timers;
+using System.Windows.Media;
 
 namespace SlideBarMVVM
 {
-    class MediaElementBehaviorTest : Behavior<MediaElement>
+    class MediaElementBehavior : Behavior<MediaElement>
     {
         private Timer _timer;
         private Boolean _fullScreen;
 
-        public static readonly DependencyProperty PositionProperty = DependencyProperty.RegisterAttached("Position", typeof(Double), typeof(MediaElementBehaviorTest), new UIPropertyMetadata(PositionPropertyChanged));
-        public static readonly DependencyProperty MaximumProperty = DependencyProperty.RegisterAttached("Maximum", typeof(Double), typeof(MediaElementBehaviorTest), new UIPropertyMetadata(MaximumPropertyChanged));
-        public static readonly DependencyProperty VolumeProperty = DependencyProperty.RegisterAttached("Volume", typeof(Double), typeof(MediaElementBehaviorTest), new UIPropertyMetadata(VolumePropertyChanged));
+        public static readonly DependencyProperty PositionProperty = DependencyProperty.RegisterAttached("Position", typeof(Double), typeof(MediaElementBehavior), new UIPropertyMetadata(PositionPropertyChanged));
+        public static readonly DependencyProperty MaximumProperty = DependencyProperty.RegisterAttached("Maximum", typeof(Double), typeof(MediaElementBehavior), new UIPropertyMetadata(MaximumPropertyChanged));
+        public static readonly DependencyProperty VolumeProperty = DependencyProperty.RegisterAttached("Volume", typeof(Double), typeof(MediaElementBehavior), new UIPropertyMetadata(VolumePropertyChanged));
 
         public static Double GetPosition(MediaElement m)
         {
@@ -30,10 +31,10 @@ namespace SlideBarMVVM
 
         public static void PositionPropertyChanged(DependencyObject dep, DependencyPropertyChangedEventArgs ev)
         {
-            double tmp = ((MediaElementBehaviorTest)dep).AssociatedObject.Position.TotalMilliseconds - (Double)(((MediaElementBehaviorTest)dep)).GetValue(PositionProperty);
+            double tmp = ((MediaElementBehavior)dep).AssociatedObject.Position.TotalMilliseconds - (Double)(((MediaElementBehavior)dep)).GetValue(PositionProperty);
 
             if (tmp > 1.0 || tmp < -1.0)
-                ((MediaElementBehaviorTest)dep).AssociatedObject.Position = TimeSpan.FromMilliseconds((double)ev.NewValue);
+                ((MediaElementBehavior)dep).AssociatedObject.Position = TimeSpan.FromMilliseconds((double)ev.NewValue);
         }
 
         public static Double GetMaximum(MediaElement m)
@@ -62,8 +63,10 @@ namespace SlideBarMVVM
 
         public static void VolumePropertyChanged(DependencyObject dep, DependencyPropertyChangedEventArgs ev)
         {
-            //MessageBox.Show("Nouvelle value: " + ev.NewValue.ToString());
-            ((MediaElementBehaviorTest)dep).AssociatedObject.Volume = (double)ev.NewValue;
+           // MessageBox.Show("Nouvelle value: " + ev.NewValue.ToString() + "Et ancienne value: " + ev.OldValue.ToString());
+           // MessageBox.Show(((MediaElementBehaviorTest)dep).AssociatedObject.Balance.ToString());
+            ((MediaElementBehavior)dep).AssociatedObject.Volume = (double)ev.NewValue;
+          //  MessageBox.Show(((MediaElementBehaviorTest)dep).AssociatedObject.Balance.ToString());
         }
 
         protected override void OnAttached()
@@ -77,7 +80,7 @@ namespace SlideBarMVVM
             _timer = new Timer();
             _timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
             _timer.Interval = TimeSpan.FromMilliseconds(1000).TotalMilliseconds;
-            SetValue(VolumeProperty, 10.0);
+            SetValue(VolumeProperty, 0.5);
             _fullScreen = false;
         }
 
@@ -138,16 +141,22 @@ namespace SlideBarMVVM
 
         void AssociatedObject_MediaOpened(object sender, System.Windows.RoutedEventArgs e)
         {
+            AssociatedObject.IsMuted = true;
+            AssociatedObject.IsMuted = false;
+
+            //   MessageBox.Show(GetValue(VolumeProperty).ToString() + ";" + AssociatedObject.Volume.ToString());
+            _timer.Stop();
             if (AssociatedObject.NaturalDuration.HasTimeSpan)
             {
                 _timer.Start();
                 SetValue(MaximumProperty, AssociatedObject.NaturalDuration.TimeSpan.TotalMilliseconds);
                 SetValue(PositionProperty, 0.0);
+                AssociatedObject.Volume = (double)GetValue(VolumeProperty);
             }
             else
             {
-                SetPosition(AssociatedObject, 0);
-                SetMaximum(AssociatedObject, 0);
+                SetValue(MaximumProperty, 0.0);
+                SetValue(PositionProperty, 0.0);
             }
         }
 
