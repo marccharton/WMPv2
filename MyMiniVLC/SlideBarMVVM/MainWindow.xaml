@@ -533,7 +533,7 @@
         <DataTemplate x:Key="TemplateLibraryLstSongs">
             <Grid>
                 <Grid HorizontalAlignment="Right" Height="30" VerticalAlignment="Bottom" Width="150">
-                    <TextBlock TextWrapping="Wrap" Text="{Binding Title}"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Name}"/>
                 </Grid>
             </Grid>
         </DataTemplate>
@@ -600,7 +600,7 @@
 				<TextBlock HorizontalAlignment="Left" Height="17.666" Margin="8,10.04,0,0" TextWrapping="Wrap" Text="Artists" VerticalAlignment="Top" Width="150"/>
 				<TextBlock Height="17.666" Margin="163,10.04,184.167,0" TextWrapping="Wrap" Text="Albums" VerticalAlignment="Top"/>
 				<TextBlock HorizontalAlignment="Right" Height="17.666" Margin="0,10.04,8,0" TextWrapping="Wrap" Text="Songs" VerticalAlignment="Top" Width="172.167"/>
-				<ListBox x:Name="lstArtists" Margin="8,31.706,0,8" HorizontalAlignment="Left" Width="150" ItemTemplate="{DynamicResource TemplateLibraryLstArtists}" MouseDoubleClick="lstArtists_MouseDoubleClick"/>
+				<ListBox x:Name="lstArtists" Margin="8,31.706,0,8" HorizontalAlignment="Left" Width="250" ItemTemplate="{DynamicResource TemplateLibraryLstArtists}" MouseDoubleClick="lstArtists_MouseDoubleClick"/>
                 <ListBox x:Name="lstAlbums" Margin="162,31.706,184.167,8" ItemTemplate="{DynamicResource TemplateLibraryLstAlbums}" MouseDoubleClick="lstAlbums_MouseDoubleClick"/>
                 <ListBox x:Name="lstSongs" Margin="0,31.706,8,8" HorizontalAlignment="Right" Width="172.167" ItemTemplate="{DynamicResource TemplateLibraryLstSongs}" MouseDoubleClick="lstSongs_MouseDoubleClick"/>
 			</Grid>
