@@ -62,11 +62,13 @@ namespace SlideBarMVVM
 
         private void lstSongs_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            CurrentList curList = CurrentList.getInstance();
+
             if (lstSongs.SelectedItem != null)
             {
                 Song sg = lstSongs.SelectedItem as Song;
                 MessageBox.Show(sg.ToString());
-                CurrentList.addElement(sg.Path);
+                curList.addElement(sg.Path);
             }
 
         }

@@ -49,14 +49,16 @@ namespace SlideBarMVVM
 
         void AssociatedObject_Drop(object sender, DragEventArgs e)
         {
+            CurrentList curList = CurrentList.getInstance();
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
             if (files != null)
             {
-                CurrentList.ResetList();
+                curList.ResetList();
                 foreach (string s in files)
                 {
-                    CurrentList.addElement(s);
+                    curList.addElement(s);
+                    //CurrentList.DropEvent(this, null);
                 }
             }
         }

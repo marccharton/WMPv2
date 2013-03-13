@@ -2,101 +2,114 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 namespace SlideBarMVVM
 {
-    public static class CurrentList
+    public class CurrentList
     {
-        private static List<String> list = new List<string>();
-        private static RepeatState repeat = RepeatState.NoRepeat;
-        private static int idx = 0;
+        private static CurrentList _object = null;
+        
+        private int _idx;
+        private List<String> _list;
+        public RepeatState Repeat { get; set; }
 
-        public static void addElement(String s)
+        private CurrentList() 
         {
-            if (s != null)
-                list.Add(s);
+            _idx = 0;
+            _list = new List<string>();
+            this.Repeat = RepeatState.NoRepeat;
         }
 
-        public static void addList(List<String> l)
+        public static CurrentList getInstance()
+        {
+            if (_object == null)
+                _object = new CurrentList();
+            return (_object);
+        }
+
+        //private static List<String> list = new List<string>();
+        //private static RepeatState repeat = RepeatState.NoRepeat;
+        //private static int idx = 0;
+        //public static EventHandler DropEvent;
+
+        public void addElement(String s)
+        {
+            if (s != null)
+                _list.Add(s);
+        }
+
+        public void addList(List<String> l)
         {
             if (l != null)
             {
                 foreach (String s in l)
                 {
                     if (s != null)
-                        list.Add(s);
+                        _list.Add(s);
                 }
             }
         }
 
-        public static String getCurrentElement() 
+        public String getCurrentElement() 
         {
-            return (list.ElementAt(idx));
+            return (_list.ElementAt(_idx));
         }
 
-        public static String getNextElement()
+        public String getNextElement()
         {
-            if (idx + 1 == list.Count)
-                return (list.ElementAt(0));                
-            return (list.ElementAt(idx + 1));
+            if (_idx + 1 == _list.Count)
+                return (_list.ElementAt(0));
+            return (_list.ElementAt(_idx + 1));
         }
 
-        public static String moveToNextElement() 
+        public String moveToNextElement() 
         {
-            if (idx + 1 == list.Count)
-                idx = 0;
+            if (_idx + 1 == _list.Count)
+                _idx = 0;
             else
-                ++idx;
-            return (list.ElementAt(idx));
+                ++_idx;
+            return (_list.ElementAt(_idx));
         }
 
-        public static String getPrevElement()
+        public String getPrevElement()
         {
-            if (idx - 1 < 0)
-                return (list.ElementAt(list.Count - 1));
-            return (list.ElementAt(idx - 1));
+            if (_idx - 1 < 0)
+                return (_list.ElementAt(_list.Count - 1));
+            return (_list.ElementAt(_idx - 1));
         }
 
-        public static String moveToPrevElement()
+        public String moveToPrevElement()
         {
-            if (idx - 1 < 0)
-                idx = list.Count - 1;
+            if (_idx - 1 < 0)
+                _idx = _list.Count - 1;
             else
-                --idx;
-            return (list.ElementAt(idx));
+                --_idx;
+            return (_list.ElementAt(_idx));
         }
 
-        public static int getSize() 
+        public int getSize() 
         {
-            return (list.Count);
+            return (_list.Count);
         }
 
-        public static Boolean HasNextElement() 
+        public Boolean HasNextElement() 
         {
-            if (idx + 1 >= list.Count)
+            if (_idx + 1 >= _list.Count)
                 return (false);
             return (true);
         }
 
-        public static void ResetIdx() 
+        public void ResetIdx() 
         {
-            idx = 0;
+            _idx = 0;
         }
 
-        public static void ResetList() 
+        public void ResetList() 
         {
-            idx = 0;
-            list.Clear();
-        }
-
-        public static void setRepeat(RepeatState r) 
-        {
-            repeat = r;
-        }
-
-        public static RepeatState getRepeat() 
-        {
-            return (repeat);
+            _idx = 0;
+            _list.Clear();
+            //DropEvent(CurrentList.get, null);
         }
     }
 }

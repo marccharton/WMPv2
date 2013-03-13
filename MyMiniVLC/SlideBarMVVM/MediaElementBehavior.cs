@@ -19,6 +19,7 @@ namespace SlideBarMVVM
         public static readonly DependencyProperty MaximumProperty = DependencyProperty.RegisterAttached("Maximum", typeof(Double), typeof(MediaElementBehavior), new UIPropertyMetadata(MaximumPropertyChanged));
         public static readonly DependencyProperty VolumeProperty = DependencyProperty.RegisterAttached("Volume", typeof(Double), typeof(MediaElementBehavior), new UIPropertyMetadata(VolumePropertyChanged));
         public static readonly DependencyProperty VideoProperty = DependencyProperty.RegisterAttached("Video", typeof(Visibility), typeof(MediaElementBehavior), new UIPropertyMetadata(VideoPropertyChanged));
+        public static readonly DependencyProperty TimeProperty = DependencyProperty.RegisterAttached("Time", typeof(String), typeof(MediaElementBehavior), new UIPropertyMetadata(TimePropertyChanged));
 
         public static Double GetPosition(DependencyObject m)
         {
@@ -85,6 +86,20 @@ namespace SlideBarMVVM
         {
         }
 
+        public static String GetTime(DependencyObject m) 
+        {
+            return ((String) (m.GetValue(TimeProperty)));
+        }
+
+        public static void SetTime(DependencyObject m, String s) 
+        {
+            m.SetValue(TimeProperty, s);
+        }
+
+        public static void TimePropertyChanged(DependencyObject dep, DependencyPropertyChangedEventArgs ev) 
+        {
+        }
+
         protected override void OnAttached()
         {
             base.OnAttached();
@@ -95,8 +110,9 @@ namespace SlideBarMVVM
   //          AssociatedObject.Drop += new DragEventHandler(AssociatedObject_Drop);
             _timer = new Timer();
             _timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
-            _timer.Interval = TimeSpan.FromMilliseconds(1000).TotalMilliseconds;
+            _timer.Interval = TimeSpan.FromMilliseconds(500).TotalMilliseconds;
             SetValue(VolumeProperty, 0.5);
+            SetValue(TimeProperty, TimeSpan.Zero.ToString(@"hh\:mm\:ss"));
             _fullScreen = false;
         }
 
@@ -135,6 +151,7 @@ namespace SlideBarMVVM
             Dispatcher.Invoke(new Action(() =>
             {
                 SetValue(PositionProperty, AssociatedObject.Position.TotalMilliseconds);
+                SetValue(TimeProperty, AssociatedObject.Position.ToString(@"hh\:mm\:ss"));
             }));
         }
 
@@ -147,8 +164,10 @@ namespace SlideBarMVVM
 
         void AssociatedObject_MediaEnded(object sender, RoutedEventArgs e)
         {
+            CurrentList curList = CurrentList.getInstance();
          //   MessageBox.Show("Ended");
-            if (CurrentList.getRepeat() == RepeatState.Repeat || (CurrentList.getRepeat() == RepeatState.RepeatAll && CurrentList.getSize() > 1))
+            SetValue(TimeProperty, TimeSpan.Zero.ToString(@"hh\:mm\:ss"));
+            if (curList.Repeat == RepeatState.Repeat || (curList.Repeat == RepeatState.RepeatAll && curList.getSize() > 1))
             {
                 AssociatedObject.Position = TimeSpan.FromMilliseconds(1);
                 AssociatedObject.Play();
@@ -156,17 +175,16 @@ namespace SlideBarMVVM
             else
             {
                 AssociatedObject.Close();
-                if (AssociatedObject.NaturalDuration.HasTimeSpan)
-                {
-                    _timer.Stop();
-                    SetPosition(AssociatedObject, 0);
-                    SetMaximum(AssociatedObject, 0);
-                }
+                _timer.Stop();
+                SetPosition(AssociatedObject, 0);
+                SetMaximum(AssociatedObject, 0);
             }
+            
         }
 
         void AssociatedObject_MediaOpened(object sender, System.Windows.RoutedEventArgs e)
         {
+            SetValue(TimeProperty, TimeSpan.Zero.ToString(@"hh\:mm\:ss"));
             AssociatedObject.IsMuted = true;
             AssociatedObject.IsMuted = false;
             if (AssociatedObject.HasVideo)
@@ -174,9 +192,9 @@ namespace SlideBarMVVM
             else
                 SetValue(VideoProperty, Visibility.Visible);
             _timer.Stop();
+            _timer.Start();
             if (AssociatedObject.NaturalDuration.HasTimeSpan)
             {
-                _timer.Start();
                 SetValue(MaximumProperty, AssociatedObject.NaturalDuration.TimeSpan.TotalMilliseconds);
                 SetValue(PositionProperty, 0.0);
                 AssociatedObject.Volume = (double)GetValue(VolumeProperty);

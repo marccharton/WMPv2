@@ -59,10 +59,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ButtonCustom.cs" />
     <Compile Include="CurrentList.cs" />
     <Compile Include="GridBehavior.cs" />
-    <Compile Include="MediaElementBehaviorTest.cs" />
-    <Compile Include="MediaElementStyle.cs" />
+    <Compile Include="MediaElementBehavior.cs" />
+    <Compile Include="MediaElementCustom.cs" />
     <Compile Include="MediaPlayerViewModel.cs" />
     <Compile Include="SliderBehavior.cs" />
     <Compile Include="SpecialSlider.cs" />
