@@ -61,6 +61,7 @@
     </ApplicationDefinition>
     <Compile Include="ButtonCustom.cs" />
     <Compile Include="CurrentList.cs" />
+    <Compile Include="LibraryViewModel.cs" />
     <Compile Include="GridBehavior.cs" />
     <Compile Include="MediaElementBehavior.cs" />
     <Compile Include="MediaElementCustom.cs" />

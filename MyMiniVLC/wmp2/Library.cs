@@ -84,6 +84,7 @@ namespace wmp2
                                        song.Track = (int)songTag.Track;
             if (songTag.Genre != null) song.Genre = songTag.Genre.ToUpper();
             if (songPath != null)      song.Path = songPath;
+            if (songPath != null)      song.Name = Path.GetFileName(songPath);
 
             #region Match with Artist
 
