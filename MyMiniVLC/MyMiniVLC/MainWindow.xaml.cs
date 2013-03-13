@@ -76,5 +76,12 @@ namespace MyMiniVLC
             //if (videoPlayer.time
         }
 
+        private void videoPlayer_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Ended");
+            videoPlayer.Position = TimeSpan.FromMilliseconds(1);
+            videoPlayer.Play();
+        }
+
     }
 }

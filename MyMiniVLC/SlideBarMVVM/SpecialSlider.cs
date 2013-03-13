@@ -10,18 +10,18 @@ namespace SlideBarMVVM
 {
     public class SpecialSlider : Slider
     {
-        public SpecialSlider()
-  {
-   MouseMove += OnMouseMove;
-  }
+  //      public SpecialSlider()
+  //{
+  // MouseMove += OnMouseMove;
+  //}
 
-  private void OnMouseMove(object sender, MouseEventArgs e)
-  {
-   if (e.LeftButton != MouseButtonState.Pressed) return;
+  //private void OnMouseMove(object sender, MouseEventArgs e)
+  //{
+  // if (e.LeftButton != MouseButtonState.Pressed) return;
 
-   var args = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, MouseButton.Left) { RoutedEvent = MouseLeftButtonDownEvent };
-   base.OnPreviewMouseLeftButtonDown(args);
-  }
+  // var args = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, MouseButton.Left) { RoutedEvent = MouseLeftButtonDownEvent };
+  // base.OnPreviewMouseLeftButtonDown(args);
+  //}
 
 
     }

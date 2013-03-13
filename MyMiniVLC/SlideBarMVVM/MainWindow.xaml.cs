@@ -31,11 +31,27 @@ namespace SlideBarMVVM
 
         public void LoadLibrary(object sender, RoutedEventArgs e)
         {
+<<<<<<< .mine
             //Tools.DefaultPathFileLibrary = @"C:\Users\Marc\Documents\Depots\wmpv2\wmp2\wmp2\bin\Debug\library.xml";
             _lib = new Library(Tools.DefaultPathFileLibrary);
             _lib.Init();
+=======
+            //Tools.DefaultPathFileLibrary = @"C:\Users\Marc\Documents\Depots\wmpv2\wmp2\wmp2\bin\Debug\library.xml";
+            //Library lib = new Library(Tools.DefaultPathFileLibrary);
+            //lib.Init();
+>>>>>>> .theirs
 
+<<<<<<< .mine
             this.lstArtists.ItemsSource = _lib.Artists;
+
+
+
+=======
+            //lib.ImportDir(@"E:\Programs Files\Itunes\Music");
+            //lib.ImportFile(@"C:\Users\Marc\Google Drive\[Partages]\KramAyrtoogle\dotNet\BDD\Music\01 Normal.m4a");
+
+            //this.lstArtists.ItemsSource = lib.Artists;
+>>>>>>> .theirs
         }
 
         private void lstArtists_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -70,6 +86,7 @@ namespace SlideBarMVVM
 
         }
 
+<<<<<<< .mine
         private void importDir_Click(object sender, EventHandler e)
         {
            _lib.ImportDir(@"E:\Programs Files\Itunes\Music");
@@ -81,5 +98,18 @@ namespace SlideBarMVVM
         }
 
 
+=======
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
     }
 }

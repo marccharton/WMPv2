@@ -60,8 +60,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CurrentList.cs" />
+<<<<<<< HEAD
     <Compile Include="LibraryViewModel.cs" />
     <Compile Include="MediaElementBehavior.cs" />
+=======
+    <Compile Include="GridBehavior.cs" />
+>>>>>>> 4413b14e3bc382d49ad9d0ee43f0998e010c485f
     <Compile Include="MediaElementBehaviorTest.cs" />
     <Compile Include="MediaElementStyle.cs" />
     <Compile Include="MediaPlayerViewModel.cs" />
@@ -111,6 +115,9 @@
       <Project>{8F500746-73FF-4D71-B055-9A8CDF465DBE}</Project>
       <Name>entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ct9gh5ot.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,35 +4,38 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Threading;
 
 namespace SlideBarMVVM
 {
-    public static class MediaElementStyle
+    public class MediaElementCustom : MediaElement
     {
-        public static readonly DependencyProperty PlayProperty = DependencyProperty.RegisterAttached("Play", typeof(PlayerState), typeof(MediaElementStyle), new UIPropertyMetadata(PlayPropertyChanged));
+        public static readonly DependencyProperty PlayProperty = DependencyProperty.RegisterAttached("Play", typeof(PlayerState), typeof(MediaElementCustom), new UIPropertyMetadata(PlayPropertyChanged));
 
-        public static PlayerState GetPlay(MediaElement m)
+        public PlayerState Play 
         {
-            return (PlayerState)(m.GetValue(PlayProperty));
-        }
-
-        public static void SetPlay(MediaElement m, PlayerState ps)
-        {
-            m.SetValue(PlayProperty, ps);
+            get { return ((PlayerState)GetValue(PlayProperty)); }
+            set { SetValue(PlayProperty, value); }
         }
 
         public static void PlayPropertyChanged(DependencyObject dep, DependencyPropertyChangedEventArgs ev)
         {
+            //MessageBox.Show(((MediaElementCustom)dep).GetValue(ev.Property).ToString());
             try
             {
-                if ((PlayerState)((MediaElement)dep).GetValue(ev.Property) == PlayerState.Play)
-                    ((MediaElement)dep).Play();
-                else if ((PlayerState)((MediaElement)dep).GetValue(ev.Property) == PlayerState.Pause)
-                    ((MediaElement)dep).Pause();
-                else if ((PlayerState)((MediaElement)dep).GetValue(ev.Property) == PlayerState.Stop)
+                if ((PlayerState)((MediaElementCustom)dep).GetValue(ev.Property) == PlayerState.Play)
+                    ((MediaElementCustom)dep).Play();
+                else if ((PlayerState)((MediaElementCustom)dep).GetValue(ev.Property) == PlayerState.Pause)
                 {
-                    ((MediaElement)dep).Stop();
-                    ((MediaElement)dep).Close();
+                    ((MediaElementCustom)dep).Pause();
+                    //MessageBox.Show("Pause!");
+                }
+                else if ((PlayerState)((MediaElementCustom)dep).GetValue(ev.Property) == PlayerState.Stop)
+                {
+                     //MessageBox.Show("Stop");
+                    ((MediaElementCustom)dep).Stop();
+                    ((MediaElementCustom)dep).Close();
+                    Thread.Sleep(10);
                 }
             }
             catch (Exception ex)

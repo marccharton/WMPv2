@@ -8,6 +8,7 @@ namespace SlideBarMVVM
     public static class CurrentList
     {
         private static List<String> list = new List<string>();
+        private static RepeatState repeat = RepeatState.NoRepeat;
         private static int idx = 0;
 
         public static void addElement(String s)
@@ -80,6 +81,22 @@ namespace SlideBarMVVM
         public static void ResetIdx() 
         {
             idx = 0;
+        }
+
+        public static void ResetList() 
+        {
+            idx = 0;
+            list.Clear();
+        }
+
+        public static void setRepeat(RepeatState r) 
+        {
+            repeat = r;
+        }
+
+        public static RepeatState getRepeat() 
+        {
+            return (repeat);
         }
     }
 }
