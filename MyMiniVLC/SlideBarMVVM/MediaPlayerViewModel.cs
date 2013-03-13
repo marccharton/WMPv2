@@ -127,9 +127,15 @@ namespace SlideBarMVVM
 
         private void Test()
         {
-            CurrentList.addElement(@"C:\Users\S@suke\Google Drive\KramAyrtoogle\dotNet\BDD\Video\4 Univers ou multivers.mp4");
-            //CurrentList.addElement(@"C:\Users\S@suke\Google Drive\KramAyrtoogle\dotNet\BDD\Music\01 Normal.mp3");
+//            CurrentList.addElement(@"C:\Users\S@suke\Google Drive\KramAyrtoogle\dotNet\BDD\Video\4 Univers ou multivers.mp4");
+
+            CurrentList.addElement(@"C:\Users\S@suke\Pictures\1184-shakaponk.bmp");
+            //CurrentList.addElement(@"C:\Users\S@suke\Pictures\1184-shakaponk.gif");
+            //CurrentList.addElement(@"C:\Users\S@suke\Pictures\1184-shakaponk.jpg");
+//            CurrentList.addElement(@"C:\Users\S@suke\Pictures\1184-shakaponk.bmp");
+
             CurrentList.addElement(@"C:\Users\S@suke\Desktop\3194648_Bangarang_feat__Sirah_Original_Mix.mp3");
+            CurrentList.addElement(@"C:\Users\S@suke\Google Drive\KramAyrtoogle\dotNet\BDD\Music\01 Normal.mp3");
         }
 
 
@@ -192,6 +198,7 @@ namespace SlideBarMVVM
             #region MediaOpenedCommand
             this.MediaOpenedCommand = new Command(new Action(() =>
             {
+               // MessageBox.Show("Opened");
                 this._isOpened = true;
                 this.PlayPauseButtonText = "Pause";
                 this.StopRequest.CanExec = true;
@@ -228,19 +235,20 @@ namespace SlideBarMVVM
             #region RepeatCommand
             this.RepeatCommand = new Command(new Action(() =>
             {
-                if (this._repeatState == RepeatState.NoRepeat)
+                //if (this._repeatState == RepeatState.NoRepeat)
+                if (CurrentList.getRepeat() == RepeatState.NoRepeat)
                 {
-                    this._repeatState = RepeatState.Repeat;
+                    CurrentList.setRepeat(RepeatState.Repeat);
                     this.RepeatButtonText = "Repeat";
                 }
-                else if (this._repeatState == RepeatState.Repeat)
+                else if (CurrentList.getRepeat() == RepeatState.Repeat)
                 {
-                    this._repeatState = RepeatState.RepeatAll;
+                    CurrentList.setRepeat(RepeatState.RepeatAll);
                     this.RepeatButtonText = "Repeat All";
                 }
                 else
                 {
-                    this._repeatState = RepeatState.NoRepeat;
+                    CurrentList.setRepeat(RepeatState.NoRepeat);
                     this.RepeatButtonText = "No Repeat";
                 }
             }));
@@ -249,21 +257,26 @@ namespace SlideBarMVVM
             #region MediaEndedCommand
             this.MediaEndedCommand = new Command(new Action(() =>
             {
-                this.PlayState = PlayerState.Stop;
-                this.PlayPauseButtonText = "Play";
-                if (this._repeatState == RepeatState.NoRepeat && CurrentList.HasNextElement())
+              //  MessageBox.Show("Ended");
+                //this.PlayState = PlayerState.Stop;
+                //this.PlayPauseButtonText = "Play";
+                if (CurrentList.getRepeat() == RepeatState.NoRepeat)
                 {
-                    this.CurrentSourceMedia = new Uri(CurrentList.moveToNextElement());
-                    this.PlayState = PlayerState.Play;
-                    this.PlayPauseButtonText = "Pause";
+                    this.PlayState = PlayerState.Stop;
+                    this.PlayPauseButtonText = "Play";
+                    if (CurrentList.HasNextElement())
+                    {
+                        this.CurrentSourceMedia = new Uri(CurrentList.moveToNextElement());
+                        this.PlayState = PlayerState.Play;
+                        this.PlayPauseButtonText = "Pause";
+                    }
+                    else
+                        CurrentList.ResetIdx();
                 }
-                else if (this._repeatState == RepeatState.Repeat)
+                else if (CurrentList.getRepeat() == RepeatState.RepeatAll && CurrentList.getSize() > 1)
                 {
-                    this.PlayState = PlayerState.Play;
-                    this.PlayPauseButtonText = "Pause";
-                }
-                else if (this._repeatState == RepeatState.RepeatAll)
-                {
+                    this.PlayState = PlayerState.Stop;
+                    this.PlayPauseButtonText = "Play";
                     if (CurrentList.HasNextElement())
                         this.CurrentSourceMedia = new Uri(CurrentList.moveToNextElement());
                     else
@@ -274,8 +287,8 @@ namespace SlideBarMVVM
                     this.PlayState = PlayerState.Play;
                     this.PlayPauseButtonText = "Pause";
                 }
-                else
-                    CurrentList.ResetIdx();
+                //else
+                //    CurrentList.ResetIdx();
             }));
             #endregion
 
