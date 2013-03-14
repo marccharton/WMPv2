@@ -56,10 +56,8 @@ namespace SlideBarMVVM
             {
                 curList.ResetList();
                 foreach (string s in files)
-                {
                     curList.addElement(s);
-                    //CurrentList.DropEvent(this, null);
-                }
+                curList.DropEvent(this, null);
             }
         }
 

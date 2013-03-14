@@ -1,7 +1,7 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:SlideBarMVVM" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" mc:Ignorable="d" x:Class="SlideBarMVVM.MainWindow"
+        xmlns:local="clr-namespace:SlideBarMVVM" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" xmlns:System="clr-namespace:System;assembly=mscorlib" mc:Ignorable="d" x:Class="SlideBarMVVM.MainWindow"
         Title="MainWindow" Height="350" Width="525" Background="{x:Null}" Loaded="LoadLibrary">
     <Window.Resources>
         <local:MediaPlayerViewModel x:Key="ViewModelDataSource" d:IsDataSource="True"/>
@@ -537,12 +537,16 @@
                 </Grid>
             </Grid>
         </DataTemplate>
+    	<System:Double x:Key="DoubleSpeedRatio">1</System:Double>
     </Window.Resources>
     
      <Window.InputBindings>
         <KeyBinding Command="{Binding OpenDialogCommand, Source={StaticResource ViewModelDataSource}}"   Key="O" Modifiers="Control"/>
     </Window.InputBindings>
     <TabControl x:Name="tabControl" Margin="0" DataContext="{Binding Source={StaticResource ViewModelDataSource}}">
+        <TabControl.InputBindings>
+            <KeyBinding Key="O" Modifiers="Control" Command="{Binding OpenDialogCommand}" />
+        </TabControl.InputBindings>
 		<TabItem x:Name="tabPlayer" Header="Player">            
             <Grid Margin="0">
 				<Grid.Background>
@@ -560,8 +564,9 @@
                     <Button x:Name="stopButton" Content="Stop" Margin="249,0,215.133,0" Command="{Binding StopRequest}" d:LayoutOverrides="HorizontalAlignment"/>
 					<Button x:Name="repeatButton" Content="{Binding RepeatButtonText}" Margin="161.867,0,0,0" Command="{Binding RepeatCommand}" HorizontalAlignment="Left" Width="62.4"/>
 					<Slider x:Name="volumeSlider" HorizontalAlignment="Right" Margin="0,17.6,45.333,8" Width="99.267" Minimum="0" Maximum="1" Value="{Binding Volume, ElementName=MediaElementBehavior, Mode=TwoWay}" IsMoveToPointEnabled="True"/>
-					<Button x:Name="prevButton" Content="&lt;&lt;" Margin="224.267,0,0,0" Command="{Binding PrevCommand}" HorizontalAlignment="Left" Width="24.733"/>
-					<Button x:Name="nextButton" Content="&gt;&gt;" HorizontalAlignment="Right" Margin="0,0,148.6,0" Width="24.733" Command="{Binding NextCommand}"/>
+                    <local:ButtonCustom x:Name="prevButton" Content="&lt;&lt;" Margin="224.267,0,0,0" HorizontalAlignment="Left" Width="24.733"/>
+                    <local:ButtonCustom x:Name="nextButton" Content="&gt;&gt;" HorizontalAlignment="Right" Margin="0,0,148.6,0" Width="24.733"/>
+                    <!--<local:ButtonCustom x:Name="test" Content="test" Width="61" Margin="95,0,337,0" />-->
                     <TextBlock x:Name="timeBlock" HorizontalAlignment="Left" Height="47.733" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="88.8" TextAlignment="Center" Foreground="White" Text="{Binding Time, ElementName=MediaElementBehavior}"/>
 				</Grid>
                 <Grid x:Name="gridMediaElement" Margin="0,0,0,74.84" d:LayoutOverrides="HorizontalAlignment" Background="#00000000" AllowDrop="True">
@@ -569,9 +574,9 @@
                         <local:GridBehavior x:Name="GridBehavior"/>
                     </i:Interaction.Behaviors>
 					<Image Source="ct9gh5ot.jpg" Visibility="{Binding Video, ElementName=MediaElementBehavior}" d:LayoutOverrides="Width" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <local:MediaElementCustom LoadedBehavior="Manual" UnloadedBehavior="Manual" x:Name="MediaPlayer" Source="{Binding CurrentSourceMedia}" Opacity="100000" d:IsHidden="True" >
+                    <local:MediaElementCustom  LoadedBehavior="Manual" UnloadedBehavior="Manual" x:Name="MediaPlayer" Source="{Binding CurrentSourceMedia}" Opacity="100000" >
                         <i:Interaction.Behaviors>
-							<local:MediaElementBehavior x:Name="MediaElementBehavior"/>
+                        	<local:MediaElementBehavior x:Name="MediaElementBehavior"/>
 						</i:Interaction.Behaviors>
 						<i:Interaction.Triggers>
 							<i:EventTrigger SourceName="MediaPlayer" EventName="MediaOpened">
@@ -615,8 +620,5 @@
                 <ListBox x:Name="lstSongs" Margin="0,31.706,8,8" HorizontalAlignment="Right" Width="172.167" ItemTemplate="{DynamicResource TemplateLibraryLstSongs}" MouseDoubleClick="lstSongs_MouseDoubleClick"/>
 			</Grid>
 		</TabItem>
-        <TabControl.InputBindings>
-            <KeyBinding Key="O" Modifiers="Control" Command="{Binding OpenDialogCommand}" />
-        </TabControl.InputBindings>
     </TabControl>
 </Window>
