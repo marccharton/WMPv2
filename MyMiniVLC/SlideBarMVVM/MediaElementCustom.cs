@@ -12,7 +12,7 @@ namespace SlideBarMVVM
     {
         public static readonly DependencyProperty PlayProperty = DependencyProperty.RegisterAttached("Play", typeof(PlayerState), typeof(MediaElementCustom), new UIPropertyMetadata(PlayPropertyChanged));
 
-        public PlayerState Play 
+        public PlayerState Play
         {
             get { return ((PlayerState)GetValue(PlayProperty)); }
             set { SetValue(PlayProperty, value); }

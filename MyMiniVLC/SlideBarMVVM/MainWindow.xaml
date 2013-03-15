@@ -2,9 +2,11 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:SlideBarMVVM" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" mc:Ignorable="d" x:Class="SlideBarMVVM.MainWindow"
-        Title="MainWindow" Height="350" Width="525" Background="{x:Null}" Loaded="LoadLibrary">
+        Title="MainWindow" Height="350" Width="525" Background="{x:Null}" >
+    <!--Loaded="LoadLibrary"-->
     <Window.Resources>
         <local:MediaPlayerViewModel x:Key="ViewModelDataSource" d:IsDataSource="True"/>
+        <local:LibraryViewModel x:Key="ViewModelLibrary" d:IsDataSource="True"/>
         <LinearGradientBrush x:Key="HorizontalSliderThumbHoverBackgroundInverted" EndPoint="0,0" StartPoint="0,1">
             <GradientStop Color="white" Offset="0"/>
             <GradientStop Color="#B8E2F9" Offset="0.5"/>
@@ -518,21 +520,21 @@
         <Style x:Key="PathStyle" TargetType="{x:Type Path}"/>
         <DataTemplate x:Key="TemplateLibraryLstArtists">
         	<Grid>
-        		<Grid HorizontalAlignment="Right" Height="30" VerticalAlignment="Bottom" Width="150">
+        		<Grid HorizontalAlignment="Right" Height="15" VerticalAlignment="Bottom" Width="250">
         			<TextBlock TextWrapping="Wrap" Text="{Binding Name}"/>
         		</Grid>
         	</Grid>
         </DataTemplate>
         <DataTemplate x:Key="TemplateLibraryLstAlbums">
             <Grid>
-                <Grid HorizontalAlignment="Right" Height="30" VerticalAlignment="Bottom" Width="150">
+                <Grid HorizontalAlignment="Right" Height="15" VerticalAlignment="Bottom" Width="150">
                     <TextBlock TextWrapping="Wrap" Text="{Binding Name}"/>
                 </Grid>
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="TemplateLibraryLstSongs">
             <Grid>
-                <Grid HorizontalAlignment="Right" Height="30" VerticalAlignment="Bottom" Width="150">
+                <Grid HorizontalAlignment="Right" Height="15" VerticalAlignment="Bottom" Width="150">
                     <TextBlock TextWrapping="Wrap" Text="{Binding Name}"/>
                 </Grid>
             </Grid>
@@ -542,8 +544,8 @@
      <Window.InputBindings>
         <KeyBinding Command="{Binding OpenDialogCommand, Source={StaticResource ViewModelDataSource}}"   Key="O" Modifiers="Control"/>
     </Window.InputBindings>
-    <TabControl x:Name="tabControl" Margin="0" DataContext="{Binding Source={StaticResource ViewModelDataSource}}">
-		<TabItem x:Name="tabPlayer" Header="Player">            
+    <TabControl x:Name="tabControl" Margin="0" >
+        <TabItem x:Name="tabPlayer" Header="Player" DataContext="{Binding Source={StaticResource ViewModelDataSource}}">            
             <Grid Margin="0">
 				<Grid.Background>
 					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -605,14 +607,39 @@
             </Grid>
 
         </TabItem>
-		<TabItem x:Name="tabLibrary" Header="Library">
+        <TabItem x:Name="tabLibrary" Header="Library" DataContext="{Binding Source={StaticResource ViewModelLibrary}}">
 			<Grid Background="#FFE5E5E5">
-				<TextBlock HorizontalAlignment="Left" Height="17.666" Margin="8,10.04,0,0" TextWrapping="Wrap" Text="Artists" VerticalAlignment="Top" Width="150"/>
-				<TextBlock Height="17.666" Margin="163,10.04,184.167,0" TextWrapping="Wrap" Text="Albums" VerticalAlignment="Top"/>
-				<TextBlock HorizontalAlignment="Right" Height="17.666" Margin="0,10.04,8,0" TextWrapping="Wrap" Text="Songs" VerticalAlignment="Top" Width="172.167"/>
-				<ListBox x:Name="lstArtists" Margin="8,31.706,0,8" HorizontalAlignment="Left" Width="250" ItemTemplate="{DynamicResource TemplateLibraryLstArtists}" MouseDoubleClick="lstArtists_MouseDoubleClick"/>
-                <ListBox x:Name="lstAlbums" Margin="162,31.706,184.167,8" ItemTemplate="{DynamicResource TemplateLibraryLstAlbums}" MouseDoubleClick="lstAlbums_MouseDoubleClick"/>
-                <ListBox x:Name="lstSongs" Margin="0,31.706,8,8" HorizontalAlignment="Right" Width="172.167" ItemTemplate="{DynamicResource TemplateLibraryLstSongs}" MouseDoubleClick="lstSongs_MouseDoubleClick"/>
+				<TextBlock HorizontalAlignment="Left" Height="21.666" Margin="8,49.04,0,0" TextWrapping="Wrap" Text="Artists" VerticalAlignment="Top" Width="150"/>
+				<TextBlock Height="21.666" Margin="163,49.04,184.167,0" TextWrapping="Wrap" Text="Albums" VerticalAlignment="Top"/>
+				<TextBlock HorizontalAlignment="Right" Height="21.666" Margin="0,49.04,8,0" TextWrapping="Wrap" Text="Songs" VerticalAlignment="Top" Width="172.167"/>
+                <ListBox x:Name="lstArtists" Margin="8,74.706,0,8" HorizontalAlignment="Left" Width="250" ItemTemplate="{DynamicResource TemplateLibraryLstArtists}" ItemsSource="{Binding ArtistsLIST}" SelectedItem="{Binding SelectedArtist}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding LoadArtistCMD}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListBox>
+                <!--MouseDoubleClick="lstArtists_MouseDoubleClick"-->
+                <ListBox x:Name="lstAlbums" Margin="162,74.706,184.167,8" ItemTemplate="{DynamicResource TemplateLibraryLstAlbums}" ItemsSource="{Binding AlbumsLIST}" SelectedItem="{Binding SelectedAlbum}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding LoadAlbumCMD}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListBox>
+                <!--MouseDoubleClick="lstAlbums_MouseDoubleClick"-->
+                <ListBox x:Name="lstSongs" Margin="0,74.706,8,8" HorizontalAlignment="Right" Width="172.167" ItemTemplate="{DynamicResource TemplateLibraryLstSongs}" ItemsSource="{Binding SongsLIST}" SelectedItem="{Binding SelectedSong}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding PlaySongCMD}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListBox>
+                <!--MouseDoubleClick="lstSongs_MouseDoubleClick"-->
+                <Button x:Name="btnImport" Content="Import File" HorizontalAlignment="Right" Height="25.04" Margin="0,8,126,0" VerticalAlignment="Top" Width="75.167" />
+                <!--Click="btnImport_Click"-->
+                <Button x:Name="btnDir" Content="Import Directory" HorizontalAlignment="Right" Height="25.04" Margin="0,8,8,0" VerticalAlignment="Top" Width="114" />
+                <!--Click="btnDir_Click"-->
 			</Grid>
 		</TabItem>
         <TabControl.InputBindings>
