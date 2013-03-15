@@ -103,6 +103,7 @@ namespace SlideBarMVVM
         protected override void OnAttached()
         {
             base.OnAttached();
+            CurrentList.getInstance().SpeedChanged += new EventHandler(SpeedChanged_Event);
             AssociatedObject.MediaOpened += new System.Windows.RoutedEventHandler(AssociatedObject_MediaOpened);
             AssociatedObject.MediaEnded += new RoutedEventHandler(AssociatedObject_MediaEnded);
             AssociatedObject.MediaFailed += new EventHandler<ExceptionRoutedEventArgs>(AssociatedObject_MediaFailed);
@@ -125,6 +126,11 @@ namespace SlideBarMVVM
         //        MessageBox.Show(s);
         //    }
         //}
+
+        void SpeedChanged_Event(object sender, EventArgs e) 
+        {
+            AssociatedObject.SpeedRatio = CurrentList.getInstance().Speed;
+        }
 
         void AssociatedObject_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -165,7 +171,7 @@ namespace SlideBarMVVM
         void AssociatedObject_MediaEnded(object sender, RoutedEventArgs e)
         {
             CurrentList curList = CurrentList.getInstance();
-         //   MessageBox.Show("Ended");
+         // MessageBox.Show("Ended");
             SetValue(TimeProperty, TimeSpan.Zero.ToString(@"hh\:mm\:ss"));
             if (curList.Repeat == RepeatState.Repeat || (curList.Repeat == RepeatState.RepeatAll && curList.getSize() > 1))
             {

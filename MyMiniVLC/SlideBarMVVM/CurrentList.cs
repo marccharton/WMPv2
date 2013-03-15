@@ -12,13 +12,34 @@ namespace SlideBarMVVM
         
         private int _idx;
         private List<String> _list;
+        private Double _speed;
+        public Double Speed
+        {
+            get
+            { 
+                return (_speed);
+            }
+            set 
+            {
+                if (this._speed != value)
+                {
+                    this._speed = value;
+                    if (this.SpeedChanged != null)
+                        this.SpeedChanged(this, null);
+                }
+            }
+        }
+        public EventHandler SpeedChanged { get; set; }
         public RepeatState Repeat { get; set; }
+        public EventHandler DropEvent;
+        public EventHandler ChangedEvent;
 
         private CurrentList() 
         {
             _idx = 0;
             _list = new List<string>();
             this.Repeat = RepeatState.NoRepeat;
+            _speed = 1.0;
         }
 
         public static CurrentList getInstance()
@@ -27,11 +48,6 @@ namespace SlideBarMVVM
                 _object = new CurrentList();
             return (_object);
         }
-
-        //private static List<String> list = new List<string>();
-        //private static RepeatState repeat = RepeatState.NoRepeat;
-        //private static int idx = 0;
-        //public static EventHandler DropEvent;
 
         public void addElement(String s)
         {
@@ -109,7 +125,6 @@ namespace SlideBarMVVM
         {
             _idx = 0;
             _list.Clear();
-            //DropEvent(CurrentList.get, null);
         }
     }
 }

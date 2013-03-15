@@ -129,10 +129,12 @@ namespace SlideBarMVVM
         }
         private RepeatState _repeatState;
 
+        private Boolean _changedInPause;
+
         public Command PlayRequest { get; set; }
         public Command StopRequest { get; set; }
-        public Command NextCommand { get; set; }
-        public Command PrevCommand { get; set; }
+        //public Command NextCommand { get; set; }
+        //public Command PrevCommand { get; set; }
         public ICommand MediaOpenedCommand { get; set; }
         public ICommand MediaFailedCommand { get; set; }
         public ICommand MediaEndedCommand { get; set; }
@@ -153,9 +155,9 @@ namespace SlideBarMVVM
         {
             CurrentList tmp = CurrentList.getInstance();
 
-            tmp.addElement(@"C:\Users\S@suke\Pictures\1184-shakaponk.bmp");
-            tmp.addElement(@"C:\Users\S@suke\Desktop\3194648_Bangarang_feat__Sirah_Original_Mix.mp3");
-            tmp.addElement(@"C:\Users\S@suke\Google Drive\KramAyrtoogle\dotNet\BDD\Music\01 Normal.mp3");
+            //tmp.addElement(@"C:\Users\S@suke\Pictures\1184-shakaponk.bmp");
+            //tmp.addElement(@"C:\Users\S@suke\Desktop\3194648_Bangarang_feat__Sirah_Original_Mix.mp3");
+            //tmp.addElement(@"C:\Users\S@suke\Google Drive\KramAyrtoogle\dotNet\BDD\Music\01 Normal.mp3");
         }
 
 
@@ -165,6 +167,7 @@ namespace SlideBarMVVM
             this._isOpened = false;
             this.PlayPauseButtonText = "Play";
             this.PlayState = PlayerState.Stop;
+            this._changedInPause = false;
             //this._timer = new Timer();
             //this._timer.Elapsed += new ElapsedEventHandler(_timer_Elapsed);
             //this._timer.Interval = TimeSpan.FromSeconds(2).TotalMilliseconds;
@@ -230,10 +233,12 @@ namespace SlideBarMVVM
             {
                // MessageBox.Show("Opened");
                 this._isOpened = true;
-                this.PlayPauseButtonText = "Pause";
+                if (!this._changedInPause)
+                    this.PlayPauseButtonText = "Pause";
                 this.StopRequest.CanExec = true;
-                this.NextCommand.CanExec = true;
-                this.PrevCommand.CanExec = true;
+                //this.NextCommand.CanExec = true;
+                //this.PrevCommand.CanExec = true;
+                this._changedInPause = false;
             }));
             #endregion
 
@@ -244,8 +249,8 @@ namespace SlideBarMVVM
                 this.PlayState = PlayerState.Stop;
                 this.PlayPauseButtonText = "Play";
                 this.StopRequest.CanExec = false;
-                this.NextCommand.CanExec = false;
-                this.PrevCommand.CanExec = false;
+                //this.NextCommand.CanExec = false;
+                //this.PrevCommand.CanExec = false;
                 MessageBox.Show("Error: Can't load file: Unknwon format");
             }));
             #endregion
@@ -326,54 +331,77 @@ namespace SlideBarMVVM
             }));
             #endregion
 
-            #region NextCommand
-            this.NextCommand = new Command(new Action(() =>
-            {
-                CurrentList curList = CurrentList.getInstance();
-                PlayerState tmp = this.PlayState;
+            //#region NextCommand
+            //this.NextCommand = new Command(new Action(() =>
+            //{
+            //    CurrentList curList = CurrentList.getInstance();
+            //    PlayerState tmp = this.PlayState;
 
-                if (tmp != PlayerState.Stop) 
-                    this.PlayState = PlayerState.Stop;
-                this.CurrentSourceMedia = new Uri(curList.moveToNextElement());
-                this.CurrentSourceName = Path.GetFileName(curList.getCurrentElement());
-                //this._tag = new Tag(CurrentList.getCurrentElement());
-                if (tmp == PlayerState.Play)
-                    this.PlayState = PlayerState.Play;
-                else if (tmp == PlayerState.Pause)
-                {
-                    this.PlayState = PlayerState.Pause;
-                    this.PlayPauseButtonText = "Play";
-                    //MessageBox.Show("la");
-                }
-            }), false);
-            #endregion
+            //    if (tmp != PlayerState.Stop) 
+            //        this.PlayState = PlayerState.Stop;
+            //    this.CurrentSourceMedia = new Uri(curList.moveToNextElement());
+            //    this.CurrentSourceName = Path.GetFileName(curList.getCurrentElement());
+            //    //this._tag = new Tag(CurrentList.getCurrentElement());
+            //    if (tmp == PlayerState.Play)
+            //        this.PlayState = PlayerState.Play;
+            //    else if (tmp == PlayerState.Pause)
+            //    {
+            //        this.PlayState = PlayerState.Pause;
+            //        this.PlayPauseButtonText = "Play";
+            //        //MessageBox.Show("la");
+            //    }
+            //}), false);
+            //#endregion
 
-            #region PrevCommand
-            this.PrevCommand = new Command(new Action(() =>
-            {
-                CurrentList curList = CurrentList.getInstance();
-                PlayerState tmp = this.PlayState;
+            //#region PrevCommand
+            //this.PrevCommand = new Command(new Action(() =>
+            //{
+            //    CurrentList curList = CurrentList.getInstance();
+            //    PlayerState tmp = this.PlayState;
 
-                if (tmp != PlayerState.Stop)
-                    this.PlayState = PlayerState.Stop;
-                this.CurrentSourceMedia = new Uri(curList.moveToPrevElement());
-                this.CurrentSourceName = Path.GetFileName(curList.getCurrentElement());
-                //this._tag = new Tag(CurrentList.getCurrentElement());
-                if (tmp == PlayerState.Play)
-                    this.PlayState = PlayerState.Play;
-                else if (tmp == PlayerState.Pause)
-                {
-                    this.PlayState = PlayerState.Pause;
-                    this.PlayPauseButtonText = "Play";
-                }
-            }), false);
-            #endregion
+            //    if (tmp != PlayerState.Stop)
+            //        this.PlayState = PlayerState.Stop;
+            //    this.CurrentSourceMedia = new Uri(curList.moveToPrevElement());
+            //    this.CurrentSourceName = Path.GetFileName(curList.getCurrentElement());
+            //    //this._tag = new Tag(CurrentList.getCurrentElement());
+            //    if (tmp == PlayerState.Play)
+            //        this.PlayState = PlayerState.Play;
+            //    else if (tmp == PlayerState.Pause)
+            //    {
+            //        this.PlayState = PlayerState.Pause;
+            //        this.PlayPauseButtonText = "Play";
+            //    }
+            //}), false);
+            //#endregion
 
             this.Test();
             this.Init();
 
-          //  CurrentList.DropEvent += new EventHandler(_timer_Elapsed);
+             CurrentList.getInstance().DropEvent += new EventHandler(dropEvent);
+             CurrentList.getInstance().ChangedEvent += new EventHandler(changedEvent);
         }
+
+        void dropEvent(object sender, EventArgs e) 
+        {
+            this.StopRequest.Execute(this);
+            this.PlayRequest.Execute(this);
+        }
+
+        void changedEvent(object sender, EventArgs e)
+        {
+            PlayerState tmp = this.PlayState;
+
+            this.StopRequest.Execute(this);
+            if (tmp != PlayerState.Stop)
+            {
+                if (tmp == PlayerState.Pause)
+                    this._changedInPause = true;
+                this.PlayRequest.Execute(this);
+                if (tmp == PlayerState.Pause)
+                    this.PlayRequest.Execute(this);
+            }
+        }
+
 
         void _timer_Elapsed(object sender, EventArgs e)
         {
