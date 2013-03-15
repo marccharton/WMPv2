@@ -168,7 +168,7 @@ namespace SlideBarMVVM
 
             LoadArtistCMD = new Command(new Action(() =>
             {
-                MessageBox.Show("Valeur de l'artist selectionné : " + _selectedArtist.Name);
+                //MessageBox.Show("Valeur de l'artist selectionné : " + _selectedArtist.Name);
                 AlbumsLIST = _selectedArtist.Albums;
                 SongsLIST = null;
             }));
@@ -179,7 +179,7 @@ namespace SlideBarMVVM
 
             LoadAlbumCMD = new Command(new Action(() =>
             {
-                MessageBox.Show("Valeur de l'album selectionné : " + _selectedAlbum.Name);
+                //MessageBox.Show("Valeur de l'album selectionné : " + _selectedAlbum.Name);
                 SongsLIST = _selectedAlbum.Songs;
             }));
 
@@ -189,7 +189,8 @@ namespace SlideBarMVVM
 
             PlaySongCMD = new Command(new Action(() =>
             {
-                MessageBox.Show("Valeur de la song selectionnée : " + _selectedSong.Title);
+                //MessageBox.Show("Valeur de la song selectionnée : " + _selectedSong.Title);
+                CurrentList.getInstance().addElement(SelectedSong.Path);
             }));
 
             #endregion
