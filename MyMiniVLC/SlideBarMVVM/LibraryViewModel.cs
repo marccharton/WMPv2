@@ -160,7 +160,7 @@ namespace SlideBarMVVM
             {
                 string error = Lib.Init();
                 if (error != null)
-                    MessageBox.Show("Paths not Found :\n" + Lib.Init());
+                    MessageBox.Show("Paths not Found :\n" + error);
             }
             catch (DirectoryNotFoundException)
             {
@@ -199,6 +199,7 @@ namespace SlideBarMVVM
                 if (_selectedAlbum != null)
                 {
                     SongsLIST = _selectedAlbum.Songs;
+                    MessageBox.Show(_selectedAlbum.Songs.Count.ToString());
                 }
             }));
 
