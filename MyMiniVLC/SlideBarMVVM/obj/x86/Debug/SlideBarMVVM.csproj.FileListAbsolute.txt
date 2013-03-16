@@ -72,7 +72,6 @@ C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\SlideB
 C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\SlideBarMVVM.Properties.Resources.resources
 C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\GenerateResource.write.1.tlog
-C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\wmp2.dll
 C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\taglib-sharp.dll
 C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\wmp2.pdb
 G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\SlideBarMVVM.exe
@@ -155,3 +154,4 @@ G:\Epitech\Semestre_06\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\SlideBarMVVM.g
 G:\Epitech\Semestre_06\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\SlideBarMVVM.Properties.Resources.resources
 G:\Epitech\Semestre_06\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\GenerateResource.read.1.tlog
 G:\Epitech\Semestre_06\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\wmp2.dll

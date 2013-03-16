@@ -6,6 +6,7 @@ using System.ComponentModel;
 using wmp2;
 using System.Windows;
 using System.IO;
+using Microsoft.Win32;
 
 
 namespace SlideBarMVVM
@@ -145,6 +146,8 @@ namespace SlideBarMVVM
         public Command LoadArtistCMD { get; set; }
         public Command LoadAlbumCMD { get; set; }
         public Command PlaySongCMD { get; set; }
+        public Command ImportDirectory { get; set; }
+        public Command ImportFile { get; set; }
 
         #endregion
 
@@ -152,7 +155,17 @@ namespace SlideBarMVVM
         public LibraryViewModel()
         {
             Lib = new Library(Tools.DefaultPathFileLibrary);
-            Lib.Init();
+
+            try
+            {
+                string error = Lib.Init();
+                if (error != null)
+                    MessageBox.Show("Paths not Found :\n" + Lib.Init());
+            }
+            catch (DirectoryNotFoundException)
+            {
+                MessageBox.Show("At least one path couldn't be found");
+            }
 
             #region Load Library
             
@@ -169,8 +182,11 @@ namespace SlideBarMVVM
             LoadArtistCMD = new Command(new Action(() =>
             {
                 //MessageBox.Show("Valeur de l'artist selectionné : " + _selectedArtist.Name);
-                AlbumsLIST = _selectedArtist.Albums;
-                SongsLIST = null;
+                if (_selectedArtist != null)
+                {
+                    AlbumsLIST = _selectedArtist.Albums;
+                    SongsLIST = null;
+                }
             }));
 
             #endregion
@@ -180,7 +196,10 @@ namespace SlideBarMVVM
             LoadAlbumCMD = new Command(new Action(() =>
             {
                 //MessageBox.Show("Valeur de l'album selectionné : " + _selectedAlbum.Name);
-                SongsLIST = _selectedAlbum.Songs;
+                if (_selectedAlbum != null)
+                {
+                    SongsLIST = _selectedAlbum.Songs;
+                }
             }));
 
             #endregion
@@ -189,13 +208,49 @@ namespace SlideBarMVVM
 
             PlaySongCMD = new Command(new Action(() =>
             {
-                //MessageBox.Show("Valeur de la song selectionnée : " + _selectedSong.Title);
-                CurrentList.getInstance().addElement(SelectedSong.Path);
+                if (_selectedSong != null)
+                {
+                    MessageBox.Show("Valeur de la song selectionnée : " + _selectedSong.Title + Path.GetFullPath(_selectedSong.Path));
+                    CurrentList.getInstance().addElement(Path.GetFullPath(SelectedSong.Path));
+                }
             }));
 
             #endregion
+            
+            #region Import Directory
 
-            //Lib.ImportDir(@"E:\Programs Files\Itunes\Music");
+            ImportDirectory = new Command(new Action(() =>
+            {
+                Lib.ImportDir(@"E:\Programs Files\Itunes\Music");
+            }));
+            
+            #endregion
+            
+            #region Import File
+
+            ImportFile = new Command(new Action(() =>
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Multiselect = true;
+                ofd.Filter = "All files (*.*)|*.*";
+                try
+                {
+                    if (ofd.ShowDialog() == true)
+                    {
+                        foreach (string name in ofd.FileNames)
+                            Lib.ImportFile(name);
+                        MessageBox.Show(Lib.Artists.Count.ToString());
+                        ArtistsLIST = Lib.Artists;
+                    }
+                    
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }));
+
+            #endregion            
 
             ArtistsLIST = Lib.Artists;
         }

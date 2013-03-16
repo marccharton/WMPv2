@@ -38,14 +38,24 @@ namespace wmp2
         }
 
         // Load Existing Files in xml file in Library
-        public bool Init()
+        public string Init()
         {
-           Unserialize();
+            Unserialize();
+            string error = null;
 
-           foreach (string path in SongPaths)
-               Songs.Add(CreateSong(path));
+            foreach (string path in SongPaths)
+            {
+                try
+                {
+                    Songs.Add(CreateSong(path));
+                }
+                catch (DirectoryNotFoundException)
+                {
+                    error += path + "\n";
+                }
+            }
             
-            return true;
+            return error;
         }
 
         public bool Serialize()

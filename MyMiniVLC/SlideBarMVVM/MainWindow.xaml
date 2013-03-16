@@ -640,7 +640,7 @@
                     </i:Interaction.Triggers>
                 </ListBox>
                 <!--MouseDoubleClick="lstSongs_MouseDoubleClick"-->
-                <Button x:Name="btnImport" Content="Import File" HorizontalAlignment="Right" Height="25.04" Margin="0,8,126,0" VerticalAlignment="Top" Width="75.167" />
+                <Button x:Name="btnImport" Content="Import File" HorizontalAlignment="Right" Height="25.04" Margin="0,8,126,0" VerticalAlignment="Top" Width="75.167" Command="{Binding ImportFile}"/>
                 <!--Click="btnImport_Click"-->
                 <Button x:Name="btnDir" Content="Import Directory" HorizontalAlignment="Right" Height="25.04" Margin="0,8,8,0" VerticalAlignment="Top" Width="114" />
                 <!--Click="btnDir_Click"-->
