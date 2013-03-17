@@ -74,7 +74,7 @@ namespace SlideBarMVVM
 
         #endregion
 
-        #region Binded Current Property
+        #region Binded Selected Property
 
         private Artist _selectedArtist;
         public Artist SelectedArtist
@@ -160,7 +160,7 @@ namespace SlideBarMVVM
             {
                 string error = Lib.Init();
                 if (error != null)
-                    MessageBox.Show("Paths not Found :\n" + error);
+                    MessageBox.Show("-- Paths not Found --\n" + error);
             }
             catch (DirectoryNotFoundException)
             {
@@ -199,7 +199,7 @@ namespace SlideBarMVVM
                 if (_selectedAlbum != null)
                 {
                     SongsLIST = _selectedAlbum.Songs;
-                    MessageBox.Show(_selectedAlbum.Songs.Count.ToString());
+                    // MessageBox.Show("_selectedAlbum.Songs.Count = " + _selectedAlbum.Songs.Count.ToString());
                 }
             }));
 
@@ -222,7 +222,10 @@ namespace SlideBarMVVM
 
             ImportDirectory = new Command(new Action(() =>
             {
-                Lib.ImportDir(@"E:\Programs Files\Itunes\Music");
+                //Lib.ImportDir(@"E:\Programs Files\Itunes\Music");
+
+                var dialog = new System.Windows.Forms.FolderBrowserDialog();
+                System.Windows.Forms.DialogResult result = dialog.ShowDialog();
             }));
             
             #endregion
@@ -240,8 +243,15 @@ namespace SlideBarMVVM
                     {
                         foreach (string name in ofd.FileNames)
                             Lib.ImportFile(name);
-                        MessageBox.Show(Lib.Artists.Count.ToString());
-                        ArtistsLIST = Lib.Artists;
+                        
+                        MessageBox.Show("Lib.Artists.Count = " + Lib.Artists.Count.ToString());
+
+                        string s = "";
+                        foreach (Artist a in Lib.Artists)
+                            s += a.Name + "\n";
+                        MessageBox.Show("Artists : \n" + s);
+                        RefreshLibrary();
+                        MessageBox.Show("ArtistsLIST.Count = " + ArtistsLIST.Count.ToString());
                     }
                     
                 }
@@ -254,6 +264,14 @@ namespace SlideBarMVVM
             #endregion            
 
             ArtistsLIST = Lib.Artists;
+        }
+
+        private void RefreshLibrary()
+        {
+            ArtistsLIST = null;
+            ArtistsLIST = Lib.Artists;
+            AlbumsLIST = null;
+            SongsLIST = null;
         }
     }
 

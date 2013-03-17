@@ -614,9 +614,9 @@
         <TabItem x:Name="tabLibrary" Header="Library" DataContext="{Binding Source={StaticResource ViewModelLibrary}}">
 			<Grid Background="#FFE5E5E5">
 				<TextBlock HorizontalAlignment="Left" Height="21.666" Margin="8,49.04,0,0" TextWrapping="Wrap" Text="Artists" VerticalAlignment="Top" Width="150"/>
-				<TextBlock Height="21.666" Margin="163,49.04,184.167,0" TextWrapping="Wrap" Text="Albums" VerticalAlignment="Top"/>
-				<TextBlock HorizontalAlignment="Right" Height="21.666" Margin="0,49.04,8,0" TextWrapping="Wrap" Text="Songs" VerticalAlignment="Top" Width="172.167"/>
-                <ListBox x:Name="lstArtists" Margin="8,74.706,0,8" HorizontalAlignment="Left" Width="250" ItemTemplate="{DynamicResource TemplateLibraryLstArtists}" ItemsSource="{Binding ArtistsLIST}" SelectedItem="{Binding SelectedArtist}">
+				<TextBlock Height="21.666" Margin="200,49,147,0" TextWrapping="Wrap" Text="Albums" VerticalAlignment="Top"/>
+				<TextBlock HorizontalAlignment="Right" Height="21.666" Margin="0,49,38,0" TextWrapping="Wrap" Text="Songs" VerticalAlignment="Top" Width="122"/>
+                <ListBox x:Name="lstArtists" Margin="8,74.706,0,8" HorizontalAlignment="Left" Width="186" ItemTemplate="{DynamicResource TemplateLibraryLstArtists}" ItemsSource="{Binding ArtistsLIST}" SelectedItem="{Binding SelectedArtist}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">
                             <i:InvokeCommandAction Command="{Binding LoadArtistCMD}"/>
@@ -624,7 +624,7 @@
                     </i:Interaction.Triggers>
                 </ListBox>
                 <!--MouseDoubleClick="lstArtists_MouseDoubleClick"-->
-                <ListBox x:Name="lstAlbums" Margin="162,74.706,184.167,8" ItemTemplate="{DynamicResource TemplateLibraryLstAlbums}" ItemsSource="{Binding AlbumsLIST}" SelectedItem="{Binding SelectedAlbum}">
+                <ListBox x:Name="lstAlbums" Margin="200,74.706,166,8" ItemTemplate="{DynamicResource TemplateLibraryLstAlbums}" ItemsSource="{Binding AlbumsLIST}" SelectedItem="{Binding SelectedAlbum}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">
                             <i:InvokeCommandAction Command="{Binding LoadAlbumCMD}"/>
@@ -632,7 +632,7 @@
                     </i:Interaction.Triggers>
                 </ListBox>
                 <!--MouseDoubleClick="lstAlbums_MouseDoubleClick"-->
-                <ListBox x:Name="lstSongs" Margin="0,74.706,8,8" HorizontalAlignment="Right" Width="172.167" ItemTemplate="{DynamicResource TemplateLibraryLstSongs}" ItemsSource="{Binding SongsLIST}" SelectedItem="{Binding SelectedSong}">
+                <ListBox x:Name="lstSongs" Margin="0,74.706,8,8" HorizontalAlignment="Right" Width="152" ItemTemplate="{DynamicResource TemplateLibraryLstSongs}" ItemsSource="{Binding SongsLIST}" SelectedItem="{Binding SelectedSong}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">
                             <i:InvokeCommandAction Command="{Binding PlaySongCMD}"/>
