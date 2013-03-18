@@ -53,6 +53,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Expression.Controls" />
+    <Reference Include="Microsoft.Expression.Drawing" />
     <Reference Include="Microsoft.Expression.Interactions" />
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
@@ -77,9 +79,11 @@
     </ApplicationDefinition>
     <Compile Include="ButtonCustom.cs" />
     <Compile Include="CurrentList.cs" />
+    <Compile Include="DropAdorner.cs" />
     <Compile Include="GridCustom.cs" />
     <Compile Include="LibraryViewModel.cs" />
     <Compile Include="GridBehavior.cs" />
+    <Compile Include="ListViewCustom.cs" />
     <Compile Include="MediaElementBehavior.cs" />
     <Compile Include="MediaElementCustom.cs" />
     <Compile Include="MediaPlayerViewModel.cs" />

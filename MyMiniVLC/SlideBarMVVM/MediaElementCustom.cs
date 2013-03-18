@@ -35,7 +35,7 @@ namespace SlideBarMVVM
                      //MessageBox.Show("Stop");
                     ((MediaElement)dep).Stop();
                     ((MediaElement)dep).Close();
-                    Thread.Sleep(10);
+                    ((MediaElement)dep).Position = TimeSpan.Zero;
                 }
             }
             catch (Exception ex)

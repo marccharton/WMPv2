@@ -21,7 +21,7 @@ namespace SlideBarMVVM
         {
             this._timer = new Timer();
             this._timer.Elapsed += new ElapsedEventHandler(_timer_Elapsed);
-            this._timer.Interval = TimeSpan.FromSeconds(2).TotalMilliseconds;
+            this._timer.Interval = TimeSpan.FromSeconds(522).TotalMilliseconds;
             this.MouseEnter += new System.Windows.Input.MouseEventHandler(GridCustom_MouseEnter);
             this.MouseLeave += new System.Windows.Input.MouseEventHandler(GridCustom_MouseLeave);
             //this._timer.Start();
@@ -30,7 +30,7 @@ namespace SlideBarMVVM
         void GridCustom_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
            // MessageBox.Show("Au revoir");
-            this._timer.Interval = TimeSpan.FromSeconds(2).TotalMilliseconds;
+            this._timer.Interval = TimeSpan.FromSeconds(522).TotalMilliseconds;
             this._timer.Start();
         }
 

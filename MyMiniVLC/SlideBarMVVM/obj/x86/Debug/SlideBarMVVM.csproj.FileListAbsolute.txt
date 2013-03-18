@@ -157,3 +157,7 @@ G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\ja\System.
 G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\ko\System.Windows.Interactivity.resources.dll
 G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
 G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Controls.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Drawing.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Controls.xml
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Drawing.xml

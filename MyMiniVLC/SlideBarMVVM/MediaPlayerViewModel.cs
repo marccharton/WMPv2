@@ -11,6 +11,7 @@ using wmp2;
 using System.IO;
 using System.Timers;
 using System.Reflection;
+using System.Collections.ObjectModel;
 
 namespace SlideBarMVVM
 {
@@ -56,18 +57,18 @@ namespace SlideBarMVVM
 
         //private Tag _tag;
         private String _currentSourceName;
-        public String CurrentSourceName 
+        public String CurrentSourceName
         {
-            get 
+            get
             {
                 return (_currentSourceName);
             }
-            set 
+            set
             {
-                if (this._currentSourceName != value) 
+                if (this._currentSourceName != value)
                 {
                     this._currentSourceName = value;
-                    if (this.PropertyChanged != null) 
+                    if (this.PropertyChanged != null)
                         this.PropertyChanged(this, new PropertyChangedEventArgs("CurrentSourceName"));
                 }
             }
@@ -193,7 +194,9 @@ namespace SlideBarMVVM
         public ICommand RepeatCommand { get; set; }
         public ICommand ShuffleCommand { get; set; }
 
-       private void Init()
+        public ObservableCollection<String> Collect { get; set; }
+
+        private void Init()
         {
             //if (CurrentList.getSize() > 0)
             //{
@@ -206,8 +209,11 @@ namespace SlideBarMVVM
         {
             CurrentList tmp = CurrentList.getInstance();
 
+            tmp.addElement(@"G:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\01 - Skrillex - First Of The Year (Equinox).mp3");
+            tmp.addElement(@"G:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\02 - Skrillex - Ruffneck (Flex).mp3");
+
             //tmp.addElement(@"C:\Users\S@suke\Pictures\1184-shakaponk.bmp");
-            tmp.addElement(@"C:\Users\S@suke\Desktop\3194648_Bangarang_feat__Sirah_Original_Mix.mp3");
+            //tmp.addElement(@"C:\Users\S@suke\Desktop\3194648_Bangarang_feat__Sirah_Original_Mix.mp3");
             //tmp.addElement(@"C:\Users\S@suke\Google Drive\KramAyrtoogle\dotNet\BDD\Music\01 Normal.mp3");
         }
 
@@ -215,7 +221,16 @@ namespace SlideBarMVVM
         public MediaPlayerViewModel()
         {
             this.PlayPauseButtonImage = "/Assets/play.png";
+            CurrentList.getInstance().ModifiedEvent += new EventHandler(modifiedEvent);
 
+            this.Collect = new ObservableCollection<string>();
+            //this.Collect.Add("Coucou");
+            //this.Collect.Add("tu");
+            //this.Collect.Add("veux");
+            //this.Collect.Add("voir");
+            //this.Collect.Add("mon");
+            //this.Collect.Add("...");
+            //this.Collect.Add("???");
 
             this._isOpened = false;
             this.PlayPauseButtonText = "Play";
@@ -287,7 +302,7 @@ namespace SlideBarMVVM
             #region MediaOpenedCommand
             this.MediaOpenedCommand = new Command(new Action(() =>
             {
-               // MessageBox.Show("Opened");
+                // MessageBox.Show("Opened");
                 this._isOpened = true;
                 if (!this._changedInPause)
                 {
@@ -420,15 +435,17 @@ namespace SlideBarMVVM
                 }
             }));
             #endregion
-            
+
             this.Test();
             this.Init();
 
-             CurrentList.getInstance().DropEvent += new EventHandler(dropEvent);
-             CurrentList.getInstance().ChangedEvent += new EventHandler(changedEvent);
+            CurrentList.getInstance().DropEvent += new EventHandler(dropEvent);
+            CurrentList.getInstance().ChangedEvent += new EventHandler(changedEvent);
+           
+
         }
 
-        void dropEvent(object sender, EventArgs e) 
+        void dropEvent(object sender, EventArgs e)
         {
             this.StopRequest.Execute(this);
             this.PlayRequest.Execute(this);
@@ -447,6 +464,13 @@ namespace SlideBarMVVM
                 if (tmp == PlayerState.Pause)
                     this.PlayRequest.Execute(this);
             }
+        }
+
+        void modifiedEvent(object sender, EventArgs e) 
+        {
+            this.Collect.Clear();
+            foreach (String s in CurrentList.getInstance().getAllElement())
+                this.Collect.Add(Path.GetFileName(s));
         }
 
         void _timer_Elapsed(object sender, EventArgs e)

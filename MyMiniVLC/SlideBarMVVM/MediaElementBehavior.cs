@@ -175,6 +175,7 @@ namespace SlideBarMVVM
             SetValue(TimeProperty, TimeSpan.Zero.ToString(@"hh\:mm\:ss"));
             if (curList.Repeat == RepeatState.Repeat || (curList.Repeat == RepeatState.RepeatAll && curList.getSize() > 1))
             {
+                MessageBox.Show("tralalala");
                 AssociatedObject.Position = TimeSpan.FromMilliseconds(1);
                 AssociatedObject.Play();
             }
@@ -190,7 +191,7 @@ namespace SlideBarMVVM
 
         void AssociatedObject_MediaOpened(object sender, System.Windows.RoutedEventArgs e)
         {
-            SetValue(TimeProperty, TimeSpan.Zero.ToString(@"hh\:mm\:ss"));
+          //  SetValue(TimeProperty, TimeSpan.Zero.ToString(@"hh\:mm\:ss"));
             AssociatedObject.IsMuted = true;
             AssociatedObject.IsMuted = false;
             if (AssociatedObject.HasVideo)
@@ -202,8 +203,9 @@ namespace SlideBarMVVM
             if (AssociatedObject.NaturalDuration.HasTimeSpan)
             {
                 SetValue(MaximumProperty, AssociatedObject.NaturalDuration.TimeSpan.TotalMilliseconds);
-                SetValue(PositionProperty, 0.0);
+  //              SetValue(PositionProperty, 0.0);
                 AssociatedObject.Volume = (double)GetValue(VolumeProperty);
+//                SetValue(PositionPropert
             }
             else
             {

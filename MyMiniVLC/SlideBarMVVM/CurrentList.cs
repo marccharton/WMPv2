@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Collections.ObjectModel;
+using System.IO;
 
 namespace SlideBarMVVM
 {
@@ -35,6 +37,7 @@ namespace SlideBarMVVM
         public Boolean Shuffle { get; set; }
         public EventHandler DropEvent;
         public EventHandler ChangedEvent;
+        public EventHandler ModifiedEvent;
 
         private CurrentList() 
         {
@@ -62,6 +65,7 @@ namespace SlideBarMVVM
                     this.ResetRandom();
                     this.Random();
                 }
+                this.ModifiedEvent(this, null);
             }
         }
 
@@ -79,6 +83,7 @@ namespace SlideBarMVVM
                     this.ResetRandom();
                     this.Random();
                 }
+                this.ModifiedEvent(this, null);
             }
         }
 
@@ -101,6 +106,14 @@ namespace SlideBarMVVM
             else
                 ++_idx;
             return (_list.ElementAt(_idx));
+        }
+
+        public String moveToIdx(int idx) 
+        {
+            if (idx >= this._list.Count || idx < 0)
+                return (null);
+            this._idx = idx;
+            return (this._list.ElementAt(this._idx));
         }
 
         public String getPrevElement()
@@ -165,5 +178,32 @@ namespace SlideBarMVVM
             this._list = this._originalList;
             this._idx = this._list.FindIndex(song => song == s);
         }
+
+        public List<String> getAllElement() 
+        {
+            return (this._list);
+        }
+
+        public void InsertAfter(String s, String toAdd) 
+        {
+            int idx = 0;
+
+            foreach (String tmp in this._list)
+            {
+                if (tmp == s)
+                    break;
+                ++idx;
+            }
+
+            if (idx >= this._list.Count)
+            {
+                 this.addElement(toAdd);
+            }
+            else
+            {
+                this._list.Insert(idx + 1, toAdd);
+                this.ModifiedEvent(this, null);
+            }
+       }
     }
 }
