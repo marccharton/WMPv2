@@ -146,7 +146,6 @@ namespace SlideBarMVVM
                 }
             }
         }
-        private RepeatState _repeatState;
         private String _repeatButtonImage;
         public String RepeatButtonImage
         {
@@ -165,21 +164,36 @@ namespace SlideBarMVVM
             }
         }
 
+        private String _shuffleButtonImage;
+        public String ShuffleButtonImage
+        {
+            get
+            {
+                return (this._shuffleButtonImage);
+            }
+            set
+            {
+                if (this._shuffleButtonImage != value)
+                {
+                    this._shuffleButtonImage = value;
+                    if (this.PropertyChanged != null)
+                        this.PropertyChanged(this, new PropertyChangedEventArgs("ShuffleButtonImage"));
+                }
+            }
+        }
+
 
         private Boolean _changedInPause;
 
         public Command PlayRequest { get; set; }
         public Command StopRequest { get; set; }
-        //public Command NextCommand { get; set; }
-        //public Command PrevCommand { get; set; }
         public ICommand MediaOpenedCommand { get; set; }
         public ICommand MediaFailedCommand { get; set; }
         public ICommand MediaEndedCommand { get; set; }
         public ICommand RepeatCommand { get; set; }
+        public ICommand ShuffleCommand { get; set; }
 
-        //private Timer _timer;
-
-        private void Init()
+       private void Init()
         {
             //if (CurrentList.getSize() > 0)
             //{
@@ -207,9 +221,6 @@ namespace SlideBarMVVM
             this.PlayPauseButtonText = "Play";
             this.PlayState = PlayerState.Stop;
             this._changedInPause = false;
-            //this._timer = new Timer();
-            //this._timer.Elapsed += new ElapsedEventHandler(_timer_Elapsed);
-            //this._timer.Interval = TimeSpan.FromSeconds(2).TotalMilliseconds;
 
             #region FileDialogCommand
             this.OpenDialogCommand = new Command(new Action(() =>
@@ -313,7 +324,6 @@ namespace SlideBarMVVM
             }), false);
             #endregion
 
-            this._repeatState = RepeatState.NoRepeat;
             this.RepeatButtonText = "No repeat";
             this.RepeatButtonImage = "/Assets/repeat.png";
 
@@ -388,49 +398,29 @@ namespace SlideBarMVVM
             }));
             #endregion
 
-            //#region NextCommand
-            //this.NextCommand = new Command(new Action(() =>
-            //{
-            //    CurrentList curList = CurrentList.getInstance();
-            //    PlayerState tmp = this.PlayState;
-
-            //    if (tmp != PlayerState.Stop) 
-            //        this.PlayState = PlayerState.Stop;
-            //    this.CurrentSourceMedia = new Uri(curList.moveToNextElement());
-            //    this.CurrentSourceName = Path.GetFileName(curList.getCurrentElement());
-            //    //this._tag = new Tag(CurrentList.getCurrentElement());
-            //    if (tmp == PlayerState.Play)
-            //        this.PlayState = PlayerState.Play;
-            //    else if (tmp == PlayerState.Pause)
-            //    {
-            //        this.PlayState = PlayerState.Pause;
-            //        this.PlayPauseButtonText = "Play";
-            //        //MessageBox.Show("la");
-            //    }
-            //}), false);
-            //#endregion
-
-            //#region PrevCommand
-            //this.PrevCommand = new Command(new Action(() =>
-            //{
-            //    CurrentList curList = CurrentList.getInstance();
-            //    PlayerState tmp = this.PlayState;
-
-            //    if (tmp != PlayerState.Stop)
-            //        this.PlayState = PlayerState.Stop;
-            //    this.CurrentSourceMedia = new Uri(curList.moveToPrevElement());
-            //    this.CurrentSourceName = Path.GetFileName(curList.getCurrentElement());
-            //    //this._tag = new Tag(CurrentList.getCurrentElement());
-            //    if (tmp == PlayerState.Play)
-            //        this.PlayState = PlayerState.Play;
-            //    else if (tmp == PlayerState.Pause)
-            //    {
-            //        this.PlayState = PlayerState.Pause;
-            //        this.PlayPauseButtonText = "Play";
-            //    }
-            //}), false);
-            //#endregion
-
+            this.ShuffleButtonImage = "/Assets/shuffleoff.png";
+            #region ShuffleCommand
+            this.ShuffleCommand = new Command(new Action(() =>
+            {
+                CurrentList curList = CurrentList.getInstance();
+                if (this.ShuffleButtonImage == "/Assets/shuffleoff.png")
+                {
+                    if (curList.getSize() > 0)
+                    {
+                        curList.Random();
+                        curList.Shuffle = true;
+                        this.ShuffleButtonImage = "/Assets/shuffleon.png";
+                    }
+                }
+                else
+                {
+                    curList.ResetRandom();
+                    curList.Shuffle = false;
+                    this.ShuffleButtonImage = "/Assets/shuffleoff.png";
+                }
+            }));
+            #endregion
+            
             this.Test();
             this.Init();
 
@@ -458,7 +448,6 @@ namespace SlideBarMVVM
                     this.PlayRequest.Execute(this);
             }
         }
-
 
         void _timer_Elapsed(object sender, EventArgs e)
         {

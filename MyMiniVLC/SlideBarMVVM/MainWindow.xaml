@@ -594,6 +594,11 @@
     			<Image Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="{Binding RepeatButtonImage}" Width="Auto" Height="Auto"/>
     		</Grid>
     	</ControlTemplate>
+    	<ControlTemplate x:Key="ButtonShuffleTemplate" TargetType="{x:Type Button}">
+    		<Grid>
+    			<Image Margin="0" Source="{Binding ShuffleButtonImage}"/>
+    		</Grid>
+    	</ControlTemplate>
     </Window.Resources>
     
      <Window.InputBindings>
@@ -613,11 +618,12 @@
 				</Grid.Background>
 				<local:GridCustom x:Name="gridControlAction" Height="70.84" VerticalAlignment="Bottom">
                     <!--<local:ButtonCustom x:Name="test" Content="test" Width="61" Margin="95,0,337,0" />-->
-                    <Button Content="Button" HorizontalAlignment="Left" Margin="105.6,27.8,0,8" Width="41.6" Template="{DynamicResource ButtonPlayTemplate}" d:IsHidden="True" Visibility="Hidden"/>
                     <local:SpecialSlider x:Name="slider" Maximum="{Binding Maximum, ElementName=MediaElementBehavior}" Minimum="0.0" Background="{x:Null}" Foreground="{x:Null}" IsMoveToPointEnabled="True" Value="{Binding Position, ElementName=MediaElementBehavior, Mode=TwoWay}" Height="23.8" VerticalAlignment="Top"/>
                     <WrapPanel Margin="0,23.8,0,6" VerticalAlignment="Center" HorizontalAlignment="Center" Height="39.04">
                     	<!--<local:ButtonCustom x:Name="test" Content="test" Width="61" Margin="95,0,337,0" />-->
+                    	<!--<local:ButtonCustom x:Name="test" Content="test" Width="61" Margin="95,0,337,0" />-->
                     	<TextBlock x:Name="timeBlock" Height="39.04" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="52.666" TextAlignment="Center" Foreground="White" Text="{Binding Time, ElementName=MediaElementBehavior}"/>
+                    	<Button x:Name="shuffleButton" Content="Button" Width="41.625" Height="39.04" Template="{DynamicResource ButtonShuffleTemplate}" Command="{Binding ShuffleCommand}"/>
                     	<Button x:Name="repeatButton" Content="{Binding RepeatButtonText}" Command="{Binding RepeatCommand}" Width="32.8" Height="39.04" Template="{DynamicResource ButtonRepeatlTemplate}"/>
                     	<Button x:Name="stopButton" Command="{Binding StopRequest}" d:LayoutOverrides="HorizontalAlignment" Height="38.973" Width="36.467" Template="{DynamicResource ButtonStopTemplate}"/>
                     	<local:ButtonCustom x:Name="prevButton" Content="&lt;&lt;" Margin="0" Width="47.986" Template="{DynamicResource ButtonPrevTemplate}" Height="39.04" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -651,13 +657,13 @@
                             <Style>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding PlayState}" Value="Play" >
-                                        <Setter Property="local:MediaElementCustom.Play" Value="Play"/>
+                                        <Setter Property="local:MediaElementCustom.PlayCustom" Value="Play"/>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding PlayState}" Value="Pause" >
-                                        <Setter Property="local:MediaElementCustom.Play" Value="Pause"/>
+                                        <Setter Property="local:MediaElementCustom.PlayCustom" Value="Pause"/>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding PlayState}" Value="Stop" >
-                                        <Setter Property="local:MediaElementCustom.Play" Value="Stop"/>
+                                        <Setter Property="local:MediaElementCustom.PlayCustom" Value="Stop"/>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>

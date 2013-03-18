@@ -130,7 +130,10 @@
       <Name>entities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\shuffleoff.png" />
+    <Resource Include="Assets\shuffleon.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\play.png" />
   </ItemGroup>

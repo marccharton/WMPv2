@@ -12,6 +12,7 @@ namespace SlideBarMVVM
         
         private int _idx;
         private List<String> _list;
+        private List<String> _originalList;
         private Double _speed;
         public Double Speed
         {
@@ -31,6 +32,7 @@ namespace SlideBarMVVM
         }
         public EventHandler SpeedChanged { get; set; }
         public RepeatState Repeat { get; set; }
+        public Boolean Shuffle { get; set; }
         public EventHandler DropEvent;
         public EventHandler ChangedEvent;
 
@@ -40,6 +42,7 @@ namespace SlideBarMVVM
             _list = new List<string>();
             this.Repeat = RepeatState.NoRepeat;
             _speed = 1.0;
+            this.Shuffle = false;
         }
 
         public static CurrentList getInstance()
@@ -52,7 +55,14 @@ namespace SlideBarMVVM
         public void addElement(String s)
         {
             if (s != null)
+            {
                 _list.Add(s);
+                if (this.Shuffle) 
+                {
+                    this.ResetRandom();
+                    this.Random();
+                }
+            }
         }
 
         public void addList(List<String> l)
@@ -63,6 +73,11 @@ namespace SlideBarMVVM
                 {
                     if (s != null)
                         _list.Add(s);
+                }
+                if (this.Shuffle)
+                {
+                    this.ResetRandom();
+                    this.Random();
                 }
             }
         }
@@ -125,6 +140,30 @@ namespace SlideBarMVVM
         {
             _idx = 0;
             _list.Clear();
+        }
+
+        public void Random()
+        {
+            String s;
+
+            if (this._list.Count > 0)
+            {
+                this._originalList = this._list;
+                s = this._list.ElementAt(this._idx);
+                this._list = this._list.OrderBy(song => Guid.NewGuid()).ToList();
+                this._idx = 0;
+                this._list.Remove(s);
+                this._list.Insert(0, s);
+            }
+        }
+
+        public void ResetRandom() 
+        {
+            String s;
+
+            s = this._list.ElementAt(this._idx);
+            this._list = this._originalList;
+            this._idx = this._list.FindIndex(song => song == s);
         }
     }
 }
