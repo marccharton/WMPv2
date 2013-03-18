@@ -539,6 +539,61 @@
             </Grid>
         </DataTemplate>
     	<System:Double x:Key="DoubleSpeedRatio">1</System:Double>
+    	<ControlTemplate x:Key="ButtonPlayTemplate" TargetType="{x:Type Button}">
+    		<Border Margin="0" BorderThickness="1" CornerRadius="60" HorizontalAlignment="Center" Width="51.2" BorderBrush="White">
+    			<Border.Background>
+    				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    					<GradientStop Color="Black" Offset="1"/>
+    					<GradientStop Color="#FF888888"/>
+    				</LinearGradientBrush>
+    			</Border.Background>
+    			<Image Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Source="{Binding PlayPauseButtonImage}"/>
+    		</Border>
+    	</ControlTemplate>
+    	<ControlTemplate x:Key="ButtonPrevTemplate" TargetType="{x:Type local:ButtonCustom}">
+    		<Border Margin="0" BorderThickness="1" BorderBrush="{x:Null}" Padding="0">
+    			<Grid>
+    				<TextBlock Margin="0" TextWrapping="Wrap" Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" TextAlignment="Left" Grid.ColumnSpan="1" FontFamily="Segoe UI" LineHeight="Auto" d:LayoutOverrides="Width, Height"/>
+    				<Path Data="M0.21733333,22.943667 L21.950667,0" Fill="{x:Null}" Margin="0,0,22.899,0" Stretch="Fill" Stroke="White" Height="18.511" VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment"/>
+    				<Path Data="M0.217,23.011 L21.750667,44.943667" Fill="{x:Null}" Height="Auto" Margin="0,18.511,22.899,-0.077" Stretch="Fill" Stroke="White" VerticalAlignment="Stretch" d:LayoutOverrides="VerticalAlignment"/>
+    				<Path Data="M45.634,45.460333 C32.234,24.460333 45.383999,-0.62266522 45.383999,-0.62266522" Fill="{x:Null}" HorizontalAlignment="Right" Margin="0,-0.623,-0.784,-0.593" Stretch="Fill" Stroke="White" Width="7.021"/>
+    				<Path Data="M22.3715,45.867 L45.7715,45.944" Fill="{x:Null}" Height="1.077" Margin="21.635,0,-0.784,0" Stretch="Fill" Stroke="White" VerticalAlignment="Bottom"/>
+    				<Path Data="M22.951,0.5395 L46.634,0.6395" Fill="{x:Null}" Height="1.101" Margin="21.635,0,-0.468,0" Stretch="Fill" Stroke="White" VerticalAlignment="Top"/>
+    				<Path Data="M-118.791,109.54" Fill="{x:Null}" HorizontalAlignment="Left" Height="1" Margin="-118.791,0,0,-73.5" Stretch="Fill" Stroke="White" VerticalAlignment="Bottom" Width="1"/>
+    			</Grid>
+    		</Border>
+    	</ControlTemplate>
+    	<ControlTemplate x:Key="ButtonNextTemplate" TargetType="{x:Type local:ButtonCustom}">
+    		<Border BorderThickness="1">
+    			<Grid>
+    				<TextBlock Margin="0" TextWrapping="Wrap" Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+    				<Path Data="M-0.00033333333,0.12666667 C17.466333,22.526667 -0.50066667,46.026333 -0.50066667,46.026333" Fill="{x:Null}" HorizontalAlignment="Left" Margin="-0.5,0.127,0,0.013" Stretch="Fill" Stroke="White" Width="6.868"/>
+    				<Path Data="M0,36.99 L26.459,37.09" Fill="{x:Null}" Height="1" Margin="-0.5,0,21.224,0.013" Stretch="Fill" Stroke="White" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" d:LayoutOverrides="HorizontalAlignment">
+    					<Path.RenderTransform>
+    						<TransformGroup>
+    							<ScaleTransform ScaleY="-1"/>
+    							<SkewTransform/>
+    							<RotateTransform/>
+    							<TranslateTransform/>
+    						</TransformGroup>
+    					</Path.RenderTransform>
+    				</Path>
+    				<Path Data="M0,0.127 L24.759,0.127" Fill="{x:Null}" Height="1" Margin="0,0.127,21.2,0" Stretch="Fill" Stroke="White" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+    				<Path Data="M26.959,37.527 L48,22.39" Fill="{x:Null}" HorizontalAlignment="Stretch" Height="19.037" Margin="23.436,0,0,0.013" Stretch="Fill" Stroke="White" VerticalAlignment="Bottom" Width="Auto"/>
+    				<Path Data="M24.659,0.127 L46.759,21.09" Fill="{x:Null}" HorizontalAlignment="Stretch" Margin="23.436,0,0,19.05" Stretch="Fill" Stroke="White" Width="Auto"/>
+    			</Grid>
+    		</Border>
+    	</ControlTemplate>
+    	<ControlTemplate x:Key="ButtonStopTemplate" TargetType="{x:Type Button}">
+    		<Grid>
+    			<Image Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Assets/stop.png"/>
+    		</Grid>
+    	</ControlTemplate>
+    	<ControlTemplate x:Key="ButtonRepeatlTemplate" TargetType="{x:Type Button}">
+    		<Grid>
+    			<Image Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="{Binding RepeatButtonImage}" Width="Auto" Height="Auto"/>
+    		</Grid>
+    	</ControlTemplate>
     </Window.Resources>
     
      <Window.InputBindings>
@@ -556,26 +611,28 @@
 						<GradientStop Color="#FF0058FF"/>
 					</LinearGradientBrush>
 				</Grid.Background>
-                <Grid x:Name="gridPlayerSlider" Height="23.8" Margin="0,0,0,47.04" VerticalAlignment="Bottom">
-                    <local:SpecialSlider x:Name="slider" Maximum="{Binding Maximum, ElementName=MediaElementBehavior}" Minimum="0.0" Background="{x:Null}" Foreground="{x:Null}" IsMoveToPointEnabled="True" Value="{Binding Position, ElementName=MediaElementBehavior, Mode=TwoWay}"/>
-                </Grid>
-				<Grid x:Name="gridControlAction" Height="47.733" VerticalAlignment="Bottom">
-					<Button x:Name="buttonPlay" Content="{Binding PlayPauseButtonText}"  Margin="0,0,173.333,0" Command="{Binding PlayRequest}" HorizontalAlignment="Right" Width="41.8" d:LayoutOverrides="HorizontalAlignment"/>
-                    <Button x:Name="openButton" Content="..." HorizontalAlignment="Right" Width="45.333" Command="{Binding OpenDialogCommand}"/>
-                    <Button x:Name="stopButton" Content="Stop" Margin="249,0,215.133,0" Command="{Binding StopRequest}" d:LayoutOverrides="HorizontalAlignment"/>
-					<Button x:Name="repeatButton" Content="{Binding RepeatButtonText}" Margin="161.867,0,0,0" Command="{Binding RepeatCommand}" HorizontalAlignment="Left" Width="62.4"/>
-					<Slider x:Name="volumeSlider" HorizontalAlignment="Right" Margin="0,17.6,45.333,8" Width="99.267" Minimum="0" Maximum="1" Value="{Binding Volume, ElementName=MediaElementBehavior, Mode=TwoWay}" IsMoveToPointEnabled="True"/>
-                    <local:ButtonCustom x:Name="prevButton" Content="&lt;&lt;" Margin="224.267,0,0,0" HorizontalAlignment="Left" Width="24.733"/>
-                    <local:ButtonCustom x:Name="nextButton" Content="&gt;&gt;" HorizontalAlignment="Right" Margin="0,0,148.6,0" Width="24.733"/>
+				<local:GridCustom x:Name="gridControlAction" Height="70.84" VerticalAlignment="Bottom">
                     <!--<local:ButtonCustom x:Name="test" Content="test" Width="61" Margin="95,0,337,0" />-->
-                    <TextBlock x:Name="timeBlock" HorizontalAlignment="Left" Height="47.733" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="88.8" TextAlignment="Center" Foreground="White" Text="{Binding Time, ElementName=MediaElementBehavior}"/>
-				</Grid>
+                    <Button Content="Button" HorizontalAlignment="Left" Margin="105.6,27.8,0,8" Width="41.6" Template="{DynamicResource ButtonPlayTemplate}" d:IsHidden="True" Visibility="Hidden"/>
+                    <local:SpecialSlider x:Name="slider" Maximum="{Binding Maximum, ElementName=MediaElementBehavior}" Minimum="0.0" Background="{x:Null}" Foreground="{x:Null}" IsMoveToPointEnabled="True" Value="{Binding Position, ElementName=MediaElementBehavior, Mode=TwoWay}" Height="23.8" VerticalAlignment="Top"/>
+                    <WrapPanel Margin="0,23.8,0,6" VerticalAlignment="Center" HorizontalAlignment="Center" Height="39.04">
+                    	<!--<local:ButtonCustom x:Name="test" Content="test" Width="61" Margin="95,0,337,0" />-->
+                    	<TextBlock x:Name="timeBlock" Height="39.04" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="52.666" TextAlignment="Center" Foreground="White" Text="{Binding Time, ElementName=MediaElementBehavior}"/>
+                    	<Button x:Name="repeatButton" Content="{Binding RepeatButtonText}" Command="{Binding RepeatCommand}" Width="32.8" Height="39.04" Template="{DynamicResource ButtonRepeatlTemplate}"/>
+                    	<Button x:Name="stopButton" Command="{Binding StopRequest}" d:LayoutOverrides="HorizontalAlignment" Height="38.973" Width="36.467" Template="{DynamicResource ButtonStopTemplate}"/>
+                    	<local:ButtonCustom x:Name="prevButton" Content="&lt;&lt;" Margin="0" Width="47.986" Template="{DynamicResource ButtonPrevTemplate}" Height="39.04" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    	<Button x:Name="buttonPlay" Content="{Binding PlayPauseButtonText}" Command="{Binding PlayRequest}" Template="{DynamicResource ButtonPlayTemplate}" BorderBrush="{x:Null}" Foreground="White" Width="51.646" Height="39.733" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    	<local:ButtonCustom x:Name="nextButton" Content="&gt;&gt;" Width="47.986" Visibility="Visible" Template="{DynamicResource ButtonNextTemplate}" Height="38.973" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    	<Slider x:Name="volumeSlider" Width="99.267" Minimum="0" Maximum="1" Value="{Binding Volume, ElementName=MediaElementBehavior, Mode=TwoWay}" IsMoveToPointEnabled="True" Height="39.04"/>
+                    	<Button x:Name="openButton" Content="..." Width="24.533" Command="{Binding OpenDialogCommand}" Height="39.04" Visibility="Hidden"/>
+                    </WrapPanel>
+                </local:GridCustom>
                 <Grid x:Name="gridMediaElement" Margin="0,0,0,74.84" d:LayoutOverrides="HorizontalAlignment" Background="#00000000" AllowDrop="True">
                     <i:Interaction.Behaviors>
                         <local:GridBehavior x:Name="GridBehavior"/>
                     </i:Interaction.Behaviors>
-					<Image Source="ct9gh5ot.jpg" Visibility="{Binding Video, ElementName=MediaElementBehavior}" d:LayoutOverrides="Width" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <local:MediaElementCustom  LoadedBehavior="Manual" UnloadedBehavior="Manual" x:Name="MediaPlayer" Source="{Binding CurrentSourceMedia}" Opacity="100000" >
+					<Image Source="/Assets/music.png" Visibility="{Binding Video, ElementName=MediaElementBehavior}" d:LayoutOverrides="Width" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.11"/>
+                    <local:MediaElementCustom  LoadedBehavior="Manual" UnloadedBehavior="Manual" x:Name="MediaPlayer" Source="{Binding CurrentSourceMedia}" Opacity="100000" d:IsHidden="True" >
                         <i:Interaction.Behaviors>
                         	<local:MediaElementBehavior x:Name="MediaElementBehavior"/>
 						</i:Interaction.Behaviors>
@@ -611,7 +668,7 @@
             </Grid>
 
         </TabItem>
-        <TabItem x:Name="tabLibrary" Header="Library" DataContext="{Binding Source={StaticResource ViewModelLibrary}}">
+        <TabItem x:Name="tabLibrary" Header="Library" DataContext="{Binding Source={StaticResource ViewModelLibrary}}" d:IsHidden="True">
 			<Grid Background="#FFE5E5E5">
 				<TextBlock HorizontalAlignment="Left" Height="21.666" Margin="8,49.04,0,0" TextWrapping="Wrap" Text="Artists" VerticalAlignment="Top" Width="150"/>
 				<TextBlock Height="21.666" Margin="163,49.04,184.167,0" TextWrapping="Wrap" Text="Albums" VerticalAlignment="Top"/>

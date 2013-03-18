@@ -76,33 +76,6 @@ C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\taglib-sha
 C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\wmp2.pdb
 G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\SlideBarMVVM.exe
 G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\SlideBarMVVM.pdb
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\SlideBarMVVM.exe
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\SlideBarMVVM.pdb
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Interactions.dll
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\System.Windows.Interactivity.dll
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\wmp2.dll
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\taglib-sharp.dll
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\wmp2.pdb
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Interactions.xml
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\System.Windows.Interactivity.xml
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\de\System.Windows.Interactivity.resources.dll
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\en\System.Windows.Interactivity.resources.dll
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\es\System.Windows.Interactivity.resources.dll
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\fr\System.Windows.Interactivity.resources.dll
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\it\System.Windows.Interactivity.resources.dll
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\ja\System.Windows.Interactivity.resources.dll
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\ko\System.Windows.Interactivity.resources.dll
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
-G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
 G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\ResolveAssemblyReference.cache
 G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\MainWindow.g.cs
 G:\Epitech\Semestre_06\Dot NET\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\App.g.cs
@@ -155,3 +128,32 @@ G:\Epitech\Semestre_06\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\SlideBarMVVM.P
 G:\Epitech\Semestre_06\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\GenerateResource.read.1.tlog
 G:\Epitech\Semestre_06\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\wmp2.dll
+G:\epitech\semestre_06\dot net\wmpv2\SlideBarMVVM.exe
+G:\epitech\semestre_06\dot net\wmpv2\SlideBarMVVM.pdb
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\SlideBarMVVM.exe
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\SlideBarMVVM.pdb
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Interactions.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\System.Windows.Interactivity.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\wmp2.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\taglib-sharp.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\wmp2.pdb
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Interactions.xml
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\System.Windows.Interactivity.xml
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\de\System.Windows.Interactivity.resources.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\en\System.Windows.Interactivity.resources.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\es\System.Windows.Interactivity.resources.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\fr\System.Windows.Interactivity.resources.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\it\System.Windows.Interactivity.resources.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\ja\System.Windows.Interactivity.resources.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\ko\System.Windows.Interactivity.resources.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
+G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll

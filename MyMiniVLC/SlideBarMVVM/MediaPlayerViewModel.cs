@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using wmp2;
 using System.IO;
 using System.Timers;
+using System.Reflection;
 
 namespace SlideBarMVVM
 {
@@ -90,6 +91,24 @@ namespace SlideBarMVVM
             }
         }
 
+        private String _playButtonImage;
+        public String PlayPauseButtonImage
+        {
+            get
+            {
+                return (this._playButtonImage);
+            }
+            set
+            {
+                if (this._playButtonImage != value)
+                {
+                    this._playButtonImage = value;
+                    if (this.PropertyChanged != null)
+                        this.PropertyChanged(this, new PropertyChangedEventArgs("PlayPauseButtonImage"));
+                }
+            }
+        }
+
         private PlayerState _playState;
         public PlayerState PlayState
         {
@@ -128,6 +147,24 @@ namespace SlideBarMVVM
             }
         }
         private RepeatState _repeatState;
+        private String _repeatButtonImage;
+        public String RepeatButtonImage
+        {
+            get
+            {
+                return (this._repeatButtonImage);
+            }
+            set
+            {
+                if (this._repeatButtonImage != value)
+                {
+                    this._repeatButtonImage = value;
+                    if (this.PropertyChanged != null)
+                        this.PropertyChanged(this, new PropertyChangedEventArgs("RepeatButtonImage"));
+                }
+            }
+        }
+
 
         private Boolean _changedInPause;
 
@@ -156,13 +193,15 @@ namespace SlideBarMVVM
             CurrentList tmp = CurrentList.getInstance();
 
             //tmp.addElement(@"C:\Users\S@suke\Pictures\1184-shakaponk.bmp");
-            //tmp.addElement(@"C:\Users\S@suke\Desktop\3194648_Bangarang_feat__Sirah_Original_Mix.mp3");
+            tmp.addElement(@"C:\Users\S@suke\Desktop\3194648_Bangarang_feat__Sirah_Original_Mix.mp3");
             //tmp.addElement(@"C:\Users\S@suke\Google Drive\KramAyrtoogle\dotNet\BDD\Music\01 Normal.mp3");
         }
 
 
         public MediaPlayerViewModel()
         {
+            this.PlayPauseButtonImage = "/Assets/play.png";
+
 
             this._isOpened = false;
             this.PlayPauseButtonText = "Play";
@@ -221,9 +260,15 @@ namespace SlideBarMVVM
                 if (this._isOpened)
                 {
                     if (this.PlayState == PlayerState.Play)
+                    {
                         this.PlayPauseButtonText = "Pause";
+                        this.PlayPauseButtonImage = "/Assets/pause.png";
+                    }
                     else
+                    {
                         this.PlayPauseButtonText = "Play";
+                        this.PlayPauseButtonImage = "/Assets/play.png";
+                    }
                 }
             }));
             #endregion
@@ -234,7 +279,10 @@ namespace SlideBarMVVM
                // MessageBox.Show("Opened");
                 this._isOpened = true;
                 if (!this._changedInPause)
+                {
                     this.PlayPauseButtonText = "Pause";
+                    this.PlayPauseButtonImage = "/Assets/pause.png";
+                }
                 this.StopRequest.CanExec = true;
                 //this.NextCommand.CanExec = true;
                 //this.PrevCommand.CanExec = true;
@@ -260,12 +308,14 @@ namespace SlideBarMVVM
             {
                 this.PlayState = PlayerState.Stop;
                 this.PlayPauseButtonText = "Play";
+                this.PlayPauseButtonImage = "/Assets/play.png";
                 this.StopRequest.CanExec = false;
             }), false);
             #endregion
 
             this._repeatState = RepeatState.NoRepeat;
             this.RepeatButtonText = "No repeat";
+            this.RepeatButtonImage = "/Assets/repeat.png";
 
             #region RepeatCommand
             this.RepeatCommand = new Command(new Action(() =>
@@ -275,16 +325,19 @@ namespace SlideBarMVVM
                 {
                     curList.Repeat = RepeatState.Repeat;
                     this.RepeatButtonText = "Repeat";
+                    this.RepeatButtonImage = "/Assets/repeatone.png";
                 }
                 else if (curList.Repeat == RepeatState.Repeat)
                 {
                     curList.Repeat = RepeatState.RepeatAll;
                     this.RepeatButtonText = "Repeat All";
+                    this.RepeatButtonImage = "/Assets/repeatall.png";
                 }
                 else
                 {
                     curList.Repeat = RepeatState.NoRepeat;
                     this.RepeatButtonText = "No Repeat";
+                    this.RepeatButtonImage = "/Assets/repeat.png";
                 }
             }));
             #endregion
@@ -297,6 +350,7 @@ namespace SlideBarMVVM
                 {
                     this.PlayState = PlayerState.Stop;
                     this.PlayPauseButtonText = "Play";
+                    this.PlayPauseButtonImage = "/Assets/play.png";
                     if (curList.HasNextElement())
                     {
                         this.CurrentSourceMedia = new Uri(curList.moveToNextElement());
@@ -304,14 +358,16 @@ namespace SlideBarMVVM
                         //this._tag = new Tag(CurrentList.getCurrentElement());
                         this.PlayState = PlayerState.Play;
                         this.PlayPauseButtonText = "Pause";
+                        this.PlayPauseButtonImage = "/Assets/pause.png";
                     }
                     else
                         curList.ResetIdx();
                 }
-                else if (curList.Repeat == RepeatState.RepeatAll && curList.getSize() > 1)
+                else if (curList.Repeat == RepeatState.RepeatAll && curList.getSize() >= 1)
                 {
                     this.PlayState = PlayerState.Stop;
                     this.PlayPauseButtonText = "Play";
+                    this.PlayPauseButtonImage = "/Assets/play.png";
                     if (curList.HasNextElement())
                     {
                         this.CurrentSourceMedia = new Uri(curList.moveToNextElement());
@@ -325,6 +381,7 @@ namespace SlideBarMVVM
                     }
                     this.PlayState = PlayerState.Play;
                     this.PlayPauseButtonText = "Pause";
+                    this.PlayPauseButtonImage = "/Assets/pause.png";
                 }
                 //else
                 //    CurrentList.ResetIdx();
