@@ -152,127 +152,127 @@ namespace SlideBarMVVM
         #endregion
 
 
-    //    public LibraryViewModel()
-    //    {
-    //        Lib = new Library(Tools.DefaultPathFileLibrary);
+        public LibraryViewModel()
+        {
+            Lib = new Library(Tools.DefaultPathFileLibrary);
 
-    //        try
-    //        {
-    //            string error = Lib.Init();
-    //            if (error != null)
-    //                MessageBox.Show("-- Paths not Found --\n" + error);
-    //        }
-    //        catch (DirectoryNotFoundException)
-    //        {
-    //            MessageBox.Show("At least one path couldn't be found");
-    //        }
+            try
+            {
+                string error = Lib.Init();
+                if (error != null)
+                    MessageBox.Show("-- Paths not Found --\n" + error);
+            }
+            catch (DirectoryNotFoundException)
+            {
+                MessageBox.Show("At least one path couldn't be found");
+            }
 
-    //        #region Load Library
+            #region Load Library
 
-    //        LoadLibraryCMD = new Command(new Action(() =>
-    //        {
-    //            MessageBox.Show("Chargement de la library");
-    //            //MessageBox.Show("Yo mon gars GG !!");
-    //        }));
+            LoadLibraryCMD = new Command(new Action(() =>
+            {
+                MessageBox.Show("Chargement de la library");
+                //MessageBox.Show("Yo mon gars GG !!");
+            }));
 
-    //        #endregion
+            #endregion
 
-    //        #region Load Artist
+            #region Load Artist
 
-    //        LoadArtistCMD = new Command(new Action(() =>
-    //        {
-    //            //MessageBox.Show("Valeur de l'artist selectionné : " + _selectedArtist.Name);
-    //            if (_selectedArtist != null)
-    //            {
-    //                AlbumsLIST = _selectedArtist.Albums;
-    //                SongsLIST = null;
-    //            }
-    //        }));
+            LoadArtistCMD = new Command(new Action(() =>
+            {
+                //MessageBox.Show("Valeur de l'artist selectionné : " + _selectedArtist.Name);
+                if (_selectedArtist != null)
+                {
+                    AlbumsLIST = _selectedArtist.Albums;
+                    SongsLIST = null;
+                }
+            }));
 
-    //        #endregion
+            #endregion
 
-    //        #region Load Album
+            #region Load Album
 
-    //        LoadAlbumCMD = new Command(new Action(() =>
-    //        {
-    //            //MessageBox.Show("Valeur de l'album selectionné : " + _selectedAlbum.Name);
-    //            if (_selectedAlbum != null)
-    //            {
-    //                SongsLIST = _selectedAlbum.Songs;
-    //                // MessageBox.Show("_selectedAlbum.Songs.Count = " + _selectedAlbum.Songs.Count.ToString());
-    //            }
-    //        }));
+            LoadAlbumCMD = new Command(new Action(() =>
+            {
+                //MessageBox.Show("Valeur de l'album selectionné : " + _selectedAlbum.Name);
+                if (_selectedAlbum != null)
+                {
+                    SongsLIST = _selectedAlbum.Songs;
+                    // MessageBox.Show("_selectedAlbum.Songs.Count = " + _selectedAlbum.Songs.Count.ToString());
+                }
+            }));
 
-    //        #endregion
+            #endregion
 
-    //        #region Play Song
+            #region Play Song
 
-    //        PlaySongCMD = new Command(new Action(() =>
-    //        {
-    //            if (_selectedSong != null)
-    //            {
-    //                MessageBox.Show("Valeur de la song selectionnée : " + _selectedSong.Title + Path.GetFullPath(_selectedSong.Path));
-    //                CurrentList.getInstance().addElement(Path.GetFullPath(SelectedSong.Path));
-    //            }
-    //        }));
+            PlaySongCMD = new Command(new Action(() =>
+            {
+                if (_selectedSong != null)
+                {
+                    MessageBox.Show("Valeur de la song selectionnée : " + _selectedSong.Title + Path.GetFullPath(_selectedSong.Path));
+                    CurrentList.getInstance().addElement(Path.GetFullPath(SelectedSong.Path));
+                }
+            }));
 
-    //        #endregion
+            #endregion
 
-    //        #region Import Directory
+            #region Import Directory
 
-    //        ImportDirectory = new Command(new Action(() =>
-    //        {
-    //            //Lib.ImportDir(@"E:\Programs Files\Itunes\Music");
+            ImportDirectory = new Command(new Action(() =>
+            {
+                //Lib.ImportDir(@"E:\Programs Files\Itunes\Music");
 
-    //            //var dialog = new System.Windows.Forms.FolderBrowserDialog();
-    //            //System.Windows.Forms.DialogResult result = dialog.ShowDialog();
-    //        }));
+                //var dialog = new System.Windows.Forms.FolderBrowserDialog();
+                //System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+            }));
 
-    //        #endregion
+            #endregion
 
-    //        #region Import File
+            #region Import File
 
-    //        ImportFile = new Command(new Action(() =>
-    //        {
-    //            OpenFileDialog ofd = new OpenFileDialog();
-    //            ofd.Multiselect = true;
-    //            ofd.Filter = "All files (*.*)|*.*";
-    //            try
-    //            {
-    //                if (ofd.ShowDialog() == true)
-    //                {
-    //                    foreach (string name in ofd.FileNames)
-    //                        Lib.ImportFile(name);
+            ImportFile = new Command(new Action(() =>
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Multiselect = true;
+                ofd.Filter = "All files (*.*)|*.*";
+                try
+                {
+                    if (ofd.ShowDialog() == true)
+                    {
+                        foreach (string name in ofd.FileNames)
+                            Lib.ImportFile(name);
 
-    //                    MessageBox.Show("Lib.Artists.Count = " + Lib.Artists.Count.ToString());
+                        MessageBox.Show("Lib.Artists.Count = " + Lib.Artists.Count.ToString());
 
-    //                    string s = "";
-    //                    foreach (Artist a in Lib.Artists)
-    //                        s += a.Name + "\n";
-    //                    MessageBox.Show("Artists : \n" + s);
-    //                    RefreshLibrary();
-    //                    MessageBox.Show("ArtistsLIST.Count = " + ArtistsLIST.Count.ToString());
-    //                }
+                        string s = "";
+                        foreach (Artist a in Lib.Artists)
+                            s += a.Name + "\n";
+                        MessageBox.Show("Artists : \n" + s);
+                        RefreshLibrary();
+                        MessageBox.Show("ArtistsLIST.Count = " + ArtistsLIST.Count.ToString());
+                    }
 
-    //            }
-    //            catch (Exception ex)
-    //            {
-    //                MessageBox.Show(ex.Message);
-    //            }
-    //        }));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }));
 
-    //        #endregion
+            #endregion
 
-    //        ArtistsLIST = Lib.Artists;
-    //    }
+            ArtistsLIST = Lib.Artists;
+        }
 
-    //    private void RefreshLibrary()
-    //    {
-    //        ArtistsLIST = null;
-    //        ArtistsLIST = Lib.Artists;
-    //        AlbumsLIST = null;
-    //        SongsLIST = null;
-    //    }
+        private void RefreshLibrary()
+        {
+            ArtistsLIST = null;
+            ArtistsLIST = Lib.Artists;
+            AlbumsLIST = null;
+            SongsLIST = null;
+        }
     }
 
 }
