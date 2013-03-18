@@ -38,6 +38,7 @@ namespace SlideBarMVVM
         public EventHandler DropEvent;
         public EventHandler ChangedEvent;
         public EventHandler ModifiedEvent;
+        public Boolean IsMovingPosition { get; set; }
 
         private CurrentList() 
         {
@@ -46,6 +47,7 @@ namespace SlideBarMVVM
             this.Repeat = RepeatState.NoRepeat;
             _speed = 1.0;
             this.Shuffle = false;
+            this.IsMovingPosition = false;
         }
 
         public static CurrentList getInstance()

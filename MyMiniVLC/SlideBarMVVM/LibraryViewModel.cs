@@ -152,127 +152,127 @@ namespace SlideBarMVVM
         #endregion
 
 
-        //public LibraryViewModel()
-        //{
-        //    Lib = new Library(Tools.DefaultPathFileLibrary);
+    //    public LibraryViewModel()
+    //    {
+    //        Lib = new Library(Tools.DefaultPathFileLibrary);
 
-        //    try
-        //    {
-        //        string error = Lib.Init();
-        //        if (error != null)
-        //            MessageBox.Show("-- Paths not Found --\n" + error);
-        //    }
-        //    catch (DirectoryNotFoundException)
-        //    {
-        //        MessageBox.Show("At least one path couldn't be found");
-        //    }
+    //        try
+    //        {
+    //            string error = Lib.Init();
+    //            if (error != null)
+    //                MessageBox.Show("-- Paths not Found --\n" + error);
+    //        }
+    //        catch (DirectoryNotFoundException)
+    //        {
+    //            MessageBox.Show("At least one path couldn't be found");
+    //        }
 
-        //    #region Load Library
-            
-        //    LoadLibraryCMD = new Command(new Action(() =>
-        //    {
-        //        MessageBox.Show("Chargement de la library");
-        //        //MessageBox.Show("Yo mon gars GG !!");
-        //    }));
-            
-        //    #endregion
+    //        #region Load Library
 
-        //    #region Load Artist
+    //        LoadLibraryCMD = new Command(new Action(() =>
+    //        {
+    //            MessageBox.Show("Chargement de la library");
+    //            //MessageBox.Show("Yo mon gars GG !!");
+    //        }));
 
-        //    LoadArtistCMD = new Command(new Action(() =>
-        //    {
-        //        //MessageBox.Show("Valeur de l'artist selectionné : " + _selectedArtist.Name);
-        //        if (_selectedArtist != null)
-        //        {
-        //            AlbumsLIST = _selectedArtist.Albums;
-        //            SongsLIST = null;
-        //        }
-        //    }));
+    //        #endregion
 
-        //    #endregion
+    //        #region Load Artist
 
-        //    #region Load Album
+    //        LoadArtistCMD = new Command(new Action(() =>
+    //        {
+    //            //MessageBox.Show("Valeur de l'artist selectionné : " + _selectedArtist.Name);
+    //            if (_selectedArtist != null)
+    //            {
+    //                AlbumsLIST = _selectedArtist.Albums;
+    //                SongsLIST = null;
+    //            }
+    //        }));
 
-        //    LoadAlbumCMD = new Command(new Action(() =>
-        //    {
-        //        //MessageBox.Show("Valeur de l'album selectionné : " + _selectedAlbum.Name);
-        //        if (_selectedAlbum != null)
-        //        {
-        //            SongsLIST = _selectedAlbum.Songs;
-        //            // MessageBox.Show("_selectedAlbum.Songs.Count = " + _selectedAlbum.Songs.Count.ToString());
-        //        }
-        //    }));
+    //        #endregion
 
-        //    #endregion
+    //        #region Load Album
 
-        //    #region Play Song
+    //        LoadAlbumCMD = new Command(new Action(() =>
+    //        {
+    //            //MessageBox.Show("Valeur de l'album selectionné : " + _selectedAlbum.Name);
+    //            if (_selectedAlbum != null)
+    //            {
+    //                SongsLIST = _selectedAlbum.Songs;
+    //                // MessageBox.Show("_selectedAlbum.Songs.Count = " + _selectedAlbum.Songs.Count.ToString());
+    //            }
+    //        }));
 
-        //    PlaySongCMD = new Command(new Action(() =>
-        //    {
-        //        if (_selectedSong != null)
-        //        {
-        //            MessageBox.Show("Valeur de la song selectionnée : " + _selectedSong.Title + Path.GetFullPath(_selectedSong.Path));
-        //            CurrentList.getInstance().addElement(Path.GetFullPath(SelectedSong.Path));
-        //        }
-        //    }));
+    //        #endregion
 
-        //    #endregion
-            
-        //    #region Import Directory
+    //        #region Play Song
 
-        //    ImportDirectory = new Command(new Action(() =>
-        //    {
-        //        //Lib.ImportDir(@"E:\Programs Files\Itunes\Music");
-                
-        //        //var dialog = new System.Windows.Forms.FolderBrowserDialog();
-        //        //System.Windows.Forms.DialogResult result = dialog.ShowDialog();
-        //    }));
-            
-        //    #endregion
-            
-        //    #region Import File
+    //        PlaySongCMD = new Command(new Action(() =>
+    //        {
+    //            if (_selectedSong != null)
+    //            {
+    //                MessageBox.Show("Valeur de la song selectionnée : " + _selectedSong.Title + Path.GetFullPath(_selectedSong.Path));
+    //                CurrentList.getInstance().addElement(Path.GetFullPath(SelectedSong.Path));
+    //            }
+    //        }));
 
-        //    ImportFile = new Command(new Action(() =>
-        //    {
-        //        OpenFileDialog ofd = new OpenFileDialog();
-        //        ofd.Multiselect = true;
-        //        ofd.Filter = "All files (*.*)|*.*";
-        //        try
-        //        {
-        //            if (ofd.ShowDialog() == true)
-        //            {
-        //                foreach (string name in ofd.FileNames)
-        //                    Lib.ImportFile(name);
-                        
-        //                MessageBox.Show("Lib.Artists.Count = " + Lib.Artists.Count.ToString());
+    //        #endregion
 
-        //                string s = "";
-        //                foreach (Artist a in Lib.Artists)
-        //                    s += a.Name + "\n";
-        //                MessageBox.Show("Artists : \n" + s);
-        //                RefreshLibrary();
-        //                MessageBox.Show("ArtistsLIST.Count = " + ArtistsLIST.Count.ToString());
-        //            }
-                    
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show(ex.Message);
-        //        }
-        //    }));
+    //        #region Import Directory
 
-        //    #endregion            
+    //        ImportDirectory = new Command(new Action(() =>
+    //        {
+    //            //Lib.ImportDir(@"E:\Programs Files\Itunes\Music");
 
-        //    ArtistsLIST = Lib.Artists;
-        //}
+    //            //var dialog = new System.Windows.Forms.FolderBrowserDialog();
+    //            //System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+    //        }));
 
-        private void RefreshLibrary()
-        {
-            ArtistsLIST = null;
-            ArtistsLIST = Lib.Artists;
-            AlbumsLIST = null;
-            SongsLIST = null;
-        }
+    //        #endregion
+
+    //        #region Import File
+
+    //        ImportFile = new Command(new Action(() =>
+    //        {
+    //            OpenFileDialog ofd = new OpenFileDialog();
+    //            ofd.Multiselect = true;
+    //            ofd.Filter = "All files (*.*)|*.*";
+    //            try
+    //            {
+    //                if (ofd.ShowDialog() == true)
+    //                {
+    //                    foreach (string name in ofd.FileNames)
+    //                        Lib.ImportFile(name);
+
+    //                    MessageBox.Show("Lib.Artists.Count = " + Lib.Artists.Count.ToString());
+
+    //                    string s = "";
+    //                    foreach (Artist a in Lib.Artists)
+    //                        s += a.Name + "\n";
+    //                    MessageBox.Show("Artists : \n" + s);
+    //                    RefreshLibrary();
+    //                    MessageBox.Show("ArtistsLIST.Count = " + ArtistsLIST.Count.ToString());
+    //                }
+
+    //            }
+    //            catch (Exception ex)
+    //            {
+    //                MessageBox.Show(ex.Message);
+    //            }
+    //        }));
+
+    //        #endregion
+
+    //        ArtistsLIST = Lib.Artists;
+    //    }
+
+    //    private void RefreshLibrary()
+    //    {
+    //        ArtistsLIST = null;
+    //        ArtistsLIST = Lib.Artists;
+    //        AlbumsLIST = null;
+    //        SongsLIST = null;
+    //    }
     }
 
 }
