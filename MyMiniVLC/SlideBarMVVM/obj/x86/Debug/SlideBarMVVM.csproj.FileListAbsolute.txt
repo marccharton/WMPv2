@@ -161,3 +161,7 @@ G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.
 G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Drawing.dll
 G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Controls.xml
 G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Drawing.xml
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Controls.dll
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Drawing.dll
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Controls.xml
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Drawing.xml
