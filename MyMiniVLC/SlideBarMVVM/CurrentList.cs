@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Collections.ObjectModel;
+using System.IO;
 
 namespace SlideBarMVVM
 {
@@ -12,6 +14,7 @@ namespace SlideBarMVVM
         
         private int _idx;
         private List<String> _list;
+        private List<String> _originalList;
         private Double _speed;
         public Double Speed
         {
@@ -31,8 +34,10 @@ namespace SlideBarMVVM
         }
         public EventHandler SpeedChanged { get; set; }
         public RepeatState Repeat { get; set; }
+        public Boolean Shuffle { get; set; }
         public EventHandler DropEvent;
         public EventHandler ChangedEvent;
+        public EventHandler ModifiedEvent;
 
         private CurrentList() 
         {
@@ -40,6 +45,7 @@ namespace SlideBarMVVM
             _list = new List<string>();
             this.Repeat = RepeatState.NoRepeat;
             _speed = 1.0;
+            this.Shuffle = false;
         }
 
         public static CurrentList getInstance()
@@ -52,7 +58,15 @@ namespace SlideBarMVVM
         public void addElement(String s)
         {
             if (s != null)
+            {
                 _list.Add(s);
+                if (this.Shuffle) 
+                {
+                    this.ResetRandom();
+                    this.Random();
+                }
+                this.ModifiedEvent(this, null);
+            }
         }
 
         public void addList(List<String> l)
@@ -64,6 +78,12 @@ namespace SlideBarMVVM
                     if (s != null)
                         _list.Add(s);
                 }
+                if (this.Shuffle)
+                {
+                    this.ResetRandom();
+                    this.Random();
+                }
+                this.ModifiedEvent(this, null);
             }
         }
 
@@ -86,6 +106,14 @@ namespace SlideBarMVVM
             else
                 ++_idx;
             return (_list.ElementAt(_idx));
+        }
+
+        public String moveToIdx(int idx) 
+        {
+            if (idx >= this._list.Count || idx < 0)
+                return (null);
+            this._idx = idx;
+            return (this._list.ElementAt(this._idx));
         }
 
         public String getPrevElement()
@@ -126,5 +154,56 @@ namespace SlideBarMVVM
             _idx = 0;
             _list.Clear();
         }
+
+        public void Random()
+        {
+            String s;
+
+            if (this._list.Count > 0)
+            {
+                this._originalList = this._list;
+                s = this._list.ElementAt(this._idx);
+                this._list = this._list.OrderBy(song => Guid.NewGuid()).ToList();
+                this._idx = 0;
+                this._list.Remove(s);
+                this._list.Insert(0, s);
+            }
+        }
+
+        public void ResetRandom() 
+        {
+            String s;
+
+            s = this._list.ElementAt(this._idx);
+            this._list = this._originalList;
+            this._idx = this._list.FindIndex(song => song == s);
+        }
+
+        public List<String> getAllElement() 
+        {
+            return (this._list);
+        }
+
+        public void InsertAfter(String s, String toAdd) 
+        {
+            int idx = 0;
+
+            foreach (String tmp in this._list)
+            {
+                if (tmp == s)
+                    break;
+                ++idx;
+            }
+
+            if (idx >= this._list.Count)
+            {
+                 this.addElement(toAdd);
+            }
+            else
+            {
+                this._list.Insert(idx + 1, toAdd);
+                this.ModifiedEvent(this, null);
+            }
+       }
     }
 }

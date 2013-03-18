@@ -10,12 +10,12 @@ namespace SlideBarMVVM
 {
     public class MediaElementCustom : MediaElement
     {
-        public static readonly DependencyProperty PlayProperty = DependencyProperty.RegisterAttached("Play", typeof(PlayerState), typeof(MediaElementCustom), new UIPropertyMetadata(PlayPropertyChanged));
+        public static readonly DependencyProperty PlayCustomProperty = DependencyProperty.RegisterAttached("PlayCustom", typeof(PlayerState), typeof(MediaElementCustom), new UIPropertyMetadata(PlayPropertyChanged));
 
-        public PlayerState Play
+        public PlayerState PlayCustom
         {
-            get { return ((PlayerState)GetValue(PlayProperty)); }
-            set { SetValue(PlayProperty, value); }
+            get { return ((PlayerState)GetValue(PlayCustomProperty)); }
+            set { SetValue(PlayCustomProperty, value); }
         }
 
         public static void PlayPropertyChanged(DependencyObject dep, DependencyPropertyChangedEventArgs ev)
@@ -35,7 +35,7 @@ namespace SlideBarMVVM
                      //MessageBox.Show("Stop");
                     ((MediaElement)dep).Stop();
                     ((MediaElement)dep).Close();
-                    Thread.Sleep(10);
+                    ((MediaElement)dep).Position = TimeSpan.Zero;
                 }
             }
             catch (Exception ex)
