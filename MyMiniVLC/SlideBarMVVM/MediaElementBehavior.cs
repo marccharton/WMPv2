@@ -33,10 +33,13 @@ namespace SlideBarMVVM
 
         public static void PositionPropertyChanged(DependencyObject dep, DependencyPropertyChangedEventArgs ev)
         {
-            double tmp = ((MediaElementBehavior)dep).AssociatedObject.Position.TotalMilliseconds - (Double)(((MediaElementBehavior)dep)).GetValue(PositionProperty);
+            if (!CurrentList.getInstance().IsMovingPosition)
+            {
+                double tmp = ((MediaElementBehavior)dep).AssociatedObject.Position.TotalMilliseconds - (Double)(((MediaElementBehavior)dep)).GetValue(PositionProperty);
 
-            if (tmp > 1.0 || tmp < -1.0)
-                ((MediaElementBehavior)dep).AssociatedObject.Position = TimeSpan.FromMilliseconds((double)ev.NewValue);
+                if (tmp > 1.0 || tmp < -1.0)
+                    ((MediaElementBehavior)dep).AssociatedObject.Position = TimeSpan.FromMilliseconds((double)ev.NewValue);
+            }
         }
 
         public static Double GetMaximum(DependencyObject m)
@@ -156,7 +159,8 @@ namespace SlideBarMVVM
         {
             Dispatcher.Invoke(new Action(() =>
             {
-                SetValue(PositionProperty, AssociatedObject.Position.TotalMilliseconds);
+                if (!CurrentList.getInstance().IsMovingPosition)
+                    SetValue(PositionProperty, AssociatedObject.Position.TotalMilliseconds);
                 SetValue(TimeProperty, AssociatedObject.Position.ToString(@"hh\:mm\:ss"));
             }));
         }
