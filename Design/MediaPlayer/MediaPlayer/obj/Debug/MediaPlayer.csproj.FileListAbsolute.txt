@@ -34,3 +34,39 @@ C:\Users\Emmanuel\Documents\Visual Studio 2012\Projects\Epitech\wmpv2\Design\Med
 C:\Users\Emmanuel\Documents\Visual Studio 2012\Projects\Epitech\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\ko\System.Windows.Interactivity.resources.dll
 C:\Users\Emmanuel\Documents\Visual Studio 2012\Projects\Epitech\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
 C:\Users\Emmanuel\Documents\Visual Studio 2012\Projects\Epitech\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\MediaPlayer.exe
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\MediaPlayer.pdb
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\Microsoft.Expression.Controls.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\Microsoft.Expression.Drawing.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\Microsoft.Expression.Controls.xml
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\Microsoft.Expression.Interactions.xml
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\System.Windows.Interactivity.xml
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\Microsoft.Expression.Drawing.xml
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\de\System.Windows.Interactivity.resources.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\en\System.Windows.Interactivity.resources.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\es\System.Windows.Interactivity.resources.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\fr\System.Windows.Interactivity.resources.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\it\System.Windows.Interactivity.resources.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\ja\System.Windows.Interactivity.resources.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\ko\System.Windows.Interactivity.resources.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\obj\Debug\MainWindow.baml
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\obj\Debug\MainWindow.g.cs
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\obj\Debug\App.g.cs
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\obj\Debug\MediaPlayer_MarkupCompile.cache
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\obj\Debug\MediaPlayer.g.resources
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\obj\Debug\MediaPlayer.exe
+C:\Users\Marc\Documents\Depots\wmpv2\Design\MediaPlayer\MediaPlayer\obj\Debug\MediaPlayer.pdb
