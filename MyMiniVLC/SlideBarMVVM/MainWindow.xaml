@@ -2,10 +2,10 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:SlideBarMVVM" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" mc:Ignorable="d" x:Class="SlideBarMVVM.MainWindow"
-        Title="MainWindow" Height="350" Width="753" Background="{x:Null}">
+        Title="MainWindow" Height="550" Width="1000" Background="{x:Null}">
     <Window.Resources>
-    	<local:MediaPlayerViewModel x:Key="ViewModelDataSource" d:IsDataSource="True"/>
-    	<local:LibraryViewModel x:Key="ViewModelLibrary" d:IsDataSource="True"/>
+    	<local:MediaPlayerViewModel x:Key="ViewModelDataSource" d:IsDataSource="True" />
+    	<local:LibraryViewModel x:Key="ViewModelLibrary" d:IsDataSource="True" />
     	<LinearGradientBrush x:Key="HorizontalSliderThumbHoverBackgroundInverted" EndPoint="0,0" StartPoint="0,1">
     		<GradientStop Color="white" Offset="0"/>
     		<GradientStop Color="#B8E2F9" Offset="0.5"/>
@@ -636,11 +636,13 @@
      <Window.InputBindings>
      	<KeyBinding Command="{Binding OpenDialogCommand, Source={StaticResource ViewModelDataSource}}"   Key="O" Modifiers="Control"/>
     </Window.InputBindings>
-    <TabControl x:Name="tabControl" Margin="0" DataContext="{Binding Source={StaticResource ViewModelDataSource}}">
+
+    <TabControl x:Name="tabControl" Margin="0">
+    <!--<TabControl x:Name="tabControl" Margin="0" >-->
         <TabControl.InputBindings>
         	<KeyBinding Key="O" Modifiers="Control" Command="{Binding OpenDialogCommand}" />
         </TabControl.InputBindings>
-		<TabItem x:Name="tabPlayer" Header="Player">            
+        <TabItem x:Name="tabPlayer" Header="Player" DataContext="{Binding Source={StaticResource ViewModelDataSource}}">
             <Grid Margin="0">
 				<Grid.Background>
 					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -649,7 +651,7 @@
 					</LinearGradientBrush>
 				</Grid.Background>
 				<local:GridCustom x:Name="gridControlAction" Height="70.84" VerticalAlignment="Bottom">
-                    <!--<local:ButtonCustom x:Name="test" Content="test" Width="61" Margin="95,0,337,0" />-->
+                    
                     <local:SpecialSlider x:Name="slider" Maximum="{Binding Maximum, ElementName=MediaElementBehavior}" Minimum="0.0" Background="{x:Null}" Foreground="{x:Null}" IsMoveToPointEnabled="True" Value="{Binding Position, ElementName=MediaElementBehavior, Mode=TwoWay}" Height="23.8" VerticalAlignment="Top"/>
                     <WrapPanel Margin="0,23.8,0,6" VerticalAlignment="Center" HorizontalAlignment="Center" Height="39.04">
 <!--<local:ButtonCustom x:Name="test" Content="test" Width="61" Margin="95,0,337,0" />--><!--<local:ButtonCustom x:Name="test" Content="test" Width="61" Margin="95,0,337,0" />-->
@@ -708,7 +710,7 @@
             </Grid>
 
         </TabItem>
-        <TabItem x:Name="tabLibrary" Header="Library" DataContext="{Binding Source={StaticResource ViewModelLibrary}}" d:IsHidden="True">
+        <!--<TabItem x:Name="tabLibrary" Header="Library" DataContext="{Binding Source={StaticResource ViewModelLibrary}}" d:IsHidden="True">
 			<Grid Background="#FFE5E5E5">
 				<TextBlock HorizontalAlignment="Left" Height="21.666" Margin="8,49.04,0,0" TextWrapping="Wrap" Text="Artists" VerticalAlignment="Top" Width="150"/>
 				<TextBlock Height="21.666" Margin="200,49,147,0" TextWrapping="Wrap" Text="Albums" VerticalAlignment="Top"/>
@@ -720,7 +722,7 @@
                     	</i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ListBox>
-<!--Click="btnDir_Click"--><!--MouseDoubleClick="lstArtists_MouseDoubleClick"-->
+
                 <ListBox x:Name="lstAlbums" Margin="200,74.706,240,8" ItemTemplate="{DynamicResource TemplateLibraryLstAlbums}" ItemsSource="{Binding AlbumsLIST}" SelectedItem="{Binding SelectedAlbum}">
                     <i:Interaction.Triggers>
                     	<i:EventTrigger EventName="MouseDoubleClick">
@@ -728,7 +730,7 @@
                     	</i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ListBox>
-                <!--MouseDoubleClick="lstAlbums_MouseDoubleClick"-->
+
                 <ListBox x:Name="lstSongs" Margin="0,74.706,8,8" HorizontalAlignment="Right" Width="226" ItemTemplate="{DynamicResource TemplateLibraryLstSongs}" ItemsSource="{Binding SongsLIST}" SelectedItem="{Binding SelectedSong}">
                     <i:Interaction.Triggers>
                     	<i:EventTrigger EventName="MouseDoubleClick">
@@ -736,11 +738,55 @@
                     	</i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ListBox>
-                <!--MouseDoubleClick="lstSongs_MouseDoubleClick"-->
-                <Button x:Name="btnImport" Content="Import File" HorizontalAlignment="Right" Height="25.04" Margin="0,8,126,0" VerticalAlignment="Top" Width="75.167" Command="{Binding ImportFile}"/>
-                <!--Click="btnImport_Click"-->
-                <Button x:Name="btnDir" Content="Import Directory" HorizontalAlignment="Right" Height="25.04" Margin="0,8,8,0" VerticalAlignment="Top" Width="114" />
+
+                <Button x:Name="btnImportFile" Content="Import File" HorizontalAlignment="Right" Height="25.04" Margin="0,8,126,0" VerticalAlignment="Top" Width="75.167" Command="{Binding ImportFile}"/>
+                <Button x:Name="btnImportDir" Content="Import Directory" HorizontalAlignment="Right" Height="25.04" Margin="0,8,8,0" VerticalAlignment="Top" Width="114" />
 			</Grid>
 		</TabItem>
+        -->
+        <TabItem x:Name="tabLibrary2" Header="Library" DataContext="{Binding Source={StaticResource ViewModelLibrary}}">
+            <Grid Background="#FFE5E5E5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.192*" />
+                    <ColumnDefinition Width="Auto" MinWidth="5.234" />
+                    <ColumnDefinition Width="0.808*" />
+                </Grid.ColumnDefinitions>
+
+                <TreeView Margin="3,20,0,0" d:LayoutOverrides="HorizontalAlignment">
+                    <TreeViewItem Header="Music">
+                        <TreeViewItem Header="Artists"/>
+                        <TreeViewItem Header="Albums" Margin="0,0,-19,0" d:LayoutOverrides="Width"/>
+                        <TreeViewItem Header="Songs" Margin="0,0,-19,0" d:LayoutOverrides="Width"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Playlists">
+                        <TreeViewItem Header="Playlist 1"/>
+                        <TreeViewItem Header="Funk" Margin="0,0,-19,0" d:LayoutOverrides="Width"/>
+                        <TreeViewItem Header="Ma super Playlist de la mort qui tue" Margin="0,0,-19,0" d:LayoutOverrides="Width"/>
+                        <TreeViewItem Header="LolilolmonGars" Margin="0,0,-19,0" d:LayoutOverrides="Width"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Video"/>
+                    <TreeViewItem Header="Pictures"/>
+                </TreeView>
+
+                <GridSplitter Grid.Column="1" Name="SplitterCentre" Width="3"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Stretch" 
+                      Background="Azure" ShowsPreview="True"/>
+
+                <ListView Grid.Column="2" d:LayoutOverrides="HorizontalAlignment" x:Name="listViewSongs" ItemsSource="{Binding ListViewProvider}" Margin="0,20,0,0">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="20" Header="#" DisplayMemberBinding="{Binding Track}" />
+                            <GridViewColumn Width="200" Header="Title" DisplayMemberBinding="{Binding Title}"/>
+                            <GridViewColumn Width="50" Header="Time"  DisplayMemberBinding="{Binding Duration}"/>
+                            <GridViewColumn Width="200" Header="Artist" DisplayMemberBinding="{Binding Artist.Name}"/>
+                            <GridViewColumn Width="200" Header="Album" DisplayMemberBinding="{Binding Album.Name}"/>
+                            <GridViewColumn Width="100" Header="Genre" DisplayMemberBinding="{Binding Genre}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            
+                </Grid>
+        </TabItem>
     </TabControl>
 </Window>

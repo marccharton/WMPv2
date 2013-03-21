@@ -72,6 +72,21 @@ namespace SlideBarMVVM
             }
         }
 
+
+        private List<Song> _listViewProvider;
+        public List<Song> ListViewProvider
+        {
+            get { return _listViewProvider; }
+            set
+            {
+                if (this._listViewProvider != value)
+                {
+                    this._listViewProvider = value;
+                    NotifyPropertyChanged("ListViewProvider");
+                }
+            }
+        }
+
         #endregion
 
         #region Binded Selected Property
@@ -166,6 +181,8 @@ namespace SlideBarMVVM
             {
                 MessageBox.Show("At least one path couldn't be found");
             }
+
+            ListViewProvider = Lib.Songs;
 
             #region Load Library
 

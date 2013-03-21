@@ -1,0 +1,17 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libraryDesign", "libraryDesign\libraryDesign.csproj", "{bcc1d54c-cea7-4243-8f72-70774b06a79b}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCC1D54C-CEA7-4243-8F72-70774B06A79B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCC1D54C-CEA7-4243-8F72-70774B06A79B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCC1D54C-CEA7-4243-8F72-70774B06A79B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCC1D54C-CEA7-4243-8F72-70774B06A79B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
