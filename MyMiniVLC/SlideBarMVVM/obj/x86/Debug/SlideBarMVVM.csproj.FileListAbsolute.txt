@@ -127,7 +127,6 @@ G:\Epitech\Semestre_06\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\SlideBarMVVM.g
 G:\Epitech\Semestre_06\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\SlideBarMVVM.Properties.Resources.resources
 G:\Epitech\Semestre_06\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\GenerateResource.read.1.tlog
 G:\Epitech\Semestre_06\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\GenerateResource.write.1.tlog
-C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\wmp2.dll
 G:\epitech\semestre_06\dot net\wmpv2\SlideBarMVVM.exe
 G:\epitech\semestre_06\dot net\wmpv2\SlideBarMVVM.pdb
 G:\epitech\semestre_06\dot net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\SlideBarMVVM.exe
@@ -165,3 +164,4 @@ C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.
 C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Drawing.dll
 C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Controls.xml
 C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Drawing.xml
+C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\wmp2.dll

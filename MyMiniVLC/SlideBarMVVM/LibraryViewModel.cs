@@ -20,7 +20,24 @@ namespace SlideBarMVVM
         #region Binded Property
 
         #region Binded List Property
-
+        
+        public List<String> _genresLIST;
+        public List<String> GenresLIST
+        {
+            get
+            {
+                return this._genresLIST;
+            }
+            set
+            {
+                if (_genresLIST != value)
+                {
+                    this._genresLIST = value;
+                    NotifyPropertyChanged("GenresLIST");
+                }
+            }
+        }
+        
         public List<Artist> _artistsLIST;
         public List<Artist> ArtistsLIST
         {
@@ -90,7 +107,7 @@ namespace SlideBarMVVM
         #endregion
 
         #region Binded Selected Property
-
+        
         private Artist _selectedArtist;
         public Artist SelectedArtist
         {
@@ -163,7 +180,7 @@ namespace SlideBarMVVM
         public Command PlaySongCMD { get; set; }
         public Command ImportDirectory { get; set; }
         public Command ImportFile { get; set; }
-
+        public Command TestBindingCMD { get; set; }
         #endregion
 
 
@@ -183,6 +200,11 @@ namespace SlideBarMVVM
             }
 
             ListViewProvider = Lib.Songs;
+
+            TestBindingCMD = new Command(new Action(() =>
+            {
+                MessageBox.Show("YO MON GARS CA PETE !!");
+            }));
 
             #region Load Library
 
@@ -280,7 +302,9 @@ namespace SlideBarMVVM
 
             #endregion
 
+            GenresLIST = Lib.Genres;
             ArtistsLIST = Lib.Artists;
+            AlbumsLIST = Lib.Albums;
         }
 
         private void RefreshLibrary()

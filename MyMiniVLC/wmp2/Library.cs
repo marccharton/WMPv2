@@ -10,6 +10,7 @@ namespace wmp2
     public class Library
     {
         public string Name { get; set; }
+        public List<String> Genres { get; set; }
         public List<Artist> Artists { get; set; }
         public List<Album> Albums { get; set; }
         public List<Song> Songs { get; set; }
@@ -27,6 +28,7 @@ namespace wmp2
             Songs = new List<Song>();
             Artists = new List<Artist>();
             Albums = new List<Album>();
+            Genres = new List<string>();
             Playlists = new List<Playlist>();
             SongPaths = new List<string>();
             validPaths = new List<string>();
@@ -109,13 +111,11 @@ namespace wmp2
             // yes -> Catch it and match with my current song
             if (artists.Any())
             {
-                foreach (Artist art in artists)
-                {
-                    song.Artist = art;
-                    art.Songs.Add(song);
-                    curArt = art;
-                    //Console.WriteLine("J'ai trouve l'artist il s'appelle bien : " + art.Name);
-                }
+                Artist art = artists.First();
+                song.Artist = art;
+                art.Songs.Add(song);
+                curArt = art;
+                //Console.WriteLine("J'ai trouve l'artist il s'appelle bien : " + art.Name);
             }
             // no -> Create a new artist et push it in my artists List
             else
@@ -165,13 +165,47 @@ namespace wmp2
             }
             #endregion
 
+            #region Match with Genre
+
+            String curGenre;
+
+            // Does this artist already exist in list ?
+            IEnumerable<String> genres = from g in Genres
+                                         where g == songTag.Genre.ToUpper()
+                                         select g;
+
+
+            // yes -> Catch it and match with my current song
+            if (genres.Any())
+            {
+                String gnr = genres.First();
+                song.Genre = gnr;
+                curGenre = gnr;
+                // Console.WriteLine("J'ai trouve l'artist il s'appelle bien : " + art.Name);
+            }
+            // no -> Create a new artist et push it in my artists List
+            else
+            {
+                String gnr = songTag.Genre.ToUpper();
+                Genres.Add(gnr);
+                song.Genre = gnr;
+                curGenre = gnr;
+                //Console.WriteLine("L'artiste n'existait pas, j'ai donc du le creer : " + art.Name);
+            }
+
+            #endregion
+
+
             IEnumerable<Album> artAlbum = from a in curArt.Albums
                                            where a.Name == curAlb.Name.ToUpper()
                                            select a;
             if (!artAlbum.Any())
             {
                 curArt.Albums.Add(curAlb);
+                curArt.Genre = curGenre;
+
                 curAlb.Artist = curArt;
+                curAlb.Genre = curGenre;
             }
 
             // peutetre idem avec genre

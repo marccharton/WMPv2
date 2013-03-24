@@ -2,9 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:SlideBarMVVM" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" mc:Ignorable="d" x:Class="SlideBarMVVM.MainWindow"
-        Title="MainWindow" Height="550" Width="1000" Background="{x:Null}">
+        Title="Windows Media PLayer 2" Height="680.5" Width="1013.5" Background="{x:Null}">
     <Window.Resources>
-    	<local:MediaPlayerViewModel x:Key="ViewModelDataSource" d:IsDataSource="True" />
+<!--    	<local:MediaPlayerViewModel x:Key="ViewModelDataSource" d:IsDataSource="True" />-->
     	<local:LibraryViewModel x:Key="ViewModelLibrary" d:IsDataSource="True" />
     	<LinearGradientBrush x:Key="HorizontalSliderThumbHoverBackgroundInverted" EndPoint="0,0" StartPoint="0,1">
     		<GradientStop Color="white" Offset="0"/>
@@ -633,84 +633,105 @@
     	</Style>
     </Window.Resources>
     
-     <Window.InputBindings>
+     <!--<Window.InputBindings>
      	<KeyBinding Command="{Binding OpenDialogCommand, Source={StaticResource ViewModelDataSource}}"   Key="O" Modifiers="Control"/>
-    </Window.InputBindings>
+    </Window.InputBindings>-->
 
-    <TabControl x:Name="tabControl" Margin="0">
-    <!--<TabControl x:Name="tabControl" Margin="0" >-->
-        <TabControl.InputBindings>
+    <Grid Margin="0">
+
+
+        <Menu Height="20" Margin="0" VerticalAlignment="Top">
+            <MenuItem Header="File" Height="20" Width="50">
+                <MenuItem Header="Open" Height="31" Width="170"/>
+                <MenuItem Header="Close" Height="31" Width="170"/>
+            </MenuItem>
+            <MenuItem Header="Edit" Height="20" Width="50"/>
+            <MenuItem Header="Library" Height="20" Width="50">
+                <MenuItem Header="Import File" Height="31" Width="170" d:LayoutOverrides="Width"/>
+                <MenuItem Header="Import Directory" Height="31"/>
+            </MenuItem>
+        </Menu>
+
+        <!--<Window.InputBindings>
+     	<KeyBinding Command="{Binding OpenDialogCommand, Source={StaticResource ViewModelDataSource}}"   Key="O" Modifiers="Control"/>
+    </Window.InputBindings>-->
+
+		<TabControl x:Name="tabControl" Margin="0,20,0,0">
+			<!--<TabControl x:Name="tabControl" Margin="0" >-->
+			<!--<TabControl.InputBindings>
         	<KeyBinding Key="O" Modifiers="Control" Command="{Binding OpenDialogCommand}" />
-        </TabControl.InputBindings>
-        <TabItem x:Name="tabPlayer" Header="Player" DataContext="{Binding Source={StaticResource ViewModelDataSource}}">
-            <Grid Margin="0">
-				<Grid.Background>
-					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-						<GradientStop Color="Black" Offset="1"/>
-						<GradientStop Color="#FF0058FF"/>
-					</LinearGradientBrush>
-				</Grid.Background>
-				<local:GridCustom x:Name="gridControlAction" Height="70.84" VerticalAlignment="Bottom">
+        </TabControl.InputBindings>-->
+			<!--<TabItem x:Name="tabPlayer" Header="Player" DataContext="{Binding Source={StaticResource ViewModelDataSource}}">-->
+			<TabItem x:Name="tabPlayer" Header="Player">
+				<Grid Margin="0">
+					<Grid.Background>
+						<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+							<GradientStop Color="Black" Offset="1"/>
+							<GradientStop Color="#FF0058FF"/>
+						</LinearGradientBrush>
+					</Grid.Background>
+					<local:GridCustom x:Name="gridControlAction" Height="70.84" VerticalAlignment="Bottom">
                     
-                    <local:SpecialSlider x:Name="slider" Maximum="{Binding Maximum, ElementName=MediaElementBehavior}" Minimum="0.0" Background="{x:Null}" Foreground="{x:Null}" IsMoveToPointEnabled="True" Value="{Binding Position, ElementName=MediaElementBehavior, Mode=TwoWay}" Height="23.8" VerticalAlignment="Top"/>
-                    <WrapPanel Margin="0,23.8,0,6" VerticalAlignment="Center" HorizontalAlignment="Center" Height="39.04">
-<!--<local:ButtonCustom x:Name="test" Content="test" Width="61" Margin="95,0,337,0" />--><!--<local:ButtonCustom x:Name="test" Content="test" Width="61" Margin="95,0,337,0" />-->
-                    	<TextBlock x:Name="timeBlock" Height="39.04" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="52.666" TextAlignment="Center" Foreground="White" Text="{Binding Time, ElementName=MediaElementBehavior}"/>
-                    	<Button x:Name="shuffleButton" Content="Button" Width="41.625" Height="39.04" Template="{DynamicResource ButtonShuffleTemplate}" Command="{Binding ShuffleCommand}"/>
-                    	<Button x:Name="repeatButton" Content="{Binding RepeatButtonText}" Command="{Binding RepeatCommand}" Width="32.8" Height="39.04" Template="{DynamicResource ButtonRepeatlTemplate}"/>
-                    	<Button x:Name="stopButton" Command="{Binding StopRequest}" d:LayoutOverrides="HorizontalAlignment" Height="38.973" Width="36.467" Template="{DynamicResource ButtonStopTemplate}"/>
-                    	<local:ButtonCustom x:Name="prevButton" Content="&lt;&lt;" Margin="0" Width="47.986" Template="{DynamicResource ButtonPrevTemplate}" Height="39.04" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    	<Button x:Name="buttonPlay" Content="{Binding PlayPauseButtonText}" Command="{Binding PlayRequest}" Template="{DynamicResource ButtonPlayTemplate}" BorderBrush="{x:Null}" Foreground="White" Width="51.646" Height="39.733" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    	<local:ButtonCustom x:Name="nextButton" Content="&gt;&gt;" Width="47.986" Visibility="Visible" Template="{DynamicResource ButtonNextTemplate}" Height="38.973" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    	<Slider x:Name="volumeSlider" Width="99.267" Minimum="0" Maximum="1" Value="{Binding Volume, ElementName=MediaElementBehavior, Mode=TwoWay}" IsMoveToPointEnabled="True" Height="39.04"/>
-                    	<Button x:Name="openButton" Content="..." Width="24.533" Command="{Binding OpenDialogCommand}" Height="39.04" Visibility="Hidden"/>
-                    </WrapPanel>
-                </local:GridCustom>
-                <Grid x:Name="gridMediaElement" Margin="0,0,0,74.84" d:LayoutOverrides="HorizontalAlignment" Background="#00000000" AllowDrop="True">
-                    <i:Interaction.Behaviors>
-                    	<local:GridBehavior x:Name="GridBehavior"/>
-                    </i:Interaction.Behaviors>
-					<Image Source="/Assets/music.png" Visibility="{Binding Video, ElementName=MediaElementBehavior}" d:LayoutOverrides="Width" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.11"/>
-                    <local:MediaElementCustom  LoadedBehavior="Manual" UnloadedBehavior="Manual" x:Name="MediaPlayer" Source="{Binding CurrentSourceMedia}" Opacity="100000" d:IsHidden="True" >
-                        <i:Interaction.Behaviors>
-                        	<local:MediaElementBehavior x:Name="MediaElementBehavior"/>
+						<local:SpecialSlider x:Name="slider" Maximum="{Binding Maximum, ElementName=MediaElementBehavior}" Minimum="0.0" Background="{x:Null}" Foreground="{x:Null}" IsMoveToPointEnabled="True" Value="{Binding Position, ElementName=MediaElementBehavior, Mode=TwoWay}" Height="23.8" VerticalAlignment="Top"/>
+						<WrapPanel Margin="0,23.8,0,6" VerticalAlignment="Center" HorizontalAlignment="Center" Height="39.04">
+							<!--<local:ButtonCustom x:Name="test" Content="test" Width="61" Margin="95,0,337,0" />--><!--<local:ButtonCustom x:Name="test" Content="test" Width="61" Margin="95,0,337,0" />-->
+							<TextBlock x:Name="timeBlock" Height="39.04" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="52.666" TextAlignment="Center" Foreground="White" Text="{Binding Time, ElementName=MediaElementBehavior}"/>
+							<Button x:Name="shuffleButton" Content="Button" Width="41.625" Height="39.04" Template="{DynamicResource ButtonShuffleTemplate}" Command="{Binding ShuffleCommand}"/>
+							<Button x:Name="repeatButton" Content="{Binding RepeatButtonText}" Command="{Binding RepeatCommand}" Width="32.8" Height="39.04" Template="{DynamicResource ButtonRepeatlTemplate}"/>
+							<Button x:Name="stopButton" Command="{Binding StopRequest}" d:LayoutOverrides="HorizontalAlignment" Height="38.973" Width="36.467" Template="{DynamicResource ButtonStopTemplate}"/>
+							<local:ButtonCustom x:Name="prevButton" Content="&lt;&lt;" Margin="0" Width="47.986" Template="{DynamicResource ButtonPrevTemplate}" Height="39.04" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+							<Button x:Name="buttonPlay" Content="{Binding PlayPauseButtonText}" Command="{Binding PlayRequest}" Template="{DynamicResource ButtonPlayTemplate}" BorderBrush="{x:Null}" Foreground="White" Width="51.646" Height="39.733" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+							<local:ButtonCustom x:Name="nextButton" Content="&gt;&gt;" Width="47.986" Visibility="Visible" Template="{DynamicResource ButtonNextTemplate}" Height="38.973" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+							<Slider x:Name="volumeSlider" Width="99.267" Minimum="0" Maximum="1" Value="{Binding Volume, ElementName=MediaElementBehavior, Mode=TwoWay}" IsMoveToPointEnabled="True" Height="39.04"/>
+							<Button x:Name="openButton" Content="..." Width="24.533" Command="{Binding OpenDialogCommand}" Height="39.04" Visibility="Hidden"/>
+						</WrapPanel>
+					</local:GridCustom>
+					<Grid x:Name="gridMediaElement" Margin="0,0,0,74.84" d:LayoutOverrides="HorizontalAlignment" Background="#00000000" AllowDrop="True">
+						<i:Interaction.Behaviors>
+							<local:GridBehavior x:Name="GridBehavior"/>
 						</i:Interaction.Behaviors>
-						<i:Interaction.Triggers>
-							<i:EventTrigger SourceName="MediaPlayer" EventName="MediaOpened">
-								<i:InvokeCommandAction Command="{Binding MediaOpenedCommand}"/>
-							</i:EventTrigger>   
-							<i:EventTrigger SourceName="MediaPlayer" EventName="MediaFailed">
-								<i:InvokeCommandAction Command="{Binding MediaFailedCommand}"/>
-							</i:EventTrigger>
-							<i:EventTrigger SourceName="MediaPlayer" EventName="MediaEnded">
-								<i:InvokeCommandAction Command="{Binding MediaEndedCommand}"/>
-							</i:EventTrigger>
-						</i:Interaction.Triggers>
-                        <local:MediaElementCustom.Style>
-                            <Style>
-                                <Style.Triggers>
-                                	<DataTrigger Binding="{Binding PlayState}" Value="Play" >
-                                		<Setter Property="local:MediaElementCustom.PlayCustom" Value="Play"/>
-                                	</DataTrigger>
-                                	<DataTrigger Binding="{Binding PlayState}" Value="Pause" >
-                                		<Setter Property="local:MediaElementCustom.PlayCustom" Value="Pause"/>
-                                	</DataTrigger>
-                                	<DataTrigger Binding="{Binding PlayState}" Value="Stop" >
-                                		<Setter Property="local:MediaElementCustom.PlayCustom" Value="Stop"/>
-                                	</DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </local:MediaElementCustom.Style>
-                    </local:MediaElementCustom>
-                    <TextBlock x:Name="nameLabel" TextWrapping="Wrap" Width="146.7" Foreground="White" TextAlignment="Center" Text="{Binding CurrentSourceName}" Height="52.533" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+						<Image Source="/Assets/music.png" Visibility="{Binding Video, ElementName=MediaElementBehavior}" d:LayoutOverrides="Width" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.11"/>
+						<local:MediaElementCustom  LoadedBehavior="Manual" UnloadedBehavior="Manual" x:Name="MediaPlayer" Source="{Binding CurrentSourceMedia}" Opacity="100000" d:IsHidden="True" >
+							<i:Interaction.Behaviors>
+								<local:MediaElementBehavior x:Name="MediaElementBehavior"/>
+							</i:Interaction.Behaviors>
+							<i:Interaction.Triggers>
+								<i:EventTrigger SourceName="MediaPlayer" EventName="MediaOpened">
+									<i:InvokeCommandAction Command="{Binding MediaOpenedCommand}"/>
+								</i:EventTrigger>   
+								<i:EventTrigger SourceName="MediaPlayer" EventName="MediaFailed">
+									<i:InvokeCommandAction Command="{Binding MediaFailedCommand}"/>
+								</i:EventTrigger>
+								<i:EventTrigger SourceName="MediaPlayer" EventName="MediaEnded">
+									<i:InvokeCommandAction Command="{Binding MediaEndedCommand}"/>
+								</i:EventTrigger>
+							</i:Interaction.Triggers>
+							<local:MediaElementCustom.Style>
+								<Style>
+									<Style.Triggers>
+										<DataTrigger Binding="{Binding PlayState}" Value="Play" >
+											<Setter Property="local:MediaElementCustom.PlayCustom" Value="Play"/>
+										</DataTrigger>
+										<DataTrigger Binding="{Binding PlayState}" Value="Pause" >
+											<Setter Property="local:MediaElementCustom.PlayCustom" Value="Pause"/>
+										</DataTrigger>
+										<DataTrigger Binding="{Binding PlayState}" Value="Stop" >
+											<Setter Property="local:MediaElementCustom.PlayCustom" Value="Stop"/>
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</local:MediaElementCustom.Style>
+						</local:MediaElementCustom>
+						<TextBlock x:Name="nameLabel" TextWrapping="Wrap" Width="146.7" Foreground="White" TextAlignment="Center" Text="{Binding CurrentSourceName}" Height="52.533" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+					</Grid>
+					<local:GridCustom x:Name="gridCurrentList" HorizontalAlignment="Right" Margin="0,0,0,70.84" Width="123.8">
+						<local:ListViewCustom x:Name="currentListView" ItemsSource="{Binding Collect}" Background="#00000000" Foreground="White" IsTabStop="True" Style="{DynamicResource ListViewStyle}" Margin="-65,0,0,0" />
+					</local:GridCustom>
 				</Grid>
-                <local:GridCustom x:Name="gridCurrentList" HorizontalAlignment="Right" Margin="0,0,0,70.84" Width="123.8">
-                	<local:ListViewCustom x:Name="currentListView" ItemsSource="{Binding Collect}" Background="#00000000" Foreground="White" IsTabStop="True" Style="{DynamicResource ListViewStyle}" Margin="-65,0,0,0" />
-                </local:GridCustom>
-            </Grid>
 
-        </TabItem>
-        <!--<TabItem x:Name="tabLibrary" Header="Library" DataContext="{Binding Source={StaticResource ViewModelLibrary}}" d:IsHidden="True">
+			</TabItem>
+			
+            <!--<TabItem x:Name="tabLibrary" Header="Library" DataContext="{Binding Source={StaticResource ViewModelLibrary}}" d:IsHidden="True">
 			<Grid Background="#FFE5E5E5">
 				<TextBlock HorizontalAlignment="Left" Height="21.666" Margin="8,49.04,0,0" TextWrapping="Wrap" Text="Artists" VerticalAlignment="Top" Width="150"/>
 				<TextBlock Height="21.666" Margin="200,49,147,0" TextWrapping="Wrap" Text="Albums" VerticalAlignment="Top"/>
@@ -744,49 +765,61 @@
 			</Grid>
 		</TabItem>
         -->
-        <TabItem x:Name="tabLibrary2" Header="Library" DataContext="{Binding Source={StaticResource ViewModelLibrary}}">
-            <Grid Background="#FFE5E5E5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.192*" />
-                    <ColumnDefinition Width="Auto" MinWidth="5.234" />
-                    <ColumnDefinition Width="0.808*" />
-                </Grid.ColumnDefinitions>
+			<TabItem x:Name="tabLibrary2" Header="Library" DataContext="{Binding Source={StaticResource ViewModelLibrary}}">
+			<!--<TabItem x:Name="tabLibrary2" Header="Library">-->
+				<Grid Background="#FFE5E5E5">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="0.192*" />
+						<ColumnDefinition Width="Auto" MinWidth="5.234" />
+						<ColumnDefinition Width="0.808*" />
+					</Grid.ColumnDefinitions>
 
-                <TreeView Margin="3,20,0,0" d:LayoutOverrides="HorizontalAlignment">
-                    <TreeViewItem Header="Music">
-                        <TreeViewItem Header="Artists"/>
-                        <TreeViewItem Header="Albums" Margin="0,0,-19,0" d:LayoutOverrides="Width"/>
-                        <TreeViewItem Header="Songs" Margin="0,0,-19,0" d:LayoutOverrides="Width"/>
-                    </TreeViewItem>
-                    <TreeViewItem Header="Playlists">
-                        <TreeViewItem Header="Playlist 1"/>
-                        <TreeViewItem Header="Funk" Margin="0,0,-19,0" d:LayoutOverrides="Width"/>
-                        <TreeViewItem Header="Ma super Playlist de la mort qui tue" Margin="0,0,-19,0" d:LayoutOverrides="Width"/>
-                        <TreeViewItem Header="LolilolmonGars" Margin="0,0,-19,0" d:LayoutOverrides="Width"/>
-                    </TreeViewItem>
-                    <TreeViewItem Header="Video"/>
-                    <TreeViewItem Header="Pictures"/>
-                </TreeView>
+					<TreeView Margin="3,8,0,0" d:LayoutOverrides="HorizontalAlignment">
+						<TreeViewItem Header="Music">
+							<TreeViewItem Header="Artists"/>
+							<TreeViewItem Header="Albums" Margin="0,0,-19,0" d:LayoutOverrides="Width"/>
+							<TreeViewItem Header="Songs" Margin="0,0,-19,0" d:LayoutOverrides="Width"/>
+						</TreeViewItem>
+						<TreeViewItem Header="Playlists">
+							<TreeViewItem Header="Playlist 1"/>
+							<TreeViewItem Header="Funk" Margin="0,0,-19,0" d:LayoutOverrides="Width"/>
+							<TreeViewItem Header="Ma super Playlist de la mort qui tue" Margin="0,0,-19,0" d:LayoutOverrides="Width"/>
+							<TreeViewItem Header="LolilolmonGars" Margin="0,0,-19,0" d:LayoutOverrides="Width"/>
+						</TreeViewItem>
+						<TreeViewItem Header="Video"/>
+						<TreeViewItem Header="Pictures"/>
+					</TreeView>
 
-                <GridSplitter Grid.Column="1" Name="SplitterCentre" Width="3"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Stretch" 
-                      Background="Azure" ShowsPreview="True"/>
+					<GridSplitter Grid.Column="1" x:Name="SplitterCentre" Width="3"
+						HorizontalAlignment="Center"
+						VerticalAlignment="Stretch" 
+						Background="Azure" ShowsPreview="True"/>
 
-                <ListView Grid.Column="2" d:LayoutOverrides="HorizontalAlignment" x:Name="listViewSongs" ItemsSource="{Binding ListViewProvider}" Margin="0,20,0,0">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Width="20" Header="#" DisplayMemberBinding="{Binding Track}" />
-                            <GridViewColumn Width="200" Header="Title" DisplayMemberBinding="{Binding Title}"/>
-                            <GridViewColumn Width="50" Header="Time"  DisplayMemberBinding="{Binding Duration}"/>
-                            <GridViewColumn Width="200" Header="Artist" DisplayMemberBinding="{Binding Artist.Name}"/>
-                            <GridViewColumn Width="200" Header="Album" DisplayMemberBinding="{Binding Album.Name}"/>
-                            <GridViewColumn Width="100" Header="Genre" DisplayMemberBinding="{Binding Genre}"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            
-                </Grid>
-        </TabItem>
-    </TabControl>
+					<ListView Grid.Column="2" d:LayoutOverrides="HorizontalAlignment" x:Name="listViewSongs" ItemsSource="{Binding ListViewProvider}" Margin="0,216.5,0,0">
+						<ListView.View>
+							<GridView>
+								<GridViewColumn Width="20" Header="#" DisplayMemberBinding="{Binding Track}" />
+								<GridViewColumn Width="200" Header="Title" DisplayMemberBinding="{Binding Title}"/>
+								<GridViewColumn Width="50" Header="Time"  DisplayMemberBinding="{Binding Duration}"/>
+								<GridViewColumn Width="200" Header="Artist" DisplayMemberBinding="{Binding Artist.Name}"/>
+								<GridViewColumn Width="200" Header="Album" DisplayMemberBinding="{Binding Album.Name}"/>
+								<GridViewColumn Width="100" Header="Genre" DisplayMemberBinding="{Binding Genre}"/>
+							</GridView>
+						</ListView.View>
+						<!--<i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding TestBindingCMD}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>-->
+					</ListView>
+                    <ListBox x:Name="lstGenre" Grid.Column="2" Height="177.04" Margin="0,35.46,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="262.883" ItemsSource="{Binding GenresLIST}" />
+                    <ListBox x:Name="lstArtist" Grid.Column="2" Height="177.04" Margin="266.883,35.46,266.788,0" VerticalAlignment="Top"  ItemsSource="{Binding ArtistsLIST}" ItemTemplate="{DynamicResource TemplateLibraryLstArtists}" />
+                    <ListBox x:Name="lstAlbum" Grid.Column="2" Height="177.04" Margin="0,35.46,2.788,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="260"  ItemsSource="{Binding AlbumsLIST}" ItemTemplate="{DynamicResource TemplateLibraryLstAlbums}" />
+					<TextBlock Grid.Column="2" HorizontalAlignment="Left" Height="21.46" Margin="0,10,0,0" TextWrapping="Wrap" Text="Genre :" VerticalAlignment="Top" Width="262.883"/>
+					<TextBlock Grid.Column="2" Height="21.46" Margin="266.883,10,263.905,0" TextWrapping="Wrap" Text="Artist :" VerticalAlignment="Top"/>
+					<TextBlock Grid.Column="2" Height="21.46" Margin="0,10,-2.978,0" TextWrapping="Wrap" Text="Album :" VerticalAlignment="Top" HorizontalAlignment="Right" Width="262.883"/>            
+				</Grid>
+			</TabItem>
+		</TabControl>
+	</Grid>
 </Window>
