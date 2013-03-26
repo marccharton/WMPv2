@@ -4,7 +4,7 @@
         xmlns:local="clr-namespace:SlideBarMVVM" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" mc:Ignorable="d" x:Class="SlideBarMVVM.MainWindow"
         Title="Windows Media PLayer 2" Height="680.5" Width="1013.5" Background="{x:Null}">
     <Window.Resources>
-<!--    	<local:MediaPlayerViewModel x:Key="ViewModelDataSource" d:IsDataSource="True" />-->
+    	<local:MediaPlayerViewModel x:Key="ViewModelDataSource" d:IsDataSource="True" />
     	<local:LibraryViewModel x:Key="ViewModelLibrary" d:IsDataSource="True" />
     	<LinearGradientBrush x:Key="HorizontalSliderThumbHoverBackgroundInverted" EndPoint="0,0" StartPoint="0,1">
     		<GradientStop Color="white" Offset="0"/>
@@ -633,9 +633,9 @@
     	</Style>
     </Window.Resources>
     
-     <!--<Window.InputBindings>
+     <Window.InputBindings>
      	<KeyBinding Command="{Binding OpenDialogCommand, Source={StaticResource ViewModelDataSource}}"   Key="O" Modifiers="Control"/>
-    </Window.InputBindings>-->
+    </Window.InputBindings>
 
     <Grid Margin="0">
 
@@ -652,17 +652,13 @@
             </MenuItem>
         </Menu>
 
-        <!--<Window.InputBindings>
-     	<KeyBinding Command="{Binding OpenDialogCommand, Source={StaticResource ViewModelDataSource}}"   Key="O" Modifiers="Control"/>
-    </Window.InputBindings>-->
-
 		<TabControl x:Name="tabControl" Margin="0,20,0,0">
 			<!--<TabControl x:Name="tabControl" Margin="0" >-->
-			<!--<TabControl.InputBindings>
-        	<KeyBinding Key="O" Modifiers="Control" Command="{Binding OpenDialogCommand}" />
-        </TabControl.InputBindings>-->
-			<!--<TabItem x:Name="tabPlayer" Header="Player" DataContext="{Binding Source={StaticResource ViewModelDataSource}}">-->
-			<TabItem x:Name="tabPlayer" Header="Player">
+			<TabControl.InputBindings>
+        	    <KeyBinding Key="O" Modifiers="Control" Command="{Binding OpenDialogCommand}" />
+            </TabControl.InputBindings>
+			<TabItem x:Name="tabPlayer" Header="Player" DataContext="{Binding Source={StaticResource ViewModelDataSource}}">
+			<!--<TabItem x:Name="tabPlayer" Header="Player">-->
 				<Grid Margin="0">
 					<Grid.Background>
 						<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -796,7 +792,12 @@
 						Background="Azure" ShowsPreview="True"/>
 
 					<ListView Grid.Column="2" d:LayoutOverrides="HorizontalAlignment" x:Name="listViewSongs" ItemsSource="{Binding ListViewProvider}" Margin="0,216.5,0,0">
-						<ListView.View>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding TestBindingCMD}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <ListView.View>
 							<GridView>
 								<GridViewColumn Width="20" Header="#" DisplayMemberBinding="{Binding Track}" />
 								<GridViewColumn Width="200" Header="Title" DisplayMemberBinding="{Binding Title}"/>
@@ -806,11 +807,6 @@
 								<GridViewColumn Width="100" Header="Genre" DisplayMemberBinding="{Binding Genre}"/>
 							</GridView>
 						</ListView.View>
-						<!--<i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseDoubleClick">
-                            <i:InvokeCommandAction Command="{Binding TestBindingCMD}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>-->
 					</ListView>
                     <ListBox x:Name="lstGenre" Grid.Column="2" Height="177.04" Margin="0,35.46,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="262.883" ItemsSource="{Binding GenresLIST}" />
                     <ListBox x:Name="lstArtist" Grid.Column="2" Height="177.04" Margin="266.883,35.46,266.788,0" VerticalAlignment="Top"  ItemsSource="{Binding ArtistsLIST}" ItemTemplate="{DynamicResource TemplateLibraryLstArtists}" />

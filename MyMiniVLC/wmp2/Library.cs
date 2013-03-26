@@ -37,6 +37,7 @@ namespace wmp2
         ~Library()
         {
             Serialize();
+
         }
 
         // Load Existing Files in xml file in Library
