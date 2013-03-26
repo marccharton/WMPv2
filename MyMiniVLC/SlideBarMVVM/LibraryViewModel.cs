@@ -19,7 +19,7 @@ namespace SlideBarMVVM
 
         #region Binded Property
 
-        #region Binded List Property
+        
         
         public List<String> _genresLIST;
         public List<String> GenresLIST
@@ -89,25 +89,23 @@ namespace SlideBarMVVM
             }
         }
 
-
-        private List<Song> _listViewProvider;
-        public List<Song> ListViewProvider
+        private String _selectedGenre;
+        public String SelectedGenre
         {
-            get { return _listViewProvider; }
+            get
+            {
+                return _selectedGenre;
+            }
             set
             {
-                if (this._listViewProvider != value)
+                if (_selectedGenre != value)
                 {
-                    this._listViewProvider = value;
-                    NotifyPropertyChanged("ListViewProvider");
+                    _selectedGenre = value;
+                    NotifyPropertyChanged("SelectedGenre");
                 }
             }
         }
 
-        #endregion
-
-        #region Binded Selected Property
-        
         private Artist _selectedArtist;
         public Artist SelectedArtist
         {
@@ -159,7 +157,7 @@ namespace SlideBarMVVM
             }
         }
 
-        #endregion
+        
 
         private void NotifyPropertyChanged(string propertyName)
         {
@@ -174,13 +172,13 @@ namespace SlideBarMVVM
 
         #region Binded Command
 
-        public Command LoadLibraryCMD { get; set; }
+        public Command LoadGenreCMD { get; set; }
         public Command LoadArtistCMD { get; set; }
         public Command LoadAlbumCMD { get; set; }
-        public Command PlaySongCMD { get; set; }
-        public Command ImportDirectory { get; set; }
-        public Command ImportFile { get; set; }
-        public Command TestBindingCMD { get; set; }
+        public Command ImportDirectoryCMD { get; set; }
+        public Command ImportFileCMD { get; set; }
+        public Command PlayItemCMD { get; set; }
+        
         #endregion
 
 
@@ -199,22 +197,55 @@ namespace SlideBarMVVM
                 MessageBox.Show("At least one path couldn't be found");
             }
 
-            ListViewProvider = Lib.Songs;
+            SongsLIST = Lib.Songs;
+            GenresLIST = Lib.Genres;
+            ArtistsLIST = Lib.Artists;
+            AlbumsLIST = Lib.Albums;
 
-            TestBindingCMD = new Command(new Action(() =>
+
+            #region Play Item
+
+            PlayItemCMD = new Command(new Action(() =>
             {
-                MessageBox.Show("YO MON GARS CA PETE !!");
-            }));
-
-            #region Load Library
-
-            LoadLibraryCMD = new Command(new Action(() =>
-            {
-                MessageBox.Show("Chargement de la library");
-                //MessageBox.Show("Yo mon gars GG !!");
+                //MessageBox.Show("YO MON GARS CA PETE !!");
+                CurrentList curList = CurrentList.getInstance();
+                curList.ResetList();
+                curList.addElement(Path.GetFullPath(SelectedSong.Path));
+                curList.DropEvent(this, null);
             }));
 
             #endregion
+
+
+            
+            
+            #region Load Genre
+
+            LoadGenreCMD = new Command(new Action(() =>
+            {
+                MessageBox.Show("Valeur du genre selectionné : " + _selectedGenre);
+                if (_selectedGenre != null)
+                {
+                    IEnumerable<Artist> selectedArtists = from art in Lib.Artists
+                                                          where art.Genre.ToUpper() == _selectedGenre.ToUpper()
+                                                          select art;
+                    
+                    if (selectedArtists.Any())
+                    {
+                        //ArtistsLIST.Clear();
+                        MessageBox.Show("Valeur du genre selectionné : " + _selectedGenre);
+                        foreach (Artist art in selectedArtists)
+                        {
+                            MessageBox.Show("Valeur du genre selectionné : " + _selectedGenre);
+                            ArtistsLIST.Add(art);
+                        }   
+                    }
+                    // SongsLIST = null;
+                }
+            }));
+
+            #endregion
+
 
             #region Load Artist
 
@@ -224,11 +255,13 @@ namespace SlideBarMVVM
                 if (_selectedArtist != null)
                 {
                     AlbumsLIST = _selectedArtist.Albums;
-                    SongsLIST = null;
+                    // SongsLIST = null;
                 }
             }));
 
             #endregion
+
+
 
             #region Load Album
 
@@ -244,22 +277,13 @@ namespace SlideBarMVVM
 
             #endregion
 
-            #region Play Song
 
-            PlaySongCMD = new Command(new Action(() =>
-            {
-                if (_selectedSong != null)
-                {
-                    MessageBox.Show("Valeur de la song selectionnée : " + _selectedSong.Title + Path.GetFullPath(_selectedSong.Path));
-                    CurrentList.getInstance().addElement(Path.GetFullPath(SelectedSong.Path));
-                }
-            }));
 
-            #endregion
+
 
             #region Import Directory
 
-            ImportDirectory = new Command(new Action(() =>
+            ImportDirectoryCMD = new Command(new Action(() =>
             {
                 //Lib.ImportDir(@"E:\Programs Files\Itunes\Music");
 
@@ -269,9 +293,12 @@ namespace SlideBarMVVM
 
             #endregion
 
+
+
+
             #region Import File
 
-            ImportFile = new Command(new Action(() =>
+            ImportFileCMD = new Command(new Action(() =>
             {
                 OpenFileDialog ofd = new OpenFileDialog();
                 ofd.Multiselect = true;
@@ -302,9 +329,7 @@ namespace SlideBarMVVM
 
             #endregion
 
-            GenresLIST = Lib.Genres;
-            ArtistsLIST = Lib.Artists;
-            AlbumsLIST = Lib.Albums;
+           
         }
 
         private void RefreshLibrary()

@@ -26,25 +26,6 @@ namespace SlideBarMVVM
         public MainWindow()
         {
             InitializeComponent();
-            
-            //Song si = new Song()
-            //    {
-            //        Track = 2,
-            //        Title = "Yo",
-            //        Artist = new Artist() { Name = "Yoman" },
-            //        Album = new Album() { Name = "Yobum" },
-            //        Genre = "YoMusic"
-            //    };
-
-
-            //List<Song> siList = new List<Song>();
-
-            //siList.Add(si);
-            //siList.Add(si);
-            //siList.Add(si);
-            //siList.Add(si);
-
-            ////this.listViewSongs.ItemsSource = siList;
         }
 
         //public void LoadLibrary(object sender, RoutedEventArgs e)
