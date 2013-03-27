@@ -20,7 +20,6 @@ namespace SlideBarMVVM
         #region Binded Property
 
         
-        
         public List<String> _genresLIST;
         public List<String> GenresLIST
         {
@@ -199,7 +198,7 @@ namespace SlideBarMVVM
 
             SongsLIST = Lib.Songs;
             GenresLIST = Lib.Genres;
-            ArtistsLIST = Lib.Artists;
+            ArtistsLIST = CopyArtistsList(Lib.Artists);
             AlbumsLIST = Lib.Albums;
 
 
@@ -223,28 +222,34 @@ namespace SlideBarMVVM
 
             LoadGenreCMD = new Command(new Action(() =>
             {
-                MessageBox.Show("Valeur du genre selectionné : " + _selectedGenre);
+                // MessageBox.Show("Valeur du genre selectionné : " + _selectedGenre);
                 if (_selectedGenre != null)
                 {
                     IEnumerable<Artist> selectedArtists = from art in Lib.Artists
                                                           where art.Genre.ToUpper() == _selectedGenre.ToUpper()
                                                           select art;
                     
+                    List<Artist> newList = new List<Artist>();
+
                     if (selectedArtists.Any())
                     {
-                        //ArtistsLIST.Clear();
-                        MessageBox.Show("Valeur du genre selectionné : " + _selectedGenre);
+                        // MessageBox.Show("il y a des artists");
+                        
                         foreach (Artist art in selectedArtists)
                         {
-                            MessageBox.Show("Valeur du genre selectionné : " + _selectedGenre);
-                            ArtistsLIST.Add(art);
-                        }   
+                            // MessageBox.Show("je parcours mes artiste du genre : " + art.Name);
+                            newList.Add(art);
+                        }
                     }
+
+                    ArtistsLIST = newList;
+                    AlbumsLIST = null;
                     // SongsLIST = null;
                 }
             }));
 
             #endregion
+
 
 
             #region Load Artist
@@ -279,20 +284,25 @@ namespace SlideBarMVVM
 
 
 
-
-
             #region Import Directory
 
             ImportDirectoryCMD = new Command(new Action(() =>
             {
-                //Lib.ImportDir(@"E:\Programs Files\Itunes\Music");
+                // using WinForms = System.Windows.Forms;
 
-                //var dialog = new System.Windows.Forms.FolderBrowserDialog();
-                //System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+                // Lib.ImportDir(@"E:\Programs Files\Itunes\Music");
+
+                var dialog = new System.Windows.Forms.FolderBrowserDialog();
+                System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+                if (dialog.SelectedPath != null && dialog.SelectedPath != "")
+                {
+                    MessageBox.Show(dialog.SelectedPath);
+                    Lib.ImportDir(dialog.SelectedPath);
+                    RefreshLibrary();
+                }
             }));
 
             #endregion
-
 
 
 
@@ -310,14 +320,14 @@ namespace SlideBarMVVM
                         foreach (string name in ofd.FileNames)
                             Lib.ImportFile(name);
 
-                        MessageBox.Show("Lib.Artists.Count = " + Lib.Artists.Count.ToString());
+                        //MessageBox.Show("Lib.Artists.Count = " + Lib.Artists.Count.ToString());
 
                         string s = "";
                         foreach (Artist a in Lib.Artists)
                             s += a.Name + "\n";
-                        MessageBox.Show("Artists : \n" + s);
+                        //MessageBox.Show("Artists : \n" + s);
                         RefreshLibrary();
-                        MessageBox.Show("ArtistsLIST.Count = " + ArtistsLIST.Count.ToString());
+                        //MessageBox.Show("ArtistsLIST.Count = " + ArtistsLIST.Count.ToString());
                     }
 
                 }
@@ -332,10 +342,21 @@ namespace SlideBarMVVM
            
         }
 
+        private List<Artist> CopyArtistsList(List<Artist> list)
+        {
+            List<Artist> ret = new List<Artist>();
+
+            foreach (Artist a in list)
+            {
+                ret.Add(a);
+            }
+            return ret;
+        }
+
         private void RefreshLibrary()
         {
+            //GenresLIST = null;
             ArtistsLIST = null;
-            ArtistsLIST = Lib.Artists;
             AlbumsLIST = null;
             SongsLIST = null;
         }
