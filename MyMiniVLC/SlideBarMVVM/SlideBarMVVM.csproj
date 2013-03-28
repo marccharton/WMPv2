@@ -136,6 +136,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="20-03-2013 18-17-01.png" />
     <Resource Include="Assets\shuffleoff.png" />
     <Resource Include="Assets\shuffleon.png" />
   </ItemGroup>

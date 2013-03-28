@@ -19,6 +19,41 @@ namespace SlideBarMVVM
 
         #region Binded Property
 
+
+        public List<Picture> _picturesList;
+        public List<Picture> PicturesList
+        {
+            get
+            {
+                return this._picturesList;
+            }
+            set
+            {
+                if (_picturesList != value)
+                {
+                    this._picturesList = value;
+                    NotifyPropertyChanged("PicturesList");
+                }
+            }
+        }
+
+        public List<Video> _videosList;
+        public List<Video> VideosList
+        {
+            get
+            {
+                return this._videosList;
+            }
+            set
+            {
+                if (_videosList != value)
+                {
+                    this._videosList = value;
+                    NotifyPropertyChanged("VideosList");
+                }
+            }
+        }
+
         
         public List<String> _genresLIST;
         public List<String> GenresLIST
@@ -201,6 +236,30 @@ namespace SlideBarMVVM
             ArtistsLIST = CopyArtistsList(Lib.Artists);
             AlbumsLIST = Lib.Albums;
 
+            VideosList = new List<Video>()
+                {
+                    new Video(@"C:\mes\fichiers\videos\filmDemerde.avi"),
+                    new Video(@"C:\mes\fichiers\videos\psychose.avi"),
+                    new Video(@"C:\mes\fichiers\videos\walkingDeadS03E04.mp4"),
+                    new Video(@"C:\mes\fichiers\videos\walkingDeadS03E05.mp4"),
+                    new Video(@"C:\mes\fichiers\videos\walkingDeadS03E06.mp4"),
+                    new Video(@"C:\mes\fichiers\videos\walkingDeadS03E07.mp4"),
+                    new Video(@"C:\mes\fichiers\videos\walkingDeadS03E08.mp4")
+                };
+
+            PicturesList = new List<Picture>()
+                {
+                    new Picture(@"C:\mes\fichiers\pictures\986392938.jpg"),
+                    new Picture(@"C:\mes\fichiers\pictures\dcdcvignette.jpg"),
+                    new Picture(@"C:\mes\fichiers\pictures\ouech_ma6[Kazuk.com].jpg"),
+                    new Picture(@"C:\mes\fichiers\pictures\kdcy83.jpg"),
+                    new Picture(@"C:\mes\fichiers\pictures\87633.jpg"),
+                    new Picture(@"C:\mes\fichiers\pictures\tet-de-con.bmp"),
+                    new Picture(@"C:\mes\fichiers\pictures\38737d76.png"),
+                    new Picture(@"C:\mes\fichiers\pictures\86298364.png"),
+                    new Picture(@"C:\mes\fichiers\pictures\78d67687c6-76dc.png")
+                };
+
 
             #region Play Item
 
@@ -216,7 +275,6 @@ namespace SlideBarMVVM
             #endregion
 
 
-            
             
             #region Load Genre
 

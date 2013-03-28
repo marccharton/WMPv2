@@ -10,8 +10,8 @@
         xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" mc:Ignorable="d" x:Class="SlideBarMVVM.MainWindow"
         Title="Windows Media PLayer 2" Height="680.5" Width="1013.5" Background="{x:Null}">
     <Window.Resources>
-    	<!--<local:MediaPlayerViewModel x:Key="ViewModelDataSource" d:IsDataSource="True" />
-    	<local:LibraryViewModel x:Key="ViewModelLibrary" d:IsDataSource="True" />-->
+    	<local:MediaPlayerViewModel x:Key="ViewModelDataSource" d:IsDataSource="True" />
+    	<local:LibraryViewModel x:Key="ViewModelLibrary" d:IsDataSource="True" />
     	<LinearGradientBrush x:Key="HorizontalSliderThumbHoverBackgroundInverted" EndPoint="0,0" StartPoint="0,1">
     		<GradientStop Color="white" Offset="0"/>
     		<GradientStop Color="#B8E2F9" Offset="0.5"/>
@@ -637,11 +637,66 @@
     			</Setter.Value>
     		</Setter>
     	</Style>
+    	<Style x:Key="simpleTextStyle" TargetType="{x:Type TextBlock}">
+    		<Setter Property="FontFamily" Value="Helvetica World"/>
+    		<Setter Property="FontWeight" Value="Normal"/>
+    		<Setter Property="Foreground" Value="White"/>
+    		<Setter Property="FontSize" Value="13.333"/>
+    	</Style>
+    	<Style x:Key="TitleTextStyle" TargetType="{x:Type TextBlock}">
+    		<Setter Property="FontFamily" Value="Helvetica World"/>
+    		<Setter Property="FontSize" Value="32"/>
+    	</Style>
+    	<ControlTemplate x:Key="VideoListBoxTemplate" TargetType="{x:Type ListBox}">
+    		<Grid/>
+    	</ControlTemplate>
+    	<DataTemplate x:Key="LibraryListBoxItemTemplate">
+    		<Grid Height="142.667" Width="450">
+    			<Grid.ColumnDefinitions>
+    				<ColumnDefinition Width="0.307*"/>
+    				<ColumnDefinition Width="0.693*"/>
+    			</Grid.ColumnDefinitions>
+    			<Image Margin="8" Source="20-03-2013 18-17-01.png" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto"/>
+    			<Grid Grid.Column="1">
+    				<Grid.RowDefinitions>
+    					<RowDefinition Height="0.25*"/>
+    					<RowDefinition Height="0.25*"/>
+    					<RowDefinition Height="0.25*"/>
+    					<RowDefinition Height="0.25*"/>
+    				</Grid.RowDefinitions>
+    				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Nom :" Width="106.517" Height="20" VerticalAlignment="Stretch" FontFamily="Helvetica World" FontSize="13.333" Foreground="White" Margin="16.333,8,0,7.667"/>
+    				<TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding Name}" Width="189" Height="20" VerticalAlignment="Center" Foreground="#FFD0D0D0"/>
+    				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Extension :" Width="106.517" Height="20" VerticalAlignment="Stretch" FontFamily="Helvetica World" FontSize="13.333" Foreground="White" Margin="16.333,8,0,7.501" Grid.Row="1"/>
+                    <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding Extension}" Width="189" Height="20" VerticalAlignment="Stretch" Foreground="#FFD0D0D0" Margin="0,8,0,7.667" Grid.Row="1"/>
+    			</Grid>
+    		</Grid>
+    	</DataTemplate>
+        <DataTemplate x:Key="PictureLibraryListBoxItemTemplate">
+            <Grid Height="142.667" Width="450">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.307*"/>
+                    <ColumnDefinition Width="0.693*"/>
+                </Grid.ColumnDefinitions>
+                <Image Margin="8" Source="20-03-2013 18-17-01.png" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto"/>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.25*"/>
+                        <RowDefinition Height="0.25*"/>
+                        <RowDefinition Height="0.25*"/>
+                        <RowDefinition Height="0.25*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Nom :" Width="106.517" Height="20" VerticalAlignment="Stretch" FontFamily="Helvetica World" FontSize="13.333" Foreground="White" Margin="16.333,8,0,7.667"/>
+                    <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding Name}" Width="189" Height="20" VerticalAlignment="Center" Foreground="#FFD0D0D0"/>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Extension :" Width="106.517" Height="20" VerticalAlignment="Stretch" FontFamily="Helvetica World" FontSize="13.333" Foreground="White" Margin="16.333,8,0,7.501" Grid.Row="1"/>
+                    <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding Extension}" Width="189" Height="20" VerticalAlignment="Stretch" Foreground="#FFD0D0D0" Margin="0,8,0,7.667" Grid.Row="1"/>
+                </Grid>
+            </Grid>
+        </DataTemplate>
     </Window.Resources>
     
-    <!--<Window.InputBindings>
+    <Window.InputBindings>
         <KeyBinding Command="{Binding OpenDialogCommand, Source={StaticResource ViewModelDataSource}}"   Key="O" Modifiers="Control"/>
-    </Window.InputBindings>-->
+    </Window.InputBindings>
 
     <Grid Margin="0">
 
@@ -653,10 +708,10 @@
                 <MenuItem Header="Close" Height="31" Width="170"/>
             </MenuItem>
             <MenuItem Header="Edit" Height="20" Width="50"/>
-            <!--<MenuItem Header="Library" Height="20" Width="50"  DataContext="{Binding Source={StaticResource ViewModelLibrary}}">
+            <MenuItem Header="Library" Height="20" Width="50"  DataContext="{Binding Source={StaticResource ViewModelLibrary}}">
                 <MenuItem Header="Import File" Height="31" Width="170" d:LayoutOverrides="Width" Command="{Binding ImportFileCMD}"/>
                 <MenuItem Header="Import Directory" Height="31" Command="{Binding ImportDirectoryCMD}"/>
-            </MenuItem>-->
+            </MenuItem>
         </Menu>
 
         <!-- ************************ Fin de MENU ************************** -->
@@ -667,8 +722,6 @@
         
         <TabControl x:Name="tabControl" Margin="0,20,0,0">
 			
-            
-            <!--<TabControl x:Name="tabControl" Margin="0" >-->
 			<TabControl.InputBindings>
         	    <KeyBinding Key="O" Modifiers="Control" Command="{Binding OpenDialogCommand}" />
             </TabControl.InputBindings>
@@ -676,8 +729,8 @@
             
             <!-- ************************* ITEM PLAYER ************************* -->
 
-            <!--<TabItem x:Name="tabPlayer" Header="Player" DataContext="{Binding Source={StaticResource ViewModelDataSource}}">-->
-            <TabItem x:Name="tabPlayer" Header="Player">
+            <TabItem x:Name="tabPlayer" Header="Player" DataContext="{Binding Source={StaticResource ViewModelDataSource}}">
+            <!--<TabItem x:Name="tabPlayer" Header="Player">-->
             	<TabItem.Background>
             		<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
             			<GradientStop Color="#FFF3F3F3" Offset="0"/>
@@ -761,8 +814,8 @@
             
             <!-- ************************* ITEM MUSIC ************************** -->
             
-            <!--<TabItem x:Name="tabMusic" Header="Music" DataContext="{Binding Source={StaticResource ViewModelLibrary}}">-->
-            <TabItem x:Name="tabMusic" Header="Music">
+            <TabItem x:Name="tabMusic" Header="Music" DataContext="{Binding Source={StaticResource ViewModelLibrary}}">
+            <!--<TabItem x:Name="tabMusic" Header="Music">-->
             	<TabItem.Background>
             		<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
             			<GradientStop Color="#FFF3F3F3" Offset="0"/>
@@ -774,8 +827,8 @@
 					<Grid.Background>
 						<LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
 							<GradientStop Color="Black" Offset="1"/>
-							<GradientStop Color="#FF045AE5"/>
-							<GradientStop Color="#FF0354D6" Offset="0.4"/>
+							<GradientStop Color="#FF0061FF"/>
+							<GradientStop Color="#FF0062FF"/>
 						</LinearGradientBrush>
 					</Grid.Background>
 					<Grid.ColumnDefinitions>
@@ -820,8 +873,8 @@
                                 <ColumnDefinition Width="4*" />
                                 <ColumnDefinition Width="263*" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Height="21.46" Margin="0,10,0,0" TextWrapping="Wrap" Text="Genre :" VerticalAlignment="Top" Width="262.883" HorizontalAlignment="Left"/>
-                            <ListBox Grid.Column="0" x:Name="lstGenre"  MinHeight="125" Height="auto" ItemsSource="{Binding GenresLIST}" SelectedItem="{Binding SelectedGenre}" Margin="0,31.46,0,0" Background="{x:Null}" Opacity="0.5" BorderThickness="0">
+                            <TextBlock Grid.Column="0" Height="21.46" Margin="0,10,0,0" TextWrapping="Wrap" Text="Genre :" VerticalAlignment="Top" Width="262.883" HorizontalAlignment="Left" Style="{DynamicResource simpleTextStyle}"/>
+                            <ListBox Grid.Column="0" x:Name="lstGenre"  MinHeight="125" Height="auto" ItemsSource="{Binding GenresLIST}" SelectedItem="{Binding SelectedGenre}" Margin="0,31.46,0,0" Background="{x:Null}" BorderThickness="0" Foreground="White" FontFamily="Helvetica World">
                     			<i:Interaction.Triggers>
                     				<i:EventTrigger EventName="MouseDoubleClick">
                     					<i:InvokeCommandAction Command="{Binding LoadGenreCMD}"/>
@@ -839,8 +892,8 @@
                                 </GridSplitter.Background>
                             </GridSplitter>
 
-                            <TextBlock Grid.Column="2" Height="21.46" Margin="1,10,1,0" TextWrapping="Wrap" Text="Artist :" VerticalAlignment="Top" />
-                            <ListBox Grid.Column="2" x:Name="lstArtist" MinHeight="125" Height="auto"  Margin="1,31.46,0,0"  ItemsSource="{Binding ArtistsLIST}" ItemTemplate="{DynamicResource TemplateLibraryLstArtists}" SelectedItem="{Binding SelectedArtist}" Opacity="0.5" Background="{x:Null}" BorderThickness="0">
+                            <TextBlock Grid.Column="2" Height="21.46" Margin="1,10,1,0" TextWrapping="Wrap" Text="Artist :" VerticalAlignment="Top" Style="{DynamicResource simpleTextStyle}" />
+                            <ListBox Grid.Column="2" x:Name="lstArtist" MinHeight="125" Height="auto"  Margin="1,31.46,0,0"  ItemsSource="{Binding ArtistsLIST}" ItemTemplate="{DynamicResource TemplateLibraryLstArtists}" SelectedItem="{Binding SelectedArtist}" Background="{x:Null}" BorderThickness="0" Foreground="White" FontFamily="Helvetica World">
                     			<i:Interaction.Triggers>
                     				<i:EventTrigger EventName="MouseDoubleClick">
                     					<i:InvokeCommandAction Command="{Binding LoadArtistCMD}"/>
@@ -859,8 +912,8 @@
                                 </GridSplitter.Background>
                             </GridSplitter>
 
-                            <TextBlock Grid.Column="4" Height="21.46" Margin="0,10,-3,0" TextWrapping="Wrap" Text="Album :" VerticalAlignment="Top" Width="262.883" HorizontalAlignment="Left"  />
-                            <ListBox Grid.Column="4" x:Name="lstAlbum" MinHeight="125" Height="auto"  Margin="0,31.46,3,0"  ItemsSource="{Binding AlbumsLIST}" ItemTemplate="{DynamicResource TemplateLibraryLstAlbums}" SelectedItem="{Binding SelectedAlbum}" Opacity="0.5" Background="{x:Null}" BorderThickness="0">
+                            <TextBlock Grid.Column="4" Height="21.46" Margin="0,10,-3,0" TextWrapping="Wrap" Text="Album :" VerticalAlignment="Top" Width="262.883" HorizontalAlignment="Left" Style="{DynamicResource simpleTextStyle}"  />
+                            <ListBox Grid.Column="4" x:Name="lstAlbum" MinHeight="125" Height="auto"  Margin="0,31.46,3,0"  ItemsSource="{Binding AlbumsLIST}" ItemTemplate="{DynamicResource TemplateLibraryLstAlbums}" SelectedItem="{Binding SelectedAlbum}" Background="{x:Null}" BorderThickness="0" Foreground="White" FontFamily="Helvetica World">
                     			<i:Interaction.Triggers>
                     				<i:EventTrigger EventName="MouseDoubleClick">
                     					<i:InvokeCommandAction Command="{Binding LoadAlbumCMD}"/>
@@ -877,7 +930,7 @@
                     			</RadialGradientBrush>
                     		</GridSplitter.Background>
                     	</GridSplitter>
-                    	<ListView Grid.Row="2" x:Name="listViewSongs" ItemsSource="{Binding SongsLIST}" SelectedItem="{Binding SelectedSong}" d:LayoutOverrides="HorizontalAlignment" Margin="0,4,0,53.017" Background="{x:Null}" BorderBrush="#FF698ED0" BorderThickness="0">
+                    	<ListView Grid.Row="2" x:Name="listViewSongs" ItemsSource="{Binding SongsLIST}" SelectedItem="{Binding SelectedSong}" d:LayoutOverrides="HorizontalAlignment" Margin="0,4,0,53.017" Background="{x:Null}" BorderBrush="#FF698ED0" BorderThickness="0" FontFamily="Helvetica World" Foreground="#FFD4D4D6">
                     		<i:Interaction.Triggers>
                     			<i:EventTrigger EventName="MouseDoubleClick">
                     				<i:InvokeCommandAction Command="{Binding PlayItemCMD}" />
@@ -894,7 +947,7 @@
                     			</GridView>
                     		</ListView.View>
                     	</ListView>
-                    	<TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="MUSIC" VerticalAlignment="Bottom" Foreground="White" FontWeight="Bold" FontSize="29.333" Grid.Row="2" Margin="0,0,10,10" FontFamily="Kozuka Gothic Pro M"/>
+                    	<TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="MUSIC" VerticalAlignment="Bottom" Foreground="White" FontWeight="Bold" Grid.Row="2" Margin="0,0,8,3.237" Style="{DynamicResource TitleTextStyle}"/>
                     </Grid>
 				</Grid>
 			</TabItem>
@@ -906,7 +959,7 @@
             
             <!-- ************************* ITEM VIDEO ************************** -->
 
-            <TabItem x:Name="tabVideos" Header="Videos">
+            <TabItem x:Name="tabVideos" Header="Videos" DataContext="{Binding Source={StaticResource ViewModelLibrary}}">
             	<TabItem.Background>
             		<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
             			<GradientStop Color="#FFF3F3F3" Offset="0"/>
@@ -920,11 +973,11 @@
             			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             				<GradientStop Color="Black" Offset="1"/>
             				<GradientStop Color="#FF045AE5"/>
-            				<GradientStop Color="#FF0354D6" Offset="0.4"/>
+            				<GradientStop Color="#FF0062FF"/>
             			</LinearGradientBrush>
             		</Grid.Background>
-            		<ListBox BorderThickness="53,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,0,78"/>
-            		<TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="VIDEOS" VerticalAlignment="Bottom" Foreground="White" Margin="0,0,10,10" FontWeight="Bold" FontSize="29.333" FontFamily="Kozuka Gothic Pr6N M"/>
+                    <ListBox x:Name="VideoList" BorderThickness="0" Margin="0,0,0,51.78" Background="{x:Null}"  ItemTemplate="{DynamicResource LibraryListBoxItemTemplate}" ItemsSource="{Binding VideosList}"/>
+            		<TextBlock x:Name="VideoTitle" HorizontalAlignment="Right" TextWrapping="Wrap" Text="VIDEOS" VerticalAlignment="Bottom" Foreground="White" Margin="0,0,8,6" FontWeight="Bold" Style="{DynamicResource TitleTextStyle}"/>
             	</Grid>                
             </TabItem>
 
@@ -934,8 +987,8 @@
             
 
             <!-- ************************ ITEM PICTURE ************************* -->
-            
-            <TabItem x:Name="tabPictures" Header="Pictures">
+
+            <TabItem x:Name="tabPictures" Header="Pictures" DataContext="{Binding Source={StaticResource ViewModelLibrary}}">
             	<TabItem.Background>
             		<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
             			<GradientStop Color="#FFF3F3F3" Offset="0"/>
@@ -949,11 +1002,11 @@
             			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             				<GradientStop Color="Black" Offset="1"/>
             				<GradientStop Color="#FF045AE5"/>
-            				<GradientStop Color="#FF0354D6" Offset="0.4"/>
+            				<GradientStop Color="#FF0062FF"/>
             			</LinearGradientBrush>
             		</Grid.Background>
-            		<ListBox BorderThickness="0" Background="{x:Null}"/>
-            		<TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="PICTURES" VerticalAlignment="Bottom" Foreground="White" Margin="0,0,10,10" FontWeight="Bold" FontSize="29.333" FontFamily="Kozuka Gothic Pr6N M"/>
+                    <ListBox x:Name="PictureList" BorderThickness="0" Margin="0,0,0,55.78" Background="{x:Null}" ItemTemplate="{DynamicResource PictureLibraryListBoxItemTemplate}" ItemsSource="{Binding PicturesList}" />
+                    <TextBlock x:Name="PictureTitle" HorizontalAlignment="Right" TextWrapping="Wrap" Text="PICTURES" VerticalAlignment="Bottom" Foreground="White" Margin="0,0,8,6" FontWeight="Bold" Style="{DynamicResource TitleTextStyle}" />
             	</Grid>
             </TabItem>
 
@@ -965,38 +1018,3 @@
 
     </Grid>
 </Window>
-
-<!--<TabItem x:Name="tabLibrary" Header="Library" DataContext="{Binding Source={StaticResource ViewModelLibrary}}" d:IsHidden="True">
-			<Grid Background="#FFE5E5E5">
-				<TextBlock HorizontalAlignment="Left" Height="21.666" Margin="8,49.04,0,0" TextWrapping="Wrap" Text="Artists" VerticalAlignment="Top" Width="150"/>
-				<TextBlock Height="21.666" Margin="200,49,147,0" TextWrapping="Wrap" Text="Albums" VerticalAlignment="Top"/>
-				<TextBlock HorizontalAlignment="Right" Height="21.666" Margin="0,49,112,0" TextWrapping="Wrap" Text="Songs" VerticalAlignment="Top" Width="122"/>
-                <ListBox x:Name="lstArtists" Margin="8,74.706,0,8" HorizontalAlignment="Left" Width="186" ItemTemplate="{DynamicResource TemplateLibraryLstArtists}" ItemsSource="{Binding ArtistsLIST}" SelectedItem="{Binding SelectedArtist}">
-                    <i:Interaction.Triggers>
-                    	<i:EventTrigger EventName="MouseDoubleClick">
-                    		<i:InvokeCommandAction Command="{Binding LoadArtistCMD}"/>
-                    	</i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </ListBox>
-
-                <ListBox x:Name="lstAlbums" Margin="200,74.706,240,8" ItemTemplate="{DynamicResource TemplateLibraryLstAlbums}" ItemsSource="{Binding AlbumsLIST}" SelectedItem="{Binding SelectedAlbum}">
-                    <i:Interaction.Triggers>
-                    	<i:EventTrigger EventName="MouseDoubleClick">
-                    		<i:InvokeCommandAction Command="{Binding LoadAlbumCMD}"/>
-                    	</i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </ListBox>
-
-                <ListBox x:Name="lstSongs" Margin="0,74.706,8,8" HorizontalAlignment="Right" Width="226" ItemTemplate="{DynamicResource TemplateLibraryLstSongs}" ItemsSource="{Binding SongsLIST}" SelectedItem="{Binding SelectedSong}">
-                    <i:Interaction.Triggers>
-                    	<i:EventTrigger EventName="MouseDoubleClick">
-                    		<i:InvokeCommandAction Command="{Binding PlaySongCMD}"/>
-                    	</i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </ListBox>
-
-                <Button x:Name="btnImportFile" Content="Import File" HorizontalAlignment="Right" Height="25.04" Margin="0,8,126,0" VerticalAlignment="Top" Width="75.167" Command="{Binding ImportFile}"/>
-                <Button x:Name="btnImportDir" Content="Import Directory" HorizontalAlignment="Right" Height="25.04" Margin="0,8,8,0" VerticalAlignment="Top" Width="114" />
-			</Grid>
-		</TabItem>
-        -->
