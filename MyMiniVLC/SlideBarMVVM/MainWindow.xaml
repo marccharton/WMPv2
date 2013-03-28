@@ -653,10 +653,10 @@
                 <MenuItem Header="Close" Height="31" Width="170"/>
             </MenuItem>
             <MenuItem Header="Edit" Height="20" Width="50"/>
-            <MenuItem Header="Library" Height="20" Width="50"  DataContext="{Binding Source={StaticResource ViewModelLibrary}}">
+            <!--<MenuItem Header="Library" Height="20" Width="50"  DataContext="{Binding Source={StaticResource ViewModelLibrary}}">
                 <MenuItem Header="Import File" Height="31" Width="170" d:LayoutOverrides="Width" Command="{Binding ImportFileCMD}"/>
                 <MenuItem Header="Import Directory" Height="31" Command="{Binding ImportDirectoryCMD}"/>
-            </MenuItem>
+            </MenuItem>-->
         </Menu>
 
         <!-- ************************ Fin de MENU ************************** -->
