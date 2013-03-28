@@ -678,6 +678,14 @@
 
             <!--<TabItem x:Name="tabPlayer" Header="Player" DataContext="{Binding Source={StaticResource ViewModelDataSource}}">-->
             <TabItem x:Name="tabPlayer" Header="Player">
+            	<TabItem.Background>
+            		<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+            			<GradientStop Color="#FFF3F3F3" Offset="0"/>
+            			<GradientStop Color="#FFEBEBEB"/>
+            			<GradientStop Color="#FF587BB2" Offset="0.7"/>
+            			<GradientStop Color="#FF587BB2" Offset="1"/>
+            		</LinearGradientBrush>
+            	</TabItem.Background>
 				<Grid Margin="0">
 					<Grid.Background>
 						<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -755,19 +763,29 @@
             
             <!--<TabItem x:Name="tabMusic" Header="Music" DataContext="{Binding Source={StaticResource ViewModelLibrary}}">-->
             <TabItem x:Name="tabMusic" Header="Music">
-				<Grid Background="#FFE5E5E5">
+            	<TabItem.Background>
+            		<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+            			<GradientStop Color="#FFF3F3F3" Offset="0"/>
+            			<GradientStop Color="#FF587BB2" Offset="0.7"/>
+            			<GradientStop Color="#FF587BB2" Offset="1"/>
+            		</LinearGradientBrush>
+            	</TabItem.Background>
+				<Grid x:Name="MusicMainGrid">
+					<Grid.Background>
+						<LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+							<GradientStop Color="Black" Offset="1"/>
+							<GradientStop Color="#FF045AE5"/>
+							<GradientStop Color="#FF0354D6" Offset="0.4"/>
+						</LinearGradientBrush>
+					</Grid.Background>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="0.192*" />
 						<ColumnDefinition Width="Auto" MinWidth="5.234" />
 						<ColumnDefinition Width="0.808*" />
 					</Grid.ColumnDefinitions>
 
-					<TreeView Margin="3,8,0,0" d:LayoutOverrides="HorizontalAlignment">
-						<TreeViewItem Header="Music">
-							<TreeViewItem Header="Artists"/>
-							<TreeViewItem Header="Albums" Margin="0,0,-19,0" d:LayoutOverrides="Width"/>
-							<TreeViewItem Header="Songs" Margin="0,0,-19,0" d:LayoutOverrides="Width"/>
-						</TreeViewItem>
+					<TreeView d:LayoutOverrides="HorizontalAlignment" Background="{x:Null}" BorderThickness="0" Margin="0,8,0,0">
+						<TreeViewItem Header="Music" />
 						<TreeViewItem Header="Playlists">
 							<TreeViewItem Header="Playlist 1"/>
 							<TreeViewItem Header="Funk" Margin="0,0,-19,0" d:LayoutOverrides="Width"/>
@@ -778,14 +796,32 @@
 						<TreeViewItem Header="Pictures"/>
 					</TreeView>
 
-					<GridSplitter Grid.Column="1" x:Name="SplitterCentre" Width="3"
-						HorizontalAlignment="Center"
-						VerticalAlignment="Stretch" 
-						Background="Azure" ShowsPreview="True"/>
-                    <Grid Grid.Column="2">
-                    	<Grid Grid.Row="0" Height="173.592" Margin="0,0,-3.171,0" VerticalAlignment="Top" d:LayoutOverrides="VerticalMargin">
-                    		<TextBlock HorizontalAlignment="Left" Height="21.46" Margin="0,10,0,0" TextWrapping="Wrap" Text="Genre :" VerticalAlignment="Top" Width="262.883"/>
-                    		<ListBox x:Name="lstGenre" Height="138.132" Margin="0,35.46,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="262.883" ItemsSource="{Binding GenresLIST}" SelectedItem="{Binding SelectedGenre}">
+					<GridSplitter Grid.Column="1" x:Name="SplitterCentre" Width="1" ResizeBehavior="PreviousAndNext"
+						VerticalAlignment="Stretch" ShowsPreview="True" ResizeDirection="Columns" HorizontalAlignment="Center" Margin="0,31,0,0">
+						<GridSplitter.Background>
+							<RadialGradientBrush>
+								<GradientStop Color="#7B717272" Offset="0"/>
+								<GradientStop Offset="1"/>
+							</RadialGradientBrush>
+						</GridSplitter.Background>
+					</GridSplitter>
+                    
+                    <Grid x:Name="RightGrid" Grid.Column="2">
+                    	<Grid.RowDefinitions>
+                    		<RowDefinition Height="0.294*"/>
+                    		<RowDefinition Height="auto" MinHeight="2.871"/>
+                    		<RowDefinition Height="0.706*"/>
+                    	</Grid.RowDefinitions>
+						<Grid x:Name="ListsBoxes" Grid.Row="0" Margin="0,0,0,3.458">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="263*" />
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="256*" />
+                                <ColumnDefinition Width="4*" />
+                                <ColumnDefinition Width="263*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Height="21.46" Margin="0,10,0,0" TextWrapping="Wrap" Text="Genre :" VerticalAlignment="Top" Width="262.883" HorizontalAlignment="Left"/>
+                            <ListBox Grid.Column="0" x:Name="lstGenre"  MinHeight="125" Height="auto" ItemsSource="{Binding GenresLIST}" SelectedItem="{Binding SelectedGenre}" Margin="0,31.46,0,0" Background="{x:Null}" Opacity="0.5" BorderThickness="0">
                     			<i:Interaction.Triggers>
                     				<i:EventTrigger EventName="MouseDoubleClick">
                     					<i:InvokeCommandAction Command="{Binding LoadGenreCMD}"/>
@@ -793,8 +829,18 @@
                     			</i:Interaction.Triggers>
                     		</ListBox>
 
-                    		<TextBlock Height="21.46" Margin="266.883,10,263.905,0" TextWrapping="Wrap" Text="Artist :" VerticalAlignment="Top"/>
-                    		<ListBox x:Name="lstArtist" Height="138.132" Margin="266.883,35.46,266.788,0" VerticalAlignment="Top"  ItemsSource="{Binding ArtistsLIST}" ItemTemplate="{DynamicResource TemplateLibraryLstArtists}" SelectedItem="{Binding SelectedArtist}">
+                            <GridSplitter Grid.Column="1" x:Name="SplitterListsLeft" Width="1" ResizeBehavior="PreviousAndNext"
+						                  VerticalAlignment="Stretch" ShowsPreview="True" ResizeDirection="Columns" HorizontalAlignment="Center">
+                                <GridSplitter.Background>
+                                	<RadialGradientBrush>
+                                		<GradientStop Color="#FF717272" Offset="0.091"/>
+                                		<GradientStop Offset="1"/>
+                                	</RadialGradientBrush>
+                                </GridSplitter.Background>
+                            </GridSplitter>
+
+                            <TextBlock Grid.Column="2" Height="21.46" Margin="1,10,1,0" TextWrapping="Wrap" Text="Artist :" VerticalAlignment="Top" />
+                            <ListBox Grid.Column="2" x:Name="lstArtist" MinHeight="125" Height="auto"  Margin="1,31.46,0,0"  ItemsSource="{Binding ArtistsLIST}" ItemTemplate="{DynamicResource TemplateLibraryLstArtists}" SelectedItem="{Binding SelectedArtist}" Opacity="0.5" Background="{x:Null}" BorderThickness="0">
                     			<i:Interaction.Triggers>
                     				<i:EventTrigger EventName="MouseDoubleClick">
                     					<i:InvokeCommandAction Command="{Binding LoadArtistCMD}"/>
@@ -802,8 +848,19 @@
                     			</i:Interaction.Triggers>
                     		</ListBox>
 
-                    		<TextBlock Height="21.46" Margin="0,10,-2.978,0" TextWrapping="Wrap" Text="Album :" VerticalAlignment="Top" HorizontalAlignment="Right" Width="262.883"/>
-                    		<ListBox x:Name="lstAlbum" Height="138.132" Margin="0,35.46,2.788,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="260"  ItemsSource="{Binding AlbumsLIST}" ItemTemplate="{DynamicResource TemplateLibraryLstAlbums}" SelectedItem="{Binding SelectedAlbum}">
+
+                            <GridSplitter Grid.Column="3" x:Name="SplitterListsRight" Width="1" ResizeBehavior="PreviousAndNext"
+						                  VerticalAlignment="Stretch" ShowsPreview="True" ResizeDirection="Columns" HorizontalAlignment="Center">
+                                <GridSplitter.Background>
+                                	<RadialGradientBrush>
+                                		<GradientStop Color="#FF717272" Offset="0.1"/>
+                                		<GradientStop Offset="1"/>
+                                	</RadialGradientBrush>
+                                </GridSplitter.Background>
+                            </GridSplitter>
+
+                            <TextBlock Grid.Column="4" Height="21.46" Margin="0,10,-3,0" TextWrapping="Wrap" Text="Album :" VerticalAlignment="Top" Width="262.883" HorizontalAlignment="Left"  />
+                            <ListBox Grid.Column="4" x:Name="lstAlbum" MinHeight="125" Height="auto"  Margin="0,31.46,3,0"  ItemsSource="{Binding AlbumsLIST}" ItemTemplate="{DynamicResource TemplateLibraryLstAlbums}" SelectedItem="{Binding SelectedAlbum}" Opacity="0.5" Background="{x:Null}" BorderThickness="0">
                     			<i:Interaction.Triggers>
                     				<i:EventTrigger EventName="MouseDoubleClick">
                     					<i:InvokeCommandAction Command="{Binding LoadAlbumCMD}"/>
@@ -811,11 +868,16 @@
                     			</i:Interaction.Triggers>
                     		</ListBox>
                     	</Grid>
-                    	<GridSplitter x:Name="SplitterLists" Height="2"
-                    		VerticalAlignment="Top"
-                    		HorizontalAlignment="Stretch" 
-                    		Background="Azure" ShowsPreview="True" Margin="8,173.592,-11.171,0" d:LayoutOverrides="GridBox"/>
-                    	<ListView x:Name="listViewSongs" ItemsSource="{Binding SongsLIST}" Margin="0,175.592,-3.171,-1.662" SelectedItem="{Binding SelectedSong}" d:LayoutOverrides="HorizontalAlignment">
+                    	<GridSplitter Grid.Row="1" x:Name="SplitterLists"
+                    		HorizontalAlignment="Stretch" ShowsPreview="True" d:LayoutOverrides="GridBox">
+                    		<GridSplitter.Background>
+                    			<RadialGradientBrush>
+                    				<GradientStop Color="#7B717272" Offset="0"/>
+                    				<GradientStop Offset="1"/>
+                    			</RadialGradientBrush>
+                    		</GridSplitter.Background>
+                    	</GridSplitter>
+                    	<ListView Grid.Row="2" x:Name="listViewSongs" ItemsSource="{Binding SongsLIST}" SelectedItem="{Binding SelectedSong}" d:LayoutOverrides="HorizontalAlignment" Margin="0,4,0,53.017" Background="{x:Null}" BorderBrush="#FF698ED0" BorderThickness="0">
                     		<i:Interaction.Triggers>
                     			<i:EventTrigger EventName="MouseDoubleClick">
                     				<i:InvokeCommandAction Command="{Binding PlayItemCMD}" />
@@ -832,6 +894,7 @@
                     			</GridView>
                     		</ListView.View>
                     	</ListView>
+                    	<TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="MUSIC" VerticalAlignment="Bottom" Foreground="White" FontWeight="Bold" FontSize="29.333" Grid.Row="2" Margin="0,0,10,10" FontFamily="Kozuka Gothic Pro M"/>
                     </Grid>
 				</Grid>
 			</TabItem>
@@ -843,7 +906,26 @@
             
             <!-- ************************* ITEM VIDEO ************************** -->
 
-            <TabItem x:Name="tabVideos" Header="Videos">                
+            <TabItem x:Name="tabVideos" Header="Videos">
+            	<TabItem.Background>
+            		<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+            			<GradientStop Color="#FFF3F3F3" Offset="0"/>
+            			<GradientStop Color="#FF587BB2" Offset="0.7"/>
+            			<GradientStop Color="#FFDDDDDD"/>
+            			<GradientStop Color="#FF587BB2" Offset="1"/>
+            		</LinearGradientBrush>
+            	</TabItem.Background>
+            	<Grid x:Name="VideoMainGrid">
+            		<Grid.Background>
+            			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            				<GradientStop Color="Black" Offset="1"/>
+            				<GradientStop Color="#FF045AE5"/>
+            				<GradientStop Color="#FF0354D6" Offset="0.4"/>
+            			</LinearGradientBrush>
+            		</Grid.Background>
+            		<ListBox BorderThickness="53,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,0,78"/>
+            		<TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="VIDEOS" VerticalAlignment="Bottom" Foreground="White" Margin="0,0,10,10" FontWeight="Bold" FontSize="29.333" FontFamily="Kozuka Gothic Pr6N M"/>
+            	</Grid>                
             </TabItem>
 
             <!-- ********************** Fin de ITEM VIDEO ********************** -->
@@ -854,6 +936,25 @@
             <!-- ************************ ITEM PICTURE ************************* -->
             
             <TabItem x:Name="tabPictures" Header="Pictures">
+            	<TabItem.Background>
+            		<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+            			<GradientStop Color="#FFF3F3F3" Offset="0"/>
+            			<GradientStop Color="#FF587BB2" Offset="0.7"/>
+            			<GradientStop Color="#FFDDDDDD"/>
+            			<GradientStop Color="#FF587BB2" Offset="1"/>
+            		</LinearGradientBrush>
+            	</TabItem.Background>
+            	<Grid x:Name="PictureMainGrid">
+            		<Grid.Background>
+            			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            				<GradientStop Color="Black" Offset="1"/>
+            				<GradientStop Color="#FF045AE5"/>
+            				<GradientStop Color="#FF0354D6" Offset="0.4"/>
+            			</LinearGradientBrush>
+            		</Grid.Background>
+            		<ListBox BorderThickness="0" Background="{x:Null}"/>
+            		<TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="PICTURES" VerticalAlignment="Bottom" Foreground="White" Margin="0,0,10,10" FontWeight="Bold" FontSize="29.333" FontFamily="Kozuka Gothic Pr6N M"/>
+            	</Grid>
             </TabItem>
 
             <!-- ********************* Fin de ITEM PICTURE ********************* -->
