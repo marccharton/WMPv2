@@ -233,7 +233,7 @@ namespace SlideBarMVVM
 
             SongsLIST = Lib.Songs;
             GenresLIST = Lib.Genres;
-            ArtistsLIST = CopyArtistsList(Lib.Artists);
+            ArtistsLIST = Lib.Artists;
             AlbumsLIST = Lib.Albums;
 
             VideosList = new List<Video>()
@@ -283,6 +283,8 @@ namespace SlideBarMVVM
                 // MessageBox.Show("Valeur du genre selectionné : " + _selectedGenre);
                 if (_selectedGenre != null)
                 {
+                    #region Load GenreArtists
+                    
                     IEnumerable<Artist> selectedArtists = from art in Lib.Artists
                                                           where art.Genre.ToUpper() == _selectedGenre.ToUpper()
                                                           select art;
@@ -301,8 +303,55 @@ namespace SlideBarMVVM
                     }
 
                     ArtistsLIST = newList;
-                    AlbumsLIST = null;
-                    // SongsLIST = null;
+
+                    #endregion
+
+                    #region Load GenreAlbums
+
+                    IEnumerable<Album> selectedAlbums = from alb in Lib.Albums
+                                                          where alb.Genre.ToUpper() == _selectedGenre.ToUpper()
+                                                          select alb;
+
+                    List<Album> newListAlb = new List<Album>();
+
+                    if (selectedArtists.Any())
+                    {
+                        // MessageBox.Show("il y a des artists");
+
+                        foreach (Album alb in selectedAlbums)
+                        {
+                            // MessageBox.Show("je parcours mes artiste du genre : " + art.Name);
+                            newListAlb.Add(alb);
+                        }
+                    }
+
+                    AlbumsLIST = newListAlb;
+
+                    #endregion
+
+                    #region Load GenreAlbums
+
+                    IEnumerable<Song> selectedSongs = from son in Lib.Songs
+                                                        where son.Genre.ToUpper() == _selectedGenre.ToUpper()
+                                                        select son;
+
+                    List<Song> newListSon = new List<Song>();
+
+                    if (selectedSongs.Any())
+                    {
+                        // MessageBox.Show("il y a des artists");
+
+                        foreach (Song son in selectedSongs)
+                        {
+                            // MessageBox.Show("je parcours mes artiste du genre : " + art.Name);
+                            newListSon.Add(son);
+                        }
+                    }
+
+                    SongsLIST = newListSon;
+
+                    #endregion
+
                 }
             }));
 
@@ -398,17 +447,6 @@ namespace SlideBarMVVM
             #endregion
 
            
-        }
-
-        private List<Artist> CopyArtistsList(List<Artist> list)
-        {
-            List<Artist> ret = new List<Artist>();
-
-            foreach (Artist a in list)
-            {
-                ret.Add(a);
-            }
-            return ret;
         }
 
         private void RefreshLibrary()
