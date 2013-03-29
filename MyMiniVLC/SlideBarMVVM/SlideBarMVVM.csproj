@@ -91,6 +91,8 @@
     <Compile Include="SliderBehavior.cs" />
     <Compile Include="SpecialSlider.cs" />
     <Compile Include="SlideBarViewModel.cs" />
+    <Compile Include="TextBlockCustom.cs" />
+    <Compile Include="TextBlockCustomEffect.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

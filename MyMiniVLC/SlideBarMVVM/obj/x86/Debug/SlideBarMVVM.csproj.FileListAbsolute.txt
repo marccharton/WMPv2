@@ -165,3 +165,47 @@ C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.
 C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Controls.xml
 C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Drawing.xml
 C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\wmp2.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\SlideBarMVVM.exe
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\SlideBarMVVM.pdb
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Controls.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Drawing.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Interactions.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\System.Windows.Interactivity.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\wmp2.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\taglib-sharp.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\wmp2.pdb
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Controls.xml
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Drawing.xml
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\Microsoft.Expression.Interactions.xml
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\System.Windows.Interactivity.xml
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\de\System.Windows.Interactivity.resources.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\en\System.Windows.Interactivity.resources.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\es\System.Windows.Interactivity.resources.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\fr\System.Windows.Interactivity.resources.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\it\System.Windows.Interactivity.resources.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\ja\System.Windows.Interactivity.resources.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\ko\System.Windows.Interactivity.resources.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\MainWindow.g.cs
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\App.g.cs
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\SlideBarMVVM_MarkupCompile.cache
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\SlideBarMVVM_MarkupCompile.lref
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\MainWindow.baml
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\SlideBarMVVM.g.resources
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\SlideBarMVVM.Properties.Resources.resources
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\GenerateResource.read.1.tlog
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\GenerateResource.write.1.tlog
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\SlideBarMVVM.exe
+E:\Depot Dot Net\wmpv2\MyMiniVLC\SlideBarMVVM\obj\x86\Debug\SlideBarMVVM.pdb

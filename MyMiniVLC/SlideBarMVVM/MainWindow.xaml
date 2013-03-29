@@ -556,57 +556,720 @@
     			<Image Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Source="{Binding PlayPauseButtonImage}"/>
     		</Border>
     	</ControlTemplate>
-    	<ControlTemplate x:Key="ButtonPrevTemplate" TargetType="{x:Type local:ButtonCustom}">
-    		<Border Margin="0" BorderThickness="1" BorderBrush="{x:Null}" Padding="0">
-    			<Grid>
-    				<TextBlock Margin="0" TextWrapping="Wrap" Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" TextAlignment="Left" Grid.ColumnSpan="1" FontFamily="Segoe UI" LineHeight="Auto" d:LayoutOverrides="Width, Height"/>
-    				<Path Data="M0.21733333,22.943667 L21.950667,0" Fill="{x:Null}" Margin="0,0,22.899,0" Stretch="Fill" Stroke="White" Height="18.511" VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment"/>
-    				<Path Data="M0.217,23.011 L21.750667,44.943667" Fill="{x:Null}" Height="Auto" Margin="0,18.511,22.899,-0.077" Stretch="Fill" Stroke="White" VerticalAlignment="Stretch" d:LayoutOverrides="VerticalAlignment"/>
-    				<Path Data="M45.634,45.460333 C32.234,24.460333 45.383999,-0.62266522 45.383999,-0.62266522" Fill="{x:Null}" HorizontalAlignment="Right" Margin="0,-0.623,-0.784,-0.593" Stretch="Fill" Stroke="White" Width="7.021"/>
-    				<Path Data="M22.3715,45.867 L45.7715,45.944" Fill="{x:Null}" Height="1.077" Margin="21.635,0,-0.784,0" Stretch="Fill" Stroke="White" VerticalAlignment="Bottom"/>
-    				<Path Data="M22.951,0.5395 L46.634,0.6395" Fill="{x:Null}" Height="1.101" Margin="21.635,0,-0.468,0" Stretch="Fill" Stroke="White" VerticalAlignment="Top"/>
-    				<Path Data="M-118.791,109.54" Fill="{x:Null}" HorizontalAlignment="Left" Height="1" Margin="-118.791,0,0,-73.5" Stretch="Fill" Stroke="White" VerticalAlignment="Bottom" Width="1"/>
-    			</Grid>
-    		</Border>
-    	</ControlTemplate>
     	<ControlTemplate x:Key="ButtonNextTemplate" TargetType="{x:Type local:ButtonCustom}">
-    		<Border BorderThickness="1">
-    			<Grid>
-    				<TextBlock Margin="0" TextWrapping="Wrap" Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
-    				<Path Data="M-0.00033333333,0.12666667 C17.466333,22.526667 -0.50066667,46.026333 -0.50066667,46.026333" Fill="{x:Null}" HorizontalAlignment="Left" Margin="-0.5,0.127,0,0.013" Stretch="Fill" Stroke="White" Width="6.868"/>
-    				<Path Data="M0,36.99 L26.459,37.09" Fill="{x:Null}" Height="1" Margin="-0.5,0,21.224,0.013" Stretch="Fill" Stroke="White" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" d:LayoutOverrides="HorizontalAlignment">
-    					<Path.RenderTransform>
-    						<TransformGroup>
-    							<ScaleTransform ScaleY="-1"/>
-    							<SkewTransform/>
-    							<RotateTransform/>
-    							<TranslateTransform/>
-    						</TransformGroup>
-    					</Path.RenderTransform>
-    				</Path>
-    				<Path Data="M0,0.127 L24.759,0.127" Fill="{x:Null}" Height="1" Margin="0,0.127,21.2,0" Stretch="Fill" Stroke="White" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
-    				<Path Data="M26.959,37.527 L48,22.39" Fill="{x:Null}" HorizontalAlignment="Stretch" Height="19.037" Margin="23.436,0,0,0.013" Stretch="Fill" Stroke="White" VerticalAlignment="Bottom" Width="Auto"/>
-    				<Path Data="M24.659,0.127 L46.759,21.09" Fill="{x:Null}" HorizontalAlignment="Stretch" Margin="23.436,0,0,19.05" Stretch="Fill" Stroke="White" Width="Auto"/>
-    			</Grid>
-    		</Border>
+    		<Grid>
+    			<Path Data="M-0.45545039,38.429617 L47.430296,19.156629 -0.36899272,-0.36016394" Margin="-0.455,-0.36,-0.445,-0.456" Stretch="Fill" Stroke="White" OpacityMask="{x:Null}">
+    				<Path.Fill>
+    					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    						<GradientStop Color="Black" Offset="1"/>
+    						<GradientStop Color="#FF878787"/>
+    					</LinearGradientBrush>
+    				</Path.Fill>
+    			</Path>
+    			<Path Data="M-1.2720384,-0.7414544 C23.313166,19.275131 -1.2746635,39.218474 -1.2746635,39.218474" HorizontalAlignment="Left" Margin="-0.468,-0.469,0,-0.475" Stretch="Fill" Stroke="White" Width="11.928" Fill="Black">
+    				<Path.OpacityMask>
+    					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    						<GradientStop Color="Black" Offset="0"/>
+    						<GradientStop Color="White" Offset="1"/>
+    					</LinearGradientBrush>
+    				</Path.OpacityMask>
+    			</Path>
+    			<TextBlock Margin="0" TextWrapping="Wrap" Text="&gt;&gt;" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Height="Auto" FontSize="16" TextAlignment="Left" FontFamily="Com" FontWeight="Thin">
+    				<TextBlock.OpacityMask>
+    					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    						<GradientStop Color="Black" Offset="0"/>
+    						<GradientStop Color="#FFFA1111" Offset="1"/>
+    					</LinearGradientBrush>
+    				</TextBlock.OpacityMask>
+    			</TextBlock>
+    		</Grid>
     	</ControlTemplate>
     	<ControlTemplate x:Key="ButtonStopTemplate" TargetType="{x:Type Button}">
     		<Grid>
-    			<Image Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Assets/stop.png"/>
+				<Rectangle Height="15.466" Margin="0" Stroke="White" VerticalAlignment="Center" RadiusX="1" RadiusY="1" HorizontalAlignment="Center" Width="15.466">
+    				<Rectangle.Fill>
+    					<LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+    						<GradientStop Color="Black" Offset="1"/>
+    						<GradientStop Color="#FF888888"/>
+    					</LinearGradientBrush>
+    				</Rectangle.Fill>
+    			</Rectangle>
     		</Grid>
     	</ControlTemplate>
     	<ControlTemplate x:Key="ButtonRepeatlTemplate" TargetType="{x:Type Button}">
-    		<Grid>
-    			<Image Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="{Binding RepeatButtonImage}" Width="Auto" Height="Auto"/>
-    		</Grid>
+    		<Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{x:Null}">
+				<Image Margin="0" Source="{Binding RepeatButtonImage}" VerticalAlignment="Stretch" HorizontalAlignment="Left" MinWidth="10" MinHeight="10"/>
+			</Grid>
     	</ControlTemplate>
     	<ControlTemplate x:Key="ButtonShuffleTemplate" TargetType="{x:Type Button}">
-    		<Grid>
+    		<Grid Background="{x:Null}" HorizontalAlignment="Stretch">
     			<Image Margin="0" Source="{Binding ShuffleButtonImage}"/>
     		</Grid>
     	</ControlTemplate>
     	<SolidColorBrush x:Key="ListBorder" Color="#828790"/>
-    	<Style x:Key="ListViewStyle" TargetType="{x:Type ListView}">
+    	<ControlTemplate x:Key="ButtonPrevTemplate" TargetType="{x:Type local:ButtonCustom}">
+    		<Grid>
+    			<Path Data="M-0.45545039,38.429617 L47.430296,19.156629 -0.36899272,-0.36016394" Margin="-0.455,-0.36,-0.445,-0.456" Stretch="Fill" Stroke="White" OpacityMask="{x:Null}">
+    				<Path.Fill>
+    					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    						<GradientStop Color="Black" Offset="0"/>
+    						<GradientStop Color="#FF878787" Offset="1"/>
+    					</LinearGradientBrush>
+    				</Path.Fill>
+    			</Path>
+    			<Path Data="M-1.2720384,-0.7414544 C23.313166,19.275131 -1.2746635,39.218474 -1.2746635,39.218474" HorizontalAlignment="Left" Margin="-0.468,-0.469,0,-0.475" Stretch="Fill" Stroke="White" Width="11.928" Fill="Black">
+    				<Path.OpacityMask>
+    					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    						<GradientStop Color="Black" Offset="0"/>
+    						<GradientStop Color="White" Offset="1"/>
+    					</LinearGradientBrush>
+    				</Path.OpacityMask>
+    			</Path>
+    			<TextBlock Margin="0" TextWrapping="Wrap" Text="&gt;&gt;" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Height="Auto" FontSize="16" TextAlignment="Left" FontFamily="Com" FontWeight="Thin">
+    				<TextBlock.OpacityMask>
+    					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    						<GradientStop Color="Black" Offset="0"/>
+    						<GradientStop Color="#FFFA1111" Offset="1"/>
+    					</LinearGradientBrush>
+    				</TextBlock.OpacityMask>
+    			</TextBlock>
+    		</Grid>
+    	</ControlTemplate>
+    	<Style x:Key="SpecialSliderStyle" TargetType="{x:Type local:SpecialSlider}">
+    		<Setter Property="Stylus.IsPressAndHoldEnabled" Value="False"/>
+    		<Setter Property="Background" Value="Transparent"/>
+    		<Setter Property="Foreground" Value="#FFC4C4C4"/>
+    		<Setter Property="Template">
+    			<Setter.Value>
+    				<ControlTemplate TargetType="{x:Type local:SpecialSlider}">
+    					<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+    						<Grid>
+    							<Grid.RowDefinitions>
+    								<RowDefinition Height="Auto"/>
+    								<RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}"/>
+    								<RowDefinition Height="Auto"/>
+    							</Grid.RowDefinitions>
+    							<TickBar x:Name="TopTick" Fill="{TemplateBinding Foreground}" Height="4" Placement="Top" Grid.Row="0" Visibility="Collapsed"/>
+    							<TickBar x:Name="BottomTick" Fill="{TemplateBinding Foreground}" Height="4" Placement="Bottom" Grid.Row="2" Visibility="Collapsed"/>
+    							<Border x:Name="TrackBackground" BorderThickness="1" Background="#FFE7EAEA" CornerRadius="1" Height="4" Margin="5,0" Grid.Row="1" VerticalAlignment="Center">
+    								<Border.BorderBrush>
+    									<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+    										<GradientStop Color="#FFAEB1AF" Offset="0.1"/>
+    										<GradientStop Color="White" Offset="0.9"/>
+    									</LinearGradientBrush>
+    								</Border.BorderBrush>
+    								<Canvas Margin="-6,-1">
+    									<Rectangle x:Name="PART_SelectionRange" Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Height="4" Stroke="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" StrokeThickness="1" Visibility="Hidden"/>
+    								</Canvas>
+    							</Border>
+    							<Track x:Name="PART_Track" Grid.Row="1">
+    								<Track.DecreaseRepeatButton>
+    									<RepeatButton Command="Slider.DecreaseLarge" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}">
+    										<RepeatButton.Style>
+    											<Style TargetType="{x:Type RepeatButton}">
+    												<Setter Property="OverridesDefaultStyle" Value="True"/>
+    												<Setter Property="IsTabStop" Value="False"/>
+    												<Setter Property="Focusable" Value="False"/>
+    												<Setter Property="Template">
+    													<Setter.Value>
+    														<ControlTemplate TargetType="{x:Type RepeatButton}">
+    															<Rectangle RadiusX="1" RadiusY="1" Height="2.8" Margin="6,0,0,0" StrokeThickness="1">
+    																<Rectangle.Fill>
+    																	<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    																		<GradientStop Color="Black" Offset="1"/>
+    																		<GradientStop Color="#FF878787" Offset="0"/>
+    																	</LinearGradientBrush>
+    																</Rectangle.Fill>
+    															</Rectangle>
+    														</ControlTemplate>
+    													</Setter.Value>
+    												</Setter>
+    											</Style>
+    										</RepeatButton.Style>
+    									</RepeatButton>
+    								</Track.DecreaseRepeatButton>
+    								<Track.IncreaseRepeatButton>
+    									<RepeatButton Command="Slider.IncreaseLarge" Background="{x:Null}" Foreground="{x:Null}">
+    										<RepeatButton.Style>
+    											<Style TargetType="{x:Type RepeatButton}">
+    												<Setter Property="OverridesDefaultStyle" Value="True"/>
+    												<Setter Property="IsTabStop" Value="False"/>
+    												<Setter Property="Focusable" Value="False"/>
+    												<Setter Property="Template">
+    													<Setter.Value>
+    														<ControlTemplate TargetType="{x:Type RepeatButton}">
+    															<Rectangle Fill="Transparent"/>
+    														</ControlTemplate>
+    													</Setter.Value>
+    												</Setter>
+    											</Style>
+    										</RepeatButton.Style>
+    									</RepeatButton>
+    								</Track.IncreaseRepeatButton>
+    								<Track.Thumb>
+    									<Thumb x:Name="Thumb">
+    										<Thumb.Style>
+    											<Style TargetType="{x:Type Thumb}">
+    												<Setter Property="Focusable" Value="False"/>
+    												<Setter Property="OverridesDefaultStyle" Value="True"/>
+    												<Setter Property="Height" Value="22"/>
+    												<Setter Property="Width" Value="11"/>
+    												<Setter Property="Foreground" Value="Gray"/>
+    												<Setter Property="Template">
+    													<Setter.Value>
+    														<ControlTemplate TargetType="{x:Type Thumb}">
+    															<Canvas SnapsToDevicePixels="True">
+    																<Canvas.RenderTransform>
+    																	<TranslateTransform X="5.5" Y="11"/>
+    																</Canvas.RenderTransform>
+    																<Ellipse Height="14" Canvas.Left="-7" Canvas.Top="-6.993" Width="14">
+    																	<Ellipse.Stroke>
+    																		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    																			<GradientStop Color="Black" Offset="0"/>
+    																			<GradientStop Color="White" Offset="1"/>
+    																		</LinearGradientBrush>
+    																	</Ellipse.Stroke>
+    																	<Ellipse.Fill>
+    																		<LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+    																			<GradientStop Color="#FF878787" Offset="0"/>
+    																			<GradientStop Color="Black" Offset="1"/>
+    																			<GradientStop Color="#FF878787" Offset="1"/>
+    																		</LinearGradientBrush>
+    																	</Ellipse.Fill>
+    																</Ellipse>
+    															</Canvas>
+    															<ControlTemplate.Triggers>
+    																<Trigger Property="IsMouseOver" Value="True"/>
+    																<Trigger Property="Foreground" Value="Blue"/>
+    																<Trigger Property="IsDragging" Value="True"/>
+    																<Trigger Property="IsEnabled" Value="False"/>
+    															</ControlTemplate.Triggers>
+    														</ControlTemplate>
+    													</Setter.Value>
+    												</Setter>
+    											</Style>
+    										</Thumb.Style>
+    									</Thumb>
+    								</Track.Thumb>
+    							</Track>
+    						</Grid>
+    					</Border>
+    					<ControlTemplate.Triggers>
+    						<Trigger Property="TickPlacement" Value="TopLeft">
+    							<Setter Property="Visibility" TargetName="TopTick" Value="Visible"/>
+    							<Setter Property="Style" TargetName="Thumb">
+    								<Setter.Value>
+    									<Style TargetType="{x:Type Thumb}">
+    										<Setter Property="Focusable" Value="False"/>
+    										<Setter Property="OverridesDefaultStyle" Value="True"/>
+    										<Setter Property="Height" Value="18"/>
+    										<Setter Property="Width" Value="10"/>
+    										<Setter Property="Foreground" Value="Gray"/>
+    										<Setter Property="Template">
+    											<Setter.Value>
+    												<ControlTemplate TargetType="{x:Type Thumb}">
+    													<Canvas SnapsToDevicePixels="True">
+    														<Canvas.RenderTransform>
+    															<TransformGroup>
+    																<RotateTransform Angle="180"/>
+    																<TranslateTransform X="5" Y="9"/>
+    															</TransformGroup>
+    														</Canvas.RenderTransform>
+    														<Path x:Name="Background" Data="M4.5,-7.5A1,1,0,0,0,3.5,-8.5L-3.5,-8.5A1,1,0,0,0,-4.5,-7.5L-4.5,4.5 -0.5,8.5 0.5,8.5 4.5,4.5z">
+    															<Path.Fill>
+    																<LinearGradientBrush EndPoint="0,0" StartPoint="0,1">
+    																	<GradientStop Color="White" Offset="0"/>
+    																	<GradientStop Color="#FFF0EFEF" Offset="0.4"/>
+    																	<GradientStop Color="#FFD6D5D5" Offset="0.8"/>
+    																</LinearGradientBrush>
+    															</Path.Fill>
+    														</Path>
+    														<Path x:Name="InnerBorder" Data="M3.5,-7.5L-3.5,-7.5 -3.5,4.5 0,8 3.5,4.5z" Stroke="White" StrokeThickness="1"/>
+    														<Path x:Name="OuterBorder" Data="M4.5,-7.5A1,1,0,0,0,3.5,-8.5L-3.5,-8.5A1,1,0,0,0,-4.5,-7.5L-4.5,4.5 -0.5,8.5 0.5,8.5 4.5,4.5z" Stroke="#FF929292" StrokeThickness="1"/>
+    													</Canvas>
+    													<ControlTemplate.Triggers>
+    														<Trigger Property="IsMouseOver" Value="True">
+    															<Setter Property="Fill" TargetName="Background">
+    																<Setter.Value>
+    																	<LinearGradientBrush EndPoint="0,0" StartPoint="0,1">
+    																		<GradientStop Color="White" Offset="0"/>
+    																		<GradientStop Color="#FFB8E2F9" Offset="0.5"/>
+    																		<GradientStop Color="#FFB0DFF8" Offset="1"/>
+    																	</LinearGradientBrush>
+    																</Setter.Value>
+    															</Setter>
+    															<Setter Property="Stroke" TargetName="OuterBorder" Value="#FF3C7FB1"/>
+    														</Trigger>
+    														<Trigger Property="Foreground" Value="Blue">
+    															<Setter Property="Fill" TargetName="Background">
+    																<Setter.Value>
+    																	<LinearGradientBrush EndPoint="0,0" StartPoint="0,1">
+    																		<GradientStop Color="White" Offset="0"/>
+    																		<GradientStop Color="#FFB8E2F9" Offset="0.5"/>
+    																		<GradientStop Color="#FFB0DFF8" Offset="1"/>
+    																	</LinearGradientBrush>
+    																</Setter.Value>
+    															</Setter>
+    															<Setter Property="Stroke" TargetName="OuterBorder" Value="#FF3C7FB1"/>
+    														</Trigger>
+    														<Trigger Property="IsDragging" Value="True">
+    															<Setter Property="Fill" TargetName="Background">
+    																<Setter.Value>
+    																	<LinearGradientBrush EndPoint="0,0" StartPoint="0,1">
+    																		<GradientStop Color="#FFB8E4FA" Offset="0.25"/>
+    																		<GradientStop Color="#FF5EB4E3" Offset="0.5"/>
+    																		<GradientStop Color="#FF4C8BB4" Offset="1"/>
+    																	</LinearGradientBrush>
+    																</Setter.Value>
+    															</Setter>
+    															<Setter Property="Stroke" TargetName="OuterBorder" Value="#FF2C628B"/>
+    														</Trigger>
+    														<Trigger Property="IsEnabled" Value="False">
+    															<Setter Property="Fill" TargetName="Background" Value="#FFF4F4F4"/>
+    															<Setter Property="Stroke" TargetName="InnerBorder" Value="{x:Null}"/>
+    															<Setter Property="Data" TargetName="OuterBorder" Value="M-5,-10.5L5,-10.5 5,10.5 -5,10.5z"/>
+    															<Setter Property="Stroke" TargetName="OuterBorder" Value="#FFAEB1AF"/>
+    															<Setter Property="Data" TargetName="OuterBorder" Value="M4.5,-8.5L-4.5,-8.5 -4.5,4.5 -0.5,8.5 0.5,8.5 4.5,4.5z"/>
+    														</Trigger>
+    													</ControlTemplate.Triggers>
+    												</ControlTemplate>
+    											</Setter.Value>
+    										</Setter>
+    									</Style>
+    								</Setter.Value>
+    							</Setter>
+    							<Setter Property="Margin" TargetName="TrackBackground" Value="5,2,5,0"/>
+    						</Trigger>
+    						<Trigger Property="TickPlacement" Value="BottomRight">
+    							<Setter Property="Visibility" TargetName="BottomTick" Value="Visible"/>
+    							<Setter Property="Style" TargetName="Thumb">
+    								<Setter.Value>
+    									<Style TargetType="{x:Type Thumb}">
+    										<Setter Property="Focusable" Value="False"/>
+    										<Setter Property="OverridesDefaultStyle" Value="True"/>
+    										<Setter Property="Height" Value="18"/>
+    										<Setter Property="Width" Value="10"/>
+    										<Setter Property="Foreground" Value="Gray"/>
+    										<Setter Property="Template">
+    											<Setter.Value>
+    												<ControlTemplate TargetType="{x:Type Thumb}">
+    													<Canvas SnapsToDevicePixels="True">
+    														<Canvas.RenderTransform>
+    															<TranslateTransform X="5" Y="9"/>
+    														</Canvas.RenderTransform>
+    														<Path x:Name="Background" Data="M4.5,-7.5A1,1,0,0,0,3.5,-8.5L-3.5,-8.5A1,1,0,0,0,-4.5,-7.5L-4.5,4.5 -0.5,8.5 0.5,8.5 4.5,4.5z">
+    															<Path.Fill>
+    																<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+    																	<GradientStop Color="White" Offset="0"/>
+    																	<GradientStop Color="#FFF0EFEF" Offset="0.4"/>
+    																	<GradientStop Color="#FFD6D5D5" Offset="0.8"/>
+    																</LinearGradientBrush>
+    															</Path.Fill>
+    														</Path>
+    														<Path x:Name="InnerBorder" Data="M3.5,-7.5L-3.5,-7.5 -3.5,4.5 0,8 3.5,4.5z" Stroke="White" StrokeThickness="1"/>
+    														<Path x:Name="OuterBorder" Data="M4.5,-7.5A1,1,0,0,0,3.5,-8.5L-3.5,-8.5A1,1,0,0,0,-4.5,-7.5L-4.5,4.5 -0.5,8.5 0.5,8.5 4.5,4.5z" Stroke="#FF929292" StrokeThickness="1"/>
+    													</Canvas>
+    													<ControlTemplate.Triggers>
+    														<Trigger Property="IsMouseOver" Value="True">
+    															<Setter Property="Fill" TargetName="Background">
+    																<Setter.Value>
+    																	<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+    																		<GradientStop Color="White" Offset="0"/>
+    																		<GradientStop Color="#FFB8E2F9" Offset="0.5"/>
+    																		<GradientStop Color="#FFB0DFF8" Offset="1"/>
+    																	</LinearGradientBrush>
+    																</Setter.Value>
+    															</Setter>
+    															<Setter Property="Stroke" TargetName="OuterBorder" Value="#FF3C7FB1"/>
+    														</Trigger>
+    														<Trigger Property="Foreground" Value="Blue">
+    															<Setter Property="Fill" TargetName="Background">
+    																<Setter.Value>
+    																	<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+    																		<GradientStop Color="White" Offset="0"/>
+    																		<GradientStop Color="#FFB8E2F9" Offset="0.5"/>
+    																		<GradientStop Color="#FFB0DFF8" Offset="1"/>
+    																	</LinearGradientBrush>
+    																</Setter.Value>
+    															</Setter>
+    															<Setter Property="Stroke" TargetName="OuterBorder" Value="#FF3C7FB1"/>
+    														</Trigger>
+    														<Trigger Property="IsDragging" Value="True">
+    															<Setter Property="Fill" TargetName="Background">
+    																<Setter.Value>
+    																	<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+    																		<GradientStop Color="#FFB8E4FA" Offset="0.25"/>
+    																		<GradientStop Color="#FF5EB4E3" Offset="0.5"/>
+    																		<GradientStop Color="#FF4C8BB4" Offset="1"/>
+    																	</LinearGradientBrush>
+    																</Setter.Value>
+    															</Setter>
+    															<Setter Property="Stroke" TargetName="OuterBorder" Value="#FF2C628B"/>
+    														</Trigger>
+    														<Trigger Property="IsEnabled" Value="False">
+    															<Setter Property="Fill" TargetName="Background" Value="#FFF4F4F4"/>
+    															<Setter Property="Stroke" TargetName="InnerBorder" Value="{x:Null}"/>
+    															<Setter Property="Data" TargetName="OuterBorder" Value="M-5,-10.5L5,-10.5 5,10.5 -5,10.5z"/>
+    															<Setter Property="Stroke" TargetName="OuterBorder" Value="#FFAEB1AF"/>
+    															<Setter Property="Data" TargetName="OuterBorder" Value="M4.5,-8.5L-4.5,-8.5 -4.5,4.5 -0.5,8.5 0.5,8.5 4.5,4.5z"/>
+    														</Trigger>
+    													</ControlTemplate.Triggers>
+    												</ControlTemplate>
+    											</Setter.Value>
+    										</Setter>
+    									</Style>
+    								</Setter.Value>
+    							</Setter>
+    							<Setter Property="Margin" TargetName="TrackBackground" Value="5,0,5,2"/>
+    						</Trigger>
+    						<Trigger Property="TickPlacement" Value="Both">
+    							<Setter Property="Visibility" TargetName="TopTick" Value="Visible"/>
+    							<Setter Property="Visibility" TargetName="BottomTick" Value="Visible"/>
+    						</Trigger>
+    						<Trigger Property="IsSelectionRangeEnabled" Value="True">
+    							<Setter Property="Visibility" TargetName="PART_SelectionRange" Value="Visible"/>
+    						</Trigger>
+    						<Trigger Property="IsKeyboardFocused" Value="True">
+    							<Setter Property="Foreground" TargetName="Thumb" Value="Blue"/>
+    						</Trigger>
+    					</ControlTemplate.Triggers>
+    				</ControlTemplate>
+    			</Setter.Value>
+    		</Setter>
+    		<Style.Triggers>
+    			<Trigger Property="Orientation" Value="Vertical">
+    				<Setter Property="Template">
+    					<Setter.Value>
+    						<ControlTemplate TargetType="{x:Type local:SpecialSlider}">
+    							<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+    								<Grid>
+    									<Grid.ColumnDefinitions>
+    										<ColumnDefinition Width="Auto"/>
+    										<ColumnDefinition MinWidth="{TemplateBinding MinWidth}" Width="Auto"/>
+    										<ColumnDefinition Width="Auto"/>
+    									</Grid.ColumnDefinitions>
+    									<TickBar x:Name="TopTick" Grid.Column="0" Fill="{TemplateBinding Foreground}" Placement="Left" Visibility="Collapsed" Width="4"/>
+    									<TickBar x:Name="BottomTick" Grid.Column="2" Fill="{TemplateBinding Foreground}" Placement="Right" Visibility="Collapsed" Width="4"/>
+    									<Border x:Name="TrackBackground" BorderThickness="1" Background="#FFE7EAEA" Grid.Column="1" CornerRadius="1" HorizontalAlignment="Center" Margin="0,5" Width="4">
+    										<Border.BorderBrush>
+    											<LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+    												<GradientStop Color="#FFAEB1AF" Offset="0.1"/>
+    												<GradientStop Color="White" Offset="0.9"/>
+    											</LinearGradientBrush>
+    										</Border.BorderBrush>
+    										<Canvas Margin="-1,-6">
+    											<Rectangle x:Name="PART_SelectionRange" Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" StrokeThickness="1" Visibility="Hidden" Width="4"/>
+    										</Canvas>
+    									</Border>
+    									<Track x:Name="PART_Track" Grid.Column="1">
+    										<Track.DecreaseRepeatButton>
+    											<RepeatButton Command="Slider.DecreaseLarge">
+    												<RepeatButton.Style>
+    													<Style TargetType="{x:Type RepeatButton}">
+    														<Setter Property="OverridesDefaultStyle" Value="True"/>
+    														<Setter Property="IsTabStop" Value="False"/>
+    														<Setter Property="Focusable" Value="False"/>
+    														<Setter Property="Template">
+    															<Setter.Value>
+    																<ControlTemplate TargetType="{x:Type RepeatButton}">
+    																	<Rectangle Fill="Transparent"/>
+    																</ControlTemplate>
+    															</Setter.Value>
+    														</Setter>
+    													</Style>
+    												</RepeatButton.Style>
+    											</RepeatButton>
+    										</Track.DecreaseRepeatButton>
+    										<Track.IncreaseRepeatButton>
+    											<RepeatButton Command="Slider.IncreaseLarge">
+    												<RepeatButton.Style>
+    													<Style TargetType="{x:Type RepeatButton}">
+    														<Setter Property="OverridesDefaultStyle" Value="True"/>
+    														<Setter Property="IsTabStop" Value="False"/>
+    														<Setter Property="Focusable" Value="False"/>
+    														<Setter Property="Template">
+    															<Setter.Value>
+    																<ControlTemplate TargetType="{x:Type RepeatButton}">
+    																	<Rectangle Fill="Transparent"/>
+    																</ControlTemplate>
+    															</Setter.Value>
+    														</Setter>
+    													</Style>
+    												</RepeatButton.Style>
+    											</RepeatButton>
+    										</Track.IncreaseRepeatButton>
+    										<Track.Thumb>
+    											<Thumb x:Name="Thumb">
+    												<Thumb.Style>
+    													<Style TargetType="{x:Type Thumb}">
+    														<Setter Property="Focusable" Value="False"/>
+    														<Setter Property="OverridesDefaultStyle" Value="True"/>
+    														<Setter Property="Height" Value="11"/>
+    														<Setter Property="Width" Value="22"/>
+    														<Setter Property="Foreground" Value="Gray"/>
+    														<Setter Property="Template">
+    															<Setter.Value>
+    																<ControlTemplate TargetType="{x:Type Thumb}">
+    																	<Canvas SnapsToDevicePixels="True">
+    																		<Canvas.RenderTransform>
+    																			<TransformGroup>
+    																				<RotateTransform Angle="90"/>
+    																				<TranslateTransform X="11" Y="5.5"/>
+    																			</TransformGroup>
+    																		</Canvas.RenderTransform>
+    																		<Path x:Name="Background" Data="M-5,-9.5A1,1,0,0,1,-4,-10.5L4,-10.5A1,1,0,0,1,5,-9.5L5,9.5A1,1,0,0,1,4,10.5L-4,10.5A1,1,0,0,1,-5,9.5z">
+    																			<Path.Fill>
+    																				<LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+    																					<GradientStop Color="White" Offset="0"/>
+    																					<GradientStop Color="#FFF0EFEF" Offset="0.4"/>
+    																					<GradientStop Color="#FFD6D5D5" Offset="0.8"/>
+    																				</LinearGradientBrush>
+    																			</Path.Fill>
+    																		</Path>
+    																		<Path x:Name="InnerBorder" Data="M-4,-9.5L4,-9.5 4,9.5 -4,9.5z" Stroke="White" StrokeThickness="1"/>
+    																		<Path x:Name="OuterBorder" Data="M-5,-9.5A1,1,0,0,1,-4,-10.5L4,-10.5A1,1,0,0,1,5,-9.5L5,9.5A1,1,0,0,1,4,10.5L-4,10.5A1,1,0,0,1,-5,9.5z" Stroke="#FF929292" StrokeThickness="1"/>
+    																	</Canvas>
+    																	<ControlTemplate.Triggers>
+    																		<Trigger Property="IsMouseOver" Value="True">
+    																			<Setter Property="Fill" TargetName="Background">
+    																				<Setter.Value>
+    																					<LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+    																						<GradientStop Color="White" Offset="0"/>
+    																						<GradientStop Color="#FFB8E2F9" Offset="0.5"/>
+    																						<GradientStop Color="#FFB0DFF8" Offset="1"/>
+    																					</LinearGradientBrush>
+    																				</Setter.Value>
+    																			</Setter>
+    																			<Setter Property="Stroke" TargetName="OuterBorder" Value="#FF3C7FB1"/>
+    																		</Trigger>
+    																		<Trigger Property="Foreground" Value="Blue">
+    																			<Setter Property="Fill" TargetName="Background">
+    																				<Setter.Value>
+    																					<LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+    																						<GradientStop Color="White" Offset="0"/>
+    																						<GradientStop Color="#FFB8E2F9" Offset="0.5"/>
+    																						<GradientStop Color="#FFB0DFF8" Offset="1"/>
+    																					</LinearGradientBrush>
+    																				</Setter.Value>
+    																			</Setter>
+    																			<Setter Property="Stroke" TargetName="OuterBorder" Value="#FF3C7FB1"/>
+    																		</Trigger>
+    																		<Trigger Property="IsDragging" Value="True">
+    																			<Setter Property="Fill" TargetName="Background">
+    																				<Setter.Value>
+    																					<LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+    																						<GradientStop Color="#FFB8E4FA" Offset="0.25"/>
+    																						<GradientStop Color="#FF5EB4E3" Offset="0.5"/>
+    																						<GradientStop Color="#FF4C8BB4" Offset="1"/>
+    																					</LinearGradientBrush>
+    																				</Setter.Value>
+    																			</Setter>
+    																			<Setter Property="Stroke" TargetName="OuterBorder" Value="#FF2C628B"/>
+    																		</Trigger>
+    																		<Trigger Property="IsEnabled" Value="False">
+    																			<Setter Property="Fill" TargetName="Background" Value="#FFF4F4F4"/>
+    																			<Setter Property="Stroke" TargetName="InnerBorder" Value="{x:Null}"/>
+    																			<Setter Property="Data" TargetName="OuterBorder" Value="M-5,-10.5L5,-10.5 5,10.5 -5,10.5z"/>
+    																			<Setter Property="Stroke" TargetName="OuterBorder" Value="#FFAEB1AF"/>
+    																		</Trigger>
+    																	</ControlTemplate.Triggers>
+    																</ControlTemplate>
+    															</Setter.Value>
+    														</Setter>
+    													</Style>
+    												</Thumb.Style>
+    											</Thumb>
+    										</Track.Thumb>
+    									</Track>
+    								</Grid>
+    							</Border>
+    							<ControlTemplate.Triggers>
+    								<Trigger Property="TickPlacement" Value="TopLeft">
+    									<Setter Property="Visibility" TargetName="TopTick" Value="Visible"/>
+    									<Setter Property="Style" TargetName="Thumb">
+    										<Setter.Value>
+    											<Style TargetType="{x:Type Thumb}">
+    												<Setter Property="Focusable" Value="False"/>
+    												<Setter Property="OverridesDefaultStyle" Value="True"/>
+    												<Setter Property="Height" Value="10"/>
+    												<Setter Property="Width" Value="18"/>
+    												<Setter Property="Foreground" Value="Gray"/>
+    												<Setter Property="Template">
+    													<Setter.Value>
+    														<ControlTemplate TargetType="{x:Type Thumb}">
+    															<Canvas SnapsToDevicePixels="True">
+    																<Canvas.RenderTransform>
+    																	<TransformGroup>
+    																		<RotateTransform Angle="90"/>
+    																		<TranslateTransform X="9" Y="5"/>
+    																	</TransformGroup>
+    																</Canvas.RenderTransform>
+    																<Path x:Name="Background" Data="M4.5,-7.5A1,1,0,0,0,3.5,-8.5L-3.5,-8.5A1,1,0,0,0,-4.5,-7.5L-4.5,4.5 -0.5,8.5 0.5,8.5 4.5,4.5z">
+    																	<Path.Fill>
+    																		<LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+    																			<GradientStop Color="White" Offset="0"/>
+    																			<GradientStop Color="#FFF0EFEF" Offset="0.4"/>
+    																			<GradientStop Color="#FFD6D5D5" Offset="0.8"/>
+    																		</LinearGradientBrush>
+    																	</Path.Fill>
+    																</Path>
+    																<Path x:Name="InnerBorder" Data="M3.5,-7.5L-3.5,-7.5 -3.5,4.5 0,8 3.5,4.5z" Stroke="White" StrokeThickness="1"/>
+    																<Path x:Name="OuterBorder" Data="M4.5,-7.5A1,1,0,0,0,3.5,-8.5L-3.5,-8.5A1,1,0,0,0,-4.5,-7.5L-4.5,4.5 -0.5,8.5 0.5,8.5 4.5,4.5z" Stroke="#FF929292" StrokeThickness="1"/>
+    															</Canvas>
+    															<ControlTemplate.Triggers>
+    																<Trigger Property="IsMouseOver" Value="True">
+    																	<Setter Property="Fill" TargetName="Background">
+    																		<Setter.Value>
+    																			<LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+    																				<GradientStop Color="White" Offset="0"/>
+    																				<GradientStop Color="#FFB8E2F9" Offset="0.5"/>
+    																				<GradientStop Color="#FFB0DFF8" Offset="1"/>
+    																			</LinearGradientBrush>
+    																		</Setter.Value>
+    																	</Setter>
+    																	<Setter Property="Stroke" TargetName="OuterBorder" Value="#FF3C7FB1"/>
+    																</Trigger>
+    																<Trigger Property="Foreground" Value="Blue">
+    																	<Setter Property="Fill" TargetName="Background">
+    																		<Setter.Value>
+    																			<LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+    																				<GradientStop Color="White" Offset="0"/>
+    																				<GradientStop Color="#FFB8E2F9" Offset="0.5"/>
+    																				<GradientStop Color="#FFB0DFF8" Offset="1"/>
+    																			</LinearGradientBrush>
+    																		</Setter.Value>
+    																	</Setter>
+    																	<Setter Property="Stroke" TargetName="OuterBorder" Value="#FF3C7FB1"/>
+    																</Trigger>
+    																<Trigger Property="IsDragging" Value="True">
+    																	<Setter Property="Fill" TargetName="Background">
+    																		<Setter.Value>
+    																			<LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+    																				<GradientStop Color="#FFB8E4FA" Offset="0.25"/>
+    																				<GradientStop Color="#FF5EB4E3" Offset="0.5"/>
+    																				<GradientStop Color="#FF4C8BB4" Offset="1"/>
+    																			</LinearGradientBrush>
+    																		</Setter.Value>
+    																	</Setter>
+    																	<Setter Property="Stroke" TargetName="OuterBorder" Value="#FF2C628B"/>
+    																</Trigger>
+    																<Trigger Property="IsEnabled" Value="False">
+    																	<Setter Property="Fill" TargetName="Background" Value="#FFF4F4F4"/>
+    																	<Setter Property="Stroke" TargetName="InnerBorder" Value="{x:Null}"/>
+    																	<Setter Property="Data" TargetName="OuterBorder" Value="M4.5,-8.5L-4.5,-8.5 -4.5,4.5 -0.5,8.5 0.5,8.5 4.5,4.5z"/>
+    																	<Setter Property="Stroke" TargetName="OuterBorder" Value="#FFAEB1AF"/>
+    																</Trigger>
+    															</ControlTemplate.Triggers>
+    														</ControlTemplate>
+    													</Setter.Value>
+    												</Setter>
+    											</Style>
+    										</Setter.Value>
+    									</Setter>
+    									<Setter Property="Margin" TargetName="TrackBackground" Value="2,5,0,5"/>
+    								</Trigger>
+    								<Trigger Property="TickPlacement" Value="BottomRight">
+    									<Setter Property="Visibility" TargetName="BottomTick" Value="Visible"/>
+    									<Setter Property="Style" TargetName="Thumb">
+    										<Setter.Value>
+    											<Style TargetType="{x:Type Thumb}">
+    												<Setter Property="Focusable" Value="False"/>
+    												<Setter Property="OverridesDefaultStyle" Value="True"/>
+    												<Setter Property="Height" Value="10"/>
+    												<Setter Property="Width" Value="18"/>
+    												<Setter Property="Foreground" Value="Gray"/>
+    												<Setter Property="Template">
+    													<Setter.Value>
+    														<ControlTemplate TargetType="{x:Type Thumb}">
+    															<Canvas SnapsToDevicePixels="True">
+    																<Canvas.RenderTransform>
+    																	<TransformGroup>
+    																		<RotateTransform Angle="-90"/>
+    																		<TranslateTransform X="9" Y="5"/>
+    																	</TransformGroup>
+    																</Canvas.RenderTransform>
+    																<Path x:Name="Background" Data="M4.5,-7.5A1,1,0,0,0,3.5,-8.5L-3.5,-8.5A1,1,0,0,0,-4.5,-7.5L-4.5,4.5 -0.5,8.5 0.5,8.5 4.5,4.5z">
+    																	<Path.Fill>
+    																		<LinearGradientBrush EndPoint="0,0" StartPoint="1,0">
+    																			<GradientStop Color="White" Offset="0"/>
+    																			<GradientStop Color="#FFF0EFEF" Offset="0.4"/>
+    																			<GradientStop Color="#FFD6D5D5" Offset="0.8"/>
+    																		</LinearGradientBrush>
+    																	</Path.Fill>
+    																</Path>
+    																<Path x:Name="InnerBorder" Data="M3.5,-7.5L-3.5,-7.5 -3.5,4.5 0,8 3.5,4.5z" Stroke="White" StrokeThickness="1"/>
+    																<Path x:Name="OuterBorder" Data="M4.5,-7.5A1,1,0,0,0,3.5,-8.5L-3.5,-8.5A1,1,0,0,0,-4.5,-7.5L-4.5,4.5 -0.5,8.5 0.5,8.5 4.5,4.5z" Stroke="#FF929292" StrokeThickness="1"/>
+    															</Canvas>
+    															<ControlTemplate.Triggers>
+    																<Trigger Property="IsMouseOver" Value="True">
+    																	<Setter Property="Fill" TargetName="Background">
+    																		<Setter.Value>
+    																			<LinearGradientBrush EndPoint="0,0" StartPoint="1,0">
+    																				<GradientStop Color="White" Offset="0"/>
+    																				<GradientStop Color="#FFB8E2F9" Offset="0.5"/>
+    																				<GradientStop Color="#FFB0DFF8" Offset="1"/>
+    																			</LinearGradientBrush>
+    																		</Setter.Value>
+    																	</Setter>
+    																	<Setter Property="Stroke" TargetName="OuterBorder" Value="#FF3C7FB1"/>
+    																</Trigger>
+    																<Trigger Property="Foreground" Value="Blue">
+    																	<Setter Property="Fill" TargetName="Background">
+    																		<Setter.Value>
+    																			<LinearGradientBrush EndPoint="0,0" StartPoint="1,0">
+    																				<GradientStop Color="White" Offset="0"/>
+    																				<GradientStop Color="#FFB8E2F9" Offset="0.5"/>
+    																				<GradientStop Color="#FFB0DFF8" Offset="1"/>
+    																			</LinearGradientBrush>
+    																		</Setter.Value>
+    																	</Setter>
+    																	<Setter Property="Stroke" TargetName="OuterBorder" Value="#FF3C7FB1"/>
+    																</Trigger>
+    																<Trigger Property="IsDragging" Value="True">
+    																	<Setter Property="Fill" TargetName="Background">
+    																		<Setter.Value>
+    																			<LinearGradientBrush EndPoint="0,0" StartPoint="1,0">
+    																				<GradientStop Color="#FFB8E4FA" Offset="0.25"/>
+    																				<GradientStop Color="#FF5EB4E3" Offset="0.5"/>
+    																				<GradientStop Color="#FF4C8BB4" Offset="1"/>
+    																			</LinearGradientBrush>
+    																		</Setter.Value>
+    																	</Setter>
+    																	<Setter Property="Stroke" TargetName="OuterBorder" Value="#FF2C628B"/>
+    																</Trigger>
+    																<Trigger Property="IsEnabled" Value="False">
+    																	<Setter Property="Fill" TargetName="Background" Value="#FFF4F4F4"/>
+    																	<Setter Property="Stroke" TargetName="InnerBorder" Value="{x:Null}"/>
+    																	<Setter Property="Data" TargetName="OuterBorder" Value="M4.5,-8.5L-4.5,-8.5 -4.5,4.5 -0.5,8.5 0.5,8.5 4.5,4.5z"/>
+    																	<Setter Property="Stroke" TargetName="OuterBorder" Value="#FFAEB1AF"/>
+    																</Trigger>
+    															</ControlTemplate.Triggers>
+    														</ControlTemplate>
+    													</Setter.Value>
+    												</Setter>
+    											</Style>
+    										</Setter.Value>
+    									</Setter>
+    									<Setter Property="Margin" TargetName="TrackBackground" Value="0,5,2,5"/>
+    								</Trigger>
+    								<Trigger Property="TickPlacement" Value="Both">
+    									<Setter Property="Visibility" TargetName="TopTick" Value="Visible"/>
+    									<Setter Property="Visibility" TargetName="BottomTick" Value="Visible"/>
+    								</Trigger>
+    								<Trigger Property="IsSelectionRangeEnabled" Value="True">
+    									<Setter Property="Visibility" TargetName="PART_SelectionRange" Value="Visible"/>
+    								</Trigger>
+    								<Trigger Property="IsKeyboardFocused" Value="True">
+    									<Setter Property="Foreground" TargetName="Thumb" Value="Blue"/>
+    								</Trigger>
+    							</ControlTemplate.Triggers>
+    						</ControlTemplate>
+    					</Setter.Value>
+    				</Setter>
+    			</Trigger>
+    		</Style.Triggers>
+    	</Style>
+    	<Style x:Key="ListViewCustomStyle" TargetType="{x:Type local:ListViewCustom}">
     		<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
     		<Setter Property="BorderBrush" Value="{StaticResource ListBorder}"/>
     		<Setter Property="BorderThickness" Value="1"/>
@@ -619,11 +1282,18 @@
     		<Setter Property="VerticalContentAlignment" Value="Center"/>
     		<Setter Property="Template">
     			<Setter.Value>
-    				<ControlTemplate TargetType="{x:Type ListView}">
+    				<ControlTemplate TargetType="{x:Type local:ListViewCustom}">
+    					<ControlTemplate.Resources>
+    						<Storyboard x:Key="OnLoaded1" AutoReverse="True" RepeatBehavior="Forever">
+    							<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="itemsPresenter">
+    								<SplineThicknessKeyFrame KeyTime="0:0:3" Value="-100,0,0,0"/>
+    							</ThicknessAnimationUsingKeyFrames>
+    						</Storyboard>
+    					</ControlTemplate.Resources>
     					<Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="true">
-    						<!--<ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}">
-    							<ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Style="{DynamicResource ItemsPresenterStyle}"/>
-    						</ScrollViewer>-->
+    						<ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}">
+    							<ItemsPresenter x:Name="itemsPresenter" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Style="{DynamicResource ItemsPresenterStyle}" RenderTransformOrigin="0.5,0.5" Margin="0"/>
+    						</ScrollViewer>
     					</Border>
     					<ControlTemplate.Triggers>
     						<Trigger Property="IsEnabled" Value="false">
@@ -637,7 +1307,22 @@
     			</Setter.Value>
     		</Setter>
     	</Style>
-    	<Style x:Key="simpleTextStyle" TargetType="{x:Type TextBlock}">
+    	<Storyboard x:Key="OnMouseLeave">
+    		<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="currentListView">
+    			<EasingThicknessKeyFrame KeyTime="0:0:1.5" Value="192,0,0,0"/>
+    		</ThicknessAnimationUsingKeyFrames>
+    	</Storyboard>
+    	<Storyboard x:Key="OnMouseEnter">
+    		<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="currentListView">
+    			<EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0"/>
+    		</ThicknessAnimationUsingKeyFrames>
+    	</Storyboard>
+    	<DataTemplate x:Key="DataTemplateCurrentList">
+    		<Grid>
+    			<local:TextBlockCustom Height="20" Margin="0" Text="{Binding Mode=OneWay}" TextWrapping="NoWrap" VerticalAlignment="Stretch" Width="Auto"/>
+			</Grid>
+    	</DataTemplate>
+		<Style x:Key="simpleTextStyle" TargetType="{x:Type TextBlock}">
     		<Setter Property="FontFamily" Value="Helvetica World"/>
     		<Setter Property="FontWeight" Value="Normal"/>
     		<Setter Property="Foreground" Value="White"/>
@@ -650,27 +1335,28 @@
     	<ControlTemplate x:Key="VideoListBoxTemplate" TargetType="{x:Type ListBox}">
     		<Grid/>
     	</ControlTemplate>
-    	<DataTemplate x:Key="LibraryListBoxItemTemplate">
-    		<Grid Height="142.667" Width="450">
-    			<Grid.ColumnDefinitions>
-    				<ColumnDefinition Width="0.307*"/>
-    				<ColumnDefinition Width="0.693*"/>
-    			</Grid.ColumnDefinitions>
-    			<Image Margin="8" Source="20-03-2013 18-17-01.png" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto"/>
-    			<Grid Grid.Column="1">
-    				<Grid.RowDefinitions>
-    					<RowDefinition Height="0.25*"/>
-    					<RowDefinition Height="0.25*"/>
-    					<RowDefinition Height="0.25*"/>
-    					<RowDefinition Height="0.25*"/>
-    				</Grid.RowDefinitions>
-    				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Nom :" Width="106.517" Height="20" VerticalAlignment="Stretch" FontFamily="Helvetica World" FontSize="13.333" Foreground="White" Margin="16.333,8,0,7.667"/>
-    				<TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding Name}" Width="189" Height="20" VerticalAlignment="Center" Foreground="#FFD0D0D0"/>
-    				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Extension :" Width="106.517" Height="20" VerticalAlignment="Stretch" FontFamily="Helvetica World" FontSize="13.333" Foreground="White" Margin="16.333,8,0,7.501" Grid.Row="1"/>
+        <DataTemplate x:Key="LibraryListBoxItemTemplate">
+            <Grid Height="142.667" Width="450">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.307*"/>
+                    <ColumnDefinition Width="0.693*"/>
+                </Grid.ColumnDefinitions>
+                <Image Margin="8" Source="20-03-2013 18-17-01.png" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto"/>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.25*"/>
+                        <RowDefinition Height="0.25*"/>
+                        <RowDefinition Height="0.25*"/>
+                        <RowDefinition Height="0.25*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Nom :" Width="106.517" Height="20" VerticalAlignment="Stretch" FontFamily="Helvetica World" FontSize="13.333" Foreground="White" Margin="16.333,8,0,7.667"/>
+                    <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding Name}" Width="189" Height="20" VerticalAlignment="Center" Foreground="#FFD0D0D0"/>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Extension :" Width="106.517" Height="20" VerticalAlignment="Stretch" FontFamily="Helvetica World" FontSize="13.333" Foreground="White" Margin="16.333,8,0,7.501" Grid.Row="1"/>
                     <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding Extension}" Width="189" Height="20" VerticalAlignment="Stretch" Foreground="#FFD0D0D0" Margin="0,8,0,7.667" Grid.Row="1"/>
-    			</Grid>
-    		</Grid>
-    	</DataTemplate>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+
         <DataTemplate x:Key="PictureLibraryListBoxItemTemplate">
             <Grid Height="142.667" Width="450">
                 <Grid.ColumnDefinitions>
@@ -693,9 +1379,17 @@
             </Grid>
         </DataTemplate>
     </Window.Resources>
+	<Window.Triggers>
+		<EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="gridCurrentList">
+			<BeginStoryboard x:Name="OnMouseLeave_BeginStoryboard" Storyboard="{StaticResource OnMouseLeave}"/>
+		</EventTrigger>
+		<EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="gridCurrentList">
+			<BeginStoryboard x:Name="OnMouseEnter_BeginStoryboard" Storyboard="{StaticResource OnMouseEnter}"/>
+		</EventTrigger>
+	</Window.Triggers>
     
     <Window.InputBindings>
-        <KeyBinding Command="{Binding OpenDialogCommand, Source={StaticResource ViewModelDataSource}}"   Key="O" Modifiers="Control"/>
+    	<KeyBinding Command="{Binding OpenDialogCommand, Source={StaticResource ViewModelDataSource}}"   Key="O" Modifiers="Control"/>
     </Window.InputBindings>
 
     <Grid Margin="0">
@@ -729,8 +1423,8 @@
             
             <!-- ************************* ITEM PLAYER ************************* -->
 
-            <TabItem x:Name="tabPlayer" Header="Player" DataContext="{Binding Source={StaticResource ViewModelDataSource}}">
-            <!--<TabItem x:Name="tabPlayer" Header="Player">-->
+			<TabItem x:Name="tabPlayer" Header="Player" DataContext="{Binding Source={StaticResource ViewModelDataSource}}">
+			<!--<TabItem x:Name="tabPlayer" Header="Player">-->
             	<TabItem.Background>
             		<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
             			<GradientStop Color="#FFF3F3F3" Offset="0"/>
@@ -748,25 +1442,52 @@
 					</Grid.Background>
 					<local:GridCustom x:Name="gridControlAction" Height="70.84" VerticalAlignment="Bottom">
                     
-						<local:SpecialSlider x:Name="slider" Maximum="{Binding Maximum, ElementName=MediaElementBehavior}" Minimum="0.0" Background="{x:Null}" Foreground="{x:Null}" IsMoveToPointEnabled="True" Value="{Binding Position, ElementName=MediaElementBehavior, Mode=TwoWay}" Height="23.8" VerticalAlignment="Top"/>
-						<WrapPanel Margin="0,23.8,0,6" VerticalAlignment="Center" HorizontalAlignment="Center" Height="39.04">
+						<local:SpecialSlider x:Name="slider" Maximum="{Binding Maximum, ElementName=MediaElementBehavior}" Minimum="0.0" Background="{x:Null}" Foreground="{x:Null}" IsMoveToPointEnabled="True" Value="{Binding Position, ElementName=MediaElementBehavior, Mode=TwoWay}" Height="23.8" VerticalAlignment="Top" Style="{DynamicResource SpecialSliderStyle}"/>
+						<WrapPanel Margin="0,23.8,0,6" VerticalAlignment="Center" HorizontalAlignment="Center" Height="39.84">
 							<!--<local:ButtonCustom x:Name="test" Content="test" Width="61" Margin="95,0,337,0" />--><!--<local:ButtonCustom x:Name="test" Content="test" Width="61" Margin="95,0,337,0" />-->
-							<TextBlock x:Name="timeBlock" Height="39.04" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="52.666" TextAlignment="Center" Foreground="White" Text="{Binding Time, ElementName=MediaElementBehavior}"/>
-							<Button x:Name="shuffleButton" Content="Button" Width="41.625" Height="39.04" Template="{DynamicResource ButtonShuffleTemplate}" Command="{Binding ShuffleCommand}"/>
-							<Button x:Name="repeatButton" Content="{Binding RepeatButtonText}" Command="{Binding RepeatCommand}" Width="32.8" Height="39.04" Template="{DynamicResource ButtonRepeatlTemplate}"/>
-							<Button x:Name="stopButton" Command="{Binding StopRequest}" d:LayoutOverrides="HorizontalAlignment" Height="38.973" Width="36.467" Template="{DynamicResource ButtonStopTemplate}"/>
-							<local:ButtonCustom x:Name="prevButton" Content="&lt;&lt;" Margin="0" Width="47.986" Template="{DynamicResource ButtonPrevTemplate}" Height="39.04" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+							<TextBlock x:Name="timeBlock" Height="16.241" Margin="0" TextWrapping="Wrap" Width="52.666" TextAlignment="Center" Foreground="White" Text="{Binding Time, ElementName=MediaElementBehavior}"/>
+							<Button x:Name="shuffleButton" Content="Button" Width="39.04" Height="39.04" Template="{DynamicResource ButtonShuffleTemplate}" Command="{Binding ShuffleCommand}" Foreground="Red" Background="{x:Null}"/>
+							<Button x:Name="repeatButton" Content="{Binding RepeatButtonText}" Command="{Binding RepeatCommand}" Width="39.04" Height="39.04" Template="{DynamicResource ButtonRepeatlTemplate}"/>
+							<Button x:Name="stopButton" Command="{Binding StopRequest}" d:LayoutOverrides="HorizontalAlignment" Height="38.973" Width="36.467" Template="{DynamicResource ButtonStopTemplate}">
+								<Button.Background>
+									<LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+										<GradientStop Color="#FFF3F3F3" Offset="1"/>
+										<GradientStop Color="#FFEBEBEB" Offset="1"/>
+										<GradientStop Color="#FF888888"/>
+									</LinearGradientBrush>
+								</Button.Background>
+							</Button>
+							<local:ButtonCustom x:Name="prevButton" Content="&lt;&lt;" Margin="0" Width="47.986" Template="{DynamicResource ButtonPrevTemplate}" Height="39.04" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+								<local:ButtonCustom.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform/>
+										<SkewTransform/>
+										<RotateTransform Angle="180"/>
+										<TranslateTransform/>
+									</TransformGroup>
+								</local:ButtonCustom.RenderTransform>
+							</local:ButtonCustom>
 							<Button x:Name="buttonPlay" Content="{Binding PlayPauseButtonText}" Command="{Binding PlayRequest}" Template="{DynamicResource ButtonPlayTemplate}" BorderBrush="{x:Null}" Foreground="White" Width="51.646" Height="39.733" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-							<local:ButtonCustom x:Name="nextButton" Content="&gt;&gt;" Width="47.986" Visibility="Visible" Template="{DynamicResource ButtonNextTemplate}" Height="38.973" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-							<Slider x:Name="volumeSlider" Width="99.267" Minimum="0" Maximum="1" Value="{Binding Volume, ElementName=MediaElementBehavior, Mode=TwoWay}" IsMoveToPointEnabled="True" Height="39.04"/>
-							<Button x:Name="openButton" Content="..." Width="24.533" Command="{Binding OpenDialogCommand}" Height="39.04" Visibility="Hidden"/>
+							<local:ButtonCustom x:Name="nextButton" Content="&gt;&gt;" Width="47.986" Visibility="Visible" Template="{DynamicResource ButtonNextTemplate}" Height="39.04" HorizontalAlignment="Center" VerticalAlignment="Center">
+								<local:ButtonCustom.Background>
+									<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+										<GradientStop Color="#FFF3F3F3" Offset="0"/>
+										<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+										<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+										<GradientStop Color="#FFCDCDCD" Offset="1"/>
+									</LinearGradientBrush>
+								</local:ButtonCustom.Background>
+							</local:ButtonCustom>
+							<Rectangle Height="39.04" Width="11.44"/>
+                            <local:SpecialSlider x:Name="volumeSlider" Width="99.267" Minimum="0" Maximum="1" Value="{Binding Volume, ElementName=MediaElementBehavior, Mode=TwoWay}" IsMoveToPointEnabled="True" Height="22.241" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{DynamicResource SpecialSliderStyle}"/>
+							<Button x:Name="openButton" Width="24.533" Command="{Binding OpenDialogCommand}" Height="39.04" Visibility="Hidden" d:IsHidden="True"/>
 						</WrapPanel>
 					</local:GridCustom>
 					<Grid x:Name="gridMediaElement" Margin="0,0,0,74.84" d:LayoutOverrides="HorizontalAlignment" Background="#00000000" AllowDrop="True">
 						<i:Interaction.Behaviors>
 							<local:GridBehavior x:Name="GridBehavior"/>
 						</i:Interaction.Behaviors>
-						<Image Source="/Assets/music.png" Visibility="{Binding Video, ElementName=MediaElementBehavior}" d:LayoutOverrides="Width" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.11"/>
+						<Image Source="/Assets/music.png" Visibility="{Binding Video, ElementName=MediaElementBehavior}" d:LayoutOverrides="Width" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 						<local:MediaElementCustom  LoadedBehavior="Manual" UnloadedBehavior="Manual" x:Name="MediaPlayer" Source="{Binding CurrentSourceMedia}" Opacity="100000" d:IsHidden="True" >
 							<i:Interaction.Behaviors>
 								<local:MediaElementBehavior x:Name="MediaElementBehavior"/>
@@ -800,9 +1521,25 @@
 						</local:MediaElementCustom>
 						<TextBlock x:Name="nameLabel" TextWrapping="Wrap" Width="146.7" Foreground="White" TextAlignment="Center" Text="{Binding CurrentSourceName}" Height="52.533" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 					</Grid>
-					<local:GridCustom x:Name="gridCurrentList" HorizontalAlignment="Right" Margin="0,0,0,70.84" Width="123.8">
-						<local:ListViewCustom x:Name="currentListView" ItemsSource="{Binding Collect}" Background="#00000000" Foreground="White" IsTabStop="True" Style="{DynamicResource ListViewStyle}" Margin="-65,0,0,0" />
-					</local:GridCustom>
+					<Grid x:Name="gridCurrentList" Margin="0,0,0,70.84" HorizontalAlignment="Right" Width="191.8" Background="#00FF0000">
+                        <!--<Grid.Triggers>
+                            <EventTrigger RoutedEvent="Grid.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="MouseLeaveStory">
+                                        <local:GridLengthAnimation Storyboard.TargetName="Col2" Storyboard.TargetProperty="Width" From="*" To="0" Duration="0:0:2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="Grid.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="MouseEnterStory">
+                                        <local:GridLengthAnimation Storyboard.TargetName="Col2" Storyboard.TargetProperty="Width" From="0" To="*" Duration="0:0:2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Grid.Triggers>-->
+						<local:ListViewCustom x:Name="currentListView" ItemsSource="{Binding Collect}" Foreground="White" IsTabStop="True" Style="{DynamicResource ListViewCustomStyle}" Background="#C5000000" BorderThickness="5" BorderBrush="Black" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" UseLayoutRounding="True" Margin="0,0,-0.2,-0.3" SelectedIndex="5" ItemTemplate="{DynamicResource DataTemplateCurrentList}" d:LayoutOverrides="GridBox, HorizontalMargin" />
+					</Grid>
 				</Grid>
 
 			</TabItem>

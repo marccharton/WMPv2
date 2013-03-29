@@ -54,3 +54,17 @@ G:\Epitech\Semestre_06\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\MyMiniVLC.g.resou
 G:\Epitech\Semestre_06\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\MyMiniVLC.Properties.Resources.resources
 G:\Epitech\Semestre_06\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\GenerateResource.read.1.tlog
 G:\Epitech\Semestre_06\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\GenerateResource.write.1.tlog
+E:\Depot Dot Net\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\MyMiniVLC.exe
+E:\Depot Dot Net\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\MyMiniVLC.pdb
+E:\Depot Dot Net\wmpv2\MyMiniVLC\MyMiniVLC\bin\Debug\MyMiniVLC.exe
+E:\Depot Dot Net\wmpv2\MyMiniVLC\MyMiniVLC\bin\Debug\MyMiniVLC.pdb
+E:\Depot Dot Net\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\Depot Dot Net\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\MainWindow.g.cs
+E:\Depot Dot Net\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\App.g.cs
+E:\Depot Dot Net\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\MyMiniVLC_MarkupCompile.cache
+E:\Depot Dot Net\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\MyMiniVLC_MarkupCompile.lref
+E:\Depot Dot Net\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\MainWindow.baml
+E:\Depot Dot Net\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\MyMiniVLC.g.resources
+E:\Depot Dot Net\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\MyMiniVLC.Properties.Resources.resources
+E:\Depot Dot Net\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\GenerateResource.read.1.tlog
+E:\Depot Dot Net\wmpv2\MyMiniVLC\MyMiniVLC\obj\x86\Debug\GenerateResource.write.1.tlog

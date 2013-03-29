@@ -34,3 +34,9 @@ G:\Epitech\Semestre_06\wmpv2\MyMiniVLC\wmp2\obj\x86\Debug\wmp2.dll
 G:\Epitech\Semestre_06\wmpv2\MyMiniVLC\wmp2\obj\x86\Debug\wmp2.pdb
 C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\wmp2\bin\Debug\wmp2.dll
 C:\Users\Marc\Documents\Depots\wmpv2\MyMiniVLC\wmp2\obj\x86\Debug\wmp2.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\wmp2\bin\Debug\wmp2.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\wmp2\bin\Debug\wmp2.pdb
+E:\Depot Dot Net\wmpv2\MyMiniVLC\wmp2\bin\Debug\policy.2.0.taglib-sharp.config
+E:\Depot Dot Net\wmpv2\MyMiniVLC\wmp2\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\Depot Dot Net\wmpv2\MyMiniVLC\wmp2\obj\x86\Debug\wmp2.dll
+E:\Depot Dot Net\wmpv2\MyMiniVLC\wmp2\obj\x86\Debug\wmp2.pdb
