@@ -167,6 +167,7 @@ namespace SlideBarMVVM
 
         void AssociatedObject_MediaFailed(object sender, ExceptionRoutedEventArgs e)
         {
+            MessageBox.Show("Error: Can't load file: Unknwon format");
             //MessageBox.Show("FAILED LE MEDIA! FAILED");
             //SetValue(PlaystateProperty, PlayerState.Stop);
             //AssociatedObject.Close();

@@ -198,25 +198,30 @@ namespace SlideBarMVVM
 
         private void Init()
         {
-            //if (CurrentList.getSize() > 0)
-            //{
-            //    this.CurrentSourceMedia = new Uri(CurrentList.getCurrentElement());
-            //    this.PlayState = PlayerState.Play;
-            //}
+            CurrentList curList = CurrentList.getInstance();
+
+            if (Environment.GetCommandLineArgs().Count() > 1)
+            {
+                bool first = true;
+                foreach (string s in Environment.GetCommandLineArgs())
+                {
+                    if (!first)
+                        curList.addElement(s);
+                    else
+                        first = false;
+                }
+            }
+            else 
+            {
+                curList.addElement(@"G:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\01 - Skrillex - First Of The Year (Equinox).mp3");
+                curList.addElement(@"G:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\02 - Skrillex - Ruffneck (Flex).mp3");
+            }
+            if (curList.getSize() > 0)
+            {
+                //this.CurrentSourceMedia = new Uri(curList.getCurrentElement());
+               this.PlayRequest.Execute(this);
+            }
         }
-
-        private void Test()
-        {
-            CurrentList tmp = CurrentList.getInstance();
-
-            tmp.addElement(@"G:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\01 - Skrillex - First Of The Year (Equinox).mp3");
-            tmp.addElement(@"G:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\02 - Skrillex - Ruffneck (Flex).mp3");
-
-            //tmp.addElement(@"C:\Users\S@suke\Pictures\1184-shakaponk.bmp");
-            //tmp.addElement(@"C:\Users\S@suke\Desktop\3194648_Bangarang_feat__Sirah_Original_Mix.mp3");
-            //tmp.addElement(@"C:\Users\S@suke\Google Drive\KramAyrtoogle\dotNet\BDD\Music\01 Normal.mp3");
-        }
-
 
         public MediaPlayerViewModel()
         {
@@ -323,9 +328,6 @@ namespace SlideBarMVVM
                 this.PlayState = PlayerState.Stop;
                 this.PlayPauseButtonText = "Play";
                 this.StopRequest.CanExec = false;
-                //this.NextCommand.CanExec = false;
-                //this.PrevCommand.CanExec = false;
-                MessageBox.Show("Error: Can't load file: Unknwon format");
             }));
             #endregion
 
@@ -436,12 +438,9 @@ namespace SlideBarMVVM
             }));
             #endregion
 
-            this.Test();
-            this.Init();
-
             CurrentList.getInstance().DropEvent += new EventHandler(dropEvent);
             CurrentList.getInstance().ChangedEvent += new EventHandler(changedEvent);
-           
+            this.Init();
 
         }
 

@@ -56,6 +56,17 @@ namespace SlideBarMVVM
             this.PreviewMouseLeftButtonDown += new System.Windows.Input.MouseButtonEventHandler(ListViewCustom_PreviewMouseLeftButtonDown);
             this.PreviewMouseLeftButtonUp += new System.Windows.Input.MouseButtonEventHandler(ListViewCustom_PreviewMouseLeftButtonUp);
             this.PreviewMouseMove += new System.Windows.Input.MouseEventHandler(ListViewCustom_PreviewMouseMove);
+            this.PreviewKeyDown += new KeyEventHandler(ListViewCustom_PreviewKeyDown);
+        }
+
+        void ListViewCustom_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete)
+            {
+                CurrentList curList = CurrentList.getInstance();
+
+                curList.removeElement(this.SelectedIndex);
+            }
         }
 
         private void ElementFound() 

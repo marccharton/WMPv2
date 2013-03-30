@@ -71,6 +71,25 @@ namespace SlideBarMVVM
             }
         }
 
+        public void removeElement(int idx)
+        {
+            if (idx >= 0)
+            {
+                try
+                {
+                    this._list.RemoveAt(idx);
+                    this.ModifiedEvent(this, null);
+                    MessageBox.Show(this._list.Count.ToString() + ";" + this._idx);
+                    if (idx == this._idx)
+                        this.ChangedEvent(this, null);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.InnerException.ToString());
+                }
+            }
+        }
+
         public void addList(List<String> l)
         {
             if (l != null)
