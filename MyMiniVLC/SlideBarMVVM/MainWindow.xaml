@@ -1386,6 +1386,12 @@
 		<EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="gridCurrentList">
 			<BeginStoryboard x:Name="OnMouseEnter_BeginStoryboard" Storyboard="{StaticResource OnMouseEnter}"/>
 		</EventTrigger>
+		<EventTrigger RoutedEvent="DragDrop.DragEnter" SourceName="gridCurrentList">
+			<BeginStoryboard x:Name="OnMouseEnter_BeginStoryboard1" Storyboard="{StaticResource OnMouseEnter}"/>
+		</EventTrigger>
+		<EventTrigger RoutedEvent="DragDrop.DragLeave" SourceName="gridCurrentList">
+			<BeginStoryboard Storyboard="{StaticResource OnMouseLeave}"/>
+		</EventTrigger>
 	</Window.Triggers>
     
     <Window.InputBindings>
@@ -1521,7 +1527,7 @@
 						</local:MediaElementCustom>
 						<TextBlock x:Name="nameLabel" TextWrapping="Wrap" Width="146.7" Foreground="White" TextAlignment="Center" Text="{Binding CurrentSourceName}" Height="52.533" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 					</Grid>
-					<Grid x:Name="gridCurrentList" Margin="0,0,0,70.84" HorizontalAlignment="Right" Width="191.8" Background="#00FF0000">
+					<Grid  AllowDrop="True" x:Name="gridCurrentList" Margin="0,0,0,70.84" HorizontalAlignment="Right" Width="191.8" Background="#00FF0000">
                         <!--<Grid.Triggers>
                             <EventTrigger RoutedEvent="Grid.MouseLeave">
                                 <BeginStoryboard>
