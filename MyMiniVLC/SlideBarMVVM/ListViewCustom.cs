@@ -159,10 +159,14 @@ namespace SlideBarMVVM
 
         void ListViewCustom_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            CurrentList curList = CurrentList.getInstance();
 
-            curList.moveToIdx(this.SelectedIndex);
-            curList.DropEvent(this, null);
+            if (this.getElementNameHit(this, e) != null)
+            {
+                CurrentList curList = CurrentList.getInstance();
+
+                curList.moveToIdx(this.SelectedIndex);
+                curList.DropEvent(this, null);
+            }
         }
 
     }
