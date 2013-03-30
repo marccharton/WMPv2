@@ -16,20 +16,26 @@ namespace SlideBarMVVM
             this.Initialized += new EventHandler(TextBlockCustom_Initialized);
         }
 
-        void TextBlockCustom_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        void TextBlockCustom_Initialized(object sender, EventArgs e)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
-            {
-                if (!this.IsVisible)
-                    TextBlockCustomEffect.getInstance().removeElement(this.Text.Length);
+            TextBlockCustomEffect.getInstance().EventTime += new EventHandler(EventTime_Changed);
+            this.Unloaded += new RoutedEventHandler(TextBlockCustom_Unloaded);
+            this.Loaded += new RoutedEventHandler(TextBlockCustom_Loaded);
+        }
+
+        void TextBlockCustom_Loaded(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.BeginInvoke(new Action(() => {
+                TextBlockCustomEffect.getInstance().addElement(this.Text.Length);
             }));
         }
 
-        void TextBlockCustom_Initialized(object sender, EventArgs e)
+        void TextBlockCustom_Unloaded(object sender, RoutedEventArgs e)
         {
-            this.IsVisibleChanged += new DependencyPropertyChangedEventHandler(TextBlockCustom_IsVisibleChanged);
-            TextBlockCustomEffect.getInstance().EventTime += new EventHandler(EventTime_Changed);
-            TextBlockCustomEffect.getInstance().addElement(this.Text.Length);
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                TextBlockCustomEffect.getInstance().removeElement(this.Text.Length);
+            }));
         }
 
         private void EventTime_Changed(object sender, EventArgs e)
