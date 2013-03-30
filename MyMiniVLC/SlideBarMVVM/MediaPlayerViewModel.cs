@@ -217,10 +217,7 @@ namespace SlideBarMVVM
                 curList.addElement(@"G:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\02 - Skrillex - Ruffneck (Flex).mp3");
             }
             if (curList.getSize() > 0)
-            {
-                //this.CurrentSourceMedia = new Uri(curList.getCurrentElement());
                this.PlayRequest.Execute(this);
-            }
         }
 
         public MediaPlayerViewModel()
@@ -277,9 +274,11 @@ namespace SlideBarMVVM
             this.PlayRequest = new Command(new Action(() =>
             {
                 CurrentList curList = CurrentList.getInstance();
-                if (this.PlayState == PlayerState.Pause)
+                if (curList.getSize() <= 0)
+                    return;
+                else if (this.PlayState == PlayerState.Pause)
                     this.PlayState = PlayerState.Play;
-                else if (this.PlayState == PlayerState.Stop && curList.getSize() > 0)
+                else if (this.PlayState == PlayerState.Stop)
                 {
                     this.CurrentSourceMedia = new Uri(curList.getCurrentElement());
                     this.CurrentSourceName = Path.GetFileName(curList.getCurrentElement());

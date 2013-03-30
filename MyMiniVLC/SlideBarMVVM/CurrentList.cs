@@ -79,8 +79,9 @@ namespace SlideBarMVVM
                 {
                     this._list.RemoveAt(idx);
                     this.ModifiedEvent(this, null);
-                    MessageBox.Show(this._list.Count.ToString() + ";" + this._idx);
-                    if (idx == this._idx)
+                    if (idx < this._idx)
+                        this._idx--;
+                    else if (idx == this._idx)
                         this.ChangedEvent(this, null);
                 }
                 catch (Exception ex)
