@@ -35,21 +35,6 @@ namespace SlideBarMVVM
         public event PropertyChangedEventHandler PropertyChanged;
         public SlideBarViewModel SbViewModel { get; set; }
 
-        private Boolean _testMute;
-        public Boolean testMute {
-            get { return (_testMute); }
-            set {
-                if (this._testMute != value) 
-                {
-                    this._testMute = true;
-                    if (this.PropertyChanged != null) 
-                    {
-                        this.PropertyChanged(this, new PropertyChangedEventArgs("testMute"));
-                    }
-                }
-            }
-        }
-
         public Command OpenDialogCommand { get; set; }
         private Uri _currentSourceMedia;
         public Uri CurrentSourceMedia
@@ -198,6 +183,37 @@ namespace SlideBarMVVM
             }
         }
 
+        private Boolean _mute;
+        public Boolean Mute
+        {
+            get { return (_mute); }
+            set
+            {
+                if (this._mute != value)
+                {
+                    this._mute = value;
+                    if (this.PropertyChanged != null)
+                        this.PropertyChanged(this, new PropertyChangedEventArgs("Mute"));
+                }
+            }
+        }
+        private String _muteButtonImage;
+        public String MuteButtonImage
+        { 
+            get 
+            {
+                return (this._muteButtonImage);
+            }
+            set 
+            {
+                if (this._muteButtonImage != value) 
+                {
+                    this._muteButtonImage = value;
+                    if (this.PropertyChanged != null)
+                        this.PropertyChanged(this, new PropertyChangedEventArgs("MuteButtonImage"));
+                }
+            }
+        }
 
         private Boolean _changedInPause;
 
@@ -208,6 +224,7 @@ namespace SlideBarMVVM
         public ICommand MediaEndedCommand { get; set; }
         public ICommand RepeatCommand { get; set; }
         public ICommand ShuffleCommand { get; set; }
+        public ICommand MuteCommand { get; set; }
 
         public ObservableCollection<String> Collect { get; set; }
 
@@ -237,19 +254,10 @@ namespace SlideBarMVVM
 
         public MediaPlayerViewModel()
         {
-            this.testMute = true;
-
             this.PlayPauseButtonImage = "/Assets/play.png";
             CurrentList.getInstance().ModifiedEvent += new EventHandler(modifiedEvent);
 
             this.Collect = new ObservableCollection<string>();
-            //this.Collect.Add("Coucou");
-            //this.Collect.Add("tu");
-            //this.Collect.Add("veux");
-            //this.Collect.Add("voir");
-            //this.Collect.Add("mon");
-            //this.Collect.Add("...");
-            //this.Collect.Add("???");
 
             this._isOpened = false;
             this.PlayPauseButtonText = "Play";
@@ -451,6 +459,24 @@ namespace SlideBarMVVM
                     curList.Shuffle = false;
                     this.ShuffleButtonImage = "/Assets/shuffleoff.png";
                 }
+            }));
+            #endregion
+
+            this.Mute = false;
+            this.MuteButtonImage = "/Assets/NoMute.png";
+            #region MuteCommand
+            this.MuteCommand = new Command(new Action(() =>
+            {
+                if (this.Mute)
+                {
+                    this.Mute = false;
+                    this.MuteButtonImage = "/Assets/NoMute.png";
+                }
+                else
+                {
+                    this.Mute = true;
+                    this.MuteButtonImage = "/Assets/Mute.png";
+                }                  
             }));
             #endregion
 

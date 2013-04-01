@@ -1378,6 +1378,27 @@
                 </Grid>
             </Grid>
         </DataTemplate>
+        <Style x:Key="ButtonFocusVisual">
+        	<Setter Property="Control.Template">
+        		<Setter.Value>
+        			<ControlTemplate>
+        				<Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+        			</ControlTemplate>
+        		</Setter.Value>
+        	</Setter>
+        </Style>
+        <LinearGradientBrush x:Key="ButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
+        	<GradientStop Color="#F3F3F3" Offset="0"/>
+        	<GradientStop Color="#EBEBEB" Offset="0.5"/>
+        	<GradientStop Color="#DDDDDD" Offset="0.5"/>
+        	<GradientStop Color="#CDCDCD" Offset="1"/>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="ButtonNormalBorder" Color="#FF707070"/>
+        <ControlTemplate x:Key="ButtonMuteTemplate" TargetType="{x:Type Button}">
+        	<Grid>
+        		<Image Margin="0" Source="{Binding MuteButtonImage}" VerticalAlignment="Center" HorizontalAlignment="Center" Height="Auto" Width="Auto"/>
+        	</Grid>
+        </ControlTemplate>
     </Window.Resources>
 	<Window.Triggers>
 		<EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="gridCurrentList">
@@ -1390,7 +1411,7 @@
 			<BeginStoryboard x:Name="OnMouseEnter_BeginStoryboard1" Storyboard="{StaticResource OnMouseEnter}"/>
 		</EventTrigger>
 		<EventTrigger RoutedEvent="DragDrop.DragLeave" SourceName="gridCurrentList">
-			<BeginStoryboard Storyboard="{StaticResource OnMouseLeave}"/>
+			<BeginStoryboard x:Name="OnMouseLeave_BeginStoryboard1" Storyboard="{StaticResource OnMouseLeave}"/>
 		</EventTrigger>
 	</Window.Triggers>
     
@@ -1485,17 +1506,17 @@
 								</local:ButtonCustom.Background>
 							</local:ButtonCustom>
 							<Rectangle Height="39.04" Width="11.44"/>
+                            <Button x:Name="muteButton" Content="Mute" Height="39.04" Width="34.4" Command="{Binding MuteCommand}" Template="{DynamicResource ButtonMuteTemplate}" Margin="0,0,2,0"/>
                             <local:SpecialSlider x:Name="volumeSlider" Width="99.267" Minimum="0" Maximum="1" Value="{Binding Volume, ElementName=MediaElementBehavior, Mode=TwoWay}" IsMoveToPointEnabled="True" Height="22.241" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{DynamicResource SpecialSliderStyle}"/>
 							<Button x:Name="openButton" Width="24.533" Command="{Binding OpenDialogCommand}" Height="39.04" Visibility="Hidden" d:IsHidden="True"/>
-							<Button Content="Mute" Height="39.04" Width="61.6"/>
-						</WrapPanel>
+                        </WrapPanel>
 					</local:GridCustom>
 					<Grid x:Name="gridMediaElement" Margin="0,0,0,74.84" d:LayoutOverrides="HorizontalAlignment" Background="#00000000" AllowDrop="True">
 						<i:Interaction.Behaviors>
 							<local:GridBehavior x:Name="GridBehavior"/>
 						</i:Interaction.Behaviors>
 						<Image Source="/Assets/music.png" Visibility="{Binding Video, ElementName=MediaElementBehavior}" d:LayoutOverrides="Width" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-						<local:MediaElementCustom IsMuted="False" LoadedBehavior="Manual" UnloadedBehavior="Manual" x:Name="MediaPlayer" Source="{Binding CurrentSourceMedia}" Opacity="100000" d:IsHidden="True" >
+						<local:MediaElementCustom IsMuted="{Binding Mute, Mode=TwoWay}" LoadedBehavior="Manual" UnloadedBehavior="Manual" x:Name="MediaPlayer" Source="{Binding CurrentSourceMedia}" Opacity="100000" d:IsHidden="True" >
 							<i:Interaction.Behaviors>
 								<local:MediaElementBehavior x:Name="MediaElementBehavior"/>
 							</i:Interaction.Behaviors>
@@ -1529,22 +1550,6 @@
 						<TextBlock x:Name="nameLabel" TextWrapping="Wrap" Width="146.7" Foreground="White" TextAlignment="Center" Text="{Binding CurrentSourceName}" Height="52.533" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 					</Grid>
 					<Grid  AllowDrop="True" x:Name="gridCurrentList" Margin="0,0,0,70.84" HorizontalAlignment="Right" Width="191.8" Background="#00FF0000">
-                        <!--<Grid.Triggers>
-                            <EventTrigger RoutedEvent="Grid.MouseLeave">
-                                <BeginStoryboard>
-                                    <Storyboard x:Name="MouseLeaveStory">
-                                        <local:GridLengthAnimation Storyboard.TargetName="Col2" Storyboard.TargetProperty="Width" From="*" To="0" Duration="0:0:2"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="Grid.MouseEnter">
-                                <BeginStoryboard>
-                                    <Storyboard x:Name="MouseEnterStory">
-                                        <local:GridLengthAnimation Storyboard.TargetName="Col2" Storyboard.TargetProperty="Width" From="0" To="*" Duration="0:0:2"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </Grid.Triggers>-->
 						<local:ListViewCustom x:Name="currentListView" ItemsSource="{Binding Collect}" Foreground="White" IsTabStop="True" Style="{DynamicResource ListViewCustomStyle}" Background="#C5000000" BorderThickness="5" BorderBrush="Black" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" UseLayoutRounding="True" Margin="0,0,-0.2,-0.3" SelectedIndex="5" ItemTemplate="{DynamicResource DataTemplateCurrentList}" d:LayoutOverrides="GridBox, HorizontalMargin" />
 					</Grid>
 				</Grid>

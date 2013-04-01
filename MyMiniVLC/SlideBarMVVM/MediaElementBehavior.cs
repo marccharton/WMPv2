@@ -196,9 +196,12 @@ namespace SlideBarMVVM
 
         void AssociatedObject_MediaOpened(object sender, System.Windows.RoutedEventArgs e)
         {
+            Boolean tmp = AssociatedObject.IsMuted;
           //  SetValue(TimeProperty, TimeSpan.Zero.ToString(@"hh\:mm\:ss"));
             AssociatedObject.IsMuted = true;
             AssociatedObject.IsMuted = false;
+            if (tmp)
+                AssociatedObject.IsMuted = true;
             if (AssociatedObject.HasVideo)
                 SetValue(VideoProperty, Visibility.Hidden);
             else
