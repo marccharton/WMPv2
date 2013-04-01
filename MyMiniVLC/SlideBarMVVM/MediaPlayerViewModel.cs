@@ -35,6 +35,21 @@ namespace SlideBarMVVM
         public event PropertyChangedEventHandler PropertyChanged;
         public SlideBarViewModel SbViewModel { get; set; }
 
+        private Boolean _testMute;
+        public Boolean testMute {
+            get { return (_testMute); }
+            set {
+                if (this._testMute != value) 
+                {
+                    this._testMute = true;
+                    if (this.PropertyChanged != null) 
+                    {
+                        this.PropertyChanged(this, new PropertyChangedEventArgs("testMute"));
+                    }
+                }
+            }
+        }
+
         public Command OpenDialogCommand { get; set; }
         private Uri _currentSourceMedia;
         public Uri CurrentSourceMedia
@@ -222,6 +237,8 @@ namespace SlideBarMVVM
 
         public MediaPlayerViewModel()
         {
+            this.testMute = true;
+
             this.PlayPauseButtonImage = "/Assets/play.png";
             CurrentList.getInstance().ModifiedEvent += new EventHandler(modifiedEvent);
 

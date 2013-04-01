@@ -1487,6 +1487,7 @@
 							<Rectangle Height="39.04" Width="11.44"/>
                             <local:SpecialSlider x:Name="volumeSlider" Width="99.267" Minimum="0" Maximum="1" Value="{Binding Volume, ElementName=MediaElementBehavior, Mode=TwoWay}" IsMoveToPointEnabled="True" Height="22.241" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{DynamicResource SpecialSliderStyle}"/>
 							<Button x:Name="openButton" Width="24.533" Command="{Binding OpenDialogCommand}" Height="39.04" Visibility="Hidden" d:IsHidden="True"/>
+							<Button Content="Mute" Height="39.04" Width="61.6"/>
 						</WrapPanel>
 					</local:GridCustom>
 					<Grid x:Name="gridMediaElement" Margin="0,0,0,74.84" d:LayoutOverrides="HorizontalAlignment" Background="#00000000" AllowDrop="True">
@@ -1494,7 +1495,7 @@
 							<local:GridBehavior x:Name="GridBehavior"/>
 						</i:Interaction.Behaviors>
 						<Image Source="/Assets/music.png" Visibility="{Binding Video, ElementName=MediaElementBehavior}" d:LayoutOverrides="Width" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-						<local:MediaElementCustom  LoadedBehavior="Manual" UnloadedBehavior="Manual" x:Name="MediaPlayer" Source="{Binding CurrentSourceMedia}" Opacity="100000" d:IsHidden="True" >
+						<local:MediaElementCustom IsMuted="False" LoadedBehavior="Manual" UnloadedBehavior="Manual" x:Name="MediaPlayer" Source="{Binding CurrentSourceMedia}" Opacity="100000" d:IsHidden="True" >
 							<i:Interaction.Behaviors>
 								<local:MediaElementBehavior x:Name="MediaElementBehavior"/>
 							</i:Interaction.Behaviors>

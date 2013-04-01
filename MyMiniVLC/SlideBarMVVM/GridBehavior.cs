@@ -17,7 +17,21 @@ namespace SlideBarMVVM
             base.OnAttached();
             AssociatedObject.MouseDown += new System.Windows.Input.MouseButtonEventHandler(AssociatedObject_MouseDown);
             AssociatedObject.Drop += new DragEventHandler(AssociatedObject_Drop);
+            AssociatedObject.PreviewKeyDown += new System.Windows.Input.KeyEventHandler(AssociatedObject_KeyDown);
             _fullScreen = false;
+        }
+
+        void AssociatedObject_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            MessageBox.Show("Hey");
+            if (e.Key == System.Windows.Input.Key.Escape && !_fullScreen) 
+            {
+                Window w = App.Current.MainWindow;
+
+                w.WindowStyle = WindowStyle.SingleBorderWindow;
+                w.WindowState = WindowState.Normal;
+                _fullScreen = false;
+            }
         }
 
         protected override void OnDetaching()
