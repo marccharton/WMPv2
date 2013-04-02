@@ -15,9 +15,11 @@ namespace wmp2
         public List<Album> Albums { get; set; }
         public List<Song> Songs { get; set; }
         public List<Playlist> Playlists { get; set; }
+        public List<Video> Videos { get; set; }
+        public List<Picture> Pictures { get; set; }
         
-        public List<string> SongPaths;
-        List<string> validPaths;
+        public List<string> MediaPaths;
+        private List<string> validPaths;
 
         private string PathOfLibFile;
 
@@ -28,16 +30,17 @@ namespace wmp2
             Songs = new List<Song>();
             Artists = new List<Artist>();
             Albums = new List<Album>();
-            Genres = new List<string>();
+            Genres = new List<String>();
             Playlists = new List<Playlist>();
-            SongPaths = new List<string>();
-            validPaths = new List<string>();
+            MediaPaths = new List<String>();
+            validPaths = new List<String>();
+            Videos = new List<Video>();
+            Pictures = new List<Picture>();
         }
 
         ~Library()
         {
             Serialize();
-
         }
 
         // Load Existing Files in xml file in Library
@@ -46,11 +49,16 @@ namespace wmp2
             Unserialize();
             string error = null;
 
-            foreach (string path in SongPaths)
+            foreach (string path in MediaPaths)
             {
                 try
                 {
-                    Songs.Add(CreateSong(path));
+                    if (Tools.CheckFormat(path) == Tools.Format.MUSIC)
+                        this.Songs.Add(CreateSong(path));
+                    else if (Tools.CheckFormat(path) == Tools.Format.VIDEO)
+                        this.Videos.Add(new Video(path));
+                    else if (Tools.CheckFormat(path) == Tools.Format.PICTURE)
+                        this.Pictures.Add(new Picture (path));
                 }
                 catch (DirectoryNotFoundException)
                 {
@@ -63,7 +71,7 @@ namespace wmp2
 
         public bool Serialize()
         {
-            Serializer.Serialize(SongPaths, PathOfLibFile, FileMode.OpenOrCreate, typeof(List<string>));
+            Serializer.Serialize(MediaPaths, PathOfLibFile, FileMode.OpenOrCreate, typeof(List<string>));
             return true;
         }
 
@@ -76,7 +84,7 @@ namespace wmp2
                     try
                     {
                         XmlSerializer xml = new XmlSerializer(typeof(List<string>));
-                        SongPaths = xml.Deserialize(fs) as List<string>;
+                        MediaPaths = xml.Deserialize(fs) as List<string>;
                     }
                     catch
                     {
@@ -93,11 +101,12 @@ namespace wmp2
             
             // Je rempli un objet Song avec les infos basiques
             Song song = new Song();
-            if (songTag.Title != null) song.Title = songTag.Title.ToUpper();
+            if (songTag.Title != null) song.Title = Tools.Capitalize(songTag.Title);
                                        song.Track = (int)songTag.Track;
-            if (songTag.Genre != null) song.Genre = songTag.Genre.ToUpper();
+            if (songTag.Genre != null) song.Genre = Tools.Capitalize(songTag.Genre);
             if (songPath != null)      song.Path = songPath;
             if (songPath != null)      song.Name = Path.GetFileName(songPath);
+
 
             #region Match with Artist
 
@@ -105,7 +114,7 @@ namespace wmp2
             
             // Does this artist already exist in list ?
             IEnumerable<Artist> artists = from a in Artists
-                                          where a.Name == songTag.Artist.ToUpper()
+                                          where a.Name.ToUpper() == songTag.Artist.ToUpper()
                                           select a;
             
 
@@ -121,7 +130,7 @@ namespace wmp2
             // no -> Create a new artist et push it in my artists List
             else
             {
-                Artist art = new Artist() { Name = songTag.Artist.ToUpper() };
+                Artist art = new Artist() { Name = Tools.Capitalize(songTag.Artist) };
                 Artists.Add(art);
                 song.Artist = art;
                 art.Songs.Add(song);
@@ -138,7 +147,7 @@ namespace wmp2
             Console.WriteLine("Est ce que Mon album existe ?");
             // Does this album already exist in list ?
             IEnumerable<Album> album = from a in Albums
-                                       where a.Name == songTag.Album.ToUpper()
+                                       where a.Name.ToUpper() == songTag.Album.ToUpper()
                                        select a;
 
             // yes -> Catch it and match with my current song
@@ -157,7 +166,7 @@ namespace wmp2
             else
             {
                 Console.WriteLine("Mon album n'existe pas");
-                Album alb = new Album() { Name = songTag.Album.ToUpper() };
+                Album alb = new Album() { Name = Tools.Capitalize(songTag.Album) };
                 Albums.Add(alb);
                 song.Album = alb;
                 alb.Songs.Add(song);
@@ -172,7 +181,7 @@ namespace wmp2
 
             // Does this artist already exist in list ?
             IEnumerable<String> genres = from g in Genres
-                                         where g == songTag.Genre.ToUpper()
+                                         where g.ToUpper() == songTag.Genre.ToUpper()
                                          select g;
 
 
@@ -187,7 +196,7 @@ namespace wmp2
             // no -> Create a new artist et push it in my artists List
             else
             {
-                String gnr = songTag.Genre.ToUpper();
+                String gnr = Tools.Capitalize(songTag.Genre);
                 Genres.Add(gnr);
                 song.Genre = gnr;
                 curGenre = gnr;
@@ -198,7 +207,7 @@ namespace wmp2
 
 
             IEnumerable<Album> artAlbum = from a in curArt.Albums
-                                           where a.Name == curAlb.Name.ToUpper()
+                                           where a.Name.ToUpper() == curAlb.Name.ToUpper()
                                            select a;
             if (!artAlbum.Any())
             {
@@ -224,23 +233,11 @@ namespace wmp2
             String[] reps = Directory.GetDirectories(path);
             
             foreach (String rep in reps)
-            {
-                //for (int i = 0; i < level; ++i)
-                //    Console.Out.Write("  ");
-                //Console.Out.WriteLine(Path.GetFileName(rep));
                 scanRep(rep, level + 1);
-            }
 
             foreach (String file in files)
-            {
-                if (Tools.checkFormat(Path.GetFileName(file)))
-                {
-                    //for (int i = 0; i < level; ++i)
-                    //    Console.Out.Write("  ");
-                    //Console.WriteLine(Path.GetFileName(file));
+                if (Tools.CheckFormat(file) != Tools.Format.NONE)
                     validPaths.Add(file);
-                }
-            }
         }
 
         public bool ImportDir(string pathToImport)
@@ -255,13 +252,18 @@ namespace wmp2
         public bool ImportFile(string path)
         {
             // If path already Exists ?
-            IEnumerable<string> pathOfFile = from p in SongPaths
+            IEnumerable<string> pathOfFile = from p in MediaPaths
                                              where p == path
                                              select p;
             if (!pathOfFile.Any())
             {
-                Songs.Add(CreateSong(path));
-                SongPaths.Add(path);
+                if (Tools.CheckFormat(path) == Tools.Format.MUSIC)
+                    this.Songs.Add(CreateSong(path));
+                else if (Tools.CheckFormat(path) == Tools.Format.VIDEO)
+                    this.Videos.Add(new Video(path));
+                else if (Tools.CheckFormat(path) == Tools.Format.PICTURE)
+                    this.Pictures.Add(new Picture(path));
+                MediaPaths.Add(path);
             }
             return true;
         }
@@ -284,7 +286,7 @@ namespace wmp2
         {
             List<Song> ret          = new List<Song>();
             IEnumerable<Song> songs = from song in Songs
-                                      where song.Album.Name == album.ToUpper()
+                                      where song.Album.Name.ToUpper() == album.ToUpper()
                                       select song;
             
             foreach (Song s in songs)
@@ -297,7 +299,7 @@ namespace wmp2
         {
             List<Song> ret = new List<Song>();
             IEnumerable<Song> songs = from song in Songs
-                                      where song.Artist.Name == artist.ToUpper()
+                                      where song.Artist.Name.ToUpper() == artist.ToUpper()
                                       select song;
 
             foreach (Song s in songs)
@@ -310,7 +312,7 @@ namespace wmp2
         {
             List<Album> ret = new List<Album>();
             IEnumerable<Album> albums = from album in Albums
-                                        where album.Artist.Name == artist.ToUpper()
+                                        where album.Artist.Name.ToUpper() == artist.ToUpper()
                                         select album;
 
             foreach (Album alb in albums)

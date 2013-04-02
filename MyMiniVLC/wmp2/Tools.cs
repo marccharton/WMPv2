@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace wmp2
 {
@@ -12,17 +13,30 @@ namespace wmp2
 
         public static string DefaultPathFileLibrary = @"library.xml";
 
-        public static bool checkFormat(string name)
+        public enum Format { NONE, MUSIC, VIDEO, PICTURE };
+        
+        public static string Capitalize(string Str)
+        {
+            Char[] ca = Str.ToCharArray();
+
+            foreach (Match m in Regex.Matches(Str, @"\b[a-z]"))
+                ca[m.Index] = Char.ToUpper(ca[m.Index]);
+
+            return new String(ca);
+        }
+
+        public static Format CheckFormat(string name)
         {
             string extension = Path.GetExtension(name);
 
             if (extension == ".mp3" || extension == ".wav" || extension == ".flac" || extension == ".ogg" || extension == ".wav" || extension == ".m4a")
-                return true;
+                return Format.MUSIC;
             if (extension == ".wmv" || extension == ".avi" || extension == ".mpg" || extension == ".mov" || extension == ".mp4")
-                return true;
+                return Format.VIDEO;
             if (extension == ".jpg" || extension == ".bmp" || extension == ".gif" || extension == ".png" || extension == ".tiff")
-                return true;
-            return false;
+                return Format.PICTURE;
+            return Format.NONE;
         }
+
     }
 }
