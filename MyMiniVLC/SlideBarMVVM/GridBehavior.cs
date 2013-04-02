@@ -5,62 +5,24 @@ using System.Text;
 using System.Windows.Interactivity;
 using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Input;
 
 namespace SlideBarMVVM
 {
     class GridBehavior : Behavior<Grid>
     {
-        private Boolean _fullScreen;
-
         protected override void OnAttached()
         {
             base.OnAttached();
-            AssociatedObject.MouseDown += new System.Windows.Input.MouseButtonEventHandler(AssociatedObject_MouseDown);
             AssociatedObject.Drop += new DragEventHandler(AssociatedObject_Drop);
-            AssociatedObject.PreviewKeyDown += new System.Windows.Input.KeyEventHandler(AssociatedObject_KeyDown);
-            _fullScreen = false;
-        }
-
-        void AssociatedObject_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            MessageBox.Show("Hey");
-            if (e.Key == System.Windows.Input.Key.Escape && !_fullScreen) 
-            {
-                Window w = App.Current.MainWindow;
-
-                w.WindowStyle = WindowStyle.SingleBorderWindow;
-                w.WindowState = WindowState.Normal;
-                _fullScreen = false;
-            }
         }
 
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            AssociatedObject.MouseDown -= AssociatedObject_MouseDown;
             AssociatedObject.Drop -= AssociatedObject_Drop;
         }
-
-        void AssociatedObject_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            Window w = App.Current.MainWindow;
-            if (e.ClickCount == 2)
-            {
-                if (!_fullScreen)
-                {
-                    w.WindowStyle = WindowStyle.None;
-                    w.WindowState = WindowState.Maximized;
-                    _fullScreen = true;
-                }
-                else
-                {
-                    w.WindowStyle = WindowStyle.SingleBorderWindow;
-                    w.WindowState = WindowState.Normal;
-                    _fullScreen = false;
-                }
-            }
-        }
-
+            
         void AssociatedObject_Drop(object sender, DragEventArgs e)
         {
             CurrentList curList = CurrentList.getInstance();

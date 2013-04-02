@@ -80,7 +80,9 @@
     </ApplicationDefinition>
     <Compile Include="ButtonCustom.cs" />
     <Compile Include="CurrentList.cs" />
+    <Compile Include="DoubleClickEventTrigger.cs" />
     <Compile Include="DropAdorner.cs" />
+    <Compile Include="EscapeKeyEventTrigger.cs" />
     <Compile Include="GridCustom.cs" />
     <Compile Include="LibraryViewModel.cs" />
     <Compile Include="GridBehavior.cs" />

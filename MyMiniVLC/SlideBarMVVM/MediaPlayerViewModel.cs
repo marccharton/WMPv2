@@ -216,6 +216,7 @@ namespace SlideBarMVVM
         }
 
         private Boolean _changedInPause;
+        private Boolean _fullScreen;
 
         public Command PlayRequest { get; set; }
         public Command StopRequest { get; set; }
@@ -225,6 +226,7 @@ namespace SlideBarMVVM
         public ICommand RepeatCommand { get; set; }
         public ICommand ShuffleCommand { get; set; }
         public ICommand MuteCommand { get; set; }
+        public ICommand FullScreenCommand { get; set; }
 
         public ObservableCollection<String> Collect { get; set; }
 
@@ -480,6 +482,26 @@ namespace SlideBarMVVM
             }));
             #endregion
 
+            this._fullScreen = false;
+            #region FullScreenCommand
+            this.FullScreenCommand = new Command(new Action(() => 
+            {
+                Window w = App.Current.MainWindow;
+                if (!_fullScreen)
+                {
+                    w.WindowStyle = WindowStyle.None;
+                    w.WindowState = WindowState.Maximized;
+                    _fullScreen = true;
+                }
+                else
+                {
+                    w.WindowStyle = WindowStyle.SingleBorderWindow;
+                    w.WindowState = WindowState.Normal;
+                    _fullScreen = false;
+                }
+            }));
+            #endregion
+            
             CurrentList.getInstance().DropEvent += new EventHandler(dropEvent);
             CurrentList.getInstance().ChangedEvent += new EventHandler(changedEvent);
             this.Init();
