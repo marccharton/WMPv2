@@ -107,6 +107,41 @@ namespace SlideBarMVVM
             }
         }
 
+
+        private Picture _selectedPicture;
+        public Picture SelectedPicture
+        {
+            get
+            {
+                return this._selectedPicture;
+            }
+            set
+            {
+                if (_selectedPicture != value)
+                {
+                    this._selectedPicture = value;
+                    NotifyPropertyChanged("SelectedPicture");
+                }
+            }
+        }
+        
+        private Video _selectedVideo;
+        public Video SelectedVideo
+        {
+            get
+            {
+                return this._selectedVideo;
+            }
+            set
+            {
+                if (_selectedVideo != value)
+                {
+                    this._selectedVideo = value;
+                    NotifyPropertyChanged("SelectedVideo");
+                }
+            }
+        }
+
         
         public List<String> _genresLIST;
         public List<String> GenresLIST
@@ -264,8 +299,11 @@ namespace SlideBarMVVM
         public Command LoadAlbumCMD { get; set; }
         public Command ImportDirectoryCMD { get; set; }
         public Command ImportFileCMD { get; set; }
-        public Command PlayItemCMD { get; set; }
 
+        public Command PlaySongItemCMD { get; set; }
+        public Command PlayVideoItemCMD { get; set; }
+        public Command PlayPictureItemCMD { get; set; }
+        
         public Command AllGenresCMD { get; set; }
         public Command AllArtistsCMD { get; set; }
         public Command AllAlbumsCMD { get; set; }
@@ -280,34 +318,13 @@ namespace SlideBarMVVM
 
             RefreshFirstDatas();
 
-            VideosList = new List<Video>()
-                {
-                    new Video(@"C:\mes\fichiers\videos\filmDemerde.avi"),
-                    new Video(@"C:\mes\fichiers\videos\psychose.avi"),
-                    new Video(@"C:\mes\fichiers\videos\walkingDeadS03E04.mp4"),
-                    new Video(@"C:\mes\fichiers\videos\walkingDeadS03E05.mp4"),
-                    new Video(@"C:\mes\fichiers\videos\walkingDeadS03E06.mp4"),
-                    new Video(@"C:\mes\fichiers\videos\walkingDeadS03E07.mp4"),
-                    new Video(@"C:\mes\fichiers\videos\walkingDeadS03E08.mp4")
-                };
-
-            PicturesList = new List<Picture>()
-                {
-                    new Picture(@"C:\mes\fichiers\pictures\986392938.jpg"),
-                    new Picture(@"C:\mes\fichiers\pictures\dcdcvignette.jpg"),
-                    new Picture(@"C:\mes\fichiers\pictures\ouech_ma6[Kazuk.com].jpg"),
-                    new Picture(@"C:\mes\fichiers\pictures\kdcy83.jpg"),
-                    new Picture(@"C:\mes\fichiers\pictures\87633.jpg"),
-                    new Picture(@"C:\mes\fichiers\pictures\tet-de-con.bmp"),
-                    new Picture(@"C:\mes\fichiers\pictures\38737d76.png"),
-                    new Picture(@"C:\mes\fichiers\pictures\86298364.png"),
-                    new Picture(@"C:\mes\fichiers\pictures\78d67687c6-76dc.png")
-                };
+            VideosList = Lib.Videos;
+            PicturesList = Lib.Pictures;
 
 
-            #region Play Item
+            #region Play Song Item
 
-            PlayItemCMD = new Command(new Action(() =>
+            PlaySongItemCMD = new Command(new Action(() =>
             {
                 if (SelectedSong != null)
                 {
@@ -315,6 +332,36 @@ namespace SlideBarMVVM
                     CurrentList curList = CurrentList.getInstance();
                     curList.ResetList();
                     curList.addElement(Path.GetFullPath(SelectedSong.Path));
+                    curList.DropEvent(this, null);
+                }
+            }));
+
+            #endregion
+
+            #region Play Video Item
+
+            PlayVideoItemCMD = new Command(new Action(() =>
+            {
+                if (SelectedVideo != null)
+                {
+                    CurrentList curList = CurrentList.getInstance();
+                    curList.ResetList();
+                    curList.addElement(Path.GetFullPath(SelectedVideo.PathOfFile));
+                    curList.DropEvent(this, null);
+                }
+            }));
+
+            #endregion
+
+            #region Play Picture Item
+
+            PlayPictureItemCMD = new Command(new Action(() =>
+            {
+                if (SelectedPicture != null)
+                {
+                    CurrentList curList = CurrentList.getInstance();
+                    curList.ResetList();
+                    curList.addElement(Path.GetFullPath(SelectedPicture.PathOfFile));
                     curList.DropEvent(this, null);
                 }
             }));
@@ -572,7 +619,12 @@ namespace SlideBarMVVM
             AllGenresText = "All (" + Lib.Genres.Count + ")";
             AllArtistsText = "All (" + Lib.Artists.Count + ")";
             AllAlbumsText = "All (" + Lib.Albums.Count + ")";
-                
+
+            VideosList = null;
+            VideosList = Lib.Videos;
+
+            PicturesList = null;
+            PicturesList = Lib.Pictures;
         }
 
     }

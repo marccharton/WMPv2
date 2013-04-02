@@ -1363,7 +1363,7 @@
                     <ColumnDefinition Width="0.307*"/>
                     <ColumnDefinition Width="0.693*"/>
                 </Grid.ColumnDefinitions>
-                <Image Margin="8" Source="20-03-2013 18-17-01.png" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto"/>
+                <Image Margin="8" Source="{Binding PathOfFile}" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto"/>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.25*"/>
@@ -1420,21 +1420,14 @@
         						</ColorAnimationUsingKeyFrames>
         					</Storyboard>
         				</VisualState>
-        				<VisualState x:Name="Pressed">
-        					<Storyboard>
-        						<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid">
-        							<EasingColorKeyFrame KeyTime="0" Value="#BA27CED2"/>
-        						</ColorAnimationUsingKeyFrames>
-        					</Storyboard>
-        				</VisualState>
-        				<VisualState x:Name="Disabled">
-        					<Storyboard>
-        						<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid">
-        							<EasingColorKeyFrame KeyTime="0" Value="#00000000"/>
-        						</ColorAnimationUsingKeyFrames>
-        					</Storyboard>
-        				</VisualState>
-        			</VisualStateGroup>
+                        <VisualState x:Name="Pressed">
+                            <Storyboard>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#BA27CED2"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
         			<VisualStateGroup x:Name="FocusStates">
         				<VisualState x:Name="Unfocused"/>
         				<VisualState x:Name="Focused"/>
@@ -1742,7 +1735,7 @@
                     	<ListView Grid.Row="2" x:Name="listViewSongs" ItemsSource="{Binding SongsLIST}" SelectedItem="{Binding SelectedSong}" d:LayoutOverrides="HorizontalAlignment" Margin="0,4,0,53.017" Background="{x:Null}" BorderBrush="#FF698ED0" BorderThickness="0" FontFamily="Helvetica World" Foreground="#FFD4D4D6">
                     		<i:Interaction.Triggers>
                     			<i:EventTrigger EventName="MouseDoubleClick">
-                    				<i:InvokeCommandAction Command="{Binding PlayItemCMD}" />
+                                    <i:InvokeCommandAction Command="{Binding PlaySongItemCMD}" />
                     			</i:EventTrigger>
                     		</i:Interaction.Triggers>
                     		<ListView.View>
@@ -1785,8 +1778,14 @@
             				<GradientStop Color="#FF0062FF"/>
             			</LinearGradientBrush>
             		</Grid.Background>
-                    <ListBox x:Name="VideoList" BorderThickness="0" Margin="0,0,0,51.78" Background="{x:Null}"  ItemTemplate="{DynamicResource LibraryListBoxItemTemplate}" ItemsSource="{Binding VideosList}"/>
-            		<TextBlock x:Name="VideoTitle" HorizontalAlignment="Right" TextWrapping="Wrap" Text="VIDEOS" VerticalAlignment="Bottom" Foreground="White" Margin="0,0,8,6" FontWeight="Bold" Style="{DynamicResource TitleTextStyle}"/>
+                    <ListBox x:Name="VideoList" BorderThickness="0" Margin="0,0,0,51.78" Background="{x:Null}"  ItemTemplate="{DynamicResource LibraryListBoxItemTemplate}" ItemsSource="{Binding VideosList}" SelectedItem="{Binding SelectedVideo}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding PlayVideoItemCMD}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListBox>
+                    <TextBlock x:Name="VideoTitle" HorizontalAlignment="Right" TextWrapping="Wrap" Text="VIDEOS" VerticalAlignment="Bottom" Foreground="White" Margin="0,0,8,6" FontWeight="Bold" Style="{DynamicResource TitleTextStyle}"/>
             	</Grid>                
             </TabItem>
 
@@ -1814,7 +1813,13 @@
             				<GradientStop Color="#FF0062FF"/>
             			</LinearGradientBrush>
             		</Grid.Background>
-                    <ListBox x:Name="PictureList" BorderThickness="0" Margin="0,0,0,55.78" Background="{x:Null}" ItemTemplate="{DynamicResource PictureLibraryListBoxItemTemplate}" ItemsSource="{Binding PicturesList}" />
+                    <ListBox x:Name="PictureList" BorderThickness="0" Margin="0,0,0,55.78" Background="{x:Null}" ItemTemplate="{DynamicResource PictureLibraryListBoxItemTemplate}" ItemsSource="{Binding PicturesList}"  SelectedItem="{Binding SelectedPicture}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding PlayPictureItemCMD}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListBox>
                     <TextBlock x:Name="PictureTitle" HorizontalAlignment="Right" TextWrapping="Wrap" Text="PICTURES" VerticalAlignment="Bottom" Foreground="White" Margin="0,0,8,6" FontWeight="Bold" Style="{DynamicResource TitleTextStyle}" />
             	</Grid>
             </TabItem>
