@@ -93,11 +93,12 @@ namespace wmp2
             
             // Je rempli un objet Song avec les infos basiques
             Song song = new Song();
-            if (songTag.Title != null) song.Title = songTag.Title.ToUpper();
+            if (songTag.Title != null) song.Title = Tools.Capitalize(songTag.Title);
                                        song.Track = (int)songTag.Track;
-            if (songTag.Genre != null) song.Genre = songTag.Genre.ToUpper();
+            if (songTag.Genre != null) song.Genre = Tools.Capitalize(songTag.Genre);
             if (songPath != null)      song.Path = songPath;
             if (songPath != null)      song.Name = Path.GetFileName(songPath);
+
 
             #region Match with Artist
 
@@ -105,7 +106,7 @@ namespace wmp2
             
             // Does this artist already exist in list ?
             IEnumerable<Artist> artists = from a in Artists
-                                          where a.Name == songTag.Artist.ToUpper()
+                                          where a.Name.ToUpper() == songTag.Artist.ToUpper()
                                           select a;
             
 
@@ -121,7 +122,7 @@ namespace wmp2
             // no -> Create a new artist et push it in my artists List
             else
             {
-                Artist art = new Artist() { Name = songTag.Artist.ToUpper() };
+                Artist art = new Artist() { Name = Tools.Capitalize(songTag.Artist) };
                 Artists.Add(art);
                 song.Artist = art;
                 art.Songs.Add(song);
@@ -138,7 +139,7 @@ namespace wmp2
             Console.WriteLine("Est ce que Mon album existe ?");
             // Does this album already exist in list ?
             IEnumerable<Album> album = from a in Albums
-                                       where a.Name == songTag.Album.ToUpper()
+                                       where a.Name.ToUpper() == songTag.Album.ToUpper()
                                        select a;
 
             // yes -> Catch it and match with my current song
@@ -157,7 +158,7 @@ namespace wmp2
             else
             {
                 Console.WriteLine("Mon album n'existe pas");
-                Album alb = new Album() { Name = songTag.Album.ToUpper() };
+                Album alb = new Album() { Name = Tools.Capitalize(songTag.Album) };
                 Albums.Add(alb);
                 song.Album = alb;
                 alb.Songs.Add(song);
@@ -172,7 +173,7 @@ namespace wmp2
 
             // Does this artist already exist in list ?
             IEnumerable<String> genres = from g in Genres
-                                         where g == songTag.Genre.ToUpper()
+                                         where g.ToUpper() == songTag.Genre.ToUpper()
                                          select g;
 
 
@@ -187,7 +188,7 @@ namespace wmp2
             // no -> Create a new artist et push it in my artists List
             else
             {
-                String gnr = songTag.Genre.ToUpper();
+                String gnr = Tools.Capitalize(songTag.Genre);
                 Genres.Add(gnr);
                 song.Genre = gnr;
                 curGenre = gnr;
@@ -198,7 +199,7 @@ namespace wmp2
 
 
             IEnumerable<Album> artAlbum = from a in curArt.Albums
-                                           where a.Name == curAlb.Name.ToUpper()
+                                           where a.Name.ToUpper() == curAlb.Name.ToUpper()
                                            select a;
             if (!artAlbum.Any())
             {
@@ -224,23 +225,11 @@ namespace wmp2
             String[] reps = Directory.GetDirectories(path);
             
             foreach (String rep in reps)
-            {
-                //for (int i = 0; i < level; ++i)
-                //    Console.Out.Write("  ");
-                //Console.Out.WriteLine(Path.GetFileName(rep));
                 scanRep(rep, level + 1);
-            }
 
             foreach (String file in files)
-            {
-                if (Tools.checkFormat(Path.GetFileName(file)))
-                {
-                    //for (int i = 0; i < level; ++i)
-                    //    Console.Out.Write("  ");
-                    //Console.WriteLine(Path.GetFileName(file));
+                if (Tools.CheckFormat(file) != Tools.Format.NONE)
                     validPaths.Add(file);
-                }
-            }
         }
 
         public bool ImportDir(string pathToImport)

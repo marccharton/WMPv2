@@ -1399,6 +1399,55 @@
         		<Image Margin="0" Source="{Binding MuteButtonImage}" VerticalAlignment="Center" HorizontalAlignment="Center" Height="Auto" Width="Auto"/>
         	</Grid>
         </ControlTemplate>
+        <ControlTemplate x:Key="ButtonAllSelectionTemplate" TargetType="{x:Type Button}">
+        	<Grid x:Name="grid" HorizontalAlignment="Stretch" Background="#00000000">
+        		<VisualStateManager.VisualStateGroups>
+        			<VisualStateGroup x:Name="CommonStates">
+        				<VisualState x:Name="Normal">
+        					<Storyboard>
+        						<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid">
+        							<EasingColorKeyFrame KeyTime="0" Value="#11000000"/>
+        						</ColorAnimationUsingKeyFrames>
+        					</Storyboard>
+        				</VisualState>
+        				<VisualState x:Name="MouseOver">
+        					<Storyboard>
+        						<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.HorizontalAlignment)" Storyboard.TargetName="textBlock">
+        							<DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static HorizontalAlignment.Left}"/>
+        						</ObjectAnimationUsingKeyFrames>
+        						<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid">
+        							<EasingColorKeyFrame KeyTime="0" Value="#69BEBEBE"/>
+        						</ColorAnimationUsingKeyFrames>
+        					</Storyboard>
+        				</VisualState>
+        				<VisualState x:Name="Pressed">
+        					<Storyboard>
+        						<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid">
+        							<EasingColorKeyFrame KeyTime="0" Value="#BA27CED2"/>
+        						</ColorAnimationUsingKeyFrames>
+        					</Storyboard>
+        				</VisualState>
+        				<VisualState x:Name="Disabled">
+        					<Storyboard>
+        						<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid">
+        							<EasingColorKeyFrame KeyTime="0" Value="#00000000"/>
+        						</ColorAnimationUsingKeyFrames>
+        					</Storyboard>
+        				</VisualState>
+        			</VisualStateGroup>
+        			<VisualStateGroup x:Name="FocusStates">
+        				<VisualState x:Name="Unfocused"/>
+        				<VisualState x:Name="Focused"/>
+        			</VisualStateGroup>
+        			<VisualStateGroup x:Name="ValidationStates">
+        				<VisualState x:Name="Valid"/>
+        				<VisualState x:Name="InvalidFocused"/>
+        				<VisualState x:Name="InvalidUnfocused"/>
+        			</VisualStateGroup>
+        		</VisualStateManager.VisualStateGroups>
+        		<TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="{TemplateBinding Content}" Style="{DynamicResource simpleTextStyle}"/>
+        	</Grid>
+        </ControlTemplate>
     </Window.Resources>
 	<Window.Triggers>
 		<EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="gridCurrentList">
@@ -1624,14 +1673,15 @@
                     	</Grid.RowDefinitions>
 						<Grid x:Name="ListsBoxes" Grid.Row="0" Margin="0,0,0,3.458">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="263*" />
-                                <ColumnDefinition Width="3*" />
-                                <ColumnDefinition Width="256*" />
-                                <ColumnDefinition Width="4*" />
-                                <ColumnDefinition Width="263*" />
+                                <ColumnDefinition Width="0.273*" />
+                                <ColumnDefinition Width="0.003*" />
+                                <ColumnDefinition Width="0.342*" />
+                                <ColumnDefinition Width="0.003*" />
+                                <ColumnDefinition Width="0.379*" />
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Height="21.46" Margin="0,10,0,0" TextWrapping="Wrap" Text="Genre :" VerticalAlignment="Top" Width="262.883" HorizontalAlignment="Left" Style="{DynamicResource simpleTextStyle}"/>
-                            <ListBox Grid.Column="0" x:Name="lstGenre"  MinHeight="125" Height="auto" ItemsSource="{Binding GenresLIST}" SelectedItem="{Binding SelectedGenre}" Margin="0,31.46,0,0" Background="{x:Null}" BorderThickness="0" Foreground="White" FontFamily="Helvetica World">
+                            <Button x:Name="btnAllGenres" Height="21.46" Margin="0,31.46,0,0" Content="{Binding AllGenresText}" VerticalAlignment="Top" Command="{Binding AllGenresCMD}" Template="{DynamicResource ButtonAllSelectionTemplate}" Background="{x:Null}"/>
+                            <ListBox x:Name="lstGenre"  MinHeight="100" ItemsSource="{Binding GenresLIST}" SelectedItem="{Binding SelectedGenre}" Background="{x:Null}" BorderThickness="0" Foreground="White" FontFamily="Helvetica World" Margin="0,52.92,0,0">
                     			<i:Interaction.Triggers>
                     				<i:EventTrigger EventName="MouseDoubleClick">
                     					<i:InvokeCommandAction Command="{Binding LoadGenreCMD}"/>
@@ -1650,7 +1700,7 @@
                             </GridSplitter>
 
                             <TextBlock Grid.Column="2" Height="21.46" Margin="1,10,1,0" TextWrapping="Wrap" Text="Artist :" VerticalAlignment="Top" Style="{DynamicResource simpleTextStyle}" />
-                            <ListBox Grid.Column="2" x:Name="lstArtist" MinHeight="125" Height="auto"  Margin="1,31.46,0,0"  ItemsSource="{Binding ArtistsLIST}" ItemTemplate="{DynamicResource TemplateLibraryLstArtists}" SelectedItem="{Binding SelectedArtist}" Background="{x:Null}" BorderThickness="0" Foreground="White" FontFamily="Helvetica World">
+                            <ListBox Grid.Column="2" x:Name="lstArtist" MinHeight="100"  ItemsSource="{Binding ArtistsLIST}" ItemTemplate="{DynamicResource TemplateLibraryLstArtists}" SelectedItem="{Binding SelectedArtist}" Background="{x:Null}" BorderThickness="0" Foreground="White" FontFamily="Helvetica World" Margin="0,52.92,0,0">
                     			<i:Interaction.Triggers>
                     				<i:EventTrigger EventName="MouseDoubleClick">
                     					<i:InvokeCommandAction Command="{Binding LoadArtistCMD}"/>
@@ -1670,14 +1720,16 @@
                             </GridSplitter>
 
                             <TextBlock Grid.Column="4" Height="21.46" Margin="0,10,-3,0" TextWrapping="Wrap" Text="Album :" VerticalAlignment="Top" Width="262.883" HorizontalAlignment="Left" Style="{DynamicResource simpleTextStyle}"  />
-                            <ListBox Grid.Column="4" x:Name="lstAlbum" MinHeight="125" Height="auto"  Margin="0,31.46,3,0"  ItemsSource="{Binding AlbumsLIST}" ItemTemplate="{DynamicResource TemplateLibraryLstAlbums}" SelectedItem="{Binding SelectedAlbum}" Background="{x:Null}" BorderThickness="0" Foreground="White" FontFamily="Helvetica World">
+                            <ListBox Grid.Column="4" x:Name="lstAlbum" MinHeight="100"  ItemsSource="{Binding AlbumsLIST}" ItemTemplate="{DynamicResource TemplateLibraryLstAlbums}" SelectedItem="{Binding SelectedAlbum}" Background="{x:Null}" BorderThickness="0" Foreground="White" FontFamily="Helvetica World" Margin="0,52.92,0,0">
                     			<i:Interaction.Triggers>
                     				<i:EventTrigger EventName="MouseDoubleClick">
                     					<i:InvokeCommandAction Command="{Binding LoadAlbumCMD}"/>
                     				</i:EventTrigger>
                     			</i:Interaction.Triggers>
                     		</ListBox>
-                    	</Grid>
+                            <Button x:Name="btnAllArtists" Command="{Binding AllArtistsCMD}" Content="{Binding AllArtistsText}" Grid.ColumnSpan="2" Height="21.46" Margin="0,31.46,0,0" VerticalAlignment="Top" Grid.Column="2" Template="{DynamicResource ButtonAllSelectionTemplate}" />
+                            <Button x:Name="btnAllAlbums" Command="{Binding AllAlbumsCMD}" Content="{Binding AllAlbumsText}" Height="21.46" Margin="0,31.46,0,0" VerticalAlignment="Top" Grid.Column="4" Template="{DynamicResource ButtonAllSelectionTemplate}" />
+                        </Grid>
                     	<GridSplitter Grid.Row="1" x:Name="SplitterLists"
                     		HorizontalAlignment="Stretch" ShowsPreview="True" d:LayoutOverrides="GridBox">
                     		<GridSplitter.Background>

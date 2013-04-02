@@ -20,6 +20,59 @@ namespace SlideBarMVVM
         #region Binded Property
 
 
+        private String _allGenresText;
+        public String AllGenresText
+        {
+            get
+            {
+                return _allGenresText;
+            }
+            set
+            {
+                if (_allGenresText != value)
+                {
+                    _allGenresText = value;
+                    NotifyPropertyChanged("AllGenresText");
+                }
+            }
+        }
+
+        private String _allArtistsText;
+        public String AllArtistsText
+        {
+            get
+            {
+                return _allArtistsText;
+            }
+            set
+            {
+                if (_allArtistsText != value)
+                {
+                    _allArtistsText = value;
+                    NotifyPropertyChanged("AllArtistsText");
+                }
+            }
+        }
+
+        private String _allAlbumsText;
+        public String AllAlbumsText
+        {
+            get
+            {
+                return _allAlbumsText;
+            }
+            set
+            {
+                if (_allAlbumsText != value)
+                {
+                    _allAlbumsText = value;
+                    NotifyPropertyChanged("AllAlbumsText");
+                }
+            }
+        }
+
+        
+        
         public List<Picture> _picturesList;
         public List<Picture> PicturesList
         {
@@ -212,29 +265,20 @@ namespace SlideBarMVVM
         public Command ImportDirectoryCMD { get; set; }
         public Command ImportFileCMD { get; set; }
         public Command PlayItemCMD { get; set; }
+
+        public Command AllGenresCMD { get; set; }
+        public Command AllArtistsCMD { get; set; }
+        public Command AllAlbumsCMD { get; set; }
         
+
         #endregion
 
 
         public LibraryViewModel()
         {
-            Lib = new Library(Tools.DefaultPathFileLibrary);
+            LoadLibrary();
 
-            try
-            {
-                string error = Lib.Init();
-                if (error != null)
-                    MessageBox.Show("-- Paths not Found --\n" + error);
-            }
-            catch (DirectoryNotFoundException)
-            {
-                MessageBox.Show("At least one path couldn't be found");
-            }
-
-            SongsLIST = Lib.Songs;
-            GenresLIST = Lib.Genres;
-            ArtistsLIST = Lib.Artists;
-            AlbumsLIST = Lib.Albums;
+            RefreshFirstDatas();
 
             VideosList = new List<Video>()
                 {
@@ -265,11 +309,14 @@ namespace SlideBarMVVM
 
             PlayItemCMD = new Command(new Action(() =>
             {
-                //MessageBox.Show("YO MON GARS CA PETE !!");
-                CurrentList curList = CurrentList.getInstance();
-                curList.ResetList();
-                curList.addElement(Path.GetFullPath(SelectedSong.Path));
-                curList.DropEvent(this, null);
+                if (SelectedSong != null)
+                {
+                    //MessageBox.Show("YO MON GARS CA PETE !!");
+                    CurrentList curList = CurrentList.getInstance();
+                    curList.ResetList();
+                    curList.addElement(Path.GetFullPath(SelectedSong.Path));
+                    curList.DropEvent(this, null);
+                }
             }));
 
             #endregion
@@ -329,7 +376,7 @@ namespace SlideBarMVVM
 
                     #endregion
 
-                    #region Load GenreAlbums
+                    #region Load GenreSongs
 
                     IEnumerable<Song> selectedSongs = from son in Lib.Songs
                                                         where son.Genre.ToUpper() == _selectedGenre.ToUpper()
@@ -352,10 +399,17 @@ namespace SlideBarMVVM
 
                     #endregion
 
+                    AllArtistsText = "All (" + ArtistsLIST.Count + ")";
+                    AllAlbumsText = "All (" + AlbumsLIST.Count + ")";
                 }
             }));
 
             #endregion
+
+            AllGenresCMD = new Command(new Action(() =>
+            {
+                RefreshFirstDatas();
+            }));
 
 
 
@@ -368,11 +422,41 @@ namespace SlideBarMVVM
                 {
                     AlbumsLIST = _selectedArtist.Albums;
                     // SongsLIST = null;
+
+                    #region Load ArtistSongs
+
+                    IEnumerable<Song> selectedSongs = from son in Lib.Songs
+                                                      where son.Artist.Name.ToUpper() == _selectedArtist.Name.ToUpper()
+                                                      select son;
+
+                    List<Song> newListSon = new List<Song>();
+
+                    if (selectedSongs.Any())
+                    {
+                        // MessageBox.Show("il y a des artists");
+
+                        foreach (Song son in selectedSongs)
+                        {
+                            // MessageBox.Show("je parcours mes artiste du genre : " + art.Name);
+                            newListSon.Add(son);
+                        }
+                    }
+
+                    SongsLIST = newListSon;
+
+                    #endregion
+
+                    AllAlbumsText = "All (" + AlbumsLIST.Count + ")";
                 }
             }));
 
             #endregion
 
+            AllArtistsCMD = new Command(new Action(() =>
+            {
+                //RefreshFirstDatas();
+                this.LoadGenreCMD.Execute(null);
+            }));
 
 
             #region Load Album
@@ -389,6 +473,11 @@ namespace SlideBarMVVM
 
             #endregion
 
+            AllAlbumsCMD = new Command(new Action(() =>
+            {
+                //RefreshFirstDatas();
+                this.LoadArtistCMD.Execute(null);
+            }));
 
 
             #region Import Directory
@@ -405,7 +494,7 @@ namespace SlideBarMVVM
                 {
                     MessageBox.Show(dialog.SelectedPath);
                     Lib.ImportDir(dialog.SelectedPath);
-                    RefreshLibrary();
+                    RefreshFirstDatas();
                 }
             }));
 
@@ -433,7 +522,7 @@ namespace SlideBarMVVM
                         foreach (Artist a in Lib.Artists)
                             s += a.Name + "\n";
                         //MessageBox.Show("Artists : \n" + s);
-                        RefreshLibrary();
+                        RefreshFirstDatas();
                         //MessageBox.Show("ArtistsLIST.Count = " + ArtistsLIST.Count.ToString());
                     }
 
@@ -449,13 +538,43 @@ namespace SlideBarMVVM
            
         }
 
-        private void RefreshLibrary()
+        private void LoadLibrary()
         {
-            //GenresLIST = null;
-            ArtistsLIST = null;
-            AlbumsLIST = null;
+            Lib = new Library(Tools.DefaultPathFileLibrary);
+
+            try
+            {
+                string error = Lib.Init();
+                if (error != null)
+                    MessageBox.Show("-- Paths not Found --\n" + error);
+            }
+            catch (DirectoryNotFoundException)
+            {
+                MessageBox.Show("At least one path couldn't be found");
+            }
+
+        }   
+
+        public void RefreshFirstDatas()
+        {
             SongsLIST = null;
+            SongsLIST = Lib.Songs;
+
+            GenresLIST = null;
+            GenresLIST = Lib.Genres;
+
+            ArtistsLIST = null;
+            ArtistsLIST = Lib.Artists;
+            
+            AlbumsLIST = null;
+            AlbumsLIST = Lib.Albums;
+
+            AllGenresText = "All (" + Lib.Genres.Count + ")";
+            AllArtistsText = "All (" + Lib.Artists.Count + ")";
+            AllAlbumsText = "All (" + Lib.Albums.Count + ")";
+                
         }
+
     }
 
 }
