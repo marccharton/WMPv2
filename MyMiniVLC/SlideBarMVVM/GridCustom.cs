@@ -32,8 +32,22 @@ namespace SlideBarMVVM
             this._timer.Elapsed += new ElapsedEventHandler(_timer_Elapsed);
             this._timer.Interval = TimeSpan.FromSeconds(2).TotalMilliseconds;
             this.MouseMove += new System.Windows.Input.MouseEventHandler(GridCustom_MouseEnter);
-           // this.ResetTime();
+            this.PreviewMouseDown += new System.Windows.Input.MouseButtonEventHandler(GridCustom_MouseDown);
+            this.MouseUp += new System.Windows.Input.MouseButtonEventHandler(GridCustom_MouseUp);
+            // this.ResetTime();
         }
+
+        void GridCustom_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.ResetTime();
+        }
+
+        void GridCustom_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.ResetTime();
+            this._timer.Stop();
+        }
+
 
         void GridCustom_DragOver(object sender, DragEventArgs e)
         {

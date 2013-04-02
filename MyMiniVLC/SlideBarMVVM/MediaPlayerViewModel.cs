@@ -183,8 +183,40 @@ namespace SlideBarMVVM
             }
         }
 
+        private Boolean _mute;
+        public Boolean Mute
+        {
+            get { return (_mute); }
+            set
+            {
+                if (this._mute != value)
+                {
+                    this._mute = value;
+                    if (this.PropertyChanged != null)
+                        this.PropertyChanged(this, new PropertyChangedEventArgs("Mute"));
+                }
+            }
+        }
+        private String _muteButtonImage;
+        public String MuteButtonImage
+        { 
+            get 
+            {
+                return (this._muteButtonImage);
+            }
+            set 
+            {
+                if (this._muteButtonImage != value) 
+                {
+                    this._muteButtonImage = value;
+                    if (this.PropertyChanged != null)
+                        this.PropertyChanged(this, new PropertyChangedEventArgs("MuteButtonImage"));
+                }
+            }
+        }
 
         private Boolean _changedInPause;
+        private Boolean _fullScreen;
 
         public Command PlayRequest { get; set; }
         public Command StopRequest { get; set; }
@@ -193,6 +225,8 @@ namespace SlideBarMVVM
         public ICommand MediaEndedCommand { get; set; }
         public ICommand RepeatCommand { get; set; }
         public ICommand ShuffleCommand { get; set; }
+        public ICommand MuteCommand { get; set; }
+        public ICommand FullScreenCommand { get; set; }
 
         public ObservableCollection<String> Collect { get; set; }
 
@@ -226,13 +260,6 @@ namespace SlideBarMVVM
             CurrentList.getInstance().ModifiedEvent += new EventHandler(modifiedEvent);
 
             this.Collect = new ObservableCollection<string>();
-            //this.Collect.Add("Coucou");
-            //this.Collect.Add("tu");
-            //this.Collect.Add("veux");
-            //this.Collect.Add("voir");
-            //this.Collect.Add("mon");
-            //this.Collect.Add("...");
-            //this.Collect.Add("???");
 
             this._isOpened = false;
             this.PlayPauseButtonText = "Play";
@@ -437,6 +464,44 @@ namespace SlideBarMVVM
             }));
             #endregion
 
+            this.Mute = false;
+            this.MuteButtonImage = "/Assets/NoMute.png";
+            #region MuteCommand
+            this.MuteCommand = new Command(new Action(() =>
+            {
+                if (this.Mute)
+                {
+                    this.Mute = false;
+                    this.MuteButtonImage = "/Assets/NoMute.png";
+                }
+                else
+                {
+                    this.Mute = true;
+                    this.MuteButtonImage = "/Assets/Mute.png";
+                }                  
+            }));
+            #endregion
+
+            this._fullScreen = false;
+            #region FullScreenCommand
+            this.FullScreenCommand = new Command(new Action(() => 
+            {
+                Window w = App.Current.MainWindow;
+                if (!_fullScreen)
+                {
+                    w.WindowStyle = WindowStyle.None;
+                    w.WindowState = WindowState.Maximized;
+                    _fullScreen = true;
+                }
+                else
+                {
+                    w.WindowStyle = WindowStyle.SingleBorderWindow;
+                    w.WindowState = WindowState.Normal;
+                    _fullScreen = false;
+                }
+            }));
+            #endregion
+            
             CurrentList.getInstance().DropEvent += new EventHandler(dropEvent);
             CurrentList.getInstance().ChangedEvent += new EventHandler(changedEvent);
             this.Init();
