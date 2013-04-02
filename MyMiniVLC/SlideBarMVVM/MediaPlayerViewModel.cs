@@ -228,7 +228,7 @@ namespace SlideBarMVVM
         public ICommand MuteCommand { get; set; }
         public ICommand FullScreenCommand { get; set; }
 
-        public ObservableCollection<String> Collect { get; set; }
+        public ObservableCollection<CurrentListObject> Collect { get; set; }
 
         private void Init()
         {
@@ -249,6 +249,11 @@ namespace SlideBarMVVM
             {
                 curList.addElement(@"G:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\01 - Skrillex - First Of The Year (Equinox).mp3");
                 curList.addElement(@"G:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\02 - Skrillex - Ruffneck (Flex).mp3");
+                curList.addElement(@"G:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\02 - Skrillex - Ruffneck (Flex).mp3");
+                curList.addElement(@"G:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\02 - Skrillex - Ruffneck (Flex).mp3");
+                curList.addElement(@"G:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\02 - Skrillex - Ruffneck (Flex).mp3");
+                curList.addElement(@"G:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\02 - Skrillex - Ruffneck (Flex).mp3");
+                curList.addElement(@"G:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\01 - Skrillex - First Of The Year (Equinox).mp3");
             }
             if (curList.getSize() > 0)
                this.PlayRequest.Execute(this);
@@ -259,7 +264,7 @@ namespace SlideBarMVVM
             this.PlayPauseButtonImage = "/Assets/play.png";
             CurrentList.getInstance().ModifiedEvent += new EventHandler(modifiedEvent);
 
-            this.Collect = new ObservableCollection<string>();
+            this.Collect = new ObservableCollection<CurrentListObject>();
 
             this._isOpened = false;
             this.PlayPauseButtonText = "Play";
@@ -532,8 +537,8 @@ namespace SlideBarMVVM
         void modifiedEvent(object sender, EventArgs e) 
         {
             this.Collect.Clear();
-            foreach (String s in CurrentList.getInstance().getAllElement())
-                this.Collect.Add(Path.GetFileName(s));
+            foreach (CurrentListObject s in CurrentList.getInstance().getAllElement())
+                this.Collect.Add(s);
         }
 
         void _timer_Elapsed(object sender, EventArgs e)

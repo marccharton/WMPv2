@@ -76,15 +76,11 @@ namespace SlideBarMVVM
 
         public void addElement(int length) 
         {
-            bool start = false;
-
             _size.Add(length);
             if (length > _maxLengthContent)
                 _maxLengthContent = length;
-            if (_textBlockCount == 0)
-                start = true;
             _textBlockCount++;
-            if (start && _maxLengthContent > 35)
+            if (_maxLengthContent > 35)
                 _timer.Start();
         }
 

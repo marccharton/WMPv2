@@ -80,6 +80,7 @@
     </ApplicationDefinition>
     <Compile Include="ButtonCustom.cs" />
     <Compile Include="CurrentList.cs" />
+    <Compile Include="CurrentListObject.cs" />
     <Compile Include="DoubleClickEventTrigger.cs" />
     <Compile Include="DropAdorner.cs" />
     <Compile Include="EscapeKeyEventTrigger.cs" />

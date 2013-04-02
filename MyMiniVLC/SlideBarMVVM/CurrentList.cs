@@ -13,8 +13,8 @@ namespace SlideBarMVVM
         private static CurrentList _object = null;
         
         private int _idx;
-        private List<String> _list;
-        private List<String> _originalList;
+        private List<CurrentListObject> _list;
+        private List<CurrentListObject> _originalList;
         private Double _speed;
         public Double Speed
         {
@@ -43,7 +43,7 @@ namespace SlideBarMVVM
         private CurrentList() 
         {
             _idx = 0;
-            _list = new List<string>();
+            _list = new List<CurrentListObject>();
             this.Repeat = RepeatState.NoRepeat;
             _speed = 1.0;
             this.Shuffle = false;
@@ -61,7 +61,7 @@ namespace SlideBarMVVM
         {
             if (s != null)
             {
-                _list.Add(s);
+                _list.Add(new CurrentListObject() { Content = s, Index = this.findMinIdx()});
                 if (this.Shuffle) 
                 {
                     this.ResetRandom();
@@ -98,7 +98,7 @@ namespace SlideBarMVVM
                 foreach (String s in l)
                 {
                     if (s != null)
-                        _list.Add(s);
+                        _list.Add(new CurrentListObject() { Content = s, Index = this.findMinIdx() });
                 }
                 if (this.Shuffle)
                 {
@@ -111,14 +111,14 @@ namespace SlideBarMVVM
 
         public String getCurrentElement() 
         {
-            return (_list.ElementAt(_idx));
+            return (_list.ElementAt(_idx).Content);
         }
 
         public String getNextElement()
         {
             if (_idx + 1 == _list.Count)
-                return (_list.ElementAt(0));
-            return (_list.ElementAt(_idx + 1));
+                return (_list.ElementAt(0).Content);
+            return (_list.ElementAt(_idx + 1).Content);
         }
 
         public String moveToNextElement() 
@@ -127,7 +127,7 @@ namespace SlideBarMVVM
                 _idx = 0;
             else
                 ++_idx;
-            return (_list.ElementAt(_idx));
+            return (_list.ElementAt(_idx).Content);
         }
 
         public String moveToIdx(int idx) 
@@ -135,14 +135,14 @@ namespace SlideBarMVVM
             if (idx >= this._list.Count || idx < 0)
                 return (null);
             this._idx = idx;
-            return (this._list.ElementAt(this._idx));
+            return (this._list.ElementAt(this._idx).Content);
         }
 
         public String getPrevElement()
         {
             if (_idx - 1 < 0)
-                return (_list.ElementAt(_list.Count - 1));
-            return (_list.ElementAt(_idx - 1));
+                return (_list.ElementAt(_list.Count - 1).Content);
+            return (_list.ElementAt(_idx - 1).Content);
         }
 
         public String moveToPrevElement()
@@ -151,7 +151,7 @@ namespace SlideBarMVVM
                 _idx = _list.Count - 1;
             else
                 --_idx;
-            return (_list.ElementAt(_idx));
+            return (_list.ElementAt(_idx).Content);
         }
 
         public int getSize() 
@@ -179,7 +179,7 @@ namespace SlideBarMVVM
 
         public void Random()
         {
-            String s;
+            CurrentListObject s;
 
             if (this._list.Count > 0)
             {
@@ -196,36 +196,40 @@ namespace SlideBarMVVM
         {
             String s;
 
-            s = this._list.ElementAt(this._idx);
+            s = this._list.ElementAt(this._idx).Content;
             this._list = this._originalList;
-            this._idx = this._list.FindIndex(song => song == s);
+            this._idx = this._list.FindIndex(song => song.Content == s);
         }
 
-        public List<String> getAllElement() 
+        public List<CurrentListObject> getAllElement() 
         {
             return (this._list);
         }
 
-        public void InsertAfter(String s, String toAdd) 
+        public void InsertAt(int idx, string item) 
         {
-            int idx = 0;
-
-            foreach (String tmp in this._list)
+            if (idx >= 0 && item != null)
             {
-                if (tmp == s)
-                    break;
-                ++idx;
-            }
-
-            if (idx >= this._list.Count)
-            {
-                 this.addElement(toAdd);
-            }
-            else
-            {
-                this._list.Insert(idx + 1, toAdd);
+                this._list.Insert(idx, new CurrentListObject() { Content = item, Index = this.findMinIdx() });
                 this.ModifiedEvent(this, null);
             }
-       }
+        }
+
+        public void RemoveAt(int idx) 
+        {
+            this._list.RemoveAt(idx);
+            this.ModifiedEvent(this, null);
+        }
+
+        private int findMinIdx() 
+        {
+            int max = -1;
+            foreach (CurrentListObject t in this._list)
+            {
+                if (t.Index > max)
+                    max = t.Index;
+            }
+            return (max + 1);
+        }
     }
 }

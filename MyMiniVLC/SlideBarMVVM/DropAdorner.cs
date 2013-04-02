@@ -40,6 +40,7 @@ namespace SlideBarMVVM
                 this.UpdatePosition();
             }
         }
+
         protected override int VisualChildrenCount
         {
             get { return 1; }

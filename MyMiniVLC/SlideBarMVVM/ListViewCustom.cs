@@ -74,9 +74,38 @@ namespace SlideBarMVVM
             this._isDragging = true;
             this._dragElementFound = true;
             this.originalItemIndex = this.SelectedIndex;
-            ListBoxItem listBoxItem = (ListBoxItem)ItemContainerGenerator.ContainerFromIndex(SelectedIndex);
+            ListBoxItem listBoxItem = (ListBoxItem)ItemContainerGenerator.ContainerFromIndex(this.originalItemIndex);
             this._dropAborn = new DropAdorner((UIElement)this, listBoxItem);
             this.AdornerLayer.Add(this._dropAborn);
+        }
+
+        private int getIdxHit(object sender, MouseButtonEventArgs e) 
+        {
+            Point pt = e.GetPosition((UIElement)sender);
+            HitTestResult result = VisualTreeHelper.HitTest(this, pt);
+            int ret = -1;
+
+            if (result != null) 
+            {
+                DependencyObject obj = result.VisualHit;
+                while (!(obj is ListView) && obj != null) 
+                {
+                    obj = VisualTreeHelper.GetParent(obj);
+                    if (obj is ListViewItem) 
+                    {
+                        ListViewItem tmp = obj as ListViewItem;
+                        for (int i = 0; i < this.Items.Count; ++i)
+                        {
+                            if (tmp == this.ItemContainerGenerator.ContainerFromIndex(i))
+                            {
+                                ret = i;
+                                break;
+                            }
+                        }                    
+                    }
+                }
+            }
+            return (ret);
         }
 
         private String getElementNameHit(object sender, MouseButtonEventArgs e) 
@@ -107,10 +136,10 @@ namespace SlideBarMVVM
         {
             if (e.LeftButton == MouseButtonState.Pressed && e.ClickCount != 2)
             {
-                String bordel = this.getElementNameHit(this, e);
-                if (bordel != null)
+                int idx = this.getIdxHit(this, e);
+                if (idx != -1)
                 {
-                    this.SelectedIndex = CurrentList.getInstance().getAllElement().FindIndex(song => Path.GetFileName(song) == bordel);
+                    this.SelectedIndex = idx;
                     this.ElementFound();
                     this._startPos = e.GetPosition(this);
                 }
@@ -119,7 +148,7 @@ namespace SlideBarMVVM
 
         private void ListViewCustom_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            String endText;
+            int endIdx;
 
             if (this._isDragging && this._dragElementFound)
             {
@@ -128,17 +157,12 @@ namespace SlideBarMVVM
 
                 this._adornLay.Remove(this._dropAborn);
 
-                object originalItem = this.Items[this.originalItemIndex];
-                endText = this.getElementNameHit(this, e);
-                if (endText != null)
+                endIdx = this.getIdxHit(this, e);
+                if (endIdx >= 0 && endIdx != this.originalItemIndex)
                 {
-                    String toAdd = CurrentList.getInstance().getAllElement().Find(song => Path.GetFileName(song) == originalItem.ToString());
-                    String before = CurrentList.getInstance().getAllElement().Find(song => Path.GetFileName(song) == endText);
-                    if (toAdd != before)
-                    {
-                        CurrentList.getInstance().getAllElement().Remove(toAdd);
-                        CurrentList.getInstance().InsertAfter(before, toAdd);
-                    }
+                    String tmp = this.Items[this.originalItemIndex].ToString();
+                    CurrentList.getInstance().RemoveAt(this.originalItemIndex);
+                    CurrentList.getInstance().InsertAt(endIdx, tmp);
                 }
             }
         }
