@@ -435,6 +435,8 @@ namespace SlideBarMVVM
                     this.PlayPauseButtonText = "Pause";
                     this.PlayPauseButtonImage = "/Assets/pause.png";
                 }
+                else
+                    CurrentList.getInstance().setIsPlaying(true, CurrentList.getInstance().getCurrentElementIdx());
             }));
             #endregion
 

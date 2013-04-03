@@ -1460,6 +1460,9 @@
 		<EventTrigger RoutedEvent="DragDrop.DragLeave" SourceName="gridCurrentList">
 			<BeginStoryboard x:Name="OnMouseLeave_BeginStoryboard1" Storyboard="{StaticResource OnMouseLeave}"/>
 		</EventTrigger>
+		<EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="gridCurrentList">
+			<BeginStoryboard Storyboard="{StaticResource OnMouseLeave}"/>
+		</EventTrigger>
     </Window.Triggers>
     
     <i:Interaction.Triggers>
@@ -1520,49 +1523,6 @@
 							<GradientStop Color="#FF0058FF"/>
 						</LinearGradientBrush>
 					</Grid.Background>
-					<local:GridCustom x:Name="gridControlAction" Height="70.84" VerticalAlignment="Bottom">
-                        <local:SpecialSlider x:Name="slider" Maximum="{Binding Maximum, ElementName=MediaElementBehavior}" Minimum="0.0" Background="{x:Null}" Foreground="{x:Null}" IsMoveToPointEnabled="True" Value="{Binding Position, ElementName=MediaElementBehavior, Mode=TwoWay}" Height="23.8" VerticalAlignment="Top" Style="{DynamicResource SpecialSliderStyle}"/>
-						<WrapPanel Margin="0,23.8,0,6" VerticalAlignment="Center" HorizontalAlignment="Center" Height="39.84">
-							<!--<local:ButtonCustom x:Name="test" Content="test" Width="61" Margin="95,0,337,0" />--><!--<local:ButtonCustom x:Name="test" Content="test" Width="61" Margin="95,0,337,0" />-->
-							<TextBlock x:Name="timeBlock" Height="16.241" Margin="0" TextWrapping="Wrap" Width="52.666" TextAlignment="Center" Foreground="White" Text="{Binding Time, ElementName=MediaElementBehavior}"/>
-							<Button x:Name="shuffleButton" Content="Button" Width="39.04" Height="39.04" Template="{DynamicResource ButtonShuffleTemplate}" Command="{Binding ShuffleCommand}" Foreground="Red" Background="{x:Null}"/>
-							<Button x:Name="repeatButton" Content="{Binding RepeatButtonText}" Command="{Binding RepeatCommand}" Width="39.04" Height="39.04" Template="{DynamicResource ButtonRepeatlTemplate}"/>
-							<Button x:Name="stopButton" Command="{Binding StopRequest}" d:LayoutOverrides="HorizontalAlignment" Height="38.973" Width="36.467" Template="{DynamicResource ButtonStopTemplate}">
-								<Button.Background>
-									<LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-										<GradientStop Color="#FFF3F3F3" Offset="1"/>
-										<GradientStop Color="#FFEBEBEB" Offset="1"/>
-										<GradientStop Color="#FF888888"/>
-									</LinearGradientBrush>
-								</Button.Background>
-							</Button>
-							<local:ButtonCustom x:Name="prevButton" Content="&lt;&lt;" Margin="0" Width="47.986" Template="{DynamicResource ButtonPrevTemplate}" Height="39.04" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
-								<local:ButtonCustom.RenderTransform>
-									<TransformGroup>
-										<ScaleTransform/>
-										<SkewTransform/>
-										<RotateTransform Angle="180"/>
-										<TranslateTransform/>
-									</TransformGroup>
-								</local:ButtonCustom.RenderTransform>
-							</local:ButtonCustom>
-							<Button x:Name="buttonPlay" Content="{Binding PlayPauseButtonText}" Command="{Binding PlayRequest}" Template="{DynamicResource ButtonPlayTemplate}" BorderBrush="{x:Null}" Foreground="White" Width="51.646" Height="39.733" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-							<local:ButtonCustom x:Name="nextButton" Content="&gt;&gt;" Width="47.986" Visibility="Visible" Template="{DynamicResource ButtonNextTemplate}" Height="39.04" HorizontalAlignment="Center" VerticalAlignment="Center">
-								<local:ButtonCustom.Background>
-									<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-										<GradientStop Color="#FFF3F3F3" Offset="0"/>
-										<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
-										<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
-										<GradientStop Color="#FFCDCDCD" Offset="1"/>
-									</LinearGradientBrush>
-								</local:ButtonCustom.Background>
-							</local:ButtonCustom>
-							<Rectangle Height="39.04" Width="11.44"/>
-                            <Button x:Name="muteButton" Content="Mute" Height="39.04" Width="34.4" Command="{Binding MuteCommand}" Template="{DynamicResource ButtonMuteTemplate}" Margin="0"/>
-                            <local:SpecialSlider x:Name="volumeSlider" Width="99.267" Minimum="0" Maximum="1" Value="{Binding Volume, ElementName=MediaElementBehavior, Mode=TwoWay}" IsMoveToPointEnabled="True" Height="22.241" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{DynamicResource SpecialSliderStyle}"/>
-							<Button x:Name="openButton" Width="24.533" Command="{Binding OpenDialogCommand}" Height="39.04" Visibility="Hidden" d:IsHidden="True"/>                           
-                        </WrapPanel>
-					</local:GridCustom>
 					<Grid x:Name="gridMediaElement" Margin="0,0,0,74.84" d:LayoutOverrides="HorizontalAlignment" Background="#00000000" AllowDrop="True">
 						<i:Interaction.Behaviors>
 							<local:GridBehavior x:Name="GridBehavior"/>
@@ -1606,6 +1566,50 @@
 						</local:MediaElementCustom>
 						<TextBlock x:Name="nameLabel" TextWrapping="Wrap" Width="146.7" Foreground="White" TextAlignment="Center" Text="{Binding CurrentSourceName}" Height="52.533" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 					</Grid>
+					<local:GridCustom x:Name="gridControlAction" Height="70.84" VerticalAlignment="Bottom">
+						<local:SpecialSlider x:Name="slider" Maximum="{Binding Maximum, ElementName=MediaElementBehavior}" Minimum="0.0" Background="{x:Null}" Foreground="{x:Null}" IsMoveToPointEnabled="True" Value="{Binding Position, ElementName=MediaElementBehavior, Mode=TwoWay}" Height="23.8" VerticalAlignment="Top" Style="{DynamicResource SpecialSliderStyle}"/>
+						<WrapPanel Margin="0,23.8,0,6" VerticalAlignment="Center" HorizontalAlignment="Center" Height="39.84">
+							<!--<local:ButtonCustom x:Name="test" Content="test" Width="61" Margin="95,0,337,0" />-->
+					<!--<local:ButtonCustom x:Name="test" Content="test" Width="61" Margin="95,0,337,0" />-->
+							<TextBlock x:Name="timeBlock" Height="16.241" Margin="0" TextWrapping="Wrap" Width="52.666" TextAlignment="Center" Foreground="White" Text="{Binding Time, ElementName=MediaElementBehavior}"/>
+							<Button x:Name="shuffleButton" Content="Button" Width="39.04" Height="39.04" Template="{DynamicResource ButtonShuffleTemplate}" Command="{Binding ShuffleCommand}" Foreground="Red" Background="{x:Null}"/>
+							<Button x:Name="repeatButton" Content="{Binding RepeatButtonText}" Command="{Binding RepeatCommand}" Width="39.04" Height="39.04" Template="{DynamicResource ButtonRepeatlTemplate}"/>
+							<Button x:Name="stopButton" Command="{Binding StopRequest}" d:LayoutOverrides="HorizontalAlignment" Height="38.973" Width="36.467" Template="{DynamicResource ButtonStopTemplate}">
+								<Button.Background>
+									<LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+										<GradientStop Color="#FFF3F3F3" Offset="1"/>
+										<GradientStop Color="#FFEBEBEB" Offset="1"/>
+										<GradientStop Color="#FF888888"/>
+									</LinearGradientBrush>
+								</Button.Background>
+							</Button>
+							<local:ButtonCustom x:Name="prevButton" Content="&lt;&lt;" Margin="0" Width="47.986" Template="{DynamicResource ButtonPrevTemplate}" Height="39.04" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+								<local:ButtonCustom.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform/>
+										<SkewTransform/>
+										<RotateTransform Angle="180"/>
+										<TranslateTransform/>
+									</TransformGroup>
+								</local:ButtonCustom.RenderTransform>
+							</local:ButtonCustom>
+							<Button x:Name="buttonPlay" Content="{Binding PlayPauseButtonText}" Command="{Binding PlayRequest}" Template="{DynamicResource ButtonPlayTemplate}" BorderBrush="{x:Null}" Foreground="White" Width="51.646" Height="39.733" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+							<local:ButtonCustom x:Name="nextButton" Content="&gt;&gt;" Width="47.986" Visibility="Visible" Template="{DynamicResource ButtonNextTemplate}" Height="39.04" HorizontalAlignment="Center" VerticalAlignment="Center">
+								<local:ButtonCustom.Background>
+									<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+										<GradientStop Color="#FFF3F3F3" Offset="0"/>
+										<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+										<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+										<GradientStop Color="#FFCDCDCD" Offset="1"/>
+									</LinearGradientBrush>
+								</local:ButtonCustom.Background>
+							</local:ButtonCustom>
+							<Rectangle Height="39.04" Width="11.44"/>
+							<Button x:Name="muteButton" Content="Mute" Height="39.04" Width="34.4" Command="{Binding MuteCommand}" Template="{DynamicResource ButtonMuteTemplate}" Margin="0"/>
+							<local:SpecialSlider x:Name="volumeSlider" Width="99.267" Minimum="0" Maximum="1" Value="{Binding Volume, ElementName=MediaElementBehavior, Mode=TwoWay}" IsMoveToPointEnabled="True" Height="22.241" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{DynamicResource SpecialSliderStyle}"/>
+							<Button x:Name="openButton" Width="24.533" Command="{Binding OpenDialogCommand}" Height="39.04" Visibility="Hidden" d:IsHidden="True"/>                           
+						</WrapPanel>
+					</local:GridCustom>
 					<Grid  AllowDrop="True" x:Name="gridCurrentList" Margin="0,0,0,70.84" HorizontalAlignment="Right" Width="191.8" Background="#00FF0000">
 						<local:ListViewCustom x:Name="currentListView" ItemsSource="{Binding Collect}" Foreground="White" IsTabStop="True" Style="{DynamicResource ListViewCustomStyle}" Background="#C5000000" BorderThickness="5" BorderBrush="Black" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" UseLayoutRounding="True" Margin="0,0,-0.2,-0.3" SelectedIndex="5" ItemTemplate="{DynamicResource DataTemplateCurrentList}" d:LayoutOverrides="GridBox, HorizontalMargin" />
 					</Grid>
