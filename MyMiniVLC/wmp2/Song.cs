@@ -22,7 +22,7 @@ namespace wmp2
         [XmlIgnore]
         public int Like { get; set; }
         [XmlIgnore]
-        public int Duration { get; set; }
+        public TimeSpan Duration { get; set; }
         [XmlIgnore]
         public string Lyrics { get; set; }
         [XmlIgnore]

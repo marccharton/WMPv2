@@ -59,22 +59,7 @@ namespace wmp2
 
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
-
-            sb.Append("[Playlist]\n");
-            sb.Append("Name: " + Name + "\n");
-            sb.Append("Description: " + Description + "\n");
-            sb.Append("Like: " + Like + " / 5\n");
-
-            if (Songs != null)
-            {
-                sb.Append("{Songs}\n");
-                foreach (string sg in Songs)
-                {
-                    sb.Append(sg + "\n");
-                }
-            }
-            return sb.ToString();
+            return Name;
         }
     }
 }

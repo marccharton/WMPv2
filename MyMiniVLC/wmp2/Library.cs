@@ -101,11 +101,24 @@ namespace wmp2
             
             // Je rempli un objet Song avec les infos basiques
             Song song = new Song();
-            if (songTag.Title != null) song.Title = Tools.Capitalize(songTag.Title);
-                                       song.Track = (int)songTag.Track;
-            if (songTag.Genre != null) song.Genre = Tools.Capitalize(songTag.Genre);
-            if (songPath != null)      song.Path = songPath;
-            if (songPath != null)      song.Name = Path.GetFileName(songPath);
+            
+            if (songTag != null)
+            {
+                song.Track = (int)songTag.Track;
+                if (String.IsNullOrEmpty(songTag.Title))
+                    song.Title = Path.GetFileName(songPath);
+                else
+                    song.Title = Tools.Capitalize(songTag.Title);
+                if (songTag.Genre != null) 
+                    song.Genre = Tools.Capitalize(songTag.Genre);
+                if (songTag.Duration != null) 
+                    song.Duration = songTag.Duration;
+            }
+            
+            if (songPath != null)
+                song.Path = songPath;
+            if (songPath != null)
+                song.Name = Path.GetFileName(songPath);
 
 
             #region Match with Artist

@@ -1408,13 +1408,7 @@
         	<Grid x:Name="grid" HorizontalAlignment="Stretch" Background="#00000000">
         		<VisualStateManager.VisualStateGroups>
         			<VisualStateGroup x:Name="CommonStates">
-        				<VisualState x:Name="Normal">
-        					<Storyboard>
-        						<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid">
-        							<EasingColorKeyFrame KeyTime="0" Value="#11000000"/>
-        						</ColorAnimationUsingKeyFrames>
-        					</Storyboard>
-        				</VisualState>
+        				
         				<VisualState x:Name="MouseOver">
         					<Storyboard>
         						<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.HorizontalAlignment)" Storyboard.TargetName="textBlock">
@@ -1482,8 +1476,8 @@
         
         <Menu Height="20" Margin="0" VerticalAlignment="Top">
             <MenuItem Header="File" Height="20" Width="50">
-                <MenuItem Header="Open" Height="31" Width="170"/>
-                <MenuItem Header="Close" Height="31" Width="170"/>
+                <MenuItem Header="Open" Height="31" Width="170" Command="{Binding OpenDialogCommand, Source={StaticResource ViewModelDataSource}}"/>
+                <MenuItem Header="Close" Height="31" Width="170" Command="{Binding CloseWindow, Source={StaticResource ViewModelDataSource}}" />
             </MenuItem>
             <MenuItem Header="Edit" Height="20" Width="50"/>
             <MenuItem Header="Library" Height="20" Width="50"  DataContext="{Binding Source={StaticResource ViewModelLibrary}}">
@@ -1647,17 +1641,20 @@
 						<ColumnDefinition Width="0.808*" />
 					</Grid.ColumnDefinitions>
 
-					<TreeView d:LayoutOverrides="HorizontalAlignment" Background="{x:Null}" BorderThickness="0" Margin="0,8,0,0">
-						<TreeViewItem Header="Music" />
-						<TreeViewItem Header="Playlists">
-							<TreeViewItem Header="Playlist 1"/>
-							<TreeViewItem Header="Funk" Margin="0,0,-19,0" d:LayoutOverrides="Width"/>
-							<TreeViewItem Header="Ma super Playlist de la mort qui tue" Margin="0,0,-19,0" d:LayoutOverrides="Width"/>
-							<TreeViewItem Header="LolilolmonGars" Margin="0,0,-19,0" d:LayoutOverrides="Width"/>
-						</TreeViewItem>
-					</TreeView>
+                    
 
-					<GridSplitter Grid.Column="1" x:Name="SplitterCentre" Width="1" ResizeBehavior="PreviousAndNext"
+                    
+                    <TextBlock x:Name="playlistTitle" TextWrapping="Wrap" Text="Playlists" HorizontalAlignment="Left" Margin="8,143.77,0,398.54" Style="{DynamicResource TitleTextStyle}"/>
+                    <ListBox Margin="8,196,2.766,8" BorderThickness="0" Background="#39FFFFFF" ItemsSource="{Binding Playlists}" SelectedItem="{Binding SelectedPlaylist}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding LoadPlaylistCMD}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListBox>
+
+
+                    <GridSplitter Grid.Column="1" x:Name="SplitterCentre" Width="1" ResizeBehavior="PreviousAndNext"
 						VerticalAlignment="Stretch" ShowsPreview="True" ResizeDirection="Columns" HorizontalAlignment="Center" Margin="0,31,0,0">
 						<GridSplitter.Background>
 							<RadialGradientBrush>
@@ -1751,8 +1748,15 @@
                     			<GridView>
                     				<GridViewColumn Width="20" Header="#" DisplayMemberBinding="{Binding Track}" />
                     				<GridViewColumn Width="200" Header="Title" DisplayMemberBinding="{Binding Title}"/>
-                    				<GridViewColumn Width="50" Header="Time"  DisplayMemberBinding="{Binding Duration}"/>
-                    				<GridViewColumn Width="200" Header="Artist" DisplayMemberBinding="{Binding Artist.Name}"/>
+                                    <GridViewColumn Width="50" Header="Time">
+                                        <GridViewColumn.DisplayMemberBinding>
+                                            <MultiBinding StringFormat="{}{0:D2}:{1:D2}">
+                                                <Binding Path="Duration.Minutes" />
+                                                <Binding Path="Duration.Seconds" />
+                                            </MultiBinding>
+                                        </GridViewColumn.DisplayMemberBinding>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="200" Header="Artist" DisplayMemberBinding="{Binding Artist.Name}"/>
                     				<GridViewColumn Width="200" Header="Album" DisplayMemberBinding="{Binding Album.Name}"/>
                     				<GridViewColumn Width="100" Header="Genre" DisplayMemberBinding="{Binding Genre}"/>
                     			</GridView>
@@ -1760,7 +1764,14 @@
                     	</ListView>
                     	<TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="MUSIC" VerticalAlignment="Bottom" Foreground="White" FontWeight="Bold" Grid.Row="2" Margin="0,0,8,3.237" Style="{DynamicResource TitleTextStyle}"/>
                     </Grid>
-				</Grid>
+                    <TextBlock x:Name="songsTitle" TextWrapping="Wrap" Text="Library" HorizontalAlignment="Right" Margin="55,8,0,534.31" Style="{DynamicResource TitleTextStyle}" Width="119">
+                    <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding LoadLibraryCMD}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBlock>
+                </Grid>
 			</TabItem>
 
             <!-- ********************** Fin de ITEM MUSIC ********************** -->

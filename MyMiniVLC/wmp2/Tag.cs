@@ -19,6 +19,7 @@ namespace wmp2
         public uint Track { get; set; }
         public string Composer { get; set; }
         public string Lyrics { get; set; }
+        public TimeSpan Duration { get; set; }
         
         public Tag(string songPath)
         {
@@ -33,6 +34,7 @@ namespace wmp2
             Track = File.Tag.Track;
             Genre = File.Tag.FirstGenre;
             Lyrics = File.Tag.Lyrics;
+            Duration = File.Properties.Duration;
         }
     }
 }

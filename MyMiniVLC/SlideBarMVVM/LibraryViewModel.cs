@@ -20,6 +20,23 @@ namespace SlideBarMVVM
         #region Binded Property
 
 
+        public List<Playlist> _playlists;
+        public List<Playlist> Playlists
+        {
+            get
+            {
+                return this._playlists;
+            }
+            set
+            {
+                if (_playlists != value)
+                {
+                    this._playlists = value;
+                    NotifyPropertyChanged("Playlists");
+                }
+            }
+        }
+
         private String _allGenresText;
         public String AllGenresText
         {
@@ -515,6 +532,11 @@ namespace SlideBarMVVM
                 {
                     SongsLIST = _selectedAlbum.Songs;
                     // MessageBox.Show("_selectedAlbum.Songs.Count = " + _selectedAlbum.Songs.Count.ToString());
+                    if (_selectedAlbum.Genre == "Jazz")
+                    {
+                        foreach(Song s in _selectedAlbum.Songs)
+                            MessageBox.Show("Name = '" + s.Name + "'\n" + "Title = '" + s.Title + "'\n");
+                    }
                 }
             }));
 
@@ -582,7 +604,11 @@ namespace SlideBarMVVM
 
             #endregion
 
-           
+            Playlists = Lib.Playlists;
+            Playlists.Add(new Playlist() { Name = "yo pelo", });
+            Playlists.Add(new Playlist() { Name = "yo pe", });
+            Playlists.Add(new Playlist() { Name = "yo peo", });
+
         }
 
         private void LoadLibrary()

@@ -215,6 +215,7 @@ namespace SlideBarMVVM
 
         private Boolean _changedInPause;
         private Boolean _fullScreen;
+        
 
         public Command PlayRequest { get; set; }
         public Command StopRequest { get; set; }
@@ -225,6 +226,7 @@ namespace SlideBarMVVM
         public ICommand ShuffleCommand { get; set; }
         public ICommand MuteCommand { get; set; }
         public ICommand FullScreenCommand { get; set; }
+        public ICommand CloseWindow { get; set; }
 
         public ObservableCollection<CurrentListObject> Collect { get; set; }
 
@@ -269,6 +271,11 @@ namespace SlideBarMVVM
             this.PlayState = PlayerState.Stop;
             this._changedInPause = false;
 
+            this.CloseWindow = new Command(new Action(() =>
+                {
+                    Application.Current.MainWindow.Close();
+                }));
+            
             #region FileDialogCommand
             this.OpenDialogCommand = new Command(new Action(() =>
             {
