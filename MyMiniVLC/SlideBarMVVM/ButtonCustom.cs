@@ -35,6 +35,7 @@ namespace SlideBarMVVM
                     CurrentList curList = CurrentList.getInstance();
                     if (curList.getSize() > 0)
                     {
+                        CurrentList.getInstance().setIsPlaying(false, CurrentList.getInstance().getCurrentElementIdx());
                         curList.moveToNextElement();
                         curList.ChangedEvent(this, null);
                     }
@@ -48,6 +49,7 @@ namespace SlideBarMVVM
                     CurrentList curList = CurrentList.getInstance();
                     if (curList.getSize() > 0)
                     {
+                        CurrentList.getInstance().setIsPlaying(false, CurrentList.getInstance().getCurrentElementIdx());
                         curList.moveToPrevElement();
                         curList.ChangedEvent(this, null);
                     }

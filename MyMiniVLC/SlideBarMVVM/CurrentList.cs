@@ -231,5 +231,19 @@ namespace SlideBarMVVM
             }
             return (max + 1);
         }
+
+        public int getCurrentElementIdx() 
+        {
+            return (this._idx);
+        }
+
+        public void setIsPlaying(bool isplay, int idx) 
+        {
+            if (idx >= 0 && idx < this._list.Count)
+            {
+                this._list.ElementAt(idx).IsPlaying = isplay;
+                this.ModifiedEvent(this, null);
+            }
+        }
     }
 }

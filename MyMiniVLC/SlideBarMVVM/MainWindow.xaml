@@ -1319,9 +1319,14 @@
     	</Storyboard>
     	<DataTemplate x:Key="DataTemplateCurrentList">
     		<Grid>
-    			<local:TextBlockCustom Height="20" Margin="0" Text="{Binding Mode=OneWay}" TextWrapping="NoWrap" VerticalAlignment="Stretch" Width="Auto"/>
-			</Grid>
-    	</DataTemplate>
+                <local:TextBlockCustom x:Name="songCurrentListBlock" Height="20" Margin="0" Text="{Binding Mode=OneWay}" TextWrapping="NoWrap" VerticalAlignment="Stretch" Width="Auto"/>
+            </Grid>
+            <DataTemplate.Triggers>
+                 <DataTrigger Binding="{Binding IsPlaying}" Value="True" >
+                    <Setter TargetName="songCurrentListBlock" Property="Foreground" Value="Orange"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
 		<Style x:Key="simpleTextStyle" TargetType="{x:Type TextBlock}">
     		<Setter Property="FontFamily" Value="Helvetica World"/>
     		<Setter Property="FontWeight" Value="Normal"/>

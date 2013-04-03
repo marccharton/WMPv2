@@ -10,8 +10,12 @@ namespace SlideBarMVVM
     {
         public int Index { get; set; }
         public String Content { get; set; }
+        public bool IsPlaying { get; set; }
 
-        public CurrentListObject() { }
+        public CurrentListObject() 
+        {
+            this.IsPlaying = false;
+        }
 
         public override string ToString()
         {

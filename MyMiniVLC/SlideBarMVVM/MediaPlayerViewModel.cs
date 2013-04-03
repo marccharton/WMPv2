@@ -340,6 +340,7 @@ namespace SlideBarMVVM
             {
                 // MessageBox.Show("Opened");
                 this._isOpened = true;
+                CurrentList.getInstance().setIsPlaying(true, CurrentList.getInstance().getCurrentElementIdx());
                 if (!this._changedInPause)
                 {
                     this.PlayPauseButtonText = "Pause";
@@ -355,6 +356,7 @@ namespace SlideBarMVVM
             #region MediaFailedCommand
             this.MediaFailedCommand = new Command(new Action(() =>
             {
+                CurrentList.getInstance().setIsPlaying(false, CurrentList.getInstance().getCurrentElementIdx());
                 this._isOpened = false;
                 this.PlayState = PlayerState.Stop;
                 this.PlayPauseButtonText = "Play";
@@ -365,6 +367,7 @@ namespace SlideBarMVVM
             #region StopRequestCommand
             this.StopRequest = new Command(new Action(() =>
             {
+                CurrentList.getInstance().setIsPlaying(false, CurrentList.getInstance().getCurrentElementIdx());
                 this.PlayState = PlayerState.Stop;
                 this.PlayPauseButtonText = "Play";
                 this.PlayPauseButtonImage = "/Assets/play.png";
@@ -403,6 +406,7 @@ namespace SlideBarMVVM
             #region MediaEndedCommand
             this.MediaEndedCommand = new Command(new Action(() =>
             {
+                CurrentList.getInstance().setIsPlaying(false, CurrentList.getInstance().getCurrentElementIdx());
                 CurrentList curList = CurrentList.getInstance();
                 if (curList.Repeat == RepeatState.NoRepeat)
                 {
