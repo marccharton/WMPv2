@@ -193,12 +193,15 @@ namespace SlideBarMVVM
 
         void ListViewCustom_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            int tmp;
 
             if (this.getElementNameHit(this, e) != null)
             {
                 CurrentList curList = CurrentList.getInstance();
 
-                curList.moveToIdx(this.SelectedIndex);
+                tmp = this.SelectedIndex;
+                curList.setIsPlaying(false, curList.getCurrentElementIdx());
+                curList.moveToIdx(tmp);
                 curList.DropEvent(this, null);
             }
         }
