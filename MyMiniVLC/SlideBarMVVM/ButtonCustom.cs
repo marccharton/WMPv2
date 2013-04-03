@@ -78,7 +78,6 @@ namespace SlideBarMVVM
         {        
             this.Dispatcher.Invoke(new Action(() =>
             {
-               // MessageBox.Show("Yo!");
                 if (CurrentList.getInstance().Speed + this._speedIncrease > 0.1)
                     CurrentList.getInstance().Speed += this._speedIncrease;
                 this._passed = true;

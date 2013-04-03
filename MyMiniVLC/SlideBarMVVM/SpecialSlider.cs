@@ -13,10 +13,6 @@ namespace SlideBarMVVM
     {
         public SpecialSlider()
         {
-            //this.MouseMove += OnMouseMove;
-            //this.PreviewMouseLeftButtonUp += new MouseButtonEventHandler(SpecialSlider_PreviewMouseLeftButtonUp);
-            //this.MouseLeave += new MouseEventHandler(SpecialSlider_MouseLeave);
-            //this.LostMouseCapture += new MouseEventHandler(SpecialSlider_LostMouseCapture);
         }
 
         private Track track;

@@ -68,11 +68,7 @@ namespace SlideBarMVVM
 
         public static void VolumePropertyChanged(DependencyObject dep, DependencyPropertyChangedEventArgs ev)
         {
-           // MessageBox.Show("Nouvelle value: " + ev.NewValue.ToString() + "Et ancienne value: " + ev.OldValue.ToString());
-           // MessageBox.Show(((MediaElementBehaviorTest)dep).AssociatedObject.Balance.ToString());
             ((MediaElementBehavior)dep).AssociatedObject.Volume = (double)ev.NewValue;
-            //MessageBox.Show("Je change le volume");
-          //  MessageBox.Show(((MediaElementBehaviorTest)dep).AssociatedObject.Balance.ToString());
         }
 
         public static Visibility GetVideo(DependencyObject m)
@@ -111,7 +107,6 @@ namespace SlideBarMVVM
             AssociatedObject.MediaEnded += new RoutedEventHandler(AssociatedObject_MediaEnded);
             AssociatedObject.MediaFailed += new EventHandler<ExceptionRoutedEventArgs>(AssociatedObject_MediaFailed);
             AssociatedObject.MouseDown += new System.Windows.Input.MouseButtonEventHandler(AssociatedObject_MouseDown);
-  //          AssociatedObject.Drop += new DragEventHandler(AssociatedObject_Drop);
             _timer = new Timer();
             _timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
             _timer.Interval = TimeSpan.FromMilliseconds(500).TotalMilliseconds;
@@ -119,16 +114,6 @@ namespace SlideBarMVVM
             SetValue(TimeProperty, TimeSpan.Zero.ToString(@"hh\:mm\:ss"));
             _fullScreen = false;
         }
-
-        //void AssociatedObject_Drop(object sender, DragEventArgs e)
-        //{
-        //    string []files = (string[])e.Data.GetData(DataFormats.FileDrop);
-
-        //    foreach (string s in files) 
-        //    {
-        //        MessageBox.Show(s);
-        //    }
-        //}
 
         void SpeedChanged_Event(object sender, EventArgs e) 
         {
@@ -168,19 +153,14 @@ namespace SlideBarMVVM
         void AssociatedObject_MediaFailed(object sender, ExceptionRoutedEventArgs e)
         {
             MessageBox.Show("Error: Can't load file: Unknwon format");
-            //MessageBox.Show("FAILED LE MEDIA! FAILED");
-            //SetValue(PlaystateProperty, PlayerState.Stop);
-            //AssociatedObject.Close();
         }
 
         void AssociatedObject_MediaEnded(object sender, RoutedEventArgs e)
         {
             CurrentList curList = CurrentList.getInstance();
-         // MessageBox.Show("Ended");
             SetValue(TimeProperty, TimeSpan.Zero.ToString(@"hh\:mm\:ss"));
             if (curList.Repeat == RepeatState.Repeat || (curList.Repeat == RepeatState.RepeatAll && curList.getSize() > 1))
             {
-                MessageBox.Show("tralalala");
                 AssociatedObject.Position = TimeSpan.FromMilliseconds(1);
                 AssociatedObject.Play();
             }
@@ -197,7 +177,7 @@ namespace SlideBarMVVM
         void AssociatedObject_MediaOpened(object sender, System.Windows.RoutedEventArgs e)
         {
             Boolean tmp = AssociatedObject.IsMuted;
-          //  SetValue(TimeProperty, TimeSpan.Zero.ToString(@"hh\:mm\:ss"));
+
             AssociatedObject.IsMuted = true;
             AssociatedObject.IsMuted = false;
             if (tmp)
@@ -211,9 +191,7 @@ namespace SlideBarMVVM
             if (AssociatedObject.NaturalDuration.HasTimeSpan)
             {
                 SetValue(MaximumProperty, AssociatedObject.NaturalDuration.TimeSpan.TotalMilliseconds);
-  //              SetValue(PositionProperty, 0.0);
-                AssociatedObject.Volume = (double)GetValue(VolumeProperty);
-//                SetValue(PositionPropert
+               AssociatedObject.Volume = (double)GetValue(VolumeProperty);
             }
             else
             {
@@ -228,8 +206,6 @@ namespace SlideBarMVVM
             AssociatedObject.MediaOpened -= AssociatedObject_MediaOpened;
             AssociatedObject.MediaEnded -= AssociatedObject_MediaEnded;
             AssociatedObject.MediaFailed -= AssociatedObject_MediaFailed;
-//            AssociatedObject.MouseDown -= AssociatedObject_MouseDown;
-//            AssociatedObject.Drop -= AssociatedObject_Drop;
             _timer.Elapsed -= timer_Elapsed;
         }
     }

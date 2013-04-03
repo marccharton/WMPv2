@@ -33,7 +33,6 @@ namespace SlideBarMVVM
     public class MediaPlayerViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        public SlideBarViewModel SbViewModel { get; set; }
 
         public Command OpenDialogCommand { get; set; }
         private Uri _currentSourceMedia;
@@ -55,7 +54,6 @@ namespace SlideBarMVVM
             }
         }
 
-        //private Tag _tag;
         private String _currentSourceName;
         public String CurrentSourceName
         {
@@ -289,8 +287,6 @@ namespace SlideBarMVVM
                         this.PlayState = PlayerState.Stop;
                         this.CurrentSourceMedia = new Uri(curList.getCurrentElement());
                         this.CurrentSourceName = Path.GetFileName(curList.getCurrentElement());
-                        //this._tag = new Tag(CurrentList.getCurrentElement());
-                        //this._timer.Start();
                         this.PlayState = PlayerState.Play;
                     }
                 }
@@ -299,7 +295,6 @@ namespace SlideBarMVVM
                     MessageBox.Show(ex.Message);
                 }
             }));
-            //this.PropertyChanged(this, new PropertyChangedEventArgs("OpenDialogCommand"));
             #endregion
 
             #region PlayRequestCommand
@@ -314,7 +309,6 @@ namespace SlideBarMVVM
                 {
                     this.CurrentSourceMedia = new Uri(curList.getCurrentElement());
                     this.CurrentSourceName = Path.GetFileName(curList.getCurrentElement());
-                    //this._tag = new Tag(CurrentList.getCurrentElement());
                     this.PlayState = PlayerState.Play;
                 }
                 else
@@ -338,7 +332,6 @@ namespace SlideBarMVVM
             #region MediaOpenedCommand
             this.MediaOpenedCommand = new Command(new Action(() =>
             {
-                // MessageBox.Show("Opened");
                 this._isOpened = true;
                 CurrentList.getInstance().setIsPlaying(true, CurrentList.getInstance().getCurrentElementIdx());
                 if (!this._changedInPause)
@@ -347,8 +340,6 @@ namespace SlideBarMVVM
                     this.PlayPauseButtonImage = "/Assets/pause.png";
                 }
                 this.StopRequest.CanExec = true;
-                //this.NextCommand.CanExec = true;
-                //this.PrevCommand.CanExec = true;
                 this._changedInPause = false;
             }));
             #endregion
@@ -417,7 +408,6 @@ namespace SlideBarMVVM
                     {
                         this.CurrentSourceMedia = new Uri(curList.moveToNextElement());
                         this.CurrentSourceName = Path.GetFileName(curList.getCurrentElement());
-                        //this._tag = new Tag(CurrentList.getCurrentElement());
                         this.PlayState = PlayerState.Play;
                         this.PlayPauseButtonText = "Pause";
                         this.PlayPauseButtonImage = "/Assets/pause.png";
@@ -445,8 +435,6 @@ namespace SlideBarMVVM
                     this.PlayPauseButtonText = "Pause";
                     this.PlayPauseButtonImage = "/Assets/pause.png";
                 }
-                //else
-                //    CurrentList.ResetIdx();
             }));
             #endregion
 
@@ -543,15 +531,6 @@ namespace SlideBarMVVM
             this.Collect.Clear();
             foreach (CurrentListObject s in CurrentList.getInstance().getAllElement())
                 this.Collect.Add(s);
-        }
-
-        void _timer_Elapsed(object sender, EventArgs e)
-        {
-            MessageBox.Show("Event");
-            //App.Current.Dispatcher.Invoke(new Action(() =>
-            //{
-            //    MessageBox.Show(this._tag.Album + ";" + this._tag.Title + ";" + this._tag.Composer);
-            //}));
         }
 
     }

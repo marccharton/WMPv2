@@ -127,7 +127,6 @@ namespace SlideBarMVVM
                         break;
                     }
                 }
-                // MessageBox.Show(bordel);
             }
             return (bordel);
         }

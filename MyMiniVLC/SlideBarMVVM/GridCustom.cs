@@ -34,7 +34,7 @@ namespace SlideBarMVVM
             this.MouseMove += new System.Windows.Input.MouseEventHandler(GridCustom_MouseEnter);
             this.PreviewMouseDown += new System.Windows.Input.MouseButtonEventHandler(GridCustom_MouseDown);
             this.MouseUp += new System.Windows.Input.MouseButtonEventHandler(GridCustom_MouseUp);
-            // this.ResetTime();
+            this.ResetTime();
         }
 
         void GridCustom_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)

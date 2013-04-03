@@ -91,9 +91,7 @@
     <Compile Include="MediaElementBehavior.cs" />
     <Compile Include="MediaElementCustom.cs" />
     <Compile Include="MediaPlayerViewModel.cs" />
-    <Compile Include="SliderBehavior.cs" />
     <Compile Include="SpecialSlider.cs" />
-    <Compile Include="SlideBarViewModel.cs" />
     <Compile Include="TextBlockCustom.cs" />
     <Compile Include="TextBlockCustomEffect.cs" />
     <Page Include="MainWindow.xaml">
@@ -127,6 +125,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
