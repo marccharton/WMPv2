@@ -25,7 +25,23 @@ namespace SlideBarMVVM
         
         Library Lib;
 
-
+        public string _playlistName;
+        public string PlaylistName
+        {
+            get
+            {
+                return this._playlistName;
+            }
+            set
+            {
+                if (_playlistName != value)
+                {
+                    this._playlistName = value;
+                    NotifyPropertyChanged("PlaylistName");
+                }
+            }
+        }
+        
         public List<Playlist> _playlistsLIST;
         public List<Playlist> PlaylistsLIST
         {
@@ -94,8 +110,26 @@ namespace SlideBarMVVM
             }
         }
 
+
+
+        public Boolean _showPlaylistList;
+        public Boolean ShowPlaylistList
+        {
+            get
+            {
+                return this._showPlaylistList;
+            }
+            set
+            {
+                if (_showPlaylistList != value)
+                {
+                    this._showPlaylistList = value;
+                    NotifyPropertyChanged("ShowPlaylistList");
+                }
+            }
+        }
         
-        
+
         public List<Picture> _picturesList;
         public List<Picture> PicturesList
         {
@@ -338,9 +372,9 @@ namespace SlideBarMVVM
         public Command AllArtistsCMD { get; set; }
         public Command AllAlbumsCMD { get; set; }
         
+        public Command ShowPlaylistsListCMD { get; set; }
 
-
-
+        
         public LibraryViewModel()
         {
             LoadLibrary();
@@ -350,9 +384,27 @@ namespace SlideBarMVVM
             VideosList = Lib.Videos;
             PicturesList = Lib.Pictures;
 
+            ShowPlaylistList = false;
+
             LoadLibraryCMD = new Command(new Action(() =>
             {
-                SongsLIST = Lib.Songs;
+                RefreshFirstDatas();
+                //SongsLIST = Lib.Songs;
+                PlaylistName = "";
+                ShowPlaylistList = false;
+            }));
+
+            ShowPlaylistsListCMD = new Command(new Action(() =>
+            {
+                SongsLIST = null;
+                PlaylistName = "Select your playlist";
+                ShowPlaylistList = true;
+                GenresLIST = null;
+                ArtistsLIST = null;
+                AlbumsLIST = null;
+                AllGenresText = "Ouech";
+                AllArtistsText = "TonTon";
+                AllAlbumsText = " ! ! !";
             }));
 
 
@@ -401,6 +453,8 @@ namespace SlideBarMVVM
             }));
 
             #endregion
+
+
 
 
             
@@ -561,7 +615,6 @@ namespace SlideBarMVVM
 
             AllAlbumsCMD = new Command(new Action(() =>
             {
-                //RefreshFirstDatas();
                 this.LoadArtistCMD.Execute(null);
             }));
 
@@ -569,11 +622,15 @@ namespace SlideBarMVVM
 
             LoadPlaylistCMD = new Command(new Action(() =>
             {
-                MessageBox.Show(SelectedPlaylist.Name);
-                if (SelectedPlaylist.Songs.Count > 0)
-                    MessageBox.Show("SelectedPlaylist.Songs.Count > 0");
+                //MessageBox.Show(SelectedPlaylist.Name);
+                //if (SelectedPlaylist.Songs.Count > 0)
+                //    MessageBox.Show("SelectedPlaylist.Songs.Count > 0");
                 if (SelectedPlaylist != null)
+                {
                     SongsLIST = SelectedPlaylist.Songs;
+                    PlaylistName = SelectedPlaylist.Name;
+                }
+
             }));
 
 
@@ -638,7 +695,8 @@ namespace SlideBarMVVM
             Lib.OpenPlaylists();
             PlaylistsLIST = Lib.Playlists;
 
-            Lib.GetPLaylistWithName("yo pe").Songs = Lib.GetSongsByArtist("Eric Legnini");
+            if (Lib.GetPLaylistWithName("yo pe") != null)
+                Lib.GetPLaylistWithName("yo pe").Songs = Lib.GetSongsByArtist("Eric Legnini");
 
             //PlaylistsLIST.Add(new Playlist() { Name = "yo pelo", });
             //PlaylistsLIST.Add(new Playlist() { Name = "yo pe", });
