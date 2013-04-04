@@ -325,7 +325,8 @@ namespace SlideBarMVVM
         public Command LoadArtistCMD { get; set; }
         public Command LoadAlbumCMD { get; set; }
         public Command LoadPlaylistCMD { get; set; }
-        
+        public Command LoadLibraryCMD { get; set; }
+
         public Command ImportDirectoryCMD { get; set; }
         public Command ImportFileCMD { get; set; }
 
@@ -348,6 +349,11 @@ namespace SlideBarMVVM
 
             VideosList = Lib.Videos;
             PicturesList = Lib.Pictures;
+
+            LoadLibraryCMD = new Command(new Action(() =>
+            {
+                SongsLIST = Lib.Songs;
+            }));
 
 
             #region Play Song Item
@@ -564,8 +570,14 @@ namespace SlideBarMVVM
             LoadPlaylistCMD = new Command(new Action(() =>
             {
                 MessageBox.Show(SelectedPlaylist.Name);
+                if (SelectedPlaylist.Songs.Count > 0)
+                    MessageBox.Show("SelectedPlaylist.Songs.Count > 0");
+                if (SelectedPlaylist != null)
+                    SongsLIST = SelectedPlaylist.Songs;
             }));
 
+
+            
 
 
             #region Import Directory
@@ -623,10 +635,14 @@ namespace SlideBarMVVM
 
             #endregion
 
+            Lib.OpenPlaylists();
             PlaylistsLIST = Lib.Playlists;
-            PlaylistsLIST.Add(new Playlist() { Name = "yo pelo", });
-            PlaylistsLIST.Add(new Playlist() { Name = "yo pe", });
-            PlaylistsLIST.Add(new Playlist() { Name = "yo peo", });
+
+            Lib.GetPLaylistWithName("yo pe").Songs = Lib.GetSongsByArtist("Eric Legnini");
+
+            //PlaylistsLIST.Add(new Playlist() { Name = "yo pelo", });
+            //PlaylistsLIST.Add(new Playlist() { Name = "yo pe", });
+            //PlaylistsLIST.Add(new Playlist() { Name = "yo peo", });
 
         }
 

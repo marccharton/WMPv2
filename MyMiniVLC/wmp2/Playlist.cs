@@ -15,26 +15,31 @@ namespace wmp2
         public DateTime CreationDate { get; set; }
         public int Like { get; set; }
 
-        public List<string> Songs { get; set; }
+        public List<Song> Songs { get; set; }
 
         public Playlist()
         {
             CreationDate = DateTime.Now;
-            Songs = new List<string>();
+            Songs = new List<Song>();
+        }
+
+        ~Playlist()
+        {
+            Serialize();
         }
 
         public bool AddSong(Song song)
         {
             // Song (path) exists ?
-            IEnumerable<string> sgs = from sg in Songs
-                                      where sg == song.Path
+            IEnumerable<Song> sgs = from sg in Songs
+                                      where sg == song
                                       select sg;
             // -> Yes
             if (sgs.Any())
             {   Console.WriteLine("La chanson existe deja..."); return false; }
             // -> No
             if (song != null)
-                Songs.Add(song.Path);
+                Songs.Add(song);
             else
                 Console.WriteLine("[Playlist] Tentative d'ajout d'une Song null");
             return true;
