@@ -40,3 +40,11 @@ E:\Depot Dot Net\wmpv2\MyMiniVLC\wmp2\bin\Debug\policy.2.0.taglib-sharp.config
 E:\Depot Dot Net\wmpv2\MyMiniVLC\wmp2\obj\x86\Debug\ResolveAssemblyReference.cache
 E:\Depot Dot Net\wmpv2\MyMiniVLC\wmp2\obj\x86\Debug\wmp2.dll
 E:\Depot Dot Net\wmpv2\MyMiniVLC\wmp2\obj\x86\Debug\wmp2.pdb
+C:\Users\Marc\Documents\Depots\wmp\MyMiniVLC\wmp2\bin\Debug\wmp2.dll
+C:\Users\Marc\Documents\Depots\wmp\MyMiniVLC\wmp2\bin\Debug\wmp2.pdb
+C:\Users\Marc\Documents\Depots\wmp\MyMiniVLC\wmp2\bin\Debug\policy.2.0.taglib-sharp.dll
+C:\Users\Marc\Documents\Depots\wmp\MyMiniVLC\wmp2\bin\Debug\taglib-sharp.dll
+C:\Users\Marc\Documents\Depots\wmp\MyMiniVLC\wmp2\bin\Debug\policy.2.0.taglib-sharp.config
+C:\Users\Marc\Documents\Depots\wmp\MyMiniVLC\wmp2\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Marc\Documents\Depots\wmp\MyMiniVLC\wmp2\obj\x86\Debug\wmp2.dll
+C:\Users\Marc\Documents\Depots\wmp\MyMiniVLC\wmp2\obj\x86\Debug\wmp2.pdb

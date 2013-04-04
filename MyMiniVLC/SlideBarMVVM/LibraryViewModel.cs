@@ -15,24 +15,30 @@ namespace SlideBarMVVM
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        
         Library Lib;
 
-        #region Binded Property
 
-
-        public List<Playlist> _playlists;
-        public List<Playlist> Playlists
+        public List<Playlist> _playlistsLIST;
+        public List<Playlist> PlaylistsLIST
         {
             get
             {
-                return this._playlists;
+                return this._playlistsLIST;
             }
             set
             {
-                if (_playlists != value)
+                if (_playlistsLIST != value)
                 {
-                    this._playlists = value;
-                    NotifyPropertyChanged("Playlists");
+                    this._playlistsLIST = value;
+                    NotifyPropertyChanged("PlaylistsLIST");
                 }
             }
         }
@@ -296,24 +302,30 @@ namespace SlideBarMVVM
             }
         }
 
-        
-
-        private void NotifyPropertyChanged(string propertyName)
+        private Playlist _selectedPlaylist;
+        public Playlist SelectedPlaylist
         {
-            if (PropertyChanged != null)
+            get
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                return _selectedPlaylist;
+            }
+            set
+            {
+                if (_selectedPlaylist != value)
+                {
+                    _selectedPlaylist = value;
+                    NotifyPropertyChanged("SelectedPlaylist");
+                }
             }
         }
         
-        #endregion
 
-
-        #region Binded Command
 
         public Command LoadGenreCMD { get; set; }
         public Command LoadArtistCMD { get; set; }
         public Command LoadAlbumCMD { get; set; }
+        public Command LoadPlaylistCMD { get; set; }
+        
         public Command ImportDirectoryCMD { get; set; }
         public Command ImportFileCMD { get; set; }
 
@@ -326,7 +338,6 @@ namespace SlideBarMVVM
         public Command AllAlbumsCMD { get; set; }
         
 
-        #endregion
 
 
         public LibraryViewModel()
@@ -549,6 +560,14 @@ namespace SlideBarMVVM
             }));
 
 
+
+            LoadPlaylistCMD = new Command(new Action(() =>
+            {
+                MessageBox.Show(SelectedPlaylist.Name);
+            }));
+
+
+
             #region Import Directory
 
             ImportDirectoryCMD = new Command(new Action(() =>
@@ -604,10 +623,10 @@ namespace SlideBarMVVM
 
             #endregion
 
-            Playlists = Lib.Playlists;
-            Playlists.Add(new Playlist() { Name = "yo pelo", });
-            Playlists.Add(new Playlist() { Name = "yo pe", });
-            Playlists.Add(new Playlist() { Name = "yo peo", });
+            PlaylistsLIST = Lib.Playlists;
+            PlaylistsLIST.Add(new Playlist() { Name = "yo pelo", });
+            PlaylistsLIST.Add(new Playlist() { Name = "yo pe", });
+            PlaylistsLIST.Add(new Playlist() { Name = "yo peo", });
 
         }
 

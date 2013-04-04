@@ -1645,7 +1645,7 @@
 
                     
                     <TextBlock x:Name="playlistTitle" TextWrapping="Wrap" Text="Playlists" HorizontalAlignment="Left" Margin="8,143.77,0,398.54" Style="{DynamicResource TitleTextStyle}"/>
-                    <ListBox Margin="8,196,2.766,8" BorderThickness="0" Background="#39FFFFFF" ItemsSource="{Binding Playlists}" SelectedItem="{Binding SelectedPlaylist}">
+                    <ListBox Margin="8,196,2.766,8" BorderThickness="0" Background="#39FFFFFF" ItemsSource="{Binding PlaylistsLIST}" SelectedItem="{Binding SelectedPlaylist}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseDoubleClick">
                                 <i:InvokeCommandAction Command="{Binding LoadPlaylistCMD}"/>
