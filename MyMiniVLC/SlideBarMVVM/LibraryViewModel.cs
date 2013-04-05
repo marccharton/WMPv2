@@ -13,6 +13,8 @@ namespace SlideBarMVVM
 {
     class LibraryViewModel : INotifyPropertyChanged
     {
+        public bool IsPlaylistMode;
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void NotifyPropertyChanged(string propertyName)
@@ -395,6 +397,7 @@ namespace SlideBarMVVM
         
         public LibraryViewModel()
         {
+            IsPlaylistMode = false;
             LoadLibrary();
 
             RefreshFirstDatas();
@@ -405,12 +408,13 @@ namespace SlideBarMVVM
             ShowPlaylistList = false;
             ShowFilters = true;
 
+            
             #region Load Library
 
             LoadLibraryCMD = new Command(new Action(() =>
             {
+                IsPlaylistMode = false;
                 RefreshFirstDatas();
-                //SongsLIST = Lib.Songs;
                 PlaylistName = "";
                 ShowPlaylistList = false;
                 ShowFilters = true;
@@ -418,10 +422,166 @@ namespace SlideBarMVVM
 
             #endregion
 
+            #region Load Playlist
+
+            LoadPlaylistCMD = new Command(new Action(() =>
+            {
+                if (SelectedPlaylist != null)
+                {
+                    SongsLIST = SelectedPlaylist.Songs;
+                    PlaylistName = SelectedPlaylist.Name;
+                }
+            }));
+
+            #endregion
+
+            #region Load Genre
+
+            LoadGenreCMD = new Command(new Action(() =>
+            {
+                // MessageBox.Show("Valeur du genre selectionné : " + _selectedGenre);
+                if (_selectedGenre != null)
+                {
+                    #region Load GenreArtists
+
+                    IEnumerable<Artist> selectedArtists = from art in Lib.Artists
+                                                          where art.Genre.ToUpper() == _selectedGenre.ToUpper()
+                                                          select art;
+
+                    List<Artist> newList = new List<Artist>();
+
+                    if (selectedArtists.Any())
+                    {
+                        // MessageBox.Show("il y a des artists");
+
+                        foreach (Artist art in selectedArtists)
+                        {
+                            // MessageBox.Show("je parcours mes artiste du genre : " + art.Name);
+                            newList.Add(art);
+                        }
+                    }
+
+                    ArtistsLIST = newList;
+
+                    #endregion
+
+                    #region Load GenreAlbums
+
+                    IEnumerable<Album> selectedAlbums = from alb in Lib.Albums
+                                                        where alb.Genre.ToUpper() == _selectedGenre.ToUpper()
+                                                        select alb;
+
+                    List<Album> newListAlb = new List<Album>();
+
+                    if (selectedArtists.Any())
+                    {
+                        // MessageBox.Show("il y a des artists");
+
+                        foreach (Album alb in selectedAlbums)
+                        {
+                            // MessageBox.Show("je parcours mes artiste du genre : " + art.Name);
+                            newListAlb.Add(alb);
+                        }
+                    }
+
+                    AlbumsLIST = newListAlb;
+
+                    #endregion
+
+                    #region Load GenreSongs
+
+                    IEnumerable<Song> selectedSongs = from son in Lib.Songs
+                                                      where son.Genre.ToUpper() == _selectedGenre.ToUpper()
+                                                      select son;
+
+                    List<Song> newListSon = new List<Song>();
+
+                    if (selectedSongs.Any())
+                    {
+                        // MessageBox.Show("il y a des artists");
+
+                        foreach (Song son in selectedSongs)
+                        {
+                            // MessageBox.Show("je parcours mes artiste du genre : " + art.Name);
+                            newListSon.Add(son);
+                        }
+                    }
+
+                    SongsLIST = newListSon;
+
+                    #endregion
+
+                    AllArtistsText = "All (" + ArtistsLIST.Count + ")";
+                    AllAlbumsText = "All (" + AlbumsLIST.Count + ")";
+                }
+            }));
+
+            #endregion
+
+            #region Load Artist
+
+            LoadArtistCMD = new Command(new Action(() =>
+            {
+                //MessageBox.Show("Valeur de l'artist selectionné : " + _selectedArtist.Name);
+                if (_selectedArtist != null)
+                {
+                    AlbumsLIST = _selectedArtist.Albums;
+                    // SongsLIST = null;
+
+                    #region Load ArtistSongs
+
+                    IEnumerable<Song> selectedSongs = from son in Lib.Songs
+                                                      where son.Artist.Name.ToUpper() == _selectedArtist.Name.ToUpper()
+                                                      select son;
+
+                    List<Song> newListSon = new List<Song>();
+
+                    if (selectedSongs.Any())
+                    {
+                        // MessageBox.Show("il y a des artists");
+
+                        foreach (Song son in selectedSongs)
+                        {
+                            // MessageBox.Show("je parcours mes artiste du genre : " + art.Name);
+                            newListSon.Add(son);
+                        }
+                    }
+
+                    SongsLIST = newListSon;
+
+                    #endregion
+
+                    AllAlbumsText = "All (" + AlbumsLIST.Count + ")";
+                }
+            }));
+
+            #endregion
+
+            #region Load Album
+
+            LoadAlbumCMD = new Command(new Action(() =>
+            {
+                //MessageBox.Show("Valeur de l'album selectionné : " + _selectedAlbum.Name);
+                if (_selectedAlbum != null)
+                {
+                    SongsLIST = _selectedAlbum.Songs;
+                    // MessageBox.Show("_selectedAlbum.Songs.Count = " + _selectedAlbum.Songs.Count.ToString());
+                    if (_selectedAlbum.Genre == "Jazz")
+                    {
+                        foreach (Song s in _selectedAlbum.Songs)
+                            MessageBox.Show("Name = '" + s.Name + "'\n" + "Title = '" + s.Title + "'\n");
+                    }
+                }
+            }));
+
+            #endregion
+
+
             #region Show Playlists List
 
             ShowPlaylistsListCMD = new Command(new Action(() =>
             {
+                IsPlaylistMode = true;
                 SongsLIST = null;
                 PlaylistName = "Select your playlist";
                 ShowPlaylistList = true;
@@ -429,13 +589,14 @@ namespace SlideBarMVVM
                 GenresLIST = null;
                 ArtistsLIST = null;
                 AlbumsLIST = null;
-                AllGenresText = "Ouech";
-                AllArtistsText = "TonTon";
-                AllAlbumsText = " ! ! !";
+                //AllGenresText = "Ouech";
+                //AllArtistsText = "TonTon";
+                //AllAlbumsText = " ! ! !";
             }));
 
             #endregion
 
+            
             #region Play Song Item
 
             PlaySongItemCMD = new Command(new Action(() =>
@@ -482,178 +643,23 @@ namespace SlideBarMVVM
 
             #endregion
 
-            #region Load Genre
 
-            LoadGenreCMD = new Command(new Action(() =>
-            {
-                // MessageBox.Show("Valeur du genre selectionné : " + _selectedGenre);
-                if (_selectedGenre != null)
-                {
-                    #region Load GenreArtists
-                    
-                    IEnumerable<Artist> selectedArtists = from art in Lib.Artists
-                                                          where art.Genre.ToUpper() == _selectedGenre.ToUpper()
-                                                          select art;
-                    
-                    List<Artist> newList = new List<Artist>();
-
-                    if (selectedArtists.Any())
-                    {
-                        // MessageBox.Show("il y a des artists");
-                        
-                        foreach (Artist art in selectedArtists)
-                        {
-                            // MessageBox.Show("je parcours mes artiste du genre : " + art.Name);
-                            newList.Add(art);
-                        }
-                    }
-
-                    ArtistsLIST = newList;
-
-                    #endregion
-
-                    #region Load GenreAlbums
-
-                    IEnumerable<Album> selectedAlbums = from alb in Lib.Albums
-                                                          where alb.Genre.ToUpper() == _selectedGenre.ToUpper()
-                                                          select alb;
-
-                    List<Album> newListAlb = new List<Album>();
-
-                    if (selectedArtists.Any())
-                    {
-                        // MessageBox.Show("il y a des artists");
-
-                        foreach (Album alb in selectedAlbums)
-                        {
-                            // MessageBox.Show("je parcours mes artiste du genre : " + art.Name);
-                            newListAlb.Add(alb);
-                        }
-                    }
-
-                    AlbumsLIST = newListAlb;
-
-                    #endregion
-
-                    #region Load GenreSongs
-
-                    IEnumerable<Song> selectedSongs = from son in Lib.Songs
-                                                        where son.Genre.ToUpper() == _selectedGenre.ToUpper()
-                                                        select son;
-
-                    List<Song> newListSon = new List<Song>();
-
-                    if (selectedSongs.Any())
-                    {
-                        // MessageBox.Show("il y a des artists");
-
-                        foreach (Song son in selectedSongs)
-                        {
-                            // MessageBox.Show("je parcours mes artiste du genre : " + art.Name);
-                            newListSon.Add(son);
-                        }
-                    }
-
-                    SongsLIST = newListSon;
-
-                    #endregion
-
-                    AllArtistsText = "All (" + ArtistsLIST.Count + ")";
-                    AllAlbumsText = "All (" + AlbumsLIST.Count + ")";
-                }
-            }));
-
-            #endregion
+            #region Filters All
 
             AllGenresCMD = new Command(new Action(() =>
             {
                 RefreshFirstDatas();
             }));
-
-
-            #region Load Artist
-
-            LoadArtistCMD = new Command(new Action(() =>
-            {
-                //MessageBox.Show("Valeur de l'artist selectionné : " + _selectedArtist.Name);
-                if (_selectedArtist != null)
-                {
-                    AlbumsLIST = _selectedArtist.Albums;
-                    // SongsLIST = null;
-
-                    #region Load ArtistSongs
-
-                    IEnumerable<Song> selectedSongs = from son in Lib.Songs
-                                                      where son.Artist.Name.ToUpper() == _selectedArtist.Name.ToUpper()
-                                                      select son;
-
-                    List<Song> newListSon = new List<Song>();
-
-                    if (selectedSongs.Any())
-                    {
-                        // MessageBox.Show("il y a des artists");
-
-                        foreach (Song son in selectedSongs)
-                        {
-                            // MessageBox.Show("je parcours mes artiste du genre : " + art.Name);
-                            newListSon.Add(son);
-                        }
-                    }
-
-                    SongsLIST = newListSon;
-
-                    #endregion
-
-                    AllAlbumsText = "All (" + AlbumsLIST.Count + ")";
-                }
-            }));
-
-            #endregion
-
+            
             AllArtistsCMD = new Command(new Action(() =>
             {
-                //RefreshFirstDatas();
                 this.LoadGenreCMD.Execute(null);
             }));
-
-
-            #region Load Album
-
-            LoadAlbumCMD = new Command(new Action(() =>
-            {
-                //MessageBox.Show("Valeur de l'album selectionné : " + _selectedAlbum.Name);
-                if (_selectedAlbum != null)
-                {
-                    SongsLIST = _selectedAlbum.Songs;
-                    // MessageBox.Show("_selectedAlbum.Songs.Count = " + _selectedAlbum.Songs.Count.ToString());
-                    if (_selectedAlbum.Genre == "Jazz")
-                    {
-                        foreach(Song s in _selectedAlbum.Songs)
-                            MessageBox.Show("Name = '" + s.Name + "'\n" + "Title = '" + s.Title + "'\n");
-                    }
-                }
-            }));
-
-            #endregion
-
+            
             AllAlbumsCMD = new Command(new Action(() =>
             {
                 this.LoadArtistCMD.Execute(null);
             }));
-
-
-
-            #region Load Playlist
-
-            LoadPlaylistCMD = new Command(new Action(() =>
-            {
-                if (SelectedPlaylist != null)
-                {
-                    SongsLIST = SelectedPlaylist.Songs;
-                    PlaylistName = SelectedPlaylist.Name;
-                }
-            }));
-
             #endregion
 
 
@@ -676,8 +682,6 @@ namespace SlideBarMVVM
             }));
 
             #endregion
-
-
 
             #region Import File
 
@@ -714,23 +718,26 @@ namespace SlideBarMVVM
 
 
             #region Delete File
-            
-            DeleteFileCMD = new Command(new Action(() => 
-            {
-                MessageBoxResult yo = MessageBox.Show("This will be deleted from you library\nDo you want to delete the file from your computer?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (yo == MessageBoxResult.Yes)
-                {
-                    // Delete du fichier 
-                }
 
-                Lib.Songs.Remove(SelectedSong);
-                RefreshFirstDatas();
+            DeleteFileCMD = new Command(new Action(() =>
+            {
+                if (IsPlaylistMode == false)
+                {
+                    MessageBoxResult yo = MessageBox.Show("This will be deleted from you library\nDo you want to delete the file from your computer?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (yo == MessageBoxResult.Yes)
+                    {
+                        // Delete du fichier 
+                    }
+
+                    Lib.Songs.Remove(SelectedSong);
+                    RefreshFirstDatas();
+                }
             }));
 
             #endregion
 
-            //Lib.OpenPlaylists();
-            //PlaylistsLIST = Lib.Playlists;
+            Lib.OpenPlaylists();
+            PlaylistsLIST = Lib.Playlists;
 
         }
 

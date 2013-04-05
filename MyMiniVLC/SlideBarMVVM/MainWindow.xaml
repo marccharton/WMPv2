@@ -1778,6 +1778,13 @@
                             <ListView.ContextMenu>
                                 <ContextMenu Name="contextMenu">
                                     <MenuItem Header="Delete" Command="{Binding DeleteFileCMD}"/>
+                                    <MenuItem Header="Im in a playlist Mode" Visibility="{Binding IsPlaylistMode, Converter={StaticResource booleanToVisibilityConverter}}">
+                                    </MenuItem>
+                                    <MenuItem Header="Add To Playlist" >
+                                        <MenuItem Header="Playlist 1" />
+                                        <MenuItem Header="Playlist 2" />
+                                        <MenuItem Header="Playlist 3" />
+                                    </MenuItem>
                                 </ContextMenu>
                             </ListView.ContextMenu>
                             <ListView.View>
