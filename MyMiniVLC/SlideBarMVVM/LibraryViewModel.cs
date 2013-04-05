@@ -128,6 +128,23 @@ namespace SlideBarMVVM
                 }
             }
         }
+
+        public Boolean _showFilters;
+        public Boolean ShowFilters
+        {
+            get
+            {
+                return this._showFilters;
+            }
+            set
+            {
+                if (_showFilters != value)
+                {
+                    this._showFilters = value;
+                    NotifyPropertyChanged("ShowFilters");
+                }
+            }
+        }
         
 
         public List<Picture> _picturesList;
@@ -373,7 +390,8 @@ namespace SlideBarMVVM
         public Command AllAlbumsCMD { get; set; }
         
         public Command ShowPlaylistsListCMD { get; set; }
-
+        public Command DeleteFileCMD { get; set; }
+        
         
         public LibraryViewModel()
         {
@@ -385,6 +403,9 @@ namespace SlideBarMVVM
             PicturesList = Lib.Pictures;
 
             ShowPlaylistList = false;
+            ShowFilters = true;
+
+            #region Load Library
 
             LoadLibraryCMD = new Command(new Action(() =>
             {
@@ -392,13 +413,19 @@ namespace SlideBarMVVM
                 //SongsLIST = Lib.Songs;
                 PlaylistName = "";
                 ShowPlaylistList = false;
+                ShowFilters = true;
             }));
+
+            #endregion
+
+            #region Show Playlists List
 
             ShowPlaylistsListCMD = new Command(new Action(() =>
             {
                 SongsLIST = null;
                 PlaylistName = "Select your playlist";
                 ShowPlaylistList = true;
+                ShowFilters = false;
                 GenresLIST = null;
                 ArtistsLIST = null;
                 AlbumsLIST = null;
@@ -407,6 +434,7 @@ namespace SlideBarMVVM
                 AllAlbumsText = " ! ! !";
             }));
 
+            #endregion
 
             #region Play Song Item
 
@@ -454,10 +482,6 @@ namespace SlideBarMVVM
 
             #endregion
 
-
-
-
-            
             #region Load Genre
 
             LoadGenreCMD = new Command(new Action(() =>
@@ -547,7 +571,6 @@ namespace SlideBarMVVM
             }));
 
 
-
             #region Load Artist
 
             LoadArtistCMD = new Command(new Action(() =>
@@ -620,21 +643,18 @@ namespace SlideBarMVVM
 
 
 
+            #region Load Playlist
+
             LoadPlaylistCMD = new Command(new Action(() =>
             {
-                //MessageBox.Show(SelectedPlaylist.Name);
-                //if (SelectedPlaylist.Songs.Count > 0)
-                //    MessageBox.Show("SelectedPlaylist.Songs.Count > 0");
                 if (SelectedPlaylist != null)
                 {
                     SongsLIST = SelectedPlaylist.Songs;
                     PlaylistName = SelectedPlaylist.Name;
                 }
-
             }));
 
-
-            
+            #endregion
 
 
             #region Import Directory
@@ -692,15 +712,25 @@ namespace SlideBarMVVM
 
             #endregion
 
-            Lib.OpenPlaylists();
-            PlaylistsLIST = Lib.Playlists;
 
-            if (Lib.GetPLaylistWithName("yo pe") != null)
-                Lib.GetPLaylistWithName("yo pe").Songs = Lib.GetSongsByArtist("Eric Legnini");
+            #region Delete File
+            
+            DeleteFileCMD = new Command(new Action(() => 
+            {
+                MessageBoxResult yo = MessageBox.Show("This will be deleted from you library\nDo you want to delete the file from your computer?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (yo == MessageBoxResult.Yes)
+                {
+                    // Delete du fichier 
+                }
 
-            //PlaylistsLIST.Add(new Playlist() { Name = "yo pelo", });
-            //PlaylistsLIST.Add(new Playlist() { Name = "yo pe", });
-            //PlaylistsLIST.Add(new Playlist() { Name = "yo peo", });
+                Lib.Songs.Remove(SelectedSong);
+                RefreshFirstDatas();
+            }));
+
+            #endregion
+
+            //Lib.OpenPlaylists();
+            //PlaylistsLIST = Lib.Playlists;
 
         }
 

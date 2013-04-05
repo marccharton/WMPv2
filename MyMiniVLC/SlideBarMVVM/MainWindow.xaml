@@ -1701,7 +1701,7 @@
                     		<RowDefinition Height="auto" MinHeight="2.871"/>
                     		<RowDefinition Height="0.706*"/>
                     	</Grid.RowDefinitions>
-						<Grid x:Name="ListsBoxes" Grid.Row="0" Margin="0,0,0,3.458">
+                        <Grid Visibility="{Binding Path=ShowFilters,Converter={StaticResource booleanToVisibilityConverter}}" x:Name="ListsBoxes" Grid.Row="0" Margin="0,0,0,3.458">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.273*" />
                                 <ColumnDefinition Width="0.003*" />
@@ -1775,9 +1775,14 @@
                                     <i:InvokeCommandAction Command="{Binding PlaySongItemCMD}" />
                     			</i:EventTrigger>
                     		</i:Interaction.Triggers>
-                    		<ListView.View>
+                            <ListView.ContextMenu>
+                                <ContextMenu Name="contextMenu">
+                                    <MenuItem Header="Delete" Command="{Binding DeleteFileCMD}"/>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                            <ListView.View>
                     			<GridView>
-                    				<GridViewColumn Width="20" Header="#" DisplayMemberBinding="{Binding Track}" />
+                    				<GridViewColumn Width="30" Header="#" DisplayMemberBinding="{Binding Track}" />
                     				<GridViewColumn Width="200" Header="Title" DisplayMemberBinding="{Binding Title}"/>
                                     <GridViewColumn Width="50" Header="Time">
                                         <GridViewColumn.DisplayMemberBinding>
@@ -1796,8 +1801,8 @@
                     	<TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="MUSIC" VerticalAlignment="Bottom" Foreground="White" FontWeight="Bold" Grid.Row="2" Margin="0,0,8,3.237" Style="{DynamicResource TitleTextStyle}"/>
                     </Grid>
                     <Button x:Name="libraryTitle" Command="{Binding LoadLibraryCMD}" Content="Library" HorizontalAlignment="Right" Margin="0,8,61.595,0"  Width="119" VerticalAlignment="Top" Template="{DynamicResource LibraryButtonTemplate}" />
-                    <TextBlock x:Name="PlaylistName" Text="{Binding PlaylistName}" Grid.Column="2" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Helvetica World" FontSize="16" Foreground="White" Margin="10,0,0,10"/>
-                    
+                    <!--<TextBlock x:Name="PlaylistName" Text="COUCOU LES AMIS" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="89,64,0,502" Height="24" Grid.ColumnSpan="2" >
+                    </TextBlock>-->
                 </Grid>
 			</TabItem>
 
