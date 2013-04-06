@@ -13,7 +13,7 @@ namespace SlideBarMVVM
 {
     class LibraryViewModel : INotifyPropertyChanged
     {
-        public bool IsPlaylistMode;
+        public bool IsPlaylistMode = false;
         
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -397,13 +397,9 @@ namespace SlideBarMVVM
         
         public LibraryViewModel()
         {
-            IsPlaylistMode = false;
             LoadLibrary();
 
             RefreshFirstDatas();
-
-            VideosList = Lib.Videos;
-            PicturesList = Lib.Pictures;
 
             ShowPlaylistList = false;
             ShowFilters = true;
@@ -565,12 +561,6 @@ namespace SlideBarMVVM
                 if (_selectedAlbum != null)
                 {
                     SongsLIST = _selectedAlbum.Songs;
-                    // MessageBox.Show("_selectedAlbum.Songs.Count = " + _selectedAlbum.Songs.Count.ToString());
-                    if (_selectedAlbum.Genre == "Jazz")
-                    {
-                        foreach (Song s in _selectedAlbum.Songs)
-                            MessageBox.Show("Name = '" + s.Name + "'\n" + "Title = '" + s.Title + "'\n");
-                    }
                 }
             }));
 
@@ -667,10 +657,6 @@ namespace SlideBarMVVM
 
             ImportDirectoryCMD = new Command(new Action(() =>
             {
-                // using WinForms = System.Windows.Forms;
-
-                // Lib.ImportDir(@"E:\Programs Files\Itunes\Music");
-
                 var dialog = new System.Windows.Forms.FolderBrowserDialog();
                 System.Windows.Forms.DialogResult result = dialog.ShowDialog();
                 if (dialog.SelectedPath != null && dialog.SelectedPath != "")
@@ -717,29 +703,50 @@ namespace SlideBarMVVM
             #endregion
 
 
-            //#region Delete File
+            #region Delete File
 
-            //DeleteFileCMD = new Command(new Action(() =>
-            //{
-            //    if (IsPlaylistMode == false)
-            //    {
-            //        MessageBoxResult yo = MessageBox.Show("This will be deleted from you library\nDo you want to delete the file from your computer?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            //        if (yo == MessageBoxResult.Yes)
-            //        {
-            //            // Delete du fichier 
-            //        }
+            DeleteFileCMD = new Command(new Action(() =>
+            {
+                if (IsPlaylistMode == false)
+                {
+                    MessageBoxResult yo = MessageBox.Show("This will be deleted from you library\nDo you want to delete the file from your computer?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (yo == MessageBoxResult.Yes)
+                    {
+                        // Delete du fichier 
+                    }
 
-            //        Lib.Songs.Remove(SelectedSong);
-            //        RefreshFirstDatas();
-            //    }
-            //}));
+                    Lib.Songs.Remove(SelectedSong);
+                    RefreshFirstDatas();
+                }
+            }));
 
-            //#endregion
+            #endregion
 
-            //Lib.OpenPlaylists();
-            //PlaylistsLIST = Lib.Playlists;
-
+            Lib.OpenPlaylists();
+            PlaylistsLIST = Lib.Playlists;
         }
+
+        public void OpenPlaylists()
+        {
+            string path = Tools.DefaultPathFolderPlaylist;
+            MessageBox.Show(Path.GetFullPath(path));
+            string[] files;
+
+            if (Directory.Exists(Path.GetFullPath(path)))
+            {
+                files = Directory.GetFiles(Path.GetFullPath(path));
+                foreach (String file in files)
+                {
+                    if (Path.GetExtension(file) == ".xml")
+                    {
+                        Console.WriteLine(Path.GetFileName(file));
+                        Playlist tmp = new Playlist();
+                        tmp.Unserialize(Path.GetFileName(file));
+                    }
+                }
+            }
+        }
+
 
         private void LoadLibrary()
         {
@@ -768,7 +775,7 @@ namespace SlideBarMVVM
 
             ArtistsLIST = null;
             ArtistsLIST = Lib.Artists;
-            
+
             AlbumsLIST = null;
             AlbumsLIST = Lib.Albums;
 

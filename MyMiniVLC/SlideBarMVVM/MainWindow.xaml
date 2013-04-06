@@ -1525,9 +1525,12 @@
     </Window.InputBindings>
 
 
+    <!-- ******************************************************** Main Grid ********************************************************* -->
+
+    
     <Grid Margin="0">
-        
-        <!-- **************************** MENU ***************************** -->
+
+        <!-- ************************************** MENU *************************************** -->
         
         <Menu Height="20" Margin="0" VerticalAlignment="Top">
             <MenuItem Header="File" Height="20" Width="50">
@@ -1541,11 +1544,11 @@
             </MenuItem>
         </Menu>
 
-        <!-- ************************ Fin de MENU ************************** -->
+        <!-- ********************************** Fin de MENU ************************************ -->
 
-        
-        
-        <!-- ************************ TAB CONTROL ************************** -->        
+
+
+        <!-- ********************************** TAB CONTROL ************************************ -->        
         
         <TabControl x:Name="tabControl" Margin="0,20,0,0">
             <TabControl.InputBindings>
@@ -1695,12 +1698,6 @@
 						<ColumnDefinition Width="Auto" MinWidth="5.234" />
 						<ColumnDefinition Width="0.808*" />
 					</Grid.ColumnDefinitions>
-
-
-
-
-
-
 
                     <Button x:Name="playlistTitle" Command="{Binding ShowPlaylistsListCMD}" Content="Playlists" HorizontalAlignment="Left" Margin="8,42.52,0,0"  Width="119" VerticalAlignment="Top" Template="{DynamicResource LibraryButtonTemplate}"/>
                     <ListBox Visibility="{Binding Path=ShowPlaylistList,Converter={StaticResource booleanToVisibilityConverter}}" Margin="8,94,8,63" BorderThickness="0" Background="#39FFFFFF" ItemsSource="{Binding PlaylistsLIST}" SelectedItem="{Binding SelectedPlaylist}" Foreground="White" BorderBrush="#92328BC4">
@@ -1914,7 +1911,10 @@
         
         </TabControl>
 
-        <!-- ********************* Fin de TAB CONTROL ********************** -->
+        <!-- ******************************* Fin de TAB CONTROL ******************************** -->
 
     </Grid>
+
+
+    <!-- **************************************************** Fin de Main Grid ****************************************************** -->
 </Window>

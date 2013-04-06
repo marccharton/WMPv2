@@ -337,16 +337,21 @@ namespace wmp2
         public void OpenPlaylists()
         {
             string path = Tools.DefaultPathFolderPlaylist;
-            string[] files = Directory.GetFiles(path);
+            //MessageBox.Show(Path.GetFullPath(path));
+            string[] files;
 
-            foreach (String file in files)
+            if (Directory.Exists(Path.GetFullPath(path)))
             {
-                if (Path.GetExtension(file) == ".xml")
+                files = Directory.GetFiles(Path.GetFullPath(path));
+                foreach (String file in files)
                 {
-                    Console.WriteLine(Path.GetFileName(file));
-                    Playlist tmp = new Playlist();
-                    tmp.Unserialize(Path.GetFileName(file));
-                    Playlists.Add(tmp);
+                    if (Path.GetExtension(file) == ".xml")
+                    {
+                        Console.WriteLine(Path.GetFileName(file));
+                        Playlist tmp = new Playlist();
+                        tmp.Unserialize(Path.GetFileName(file));
+                        Playlists.Add(tmp);
+                    }
                 }
             }
         }
