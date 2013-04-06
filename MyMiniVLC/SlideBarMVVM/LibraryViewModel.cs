@@ -61,6 +61,24 @@ namespace SlideBarMVVM
             }
         }
 
+        public List<MenuItemCustom> _playlistsMenuItemList;
+        public List<MenuItemCustom> PlaylistsMenuItemList
+        {
+            get
+            {
+                return this._playlistsMenuItemList;
+            }
+            set
+            {
+                if (_playlistsMenuItemList != value)
+                {
+                    this._playlistsMenuItemList = value;
+                    NotifyPropertyChanged("PlaylistsMenuItemList");
+                }
+            }
+        }
+        
+
         private String _allGenresText;
         public String AllGenresText
         {
@@ -393,11 +411,13 @@ namespace SlideBarMVVM
         
         public Command ShowPlaylistsListCMD { get; set; }
         public Command DeleteFileCMD { get; set; }
+        public Command AddToPlaylistCMD { get; set; }
         
         
         public LibraryViewModel()
         {
             LoadLibrary();
+            LoadPlaylistModule();
 
             RefreshFirstDatas();
 
@@ -722,8 +742,25 @@ namespace SlideBarMVVM
 
             #endregion
 
+            AddToPlaylistCMD = new Command(new Action(() =>
+                {
+                    if (SelectedSong != null)
+                    {
+
+                    }
+                }));
+             
+        }
+
+        private void LoadPlaylistModule()
+        {
             Lib.OpenPlaylists();
             PlaylistsLIST = Lib.Playlists;
+            PlaylistsMenuItemList = new List<MenuItemCustom>();
+            foreach (Playlist pl in Lib.Playlists)
+            {
+                PlaylistsMenuItemList.Add(new MenuItemCustom() { Name = pl.Name, isEnabled = true });
+            }
         }
 
         public void OpenPlaylists()

@@ -91,6 +91,7 @@
     <Compile Include="MediaElementBehavior.cs" />
     <Compile Include="MediaElementCustom.cs" />
     <Compile Include="MediaPlayerViewModel.cs" />
+    <Compile Include="MenuItemCustom.cs" />
     <Compile Include="SpecialSlider.cs" />
     <Compile Include="TextBlockCustom.cs" />
     <Compile Include="TextBlockCustomEffect.cs" />
