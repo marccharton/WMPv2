@@ -408,7 +408,7 @@ namespace SlideBarMVVM
             ShowPlaylistList = false;
             ShowFilters = true;
 
-            
+
             #region Load Library
 
             LoadLibraryCMD = new Command(new Action(() =>
@@ -596,7 +596,7 @@ namespace SlideBarMVVM
 
             #endregion
 
-            
+
             #region Play Song Item
 
             PlaySongItemCMD = new Command(new Action(() =>
@@ -650,12 +650,12 @@ namespace SlideBarMVVM
             {
                 RefreshFirstDatas();
             }));
-            
+
             AllArtistsCMD = new Command(new Action(() =>
             {
                 this.LoadGenreCMD.Execute(null);
             }));
-            
+
             AllAlbumsCMD = new Command(new Action(() =>
             {
                 this.LoadArtistCMD.Execute(null);
@@ -717,27 +717,27 @@ namespace SlideBarMVVM
             #endregion
 
 
-            #region Delete File
+            //#region Delete File
 
-            DeleteFileCMD = new Command(new Action(() =>
-            {
-                if (IsPlaylistMode == false)
-                {
-                    MessageBoxResult yo = MessageBox.Show("This will be deleted from you library\nDo you want to delete the file from your computer?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    if (yo == MessageBoxResult.Yes)
-                    {
-                        // Delete du fichier 
-                    }
+            //DeleteFileCMD = new Command(new Action(() =>
+            //{
+            //    if (IsPlaylistMode == false)
+            //    {
+            //        MessageBoxResult yo = MessageBox.Show("This will be deleted from you library\nDo you want to delete the file from your computer?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            //        if (yo == MessageBoxResult.Yes)
+            //        {
+            //            // Delete du fichier 
+            //        }
 
-                    Lib.Songs.Remove(SelectedSong);
-                    RefreshFirstDatas();
-                }
-            }));
+            //        Lib.Songs.Remove(SelectedSong);
+            //        RefreshFirstDatas();
+            //    }
+            //}));
 
-            #endregion
+            //#endregion
 
-            Lib.OpenPlaylists();
-            PlaylistsLIST = Lib.Playlists;
+            //Lib.OpenPlaylists();
+            //PlaylistsLIST = Lib.Playlists;
 
         }
 
