@@ -92,12 +92,12 @@ namespace wmp2
             this.Description = tmp.Description;
             this.CreationDate = tmp.CreationDate;
             this.Like = tmp.Like;
-
-
-            foreach (Song sg in tmp.Songs)
-            {
-                this.Songs.Add(CreateSong(Path.GetFullPath(sg.Path)));
-            }
+            this.Songs = tmp.Songs;
+            
+            //foreach (Song sg in tmp.Songs)
+            //{
+            //    this.Songs.Add(CreateSong(Path.GetFullPath(sg.Path)));
+            //}
         }
         
         public void Serialize()

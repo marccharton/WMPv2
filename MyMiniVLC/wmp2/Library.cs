@@ -292,7 +292,16 @@ namespace wmp2
             if (enum_sg.Any())
                 s = enum_sg.First();
             else
-                s = CreateSong(path);
+            {
+                try
+                {
+                    s = CreateSong(path);
+                }
+                catch
+                {
+                    return s;
+                }
+            }
             return s;
         }
 
@@ -348,9 +357,17 @@ namespace wmp2
                 {
                     if (Path.GetExtension(file) == ".xml")
                     {
+                        List<Song> newList = new List<Song>(); 
                         Console.WriteLine(Path.GetFileName(file));
                         Playlist tmp = new Playlist();
                         tmp.Unserialize(Path.GetFileName(file));
+                        foreach (Song sg in tmp.Songs)
+                        {
+                            Song sgToAdd = GetSongWithPath(sg.Path);
+                            if (sgToAdd != null)
+                                newList.Add(sgToAdd);
+                        }
+                        tmp.Songs = newList;
                         Playlists.Add(tmp);
                     }
                 }
