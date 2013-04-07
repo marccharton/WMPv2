@@ -414,6 +414,8 @@ namespace SlideBarMVVM
         
         
         public Command DeleteFileCMD { get; set; }
+        public Command AddToCurrentListCMD { get; set; }
+        
 
         public Command ShowPlaylistsListCMD { get; set; }
         public Command AddToPlaylistCMD { get; set; }
@@ -422,7 +424,7 @@ namespace SlideBarMVVM
 
         public Command DeletePlaylistCMD { get; set; }
         public Command RenamePlaylistCMD { get; set; }
-
+        public Command PlayPlaylistCMD { get; set; }
         
         public LibraryViewModel()
         {
@@ -763,6 +765,12 @@ namespace SlideBarMVVM
 
             #endregion
 
+            #region Add to current List
+            AddToCurrentListCMD = new Command(new Action(() =>
+            {
+                CurrentList.getInstance().addElement(Path.GetFullPath(SelectedSong.Path));
+            }));
+            #endregion
 
             
             #region Add to Playlist
@@ -831,6 +839,23 @@ namespace SlideBarMVVM
                     }
                 }));
             #endregion
+
+            #region Play Playlist
+
+            PlayPlaylistCMD = new Command(new Action(() =>
+                {
+                    CurrentList curList = CurrentList.getInstance();
+                    curList.ResetList();
+                    foreach (Song sg in SelectedPlaylist.Songs)
+                    {
+                        curList.addElement(Path.GetFullPath(sg.Path));
+                    }
+                    curList.DropEvent(this, null);
+                }));
+
+            #endregion
+
+
         }
 
         private void LoadPlaylistModule()
@@ -839,39 +864,12 @@ namespace SlideBarMVVM
             {
                 Lib.OpenPlaylists();
                 PlaylistsLIST = Lib.Playlists;
-                //PlaylistsMenuItemList = new List<MenuItemCustom>();
-                //foreach (Playlist pl in Lib.Playlists)
-                //{
-                //    PlaylistsMenuItemList.Add(new MenuItemCustom() { Name = pl.Name, isEnabled = true });
-                //}
             }
         }
-
-        public void OpenPlaylists()
-        {
-            string path = Tools.DefaultPathFolderPlaylist;
-            MessageBox.Show(Path.GetFullPath(path));
-            string[] files;
-
-            if (Directory.Exists(Path.GetFullPath(path)))
-            {
-                files = Directory.GetFiles(Path.GetFullPath(path));
-                foreach (String file in files)
-                {
-                    if (Path.GetExtension(file) == ".xml")
-                    {
-                        Console.WriteLine(Path.GetFileName(file));
-                        Playlist tmp = new Playlist();
-                        tmp.Unserialize(Path.GetFileName(file));
-                    }
-                }
-            }
-        }
-
 
         private void LoadLibrary()
         {
-            MessageBox.Show(Path.GetFullPath(Tools.DefaultPathFileLibrary));
+            //MessageBox.Show(Path.GetFullPath(Tools.DefaultPathFileLibrary));
             Lib = new Library(Path.GetFullPath(Tools.DefaultPathFileLibrary));
 
             try
@@ -881,13 +879,11 @@ namespace SlideBarMVVM
                     string error = Lib.Init();
                     if (error != null)
                         MessageBox.Show("-- Paths not Found --\n" + error);
-                    else
-                        MessageBox.Show("Library Imported");
                 }
             }
-            catch (DirectoryNotFoundException)
+            catch
             {
-                MessageBox.Show("At least one path couldn't be found");
+                MessageBox.Show("Problem with library loading");
             }
 
         }   

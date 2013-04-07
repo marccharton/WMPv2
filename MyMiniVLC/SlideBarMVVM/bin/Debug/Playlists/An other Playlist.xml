@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Playlist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <IsDeleted>false</IsDeleted>
+  <Name>An other Playlist</Name>
+  <Description />
+  <CreationDate>2013-04-07T14:21:44.829621+02:00</CreationDate>
+  <Like>0</Like>
+  <Songs>
+    <Song>
+      <Path>E:\Programs Files\Itunes\Music\Bumblefoot\Normal\14 Hidden Track.m4a</Path>
+    </Song>
+    <Song>
+      <Path>E:\Programs Files\Itunes\Music\Bumblefoot\Normal\06 Pretty Ugly.m4a</Path>
+    </Song>
+  </Songs>
+</Playlist>
