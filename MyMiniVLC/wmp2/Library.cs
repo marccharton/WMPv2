@@ -46,9 +46,10 @@ namespace wmp2
         // Load Existing Files in xml file in Library
         public string Init()
         {
-            Unserialize();
             string error = null;
-
+            
+            if (Unserialize() == false)
+                return "Problem with " + PathOfLibFile;
             foreach (string path in MediaPaths)
             {
                 try

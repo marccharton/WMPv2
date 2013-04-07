@@ -14,6 +14,8 @@ namespace SlideBarMVVM
 {
     class LibraryViewModel : INotifyPropertyChanged
     {
+        Library Lib;
+        
         public bool IsPlaylistMode = false;
         public bool IsAddPlaylistMode = false;
         
@@ -27,7 +29,6 @@ namespace SlideBarMVVM
             }
         }
         
-        Library Lib;
 
         public string _playlistName;
         public string PlaylistName
@@ -804,14 +805,21 @@ namespace SlideBarMVVM
                 }));
             #endregion
 
+            #region Delete Playlist
             DeletePlaylistCMD = new Command(new Action(() => 
                 {
-                    File.Delete(Tools.DefaultPathFolderPlaylist + SelectedPlaylist.Name + ".xml");
-                    Lib.Playlists.Remove(SelectedPlaylist);
-                    PlaylistsLIST = null;
-                    PlaylistsLIST = Lib.Playlists;
+                    if (SelectedPlaylist != null)
+                    {
+                        File.Delete(Tools.DefaultPathFolderPlaylist + SelectedPlaylist.Name + ".xml");
+                        SelectedPlaylist.IsDeleted = true;
+                        Lib.Playlists.Remove(SelectedPlaylist);
+                        PlaylistsLIST = null;
+                        PlaylistsLIST = Lib.Playlists;
+                    }
                 }));
+            #endregion
 
+            #region Rename Playlist
             RenamePlaylistCMD = new Command(new Action(() =>
                 {
                     string playlistName = Interaction.InputBox("Type the new name of your Playlist :", "New Name", "My playlist");
@@ -822,17 +830,20 @@ namespace SlideBarMVVM
                         PlaylistsLIST = Lib.Playlists;
                     }
                 }));
-
+            #endregion
         }
 
         private void LoadPlaylistModule()
         {
-            Lib.OpenPlaylists();
-            PlaylistsLIST = Lib.Playlists;
-            PlaylistsMenuItemList = new List<MenuItemCustom>();
-            foreach (Playlist pl in Lib.Playlists)
+            if (Lib != null)
             {
-                PlaylistsMenuItemList.Add(new MenuItemCustom() { Name = pl.Name, isEnabled = true });
+                Lib.OpenPlaylists();
+                PlaylistsLIST = Lib.Playlists;
+                //PlaylistsMenuItemList = new List<MenuItemCustom>();
+                //foreach (Playlist pl in Lib.Playlists)
+                //{
+                //    PlaylistsMenuItemList.Add(new MenuItemCustom() { Name = pl.Name, isEnabled = true });
+                //}
             }
         }
 
@@ -860,13 +871,19 @@ namespace SlideBarMVVM
 
         private void LoadLibrary()
         {
-            Lib = new Library(Tools.DefaultPathFileLibrary);
+            MessageBox.Show(Path.GetFullPath(Tools.DefaultPathFileLibrary));
+            Lib = new Library(Path.GetFullPath(Tools.DefaultPathFileLibrary));
 
             try
             {
-                string error = Lib.Init();
-                if (error != null)
-                    MessageBox.Show("-- Paths not Found --\n" + error);
+                if (Lib != null)
+                {
+                    string error = Lib.Init();
+                    if (error != null)
+                        MessageBox.Show("-- Paths not Found --\n" + error);
+                    else
+                        MessageBox.Show("Library Imported");
+                }
             }
             catch (DirectoryNotFoundException)
             {
@@ -877,27 +894,30 @@ namespace SlideBarMVVM
 
         public void RefreshFirstDatas()
         {
-            SongsLIST = null;
-            SongsLIST = Lib.Songs;
+            if (Lib != null)
+            {
+                SongsLIST = null;
+                SongsLIST = Lib.Songs;
 
-            GenresLIST = null;
-            GenresLIST = Lib.Genres;
+                GenresLIST = null;
+                GenresLIST = Lib.Genres;
 
-            ArtistsLIST = null;
-            ArtistsLIST = Lib.Artists;
+                ArtistsLIST = null;
+                ArtistsLIST = Lib.Artists;
 
-            AlbumsLIST = null;
-            AlbumsLIST = Lib.Albums;
+                AlbumsLIST = null;
+                AlbumsLIST = Lib.Albums;
 
-            AllGenresText = "All (" + Lib.Genres.Count + ")";
-            AllArtistsText = "All (" + Lib.Artists.Count + ")";
-            AllAlbumsText = "All (" + Lib.Albums.Count + ")";
+                AllGenresText = "All (" + Lib.Genres.Count + ")";
+                AllArtistsText = "All (" + Lib.Artists.Count + ")";
+                AllAlbumsText = "All (" + Lib.Albums.Count + ")";
 
-            VideosList = null;
-            VideosList = Lib.Videos;
+                VideosList = null;
+                VideosList = Lib.Videos;
 
-            PicturesList = null;
-            PicturesList = Lib.Pictures;
+                PicturesList = null;
+                PicturesList = Lib.Pictures;
+            }
         }
 
     }

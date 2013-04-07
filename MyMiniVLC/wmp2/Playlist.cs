@@ -14,6 +14,8 @@ namespace wmp2
         public string Description { get; set; }
         public DateTime CreationDate { get; set; }
         public int Like { get; set; }
+        
+        public bool IsDeleted = false;
 
         public List<Song> Songs { get; set; }
 
@@ -25,7 +27,8 @@ namespace wmp2
 
         ~Playlist()
         {
-            Serialize();
+            if (IsDeleted == false)
+                Serialize();
         }
 
         public bool AddSong(Song song)
@@ -96,7 +99,7 @@ namespace wmp2
                 this.Songs.Add(CreateSong(Path.GetFullPath(sg.Path)));
             }
         }
-
+        
         public void Serialize()
         {
             Serializer.Serialize(this, Tools.DefaultPathFolderPlaylist + this.Name + ".xml", FileMode.OpenOrCreate, typeof(Playlist));
