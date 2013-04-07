@@ -159,9 +159,9 @@ namespace SlideBarMVVM
                 endIdx = this.getIdxHit(this, e);
                 if (endIdx >= 0 && endIdx != this.originalItemIndex)
                 {
-                    String tmp = this.Items[this.originalItemIndex].ToString();
+                    CurrentListObject tmp = this.Items[this.originalItemIndex] as CurrentListObject;
                     CurrentList.getInstance().RemoveAt(this.originalItemIndex);
-                    CurrentList.getInstance().InsertAt(endIdx, tmp);
+                    CurrentList.getInstance().InsertAt(endIdx, tmp.Content);
                 }
             }
         }
