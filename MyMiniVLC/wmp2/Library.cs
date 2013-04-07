@@ -356,7 +356,7 @@ namespace wmp2
             }
         }
 
-        public void AddPlaylist(string name, string desc)
+        public bool AddPlaylist(string name, string desc)
         {
             IEnumerable<Playlist> pls = from pl in Playlists
                                         where pl.Name == name
@@ -370,6 +370,9 @@ namespace wmp2
                     Description = desc
                 });
             }
+            else
+                return false;
+            return true;
         }
 
         public Playlist GetPLaylistWithName(string name)

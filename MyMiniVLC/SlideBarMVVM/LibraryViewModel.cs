@@ -7,6 +7,7 @@ using wmp2;
 using System.Windows;
 using System.IO;
 using Microsoft.Win32;
+using Microsoft.VisualBasic;
 
 
 namespace SlideBarMVVM
@@ -14,6 +15,7 @@ namespace SlideBarMVVM
     class LibraryViewModel : INotifyPropertyChanged
     {
         public bool IsPlaylistMode = false;
+        public bool IsAddPlaylistMode = false;
         
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -409,10 +411,17 @@ namespace SlideBarMVVM
         public Command AllArtistsCMD { get; set; }
         public Command AllAlbumsCMD { get; set; }
         
-        public Command ShowPlaylistsListCMD { get; set; }
-        public Command DeleteFileCMD { get; set; }
-        public Command AddToPlaylistCMD { get; set; }
         
+        public Command DeleteFileCMD { get; set; }
+
+        public Command ShowPlaylistsListCMD { get; set; }
+        public Command AddToPlaylistCMD { get; set; }
+        public Command RunAddPlaylistModeCMD { get; set; }
+        public Command AddPlaylistCMD { get; set; }
+
+        public Command DeletePlaylistCMD { get; set; }
+        public Command RenamePlaylistCMD { get; set; }
+
         
         public LibraryViewModel()
         {
@@ -442,10 +451,22 @@ namespace SlideBarMVVM
 
             LoadPlaylistCMD = new Command(new Action(() =>
             {
-                if (SelectedPlaylist != null)
+                if (IsAddPlaylistMode == false)
                 {
-                    SongsLIST = SelectedPlaylist.Songs;
-                    PlaylistName = SelectedPlaylist.Name;
+                    if (SelectedPlaylist != null)
+                    {
+                        SongsLIST = SelectedPlaylist.Songs;
+                        PlaylistName = SelectedPlaylist.Name;
+                    }
+                }
+                else
+                {
+                    this.AddToPlaylistCMD.Execute(null);
+                    ShowPlaylistList = false;
+                    IsAddPlaylistMode = false;
+                    if (SelectedPlaylist != null)
+                        MessageBox.Show("Song added to '" + SelectedPlaylist.Name + "'");
+                    PlaylistsLIST = Lib.Playlists;
                 }
             }));
 
@@ -727,14 +748,13 @@ namespace SlideBarMVVM
 
             DeleteFileCMD = new Command(new Action(() =>
             {
-                if (IsPlaylistMode == false)
+                if (IsPlaylistMode == false && SelectedSong != null)
                 {
                     MessageBoxResult yo = MessageBox.Show("This will be deleted from you library\nDo you want to delete the file from your computer?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (yo == MessageBoxResult.Yes)
                     {
-                        // Delete du fichier 
+                        File.Delete(Path.GetFullPath(SelectedSong.Path));
                     }
-
                     Lib.Songs.Remove(SelectedSong);
                     RefreshFirstDatas();
                 }
@@ -742,14 +762,67 @@ namespace SlideBarMVVM
 
             #endregion
 
+
+            
+            #region Add to Playlist
             AddToPlaylistCMD = new Command(new Action(() =>
                 {
-                    if (SelectedSong != null)
+                    if (SelectedSong != null && SelectedPlaylist != null)
                     {
-
+                        SelectedPlaylist.AddSong(SelectedSong);
+                    }
+                    else
+                    {
+                        MessageBox.Show("SelectedSong : " + SelectedSong + "\nSelectedPlaylist" + SelectedPlaylist);
                     }
                 }));
-             
+            #endregion
+
+            #region Run Add Playlist Mode
+            RunAddPlaylistModeCMD = new Command(new Action(() =>
+                {
+                    IsAddPlaylistMode = true;
+                    ShowPlaylistList = true;
+                }));
+            #endregion
+
+            #region Add Playlist
+
+            AddPlaylistCMD = new Command(new Action(() => 
+                {
+                    //MessageBox.Show("Type the name of your new Playlist :");
+                    string playlistName = Interaction.InputBox("Type the name of your new Playlist :", "New Playlist", "My playlist");
+                    if (playlistName != "" && playlistName != null)
+                    {
+                        if (Lib.AddPlaylist(playlistName, "") == false)
+                        {
+                            MessageBox.Show("This playlist name already exists");
+                        }
+                        PlaylistsLIST = null;
+                        PlaylistsLIST = Lib.Playlists;
+                    }
+                }));
+            #endregion
+
+            DeletePlaylistCMD = new Command(new Action(() => 
+                {
+                    File.Delete(Tools.DefaultPathFolderPlaylist + SelectedPlaylist.Name + ".xml");
+                    Lib.Playlists.Remove(SelectedPlaylist);
+                    PlaylistsLIST = null;
+                    PlaylistsLIST = Lib.Playlists;
+                }));
+
+            RenamePlaylistCMD = new Command(new Action(() =>
+                {
+                    string playlistName = Interaction.InputBox("Type the new name of your Playlist :", "New Name", "My playlist");
+                    if (playlistName != "" && playlistName != null)
+                    {
+                        SelectedPlaylist.Name = playlistName;
+                        PlaylistsLIST = null;
+                        PlaylistsLIST = Lib.Playlists;
+                    }
+                }));
+
         }
 
         private void LoadPlaylistModule()

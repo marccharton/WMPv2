@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<Playlist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>playlist2</Name>
+  <Description />
+  <CreationDate>2013-04-07T11:27:55.0380711+02:00</CreationDate>
+  <Like>0</Like>
+  <Songs>
+    <Song>
+      <Path>E:\Programs Files\Itunes\Music\Airbourne\Runnin' Wild [Roadrunner]\02 Runnin' Wild.m4a</Path>
+    </Song>
+  </Songs>
+</Playlist>

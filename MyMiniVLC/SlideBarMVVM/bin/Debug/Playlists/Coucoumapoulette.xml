@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Playlist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>Coucoumapoulette</Name>
+  <Description />
+  <CreationDate>2013-04-07T11:29:29.8454937+02:00</CreationDate>
+  <Like>0</Like>
+  <Songs>
+    <Song>
+      <Path>E:\Programs Files\Itunes\Music\Airbourne\Runnin' Wild [Roadrunner]\06 Blackjack.m4a</Path>
+    </Song>
+    <Song>
+      <Path>E:\Programs Files\Itunes\Music\Bumblefoot\Normal\14 Hidden Track.m4a</Path>
+    </Song>
+  </Songs>
+</Playlist>

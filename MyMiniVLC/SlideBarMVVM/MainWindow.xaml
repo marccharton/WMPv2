@@ -1493,6 +1493,37 @@
         <!-- ******************************* Misc ******************************** -->
         <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
         <System:Double x:Key="DoubleSpeedRatio">1</System:Double>
+        <ControlTemplate x:Key="ActionButtonTemplate" TargetType="{x:Type Button}">
+        	<Grid x:Name="grid" Margin="0,0,-86.667,0">
+        		<Grid.Background>
+        			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+        				<GradientStop Color="#4F3F3F3F" Offset="1"/>
+        				<GradientStop/>
+        			</LinearGradientBrush>
+        		</Grid.Background>
+        		<VisualStateManager.VisualStateGroups>
+        			<VisualStateGroup x:Name="CommonStates">
+        				<VisualState x:Name="Normal"/>
+        				<VisualState x:Name="MouseOver">
+        					<Storyboard>
+        						<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="grid">
+        							<EasingColorKeyFrame KeyTime="0" Value="#4FFFFFFF"/>
+        						</ColorAnimationUsingKeyFrames>
+        					</Storyboard>
+        				</VisualState>
+        				<VisualState x:Name="Pressed">
+        					<Storyboard>
+        						<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="grid">
+        							<EasingColorKeyFrame KeyTime="0" Value="#AE3F3F3F"/>
+        						</ColorAnimationUsingKeyFrames>
+        					</Storyboard>
+        				</VisualState>
+        				<VisualState x:Name="Disabled"/>
+        			</VisualStateGroup>
+        		</VisualStateManager.VisualStateGroups>
+        		<TextBlock TextWrapping="Wrap" Text="{TemplateBinding Content}" FontFamily="Helvetica World" Foreground="White" Margin="8,0,0,0"/>
+        	</Grid>
+        </ControlTemplate>
         <!-- *************************** Fin de Misc ***************************** -->
 	
 	</Window.Resources>
@@ -1676,7 +1707,7 @@
             
             <!-- ************************* ITEM MUSIC ************************** -->
             
-            <TabItem x:Name="tabMusic" Header="Music" DataContext="{Binding Source={StaticResource ViewModelLibrary}}">
+            <TabItem x:Name="tabMusic" Header="Music" DataContext="{Binding Source={StaticResource ViewModelLibrary}}" Height="22.96" Margin="-2,0,-2,-1" VerticalAlignment="Bottom">
             <!--<TabItem x:Name="tabMusic" Header="Music">-->
             	<TabItem.Background>
             		<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -1700,7 +1731,14 @@
 					</Grid.ColumnDefinitions>
 
                     <Button x:Name="playlistTitle" Command="{Binding ShowPlaylistsListCMD}" Content="Playlists" HorizontalAlignment="Left" Margin="8,42.52,0,0"  Width="119" VerticalAlignment="Top" Template="{DynamicResource LibraryButtonTemplate}"/>
-                    <ListBox Visibility="{Binding Path=ShowPlaylistList,Converter={StaticResource booleanToVisibilityConverter}}" Margin="8,94,8,63" BorderThickness="0" Background="#39FFFFFF" ItemsSource="{Binding PlaylistsLIST}" SelectedItem="{Binding SelectedPlaylist}" Foreground="White" BorderBrush="#92328BC4">
+                    
+					<ListBox Visibility="{Binding Path=ShowPlaylistList,Converter={StaticResource booleanToVisibilityConverter}}" Margin="8,111,8,63" BorderThickness="0" Background="#39FFFFFF" ItemsSource="{Binding PlaylistsLIST}" SelectedItem="{Binding SelectedPlaylist}" Foreground="White" BorderBrush="#92328BC4">
+                        <ListBox.ContextMenu>
+                            <ContextMenu Name="contextMenuPlaylist" Background="White" BorderThickness="0" FontFamily="Helvetica World" Foreground="#FF1F477C">
+                                <MenuItem Header="Delete" Command="{Binding DeletePlaylistCMD}"/>
+                                <MenuItem Header="Rename" Command="{Binding RenamePlaylistCMD}"/>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseDoubleClick">
                                 <i:InvokeCommandAction Command="{Binding LoadPlaylistCMD}"/>
@@ -1800,23 +1838,16 @@
                     			</i:EventTrigger>
                     		</i:Interaction.Triggers>
                             <ListView.ContextMenu>
-                                <ContextMenu Name="contextMenu">
+                                <ContextMenu Name="contextMenu" Background="White" BorderThickness="0" FontFamily="Helvetica World" Foreground="#FF1F477C">
                                     <MenuItem Header="Delete" Command="{Binding DeleteFileCMD}"/>
-                                    <MenuItem Header="Add to playlist" Name="AddToPlaylist" ItemsSource="{Binding PlaylistsMenuItemList}">
-                                        <MenuItem.ItemTemplate>
+                                    <MenuItem Header="Add to playlist" Name="AddToPlaylist" ToolTip="Ajouter cette chanson a une playlist" Command="{Binding RunAddPlaylistModeCMD}">
+                                    <!--<MenuItem Header="Add to playlist" Name="AddToPlaylist" ItemsSource="{Binding PlaylistsMenuItemList}" ToolTip="Ajouter cette chanson a une playlist" Command="{Binding RunAddPlaylistModeCMD}">-->
+                                        <!--<MenuItem.ItemTemplate>
                                             <DataTemplate>
-                                                <MenuItem Header="{Binding Name}" Command="" Visibility="{Binding IsEnabled, Converter={StaticResource booleanToVisibilityConverter}}" />
+                                                <MenuItem Header="{Binding Name}" Command="{Binding AddToPlaylistCMD}" Visibility="{Binding IsEnabled, Converter={StaticResource booleanToVisibilityConverter}}" Cursor="Hand" Focusable="False"/>
                                             </DataTemplate>
-                                        </MenuItem.ItemTemplate>
+                                        </MenuItem.ItemTemplate>-->
                                     </MenuItem>
-
-                                    <!--<MenuItem Header="Im in a playlist Mode" Visibility="{Binding IsPlaylistMode, Converter={StaticResource booleanToVisibilityConverter}}">
-                                    </MenuItem>
-                                    <MenuItem Header="Add To Playlist" >
-                                        <MenuItem Header="Playlist 1" />
-                                        <MenuItem Header="Playlist 2" />
-                                        <MenuItem Header="Playlist 3" />
-                                    </MenuItem>-->
                                 </ContextMenu>
                             </ListView.ContextMenu>
                             <ListView.View>
@@ -1840,6 +1871,7 @@
                     	<TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="MUSIC" VerticalAlignment="Bottom" Foreground="White" FontWeight="Bold" Grid.Row="2" Margin="0,0,8,3.237" Style="{DynamicResource TitleTextStyle}"/>
                     </Grid>
                     <Button x:Name="libraryTitle" Command="{Binding LoadLibraryCMD}" Content="Library" HorizontalAlignment="Right" Margin="0,8,61.595,0"  Width="119" VerticalAlignment="Top" Template="{DynamicResource LibraryButtonTemplate}" />
+                    <Button Content="New Playlist" BorderThickness="0" Height="23.54" VerticalAlignment="Top" HorizontalAlignment="Left" Width="83.624" Margin="10,81,0,0" Template="{DynamicResource ActionButtonTemplate}" Command="{Binding AddPlaylistCMD}"/>
                     <!--<TextBlock x:Name="PlaylistName" Text="COUCOU LES AMIS" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="89,64,0,502" Height="24" Grid.ColumnSpan="2" >
                     </TextBlock>-->
                 </Grid>

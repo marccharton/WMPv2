@@ -1,14 +1,12 @@
 <?xml version="1.0"?>
 <Playlist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Name>yo pelo</Name>
-  <CreationDate>2013-04-04T17:05:55.6796054+02:00</CreationDate>
+  <Name>playlist4</Name>
+  <Description />
+  <CreationDate>2013-04-07T11:28:08.5138418+02:00</CreationDate>
   <Like>0</Like>
   <Songs>
     <Song>
       <Path>E:\Programs Files\Itunes\Music\Airbourne\Runnin' Wild [Roadrunner]\05 Fat City.m4a</Path>
-    </Song>
-    <Song>
-      <Path>E:\Programs Files\Itunes\Music\Bumblefoot\Normal\07 The Color Of Justice.m4a</Path>
     </Song>
   </Songs>
 </Playlist>
