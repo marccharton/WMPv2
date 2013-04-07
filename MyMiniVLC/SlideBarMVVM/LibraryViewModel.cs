@@ -8,6 +8,7 @@ using System.Windows;
 using System.IO;
 using Microsoft.Win32;
 using Microsoft.VisualBasic;
+using System.Diagnostics;
 
 
 namespace SlideBarMVVM
@@ -425,7 +426,9 @@ namespace SlideBarMVVM
         public Command DeletePlaylistCMD { get; set; }
         public Command RenamePlaylistCMD { get; set; }
         public Command PlayPlaylistCMD { get; set; }
-        
+
+        public Command OpenFileInExplorerCMD { get; set; }
+
         public LibraryViewModel()
         {
             LoadLibrary();
@@ -855,7 +858,12 @@ namespace SlideBarMVVM
 
             #endregion
 
-
+            #region Open Explorer
+            OpenFileInExplorerCMD = new Command(new Action(() =>
+                {
+                    Process.Start(Path.GetDirectoryName(SelectedSong.Path));
+                }));
+            #endregion
         }
 
         private void LoadPlaylistModule()

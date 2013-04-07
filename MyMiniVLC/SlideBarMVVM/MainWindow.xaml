@@ -1842,6 +1842,7 @@
                                 <ContextMenu Name="contextMenu" Background="White" BorderThickness="0" FontFamily="Helvetica World" Foreground="#FF1F477C">
                                     <MenuItem Header="Add to Current List" Name="AddToCurrentList" ToolTip="Ajouter cette chanson à la liste de lecture en cours" Command="{Binding AddToCurrentListCMD}"/>
                                     <MenuItem Header="Add to playlist" Name="AddToPlaylist" ToolTip="Ajouter cette chanson à une playlist" Command="{Binding RunAddPlaylistModeCMD}"/>
+                                    <MenuItem Header="Open in Explorer" Name="OpenInexplorer" ToolTip="Ouvrir dans l'explorateur Windows" Command="{Binding OpenFileInExplorerCMD}"/>
                                     <MenuItem Header="Delete" Command="{Binding DeleteFileCMD}"/>
                                     <!--<MenuItem Header="Add to playlist" Name="AddToPlaylist" ItemsSource="{Binding PlaylistsMenuItemList}" ToolTip="Ajouter cette chanson a une playlist" Command="{Binding RunAddPlaylistModeCMD}">-->
                                         <!--<MenuItem.ItemTemplate>
