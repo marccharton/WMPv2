@@ -517,6 +517,7 @@ namespace SlideBarMVVM
         void dropEvent(object sender, EventArgs e)
         {
             this.StopRequest.Execute(this);
+            this.CurrentSourceName = "";
             this.PlayRequest.Execute(this);
         }
 
@@ -540,7 +541,6 @@ namespace SlideBarMVVM
             this.Collect.Clear();
             foreach (CurrentListObject s in CurrentList.getInstance().getAllElement())
                 this.Collect.Add(s);
-            this.CurrentSourceName = "";
         }
 
     }
