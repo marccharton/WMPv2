@@ -28,7 +28,10 @@ namespace wmp2
         ~Playlist()
         {
             if (IsDeleted == false)
+            {
+                File.Delete(Path.GetFullPath(Tools.DefaultPathFolderPlaylist + Name + ".xml"));
                 Serialize();
+            }
         }
 
         public bool AddSong(Song song)
