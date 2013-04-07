@@ -175,6 +175,7 @@ namespace SlideBarMVVM
         {
             _idx = 0;
             _list.Clear();
+            this.ModifiedEvent(this, null);
         }
 
         public void Random()

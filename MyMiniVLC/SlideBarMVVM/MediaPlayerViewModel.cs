@@ -540,6 +540,7 @@ namespace SlideBarMVVM
             this.Collect.Clear();
             foreach (CurrentListObject s in CurrentList.getInstance().getAllElement())
                 this.Collect.Add(s);
+            this.CurrentSourceName = "";
         }
 
     }
