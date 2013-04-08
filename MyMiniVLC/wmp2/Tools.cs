@@ -29,7 +29,7 @@ namespace wmp2
         {
             string extension = Path.GetExtension(name);
 
-            if (extension == ".mp3" || extension == ".wav" || extension == ".flac" || extension == ".ogg" || extension == ".wav" || extension == ".m4a")
+            if (extension == ".mp3" || extension == ".wav" || extension == ".flac" || extension == ".ogg" || extension == ".wma" || extension == ".m4a")
                 return Format.MUSIC;
             if (extension == ".wmv" || extension == ".avi" || extension == ".mpg" || extension == ".mov" || extension == ".mp4")
                 return Format.VIDEO;

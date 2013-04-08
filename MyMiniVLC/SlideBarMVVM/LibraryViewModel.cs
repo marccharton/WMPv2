@@ -754,15 +754,24 @@ namespace SlideBarMVVM
 
             DeleteFileCMD = new Command(new Action(() =>
             {
-                if (IsPlaylistMode == false && SelectedSong != null)
+                if (SelectedSong != null)
                 {
                     MessageBoxResult yo = MessageBox.Show("This will be deleted from you library\nDo you want to delete the file from your computer?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (yo == MessageBoxResult.Yes)
                     {
                         File.Delete(Path.GetFullPath(SelectedSong.Path));
                     }
-                    Lib.Songs.Remove(SelectedSong);
-                    RefreshFirstDatas();
+                    if (IsPlaylistMode == false)
+                    {
+                        Lib.Songs.Remove(SelectedSong);
+                        RefreshFirstDatas();
+                    }
+                    else
+                    {
+                        SelectedPlaylist.Songs.Remove(SelectedSong);
+                        SongsLIST = null;
+                        SongsLIST = SelectedPlaylist.Songs;
+                    }
                 }
             }));
 
@@ -772,6 +781,13 @@ namespace SlideBarMVVM
             AddToCurrentListCMD = new Command(new Action(() =>
             {
                 CurrentList.getInstance().addElement(Path.GetFullPath(SelectedSong.Path));
+            }));
+            #endregion
+
+            #region Open Explorer
+            OpenFileInExplorerCMD = new Command(new Action(() =>
+            {
+                Process.Start(Path.GetDirectoryName(SelectedSong.Path));
             }));
             #endregion
 
@@ -833,9 +849,10 @@ namespace SlideBarMVVM
             #region Rename Playlist
             RenamePlaylistCMD = new Command(new Action(() =>
                 {
-                    string playlistName = Interaction.InputBox("Type the new name of your Playlist :", "New Name", "My playlist");
+                    string playlistName = Interaction.InputBox("Type the new name of your Playlist :", "New Name", SelectedPlaylist.Name);
                     if (playlistName != "" && playlistName != null)
                     {
+                        File.Delete(Tools.DefaultPathFolderPlaylist + SelectedPlaylist.Name + ".xml");
                         SelectedPlaylist.Name = playlistName;
                         PlaylistsLIST = null;
                         PlaylistsLIST = Lib.Playlists;
@@ -847,23 +864,27 @@ namespace SlideBarMVVM
 
             PlayPlaylistCMD = new Command(new Action(() =>
                 {
-                    CurrentList curList = CurrentList.getInstance();
-                    curList.ResetList();
-                    foreach (Song sg in SelectedPlaylist.Songs)
+                    if (SelectedPlaylist != null)
                     {
-                        curList.addElement(Path.GetFullPath(sg.Path));
+                        if (SelectedPlaylist.Songs.Count > 0)
+                        {
+                            CurrentList curList = CurrentList.getInstance();
+                            curList.ResetList();
+                            foreach (Song sg in SelectedPlaylist.Songs)
+                            {
+                                curList.addElement(Path.GetFullPath(sg.Path));
+                            }
+                            curList.DropEvent(this, null);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Your Playlist is empty !\nAdd some songs to play it");
+                        }
                     }
-                    curList.DropEvent(this, null);
                 }));
 
             #endregion
 
-            #region Open Explorer
-            OpenFileInExplorerCMD = new Command(new Action(() =>
-                {
-                    Process.Start(Path.GetDirectoryName(SelectedSong.Path));
-                }));
-            #endregion
         }
 
         private void LoadPlaylistModule()
@@ -877,7 +898,6 @@ namespace SlideBarMVVM
 
         private void LoadLibrary()
         {
-            //MessageBox.Show(Path.GetFullPath(Tools.DefaultPathFileLibrary));
             Lib = new Library(Path.GetFullPath(Tools.DefaultPathFileLibrary));
 
             try

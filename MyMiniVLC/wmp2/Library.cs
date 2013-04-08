@@ -165,27 +165,30 @@ namespace wmp2
                                        select a;
 
             // yes -> Catch it and match with my current song
-            if (album.Any())
+            if (album != null)
             {
-                Console.WriteLine("Mon album existe");
-                foreach (Album alb in album)
+                if (album.Any())
                 {
+                    Console.WriteLine("Mon album existe");
+                    foreach (Album alb in album)
+                    {
+                        song.Album = alb;
+                        alb.Songs.Add(song);
+                        curAlb = alb;
+                        //Console.WriteLine("J'ai trouve l'album il s'appelle bien : " + alb.Name);
+                    }
+                }
+                // no -> Create a new album et push it in my albums List
+                else
+                {
+                    Console.WriteLine("Mon album n'existe pas");
+                    Album alb = new Album() { Name = Tools.Capitalize(songTag.Album) };
+                    Albums.Add(alb);
                     song.Album = alb;
                     alb.Songs.Add(song);
                     curAlb = alb;
-                    //Console.WriteLine("J'ai trouve l'album il s'appelle bien : " + alb.Name);
+                    //Console.WriteLine("L'album n'existait pas, j'ai donc du le creer : " + alb.Name);
                 }
-            }
-            // no -> Create a new album et push it in my albums List
-            else
-            {
-                Console.WriteLine("Mon album n'existe pas");
-                Album alb = new Album() { Name = Tools.Capitalize(songTag.Album) };
-                Albums.Add(alb);
-                song.Album = alb;
-                alb.Songs.Add(song);
-                curAlb = alb;
-                //Console.WriteLine("L'album n'existait pas, j'ai donc du le creer : " + alb.Name);
             }
             #endregion
 
@@ -272,12 +275,21 @@ namespace wmp2
             if (!pathOfFile.Any())
             {
                 if (Tools.CheckFormat(path) == Tools.Format.MUSIC)
+                {
                     this.Songs.Add(CreateSong(path));
+                    MediaPaths.Add(path);
+                }
                 else if (Tools.CheckFormat(path) == Tools.Format.VIDEO)
+                {
                     this.Videos.Add(new Video(path));
+                    MediaPaths.Add(path);
+                }
                 else if (Tools.CheckFormat(path) == Tools.Format.PICTURE)
+                {
                     this.Pictures.Add(new Picture(path));
-                MediaPaths.Add(path);
+                    MediaPaths.Add(path);
+                }
+                
             }
             return true;
         }
