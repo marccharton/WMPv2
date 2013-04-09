@@ -46,9 +46,10 @@ namespace wmp2
         public string Init()
         {
             string error = null;
+            int i = 0;
             
             if (Unserialize() == false)
-                return "Problem with " + PathOfLibFile;
+                return "Problem with the path of library : " + PathOfLibFile;
             foreach (string path in MediaPaths)
             {
                 try
@@ -62,7 +63,15 @@ namespace wmp2
                 }
                 catch (DirectoryNotFoundException)
                 {
-                    error += path + "\n";
+                    if (i < 20)
+                    {
+                        error += path + "\n";
+                        i++;
+                    }
+                    else
+                    {
+                        error += "...";
+                    }
                 }
             }
             
@@ -77,7 +86,6 @@ namespace wmp2
 
         public bool Unserialize()
         {
-            Console.WriteLine("[deserialize] file : " + PathOfLibFile);
             if (File.Exists(PathOfLibFile))
                 using (var fs = new FileStream(PathOfLibFile, FileMode.Open))
                 {
