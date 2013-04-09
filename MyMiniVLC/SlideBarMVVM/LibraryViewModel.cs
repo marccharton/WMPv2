@@ -527,14 +527,39 @@ namespace SlideBarMVVM
                 //MessageBox.Show("Valeur de l'artist selectionné : " + _selectedArtist.Name);
                 if (_selectedArtist != null)
                 {
-                    AlbumsLIST = _selectedArtist.Albums;
-                    // SongsLIST = null;
+                    if (SelectedGenre != null)
+                    {
+                        IEnumerable<Album> linqAlbums = from alb in Lib.GetAlbumsByGenre(SelectedGenre)
+                                                        where alb.Artist.Name.ToUpper() == SelectedArtist.Name.ToUpper()
+                                                        select alb;
+                        List<Album> newAlbumList = new List<Album>();
+                        if (linqAlbums.Any())
+                            foreach (Album alb in linqAlbums)
+                                newAlbumList.Add(alb);
+                        AlbumsLIST = newAlbumList;
+                    }
+                    else
+                    {
+                        AlbumsLIST = _selectedArtist.Albums;
+                    }
 
                     #region Load ArtistSongs
 
-                    IEnumerable<Song> selectedSongs = from son in Lib.Songs
-                                                      where son.Artist.Name.ToUpper() == _selectedArtist.Name.ToUpper()
-                                                      select son;
+                    IEnumerable<Song> selectedSongs = null;
+
+                    if (SelectedGenre != null)
+                    {
+                        selectedSongs = from son in Lib.Songs
+                                        where (son.Artist.Name.ToUpper() == _selectedArtist.Name.ToUpper()) &&
+                                              (son.Genre.ToUpper() == SelectedGenre.ToUpper())
+                                        select son;
+                    }
+                    else
+                    {
+                        selectedSongs = from son in Lib.Songs
+                                        where son.Artist.Name.ToUpper() == _selectedArtist.Name.ToUpper()
+                                        select son;
+                    }
 
                     List<Song> newListSon = new List<Song>();
 
@@ -566,7 +591,21 @@ namespace SlideBarMVVM
                 //MessageBox.Show("Valeur de l'album selectionné : " + _selectedAlbum.Name);
                 if (_selectedAlbum != null)
                 {
-                    SongsLIST = _selectedAlbum.Songs;
+                    List<Song> newList = new List<Song>();
+
+                    if (_selectedGenre != null)
+                    {
+                        IEnumerable<Song> linqSongs = from sg in _selectedAlbum.Songs
+                                                      where sg.Genre.ToUpper() == _selectedGenre.ToUpper()
+                                                      select sg;
+                        if (linqSongs.Any())
+                            foreach (Song sg in linqSongs)
+                                newList.Add(sg);
+                    }
+                    else
+                    {
+                        SongsLIST = _selectedAlbum.Songs;
+                    }
                 }
             }));
 
