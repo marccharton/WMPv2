@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Playlist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <IsDeleted>false</IsDeleted>
+  <Name>playlistExample</Name>
+  <CreationDate>2013-04-04T17:05:55.6806055+02:00</CreationDate>
+  <Like>0</Like>
+  <Songs>
+    <Song>
+      <Path>E:\Programs Files\Itunes\Music\Artiste inconnu\Album inconnu (01_09_2006 11_03_12)\06 Funky town.mp3</Path>
+    </Song>
+    <Song>
+      <Path>E:\Programs Files\Itunes\Music\Creedence Clearwater Revival\Cosmo's Factory\07 Up Around The Bend.mp3</Path>
+    </Song>
+  </Songs>
+</Playlist>

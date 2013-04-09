@@ -13,6 +13,10 @@ namespace wmp2
 
         public static string DefaultPathFileLibrary = @"library.xml";
 
+        public static string UnknownGenreName = @"Genre Inconnu";
+        public static string UnknownArtistName = @"Artiste Inconnu";
+        public static string UnknownAlbumName = @"Album Inconnu";
+
         public enum Format { NONE, MUSIC, VIDEO, PICTURE };
         
         public static string Capitalize(string Str)

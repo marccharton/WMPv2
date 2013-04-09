@@ -43,7 +43,6 @@ namespace wmp2
             Serialize();
         }
 
-        // Load Existing Files in xml file in Library
         public string Init()
         {
             string error = null;
@@ -110,8 +109,6 @@ namespace wmp2
                     song.Title = Path.GetFileName(songPath);
                 else
                     song.Title = Tools.Capitalize(songTag.Title);
-                if (songTag.Genre != null) 
-                    song.Genre = Tools.Capitalize(songTag.Genre);
                 if (songTag.Duration != null) 
                     song.Duration = songTag.Duration;
             }
@@ -121,121 +118,166 @@ namespace wmp2
             if (songPath != null)
                 song.Name = Path.GetFileName(songPath);
 
-
             #region Match with Artist
 
-            Artist curArt = new Artist();
-            
-            // Does this artist already exist in list ?
-            IEnumerable<Artist> artists = from a in Artists
-                                          where a.Name.ToUpper() == songTag.Artist.ToUpper()
-                                          select a;
-            
+            Artist curArt = null;
 
-            // yes -> Catch it and match with my current song
-            if (artists.Any())
+            if (songTag.Artist != null && songTag.Artist != "")
             {
-                Artist art = artists.First();
-                song.Artist = art;
-                art.Songs.Add(song);
-                curArt = art;
-                //Console.WriteLine("J'ai trouve l'artist il s'appelle bien : " + art.Name);
+                IEnumerable<Artist> artists = from a in Artists
+                                              where a.Name.ToUpper() == songTag.Artist.ToUpper()
+                                              select a;
+                if (artists.Any())
+                {
+                    Artist art = artists.First();
+                    song.Artist = art;
+                    art.Songs.Add(song);
+                    curArt = art;
+                }
+                else
+                {
+                    Artist art = new Artist() { Name = Tools.Capitalize(songTag.Artist) };
+                    Artists.Add(art);
+                    song.Artist = art;
+                    art.Songs.Add(song);
+                    curArt = art;
+                }
             }
-            // no -> Create a new artist et push it in my artists List
             else
             {
-                Artist art = new Artist() { Name = Tools.Capitalize(songTag.Artist) };
-                Artists.Add(art);
-                song.Artist = art;
-                art.Songs.Add(song);
-                curArt = art;
-                //Console.WriteLine("L'artiste n'existait pas, j'ai donc du le creer : " + art.Name);
+                IEnumerable<Artist> artists = from a in Artists
+                                              where a.Name.ToUpper() == Tools.UnknownArtistName.ToUpper()
+                                              select a;
+                if (artists.Any())
+                {
+                    Artist art = artists.First();
+                    song.Artist = art;
+                    art.Songs.Add(song);
+                    curArt = art;
+                }
+                else
+                {
+                    Artist art = new Artist() { Name = Tools.UnknownArtistName };
+                    Artists.Add(art);
+                    song.Artist = art;
+                    art.Songs.Add(song);
+                    curArt = art;
+                }
             }
 
             #endregion
 
             #region Match with Album
 
-            Album curAlb = new Album();
+            Album curAlb = null;
 
-            Console.WriteLine("Est ce que Mon album existe ?");
-            // Does this album already exist in list ?
-            IEnumerable<Album> album = from a in Albums
-                                       where a.Name.ToUpper() == songTag.Album.ToUpper()
-                                       select a;
-
-            // yes -> Catch it and match with my current song
-            if (album != null)
+            if (songTag.Album != null && songTag.Album != "")
             {
-                if (album.Any())
+                IEnumerable<Album> album = from a in Albums
+                                           where a.Name.ToUpper() == songTag.Album.ToUpper()
+                                           select a;
+                if (album != null)
                 {
-                    Console.WriteLine("Mon album existe");
-                    foreach (Album alb in album)
+                    if (album.Any())
                     {
+                        curAlb = album.First();
+                        song.Album = album.First();
+                        curAlb.Songs.Add(song);
+                    }
+                    else
+                    {
+                        Album alb = new Album() { Name = Tools.Capitalize(songTag.Album) };
+                        Albums.Add(alb);
                         song.Album = alb;
                         alb.Songs.Add(song);
                         curAlb = alb;
-                        //Console.WriteLine("J'ai trouve l'album il s'appelle bien : " + alb.Name);
                     }
                 }
-                // no -> Create a new album et push it in my albums List
+
+            }
+            else
+            {
+                IEnumerable<Album> album = from a in Albums
+                                           where a.Name.ToUpper() == Tools.UnknownAlbumName.ToUpper()
+                                           select a;
+                if (album.Any())
+                {
+                    curAlb = album.First();
+                    song.Album = album.First();
+                    curAlb.Songs.Add(song);
+                }
                 else
                 {
-                    Console.WriteLine("Mon album n'existe pas");
-                    Album alb = new Album() { Name = Tools.Capitalize(songTag.Album) };
+                    Album alb = new Album() { Name = Tools.UnknownAlbumName };
                     Albums.Add(alb);
                     song.Album = alb;
                     alb.Songs.Add(song);
                     curAlb = alb;
-                    //Console.WriteLine("L'album n'existait pas, j'ai donc du le creer : " + alb.Name);
                 }
             }
+
             #endregion
 
             #region Match with Genre
 
-            String curGenre;
+            String curGenre = null;
 
-            // Does this artist already exist in list ?
-            IEnumerable<String> genres = from g in Genres
-                                         where g.ToUpper() == songTag.Genre.ToUpper()
-                                         select g;
-
-
-            // yes -> Catch it and match with my current song
-            if (genres.Any())
+            if (songTag.Genre != null && songTag.Genre != "")
             {
-                String gnr = genres.First();
-                song.Genre = gnr;
-                curGenre = gnr;
-                // Console.WriteLine("J'ai trouve l'artist il s'appelle bien : " + art.Name);
+                IEnumerable<String> genres = from g in Genres
+                                             where g.ToUpper() == songTag.Genre.ToUpper()
+                                             select g;
+                if (genres.Any())
+                {
+                    String gnr = genres.First();
+                    song.Genre = gnr;
+                    curGenre = gnr;
+                }
+                else
+                {
+                    String gnr = Tools.Capitalize(songTag.Genre);
+                    Genres.Add(gnr);
+                    song.Genre = gnr;
+                    curGenre = gnr;
+                }
             }
-            // no -> Create a new artist et push it in my artists List
             else
             {
-                String gnr = Tools.Capitalize(songTag.Genre);
-                Genres.Add(gnr);
-                song.Genre = gnr;
-                curGenre = gnr;
-                //Console.WriteLine("L'artiste n'existait pas, j'ai donc du le creer : " + art.Name);
+                IEnumerable<String> genres = from g in Genres
+                                             where g.ToUpper() == Tools.UnknownGenreName.ToUpper()
+                                             select g;
+                if (genres.Any())
+                {
+                    String gnr = genres.First();
+                    song.Genre = gnr;
+                    curGenre = gnr;
+                }
+                else
+                {
+                    String gnr = Tools.Capitalize(Tools.UnknownGenreName);
+                    Genres.Add(gnr);
+                    song.Genre = gnr;
+                    curGenre = gnr;
+                }
             }
-
             #endregion
 
 
-            IEnumerable<Album> artAlbum = from a in curArt.Albums
-                                           where a.Name.ToUpper() == curAlb.Name.ToUpper()
-                                           select a;
-            if (!artAlbum.Any())
+            if (curArt != null && curAlb != null)
             {
-                curArt.Albums.Add(curAlb);
-                curArt.Genre = curGenre;
+                IEnumerable<Album> artAlbum = from a in curArt.Albums
+                                              where a.Name.ToUpper() == curAlb.Name.ToUpper()
+                                              select a;
+                if (!artAlbum.Any())
+                {
+                    curArt.Albums.Add(curAlb);
+                    curArt.Genre = curGenre;
 
-                curAlb.Artist = curArt;
-                curAlb.Genre = curGenre;
+                    curAlb.Artist = curArt;
+                    curAlb.Genre = curGenre;
+                }
             }
 
-            // peutetre idem avec genre
             return song;
         }
 
@@ -376,8 +418,18 @@ namespace wmp2
                         foreach (Song sg in tmp.Songs)
                         {
                             Song sgToAdd = GetSongWithPath(sg.Path);
+                            IEnumerable<Song> songInList = from s in Songs
+                                                     where s.Path == sgToAdd.Path
+                                                     select s;
                             if (sgToAdd != null)
+                            {
+                                if (!songInList.Any())
+                                {
+                                    Songs.Add(sgToAdd);
+                                    MediaPaths.Add(sgToAdd.Path);
+                                }
                                 newList.Add(sgToAdd);
+                            }
                         }
                         tmp.Songs = newList;
                         Playlists.Add(tmp);

@@ -729,17 +729,8 @@ namespace SlideBarMVVM
                     {
                         foreach (string name in ofd.FileNames)
                             Lib.ImportFile(name);
-
-                        //MessageBox.Show("Lib.Artists.Count = " + Lib.Artists.Count.ToString());
-
-                        string s = "";
-                        foreach (Artist a in Lib.Artists)
-                            s += a.Name + "\n";
-                        //MessageBox.Show("Artists : \n" + s);
                         RefreshFirstDatas();
-                        //MessageBox.Show("ArtistsLIST.Count = " + ArtistsLIST.Count.ToString());
                     }
-
                 }
                 catch (Exception ex)
                 {

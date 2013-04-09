@@ -51,41 +51,6 @@ namespace wmp2
             return true;
         }
 
-        public Song CreateSong(string songPath)
-        {
-            // Je recupere mes supers Tags
-            Tag songTag = new Tag(songPath);
-
-            // Je rempli un objet Song avec les infos basiques
-            Song song = new Song();
-
-            if (songTag != null)
-            {
-                song.Track = (int)songTag.Track;
-                if (String.IsNullOrEmpty(songTag.Title))
-                    song.Title = Path.GetFileName(songPath);
-                else
-                    song.Title = Tools.Capitalize(songTag.Title);
-                if (songTag.Genre != null)
-                    song.Genre = Tools.Capitalize(songTag.Genre);
-                if (songTag.Duration != null)
-                    song.Duration = songTag.Duration;
-                if (songTag.Artist != null)
-                    song.Artist = new Artist() { Name = songTag.Artist };
-                if (songTag.Album != null)
-                    song.Album = new Album() { Name = songTag.Album };
-                    
-            }
-
-
-
-            if (songPath != null)
-                song.Path = songPath;
-            if (songPath != null)
-                song.Name = Path.GetFileName(songPath);
-            return song;
-        }
-        
         public void Unserialize(string name)
         {
             Playlist tmp = Serializer.Deserialize<Playlist>(Tools.DefaultPathFolderPlaylist + name, FileMode.Open) as Playlist;
@@ -96,11 +61,6 @@ namespace wmp2
             this.CreationDate = tmp.CreationDate;
             this.Like = tmp.Like;
             this.Songs = tmp.Songs;
-            
-            //foreach (Song sg in tmp.Songs)
-            //{
-            //    this.Songs.Add(CreateSong(Path.GetFullPath(sg.Path)));
-            //}
         }
         
         public void Serialize()
