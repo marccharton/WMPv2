@@ -398,6 +398,50 @@ namespace wmp2
             return ret;
         }
 
+        public List<Album> GetAlbumsByGenre(string genre)
+        {
+            List<Album> ret = new List<Album>();
+
+            foreach (Album alb in Albums)
+            {
+                IEnumerable<Song> linqSongs = from sg in alb.Songs
+                                              where sg.Genre.ToUpper() == genre.ToUpper()
+                                              select sg;
+
+                if (linqSongs.Any())
+                    ret.Add(alb);
+            }
+
+            return ret;
+        }
+
+        public List<Artist> GetArtistsByGenre(string genre)
+        {
+            List<Artist> ret = new List<Artist>();
+            bool genreFound = false;
+
+            foreach (Artist art in Artists)
+            {
+                foreach (Album alb in art.Albums)
+                {
+                    IEnumerable<Song> linqSongs = from sg in alb.Songs
+                                                  where sg.Genre.ToUpper() == genre.ToUpper()
+                                                  select sg;
+
+                    if (linqSongs.Any())
+                        genreFound = true;
+                }
+                if (genreFound == true)
+                {
+                    ret.Add(art);
+                    genreFound = false;
+                }
+            }
+            
+
+            return ret;
+        }
+
         public void OpenPlaylists()
         {
             string path = Tools.DefaultPathFolderPlaylist;

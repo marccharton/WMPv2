@@ -485,51 +485,10 @@ namespace SlideBarMVVM
                 // MessageBox.Show("Valeur du genre selectionné : " + _selectedGenre);
                 if (_selectedGenre != null)
                 {
-                    #region Load GenreArtists
 
-                    IEnumerable<Artist> selectedArtists = from art in Lib.Artists
-                                                          where art.Genre.ToUpper() == _selectedGenre.ToUpper()
-                                                          select art;
+                    ArtistsLIST = Lib.GetArtistsByGenre(_selectedGenre);
 
-                    List<Artist> newList = new List<Artist>();
-
-                    if (selectedArtists.Any())
-                    {
-                        // MessageBox.Show("il y a des artists");
-
-                        foreach (Artist art in selectedArtists)
-                        {
-                            // MessageBox.Show("je parcours mes artiste du genre : " + art.Name);
-                            newList.Add(art);
-                        }
-                    }
-
-                    ArtistsLIST = newList;
-
-                    #endregion
-
-                    #region Load GenreAlbums
-
-                    IEnumerable<Album> selectedAlbums = from alb in Lib.Albums
-                                                        where alb.Genre.ToUpper() == _selectedGenre.ToUpper()
-                                                        select alb;
-
-                    List<Album> newListAlb = new List<Album>();
-
-                    if (selectedArtists.Any())
-                    {
-                        // MessageBox.Show("il y a des artists");
-
-                        foreach (Album alb in selectedAlbums)
-                        {
-                            // MessageBox.Show("je parcours mes artiste du genre : " + art.Name);
-                            newListAlb.Add(alb);
-                        }
-                    }
-
-                    AlbumsLIST = newListAlb;
-
-                    #endregion
+                    AlbumsLIST = Lib.GetAlbumsByGenre(_selectedGenre);
 
                     #region Load GenreSongs
 
