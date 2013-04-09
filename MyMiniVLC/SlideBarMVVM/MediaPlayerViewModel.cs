@@ -228,8 +228,7 @@ namespace SlideBarMVVM
         public ICommand MuteCommand { get; set; }
         public ICommand FullScreenCommand { get; set; }
         public ICommand CloseWindow { get; set; }
-
-        public ICommand TestCommand { get; set; }
+        public ICommand InitCommand { get; set; }
 
         public ObservableCollection<CurrentListObject> Collect { get; set; }
 
@@ -459,14 +458,12 @@ namespace SlideBarMVVM
                 {
                     if (curList.getSize() > 0)
                     {
-                        curList.Random();
                         curList.Shuffle = true;
                         this.ShuffleButtonImage = "/Assets/shuffleon.png";
                     }
                 }
                 else
                 {
-                    curList.ResetRandom();
                     curList.Shuffle = false;
                     this.ShuffleButtonImage = "/Assets/shuffleoff.png";
                 }
@@ -514,7 +511,7 @@ namespace SlideBarMVVM
             CurrentList.getInstance().DropEvent += new EventHandler(dropEvent);
             CurrentList.getInstance().ChangedEvent += new EventHandler(changedEvent);
 
-            this.TestCommand = new Command(new Action(() =>
+            this.InitCommand = new Command(new Action(() =>
             {
                 this.Init();
             }));

@@ -1550,7 +1550,7 @@
             <i:InvokeCommandAction Command="{Binding FullScreenCommand, Source={StaticResource ViewModelDataSource}}"/>
         </local:EscapeKeyEventTrigger>
         <i:EventTrigger SourceName="WMPWindow" EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding TestCommand, Source={StaticResource ViewModelDataSource}}"/>
+            <i:InvokeCommandAction Command="{Binding InitCommand, Source={StaticResource ViewModelDataSource}}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
