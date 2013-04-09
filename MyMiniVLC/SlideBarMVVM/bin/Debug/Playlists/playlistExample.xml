@@ -4,12 +4,5 @@
   <Name>playlistExample</Name>
   <CreationDate>2013-04-04T17:05:55.6806055+02:00</CreationDate>
   <Like>0</Like>
-  <Songs>
-    <Song>
-      <Path>E:\Programs Files\Itunes\Music\Artiste inconnu\Album inconnu (01_09_2006 11_03_12)\06 Funky town.mp3</Path>
-    </Song>
-    <Song>
-      <Path>E:\Programs Files\Itunes\Music\Creedence Clearwater Revival\Cosmo's Factory\07 Up Around The Bend.mp3</Path>
-    </Song>
-  </Songs>
+  <Songs />
 </Playlist>

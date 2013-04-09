@@ -216,6 +216,16 @@ namespace SlideBarMVVM
             }
         }
 
+        public void InsertAt(int idx, CurrentListObject clo)
+        {
+            if (idx >= 0 && clo != null)
+            {
+                this._list.Insert(idx, clo);
+                this.ModifiedEvent(this, null);
+            }
+        }
+
+        
         public void RemoveAt(int idx) 
         {
             this._list.RemoveAt(idx);

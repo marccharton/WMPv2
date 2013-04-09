@@ -161,7 +161,7 @@ namespace SlideBarMVVM
                 {
                     CurrentListObject tmp = this.Items[this.originalItemIndex] as CurrentListObject;
                     CurrentList.getInstance().RemoveAt(this.originalItemIndex);
-                    CurrentList.getInstance().InsertAt(endIdx, tmp.Content);
+                    CurrentList.getInstance().InsertAt(endIdx, tmp);
                 }
             }
         }
