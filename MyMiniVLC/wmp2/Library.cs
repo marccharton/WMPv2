@@ -64,14 +64,9 @@ namespace wmp2
                 catch (DirectoryNotFoundException)
                 {
                     if (i < 20)
-                    {
-                        error += path + "\n";
-                        i++;
-                    }
-                    else
-                    {
-                        error += "...";
-                    }
+                    { error += path + "\n"; i++; }
+                    if (i == 20)
+                    { error += "..."; i++; }
                 }
             }
             
