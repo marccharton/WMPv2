@@ -9,6 +9,8 @@ using System.IO;
 using Microsoft.Win32;
 using Microsoft.VisualBasic;
 using System.Diagnostics;
+using System.Windows.Input;
+using System.Windows.Controls;
 
 
 namespace SlideBarMVVM
@@ -65,8 +67,8 @@ namespace SlideBarMVVM
             }
         }
 
-        public List<MenuItemCustom> _playlistsMenuItemList;
-        public List<MenuItemCustom> PlaylistsMenuItemList
+        public List<Playlist> _playlistsMenuItemList;
+        public List<Playlist> PlaylistsMenuItemList
         {
             get
             {
@@ -396,38 +398,39 @@ namespace SlideBarMVVM
         
 
 
-        public Command LoadGenreCMD { get; set; }
-        public Command LoadArtistCMD { get; set; }
-        public Command LoadAlbumCMD { get; set; }
-        public Command LoadPlaylistCMD { get; set; }
-        public Command LoadLibraryCMD { get; set; }
+        public ICommand LoadGenreCMD { get; set; }
+        public ICommand LoadArtistCMD { get; set; }
+        public ICommand LoadAlbumCMD { get; set; }
+        public ICommand LoadPlaylistCMD { get; set; }
+        public ICommand LoadLibraryCMD { get; set; }
 
-        public Command ImportDirectoryCMD { get; set; }
-        public Command ImportFileCMD { get; set; }
+        public ICommand ImportDirectoryCMD { get; set; }
+        public ICommand ImportFileCMD { get; set; }
 
-        public Command PlaySongItemCMD { get; set; }
-        public Command PlayVideoItemCMD { get; set; }
-        public Command PlayPictureItemCMD { get; set; }
+        public ICommand PlaySongItemCMD { get; set; }
+        public ICommand PlayVideoItemCMD { get; set; }
+        public ICommand PlayPictureItemCMD { get; set; }
         
-        public Command AllGenresCMD { get; set; }
-        public Command AllArtistsCMD { get; set; }
-        public Command AllAlbumsCMD { get; set; }
+        public ICommand AllGenresCMD { get; set; }
+        public ICommand AllArtistsCMD { get; set; }
+        public ICommand AllAlbumsCMD { get; set; }
         
         
-        public Command DeleteFileCMD { get; set; }
-        public Command AddToCurrentListCMD { get; set; }
+        public ICommand DeleteFileCMD { get; set; }
+        public ICommand AddToCurrentListCMD { get; set; }
         
 
-        public Command ShowPlaylistsListCMD { get; set; }
-        public Command AddToPlaylistCMD { get; set; }
-        public Command RunAddPlaylistModeCMD { get; set; }
-        public Command AddPlaylistCMD { get; set; }
+        public ICommand ShowPlaylistsListCMD { get; set; }
+        public ICommand AddToPlaylistCMD { get; set; }
+        public ICommand RunAddPlaylistModeCMD { get; set; }
+        public ICommand AddPlaylistCMD { get; set; }
 
-        public Command DeletePlaylistCMD { get; set; }
-        public Command RenamePlaylistCMD { get; set; }
-        public Command PlayPlaylistCMD { get; set; }
+        public ICommand DeletePlaylistCMD { get; set; }
+        public ICommand RenamePlaylistCMD { get; set; }
+        public ICommand PlayPlaylistCMD { get; set; }
 
-        public Command OpenFileInExplorerCMD { get; set; }
+        public ICommand OpenFileInExplorerCMD { get; set; }
+
 
         public LibraryViewModel()
         {
@@ -467,7 +470,7 @@ namespace SlideBarMVVM
                 }
                 else
                 {
-                    this.AddToPlaylistCMD.Execute(null);
+                    this.AddToPlaylistCMD.Execute("");
                     ShowPlaylistList = false;
                     IsAddPlaylistMode = false;
                     if (SelectedPlaylist != null)
@@ -480,9 +483,9 @@ namespace SlideBarMVVM
 
             #region Load Genre
 
-            LoadGenreCMD = new Command(new Action(() =>
+            LoadGenreCMD = new CommandWithParameter(new Action<object>((o) =>
             {
-                // MessageBox.Show("Valeur du genre selectionné : " + _selectedGenre);
+                SelectedGenre = o as string;
                 if (_selectedGenre != null)
                 {
 
@@ -522,9 +525,9 @@ namespace SlideBarMVVM
 
             #region Load Artist
 
-            LoadArtistCMD = new Command(new Action(() =>
+            LoadArtistCMD = new CommandWithParameter(new Action<object>((o) =>
             {
-                //MessageBox.Show("Valeur de l'artist selectionné : " + _selectedArtist.Name);
+                SelectedArtist = o as Artist;
                 if (_selectedArtist != null)
                 {
                     if (SelectedGenre != null)
@@ -586,9 +589,9 @@ namespace SlideBarMVVM
 
             #region Load Album
 
-            LoadAlbumCMD = new Command(new Action(() =>
+            LoadAlbumCMD = new CommandWithParameter(new Action<object>((o) =>
             {
-                //MessageBox.Show("Valeur de l'album selectionné : " + _selectedAlbum.Name);
+                SelectedAlbum = o as Album;
                 if (_selectedAlbum != null)
                 {
                     List<Song> newList = new List<Song>();
@@ -738,7 +741,6 @@ namespace SlideBarMVVM
 
             #endregion
 
-
             #region Delete File
 
             DeleteFileCMD = new Command(new Action(() =>
@@ -782,11 +784,16 @@ namespace SlideBarMVVM
 
             
             #region Add to Playlist
-            AddToPlaylistCMD = new Command(new Action(() =>
+            AddToPlaylistCMD = new CommandWithParameter(new Action<object>((o) =>
                 {
+                    MessageBox.Show("On va ajouter a '" + SelectedPlaylist.Name + "'");
+                    //SelectedPlaylist = o as Playlist;
+
+                    
                     if (SelectedSong != null && SelectedPlaylist != null)
                     {
                         SelectedPlaylist.AddSong(SelectedSong);
+                        MessageBox.Show("Song added to '" + SelectedPlaylist.Name + "'");
                     }
                     else
                     {
@@ -876,12 +883,54 @@ namespace SlideBarMVVM
 
         }
 
+
+        private void LoadGenre(Object o)
+        {
+            //SelectedGenre = o as string;
+            MessageBox.Show("Valeur du genre selectionné : " + _selectedGenre);
+            if (_selectedGenre != null)
+            {
+
+                ArtistsLIST = Lib.GetArtistsByGenre(_selectedGenre);
+
+                AlbumsLIST = Lib.GetAlbumsByGenre(_selectedGenre);
+
+                #region Load GenreSongs
+
+                IEnumerable<Song> selectedSongs = from son in Lib.Songs
+                                                    where son.Genre.ToUpper() == _selectedGenre.ToUpper()
+                                                    select son;
+
+                List<Song> newListSon = new List<Song>();
+
+                if (selectedSongs.Any())
+                {
+                    // MessageBox.Show("il y a des artists");
+
+                    foreach (Song son in selectedSongs)
+                    {
+                        // MessageBox.Show("je parcours mes artiste du genre : " + art.Name);
+                        newListSon.Add(son);
+                    }
+                }
+
+                SongsLIST = newListSon;
+
+                #endregion
+
+                AllArtistsText = "All (" + ArtistsLIST.Count + ")";
+                AllAlbumsText = "All (" + AlbumsLIST.Count + ")";
+            }
+        }
+        
         private void LoadPlaylistModule()
         {
             if (Lib != null)
             {
                 Lib.OpenPlaylists();
                 PlaylistsLIST = Lib.Playlists;
+
+                PlaylistsMenuItemList = Lib.Playlists;
             }
         }
 
