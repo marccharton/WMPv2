@@ -17,6 +17,7 @@ namespace SlideBarMVVM
 {
     public enum PlayerState
     {
+        None = 0,
         Play = 1,
         Pause = 2,
         Stop = 4,
@@ -227,6 +228,7 @@ namespace SlideBarMVVM
         public ICommand MuteCommand { get; set; }
         public ICommand FullScreenCommand { get; set; }
         public ICommand CloseWindow { get; set; }
+        public ICommand InitCommand { get; set; }
 
         public ObservableCollection<CurrentListObject> Collect { get; set; }
 
@@ -247,13 +249,13 @@ namespace SlideBarMVVM
             }
             else 
             {
-                curList.addElement(@"G:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\01 - Skrillex - First Of The Year (Equinox).mp3");
-                curList.addElement(@"G:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\02 - Skrillex - Ruffneck (Flex).mp3");
-                curList.addElement(@"G:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\02 - Skrillex - Ruffneck (Flex).mp3");
-                curList.addElement(@"G:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\02 - Skrillex - Ruffneck (Flex).mp3");
-                curList.addElement(@"G:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\02 - Skrillex - Ruffneck (Flex).mp3");
-                curList.addElement(@"G:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\02 - Skrillex - Ruffneck (Flex).mp3");
-                curList.addElement(@"G:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\01 - Skrillex - First Of The Year (Equinox).mp3");
+                curList.addElement(@"H:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\01 - Skrillex - First Of The Year (Equinox).mp3");
+                curList.addElement(@"H:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\02 - Skrillex - Ruffneck (Flex).mp3");
+                curList.addElement(@"H:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\02 - Skrillex - Ruffneck (Flex).mp3");
+                curList.addElement(@"H:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\02 - Skrillex - Ruffneck (Flex).mp3");
+                curList.addElement(@"H:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\02 - Skrillex - Ruffneck (Flex).mp3");
+                curList.addElement(@"H:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\02 - Skrillex - Ruffneck (Flex).mp3");
+                curList.addElement(@"H:\Musique\Skrillex\Albums and EPs\2011 - More Monsters And Sprites [EP]\01 - Skrillex - First Of The Year (Equinox).mp3");
             }
             if (curList.getSize() > 0)
                this.PlayRequest.Execute(this);
@@ -456,14 +458,12 @@ namespace SlideBarMVVM
                 {
                     if (curList.getSize() > 0)
                     {
-                        curList.Random();
                         curList.Shuffle = true;
                         this.ShuffleButtonImage = "/Assets/shuffleon.png";
                     }
                 }
                 else
                 {
-                    curList.ResetRandom();
                     curList.Shuffle = false;
                     this.ShuffleButtonImage = "/Assets/shuffleoff.png";
                 }
@@ -510,7 +510,13 @@ namespace SlideBarMVVM
             
             CurrentList.getInstance().DropEvent += new EventHandler(dropEvent);
             CurrentList.getInstance().ChangedEvent += new EventHandler(changedEvent);
-            this.Init();
+
+            this.InitCommand = new Command(new Action(() =>
+            {
+                this.Init();
+            }));
+
+           // this.Init();
 
         }
 

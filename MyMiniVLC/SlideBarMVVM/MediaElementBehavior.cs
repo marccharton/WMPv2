@@ -152,7 +152,7 @@ namespace SlideBarMVVM
 
         void AssociatedObject_MediaFailed(object sender, ExceptionRoutedEventArgs e)
         {
-            MessageBox.Show("Error: Can't load file: Unknwon format");
+            MessageBox.Show("Error\nCan't load file: " + AssociatedObject.Source.ToString());
         }
 
         void AssociatedObject_MediaEnded(object sender, RoutedEventArgs e)

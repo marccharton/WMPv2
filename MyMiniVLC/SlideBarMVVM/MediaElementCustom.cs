@@ -10,7 +10,7 @@ namespace SlideBarMVVM
 {
     public class MediaElementCustom : MediaElement
     {
-        public static readonly DependencyProperty PlayCustomProperty = DependencyProperty.RegisterAttached("PlayCustom", typeof(PlayerState), typeof(MediaElementCustom), new UIPropertyMetadata(PlayPropertyChanged));
+        public static readonly DependencyProperty PlayCustomProperty = DependencyProperty.RegisterAttached("PlayCustom", typeof(PlayerState), typeof(MediaElementCustom), new UIPropertyMetadata(PlayerState.None, PlayPropertyChanged));
 
         public PlayerState PlayCustom
         {
@@ -20,24 +20,21 @@ namespace SlideBarMVVM
 
         public static void PlayPropertyChanged(DependencyObject dep, DependencyPropertyChangedEventArgs ev)
         {
-            try
+            MediaElementCustom mec = dep as MediaElementCustom;
+            PlayerState ps = (PlayerState)ev.NewValue;
+
+            if (mec != null)
             {
-                if ((PlayerState)((MediaElement)dep).GetValue(ev.Property) == PlayerState.Play)
-                    ((MediaElement)dep).Play();
-                else if ((PlayerState)((MediaElement)dep).GetValue(ev.Property) == PlayerState.Pause)
+                if (ps == PlayerState.Play)
+                    mec.Play();
+                else if (ps == PlayerState.Pause)
+                    mec.Pause();
+                else if (ps == PlayerState.Stop)
                 {
-                    ((MediaElementCustom)dep).Pause();
+                    mec.Stop();
+                    mec.Close();
+                    mec.Position = TimeSpan.Zero;
                 }
-                else if ((PlayerState)((MediaElement)dep).GetValue(ev.Property) == PlayerState.Stop)
-                {
-                    ((MediaElement)dep).Stop();
-                    ((MediaElement)dep).Close();
-                    ((MediaElement)dep).Position = TimeSpan.Zero;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
             }
         }
     }

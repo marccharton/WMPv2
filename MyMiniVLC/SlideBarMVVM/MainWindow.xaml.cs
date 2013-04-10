@@ -26,5 +26,15 @@ namespace SlideBarMVVM
         {
             InitializeComponent();
         }
+
+        private void WMPWindow_Initialized(object sender, EventArgs e)
+        {
+            MessageBox.Show("Coucou INIT");
+        }
+
+        private void WMPWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Coucou LOAD");
+        }
     }
 }
