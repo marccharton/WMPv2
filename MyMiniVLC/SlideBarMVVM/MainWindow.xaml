@@ -1296,6 +1296,22 @@
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
+        <DataTemplate x:Key="ListGenresItemTemplate">
+            <Grid Width="193" Height="17">
+                <Button Content="{Binding}" Template="{DynamicResource ListLibraryButtonTemplate}" Command="{Binding Path=DataContext.LoadGenreCMD, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="ListArtistsItemTemplate">
+            <Grid Width="193" Height="17">
+                <Button Content="{Binding Name}" Template="{DynamicResource ListLibraryButtonTemplate}" Command="{Binding Path=DataContext.LoadArtistCMD, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="ListAlbumsItemTemplate">
+            <Grid Width="193" Height="17">
+                <Button Content="{Binding Name}" Template="{DynamicResource ListLibraryButtonTemplate}" Command="{Binding Path=DataContext.LoadAlbumCMD, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}"/>
+            </Grid>
+        </DataTemplate>
+       
         <!-- *********************** Fin de DataTemplate ************************* -->
 
 
@@ -1512,23 +1528,6 @@
         <!-- ******************************* Misc ******************************** -->
         <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
         <System:Double x:Key="DoubleSpeedRatio">1</System:Double>
-        <DataTemplate x:Key="ListGenresItemTemplate">
-        	<Grid Width="193" Height="17">
-                <Button Content="{Binding}" Template="{DynamicResource ListLibraryButtonTemplate}" Command="{Binding Path=DataContext.LoadGenreCMD, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}" />
-        	</Grid>
-        </DataTemplate>
-        <DataTemplate x:Key="ListArtistsItemTemplate">
-            <Grid Width="193" Height="17">
-                <Button Content="{Binding Name}" Template="{DynamicResource ListLibraryButtonTemplate}" Command="{Binding Path=DataContext.LoadArtistCMD, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}"/>
-            </Grid>
-        </DataTemplate>
-        <DataTemplate x:Key="ListAlbumsItemTemplate">
-            <Grid Width="193" Height="17">
-                <Button Content="{Binding Name}" Template="{DynamicResource ListLibraryButtonTemplate}" Command="{Binding Path=DataContext.LoadAlbumCMD, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}"/>
-            </Grid>
-        </DataTemplate>
-
-
         <!-- *************************** Fin de Misc ***************************** -->
 	
 	</Window.Resources>
@@ -1849,10 +1848,8 @@
                             <ListView.ContextMenu>
                                 <ContextMenu Name="contextMenu" Background="White" BorderThickness="0" Foreground="#FF1F477C">
                                     <MenuItem Header="Add to Current List" Name="AddToCurrentList" ToolTip="Ajouter cette chanson à la liste de lecture en cours" Command="{Binding AddToCurrentListCMD}"/>
-                                    <MenuItem Header="Add to playlist" Name="AddToPlaylist" ToolTip="Ajouter cette chanson à une playlist" Command="{Binding RunAddPlaylistModeCMD}"/>
-                                    <MenuItem Header="Open in Explorer" Name="OpenInexplorer" ToolTip="Ouvrir dans l'explorateur Windows" Command="{Binding OpenFileInExplorerCMD}"/>
-                                    <MenuItem Header="Delete" Command="{Binding DeleteFileCMD}"/>
-                                    <MenuItem Header="Add to playlist2" Name="AddToPlaylist2" ItemsSource="{Binding PlaylistsMenuItemList}">
+                                    <!--<MenuItem Header="Add to playlist" Name="AddToPlaylist" ToolTip="Ajouter cette chanson à une playlist" Command="{Binding RunAddPlaylistModeCMD}"/>-->
+                                    <MenuItem Header="Add to playlist" Name="AddToPlaylist2" ItemsSource="{Binding PlaylistsMenuItemList, Source={StaticResource ViewModelLibrary}}">
                                         <MenuItem.ItemTemplate>
                                             <DataTemplate>
                                                 <TextBlock Text="{Binding Name}" />
@@ -1860,10 +1857,14 @@
                                         </MenuItem.ItemTemplate>
                                         <MenuItem.ItemContainerStyle>
                                             <Style TargetType="MenuItem">
-                                                <Setter Property="Command" Value="{Binding AddToPlaylistCMD}" />
+                                                <Setter Property="Command" Value="{Binding AddToPlaylistCMD, Source={StaticResource ViewModelLibrary}}" />
+                                                <Setter Property="CommandParameter" Value="{Binding}" />
                                             </Style>
                                         </MenuItem.ItemContainerStyle>
                                     </MenuItem>
+                                    <MenuItem Header="Open in Explorer" Name="OpenInexplorer" ToolTip="Ouvrir dans l'explorateur Windows" Command="{Binding OpenFileInExplorerCMD}"/>
+                                    <MenuItem Header="Delete" Command="{Binding DeleteFileCMD}"/>
+
                                 </ContextMenu>
                             </ListView.ContextMenu>
                             <ListView.View>

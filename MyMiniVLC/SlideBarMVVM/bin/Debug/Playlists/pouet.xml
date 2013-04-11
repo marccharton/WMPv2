@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<Playlist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <IsDeleted>false</IsDeleted>
+  <Name>pouet</Name>
+  <Description />
+  <CreationDate>2013-04-11T14:53:33.78432+02:00</CreationDate>
+  <Like>0</Like>
+  <Songs>
+    <Song>
+      <Path>E:\Programs Files\Itunes\Music\Creedence Clearwater Revival\Cosmo's Factory\02 Before You Accuse Me.mp3</Path>
+    </Song>
+  </Songs>
+</Playlist>

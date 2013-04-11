@@ -32,8 +32,7 @@ namespace SlideBarMVVM
 
         public void Execute(object parameter)
         {
-            if (parameter != null)
-                this._action(parameter);
+           this._action(parameter);
         }
 
         public CommandWithParameter(Action<object> a)

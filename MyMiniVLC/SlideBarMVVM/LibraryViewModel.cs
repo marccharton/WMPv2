@@ -786,19 +786,15 @@ namespace SlideBarMVVM
             #region Add to Playlist
             AddToPlaylistCMD = new CommandWithParameter(new Action<object>((o) =>
                 {
-                    MessageBox.Show("On va ajouter a '" + SelectedPlaylist.Name + "'");
-                    //SelectedPlaylist = o as Playlist;
-
-                    
+                    if (o != null)
+                        SelectedPlaylist = o as Playlist;
                     if (SelectedSong != null && SelectedPlaylist != null)
                     {
                         SelectedPlaylist.AddSong(SelectedSong);
                         MessageBox.Show("Song added to '" + SelectedPlaylist.Name + "'");
                     }
                     else
-                    {
                         MessageBox.Show("SelectedSong : " + SelectedSong + "\nSelectedPlaylist" + SelectedPlaylist);
-                    }
                 }));
             #endregion
 
@@ -824,6 +820,8 @@ namespace SlideBarMVVM
                         }
                         PlaylistsLIST = null;
                         PlaylistsLIST = Lib.Playlists;
+                        PlaylistsMenuItemList = null;
+                        PlaylistsMenuItemList = Lib.Playlists;
                     }
                 }));
             #endregion
@@ -838,6 +836,8 @@ namespace SlideBarMVVM
                         Lib.Playlists.Remove(SelectedPlaylist);
                         PlaylistsLIST = null;
                         PlaylistsLIST = Lib.Playlists;
+                        PlaylistsMenuItemList = null;
+                        PlaylistsMenuItemList = Lib.Playlists;
                     }
                 }));
             #endregion
@@ -852,6 +852,8 @@ namespace SlideBarMVVM
                         SelectedPlaylist.Name = playlistName;
                         PlaylistsLIST = null;
                         PlaylistsLIST = Lib.Playlists;
+                        PlaylistsMenuItemList = null;
+                        PlaylistsMenuItemList = Lib.Playlists;
                     }
                 }));
             #endregion
@@ -929,7 +931,6 @@ namespace SlideBarMVVM
             {
                 Lib.OpenPlaylists();
                 PlaylistsLIST = Lib.Playlists;
-
                 PlaylistsMenuItemList = Lib.Playlists;
             }
         }

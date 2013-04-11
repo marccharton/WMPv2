@@ -1,4 +1,5 @@
 Lib picture/video menu contextuel -> ajouter a curentlist
-Template data list box avec bouton
+DONE Template data list box avec bouton
 Ouvrir fichiers recents
 Animation playlist list
+menucontextuel le retour
