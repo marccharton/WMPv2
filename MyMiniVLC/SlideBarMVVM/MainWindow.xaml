@@ -1779,9 +1779,21 @@
                             </ListBox.RenderTransform>
                             <ListBox.ContextMenu>
                                 <ContextMenu Name="contextMenuPlaylist" Background="White" BorderThickness="0" Foreground="#FF1F477C">
-                                    <MenuItem Header="Play" Command="{Binding PlayPlaylistCMD}"/>
-                                    <MenuItem Header="Rename" Command="{Binding RenamePlaylistCMD}"/>
-                                    <MenuItem Header="Delete" Command="{Binding DeletePlaylistCMD}"/>
+                                    <MenuItem Header="Play" Command="{Binding PlayPlaylistCMD}">
+                                        <MenuItem.Icon>
+                                            <Image Width="20" Height="20" Source="/Assets/Play.ico" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Header="Rename" Command="{Binding RenamePlaylistCMD}">
+                                        <MenuItem.Icon>
+                                            <Image Width="20" Height="20" Source="/Assets/Rename.ico" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Header="Delete" Command="{Binding DeletePlaylistCMD}">
+                                        <MenuItem.Icon>
+                                            <Image Width="20" Height="20" Source="/Assets/Delete.ico" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
                                 </ContextMenu>
                             </ListBox.ContextMenu>
                             <!--<i:Interaction.Triggers>
@@ -1886,9 +1898,20 @@
                     		</i:Interaction.Triggers>
                             <ListView.ContextMenu>
                                 <ContextMenu Name="contextMenu" Background="White" BorderThickness="0" Foreground="#FF1F477C">
-                                    <MenuItem Header="Add to Current List" Name="AddToCurrentList" ToolTip="Ajouter cette chanson à la liste de lecture en cours" Command="{Binding AddToCurrentListCMD}"/>
-                                    <!--<MenuItem Header="Add to playlist" Name="AddToPlaylist" ToolTip="Ajouter cette chanson à une playlist" Command="{Binding RunAddPlaylistModeCMD}"/>-->
-                                    <MenuItem Header="Add to playlist" Name="AddToPlaylist2" ItemsSource="{Binding PlaylistsMenuItemList, Source={StaticResource ViewModelLibrary}}">
+                                    <MenuItem Header="Play" Name="PlaySongItem" ToolTip="Lire cette chanson" Command="{Binding PlaySongItemCMD}">
+                                        <MenuItem.Icon>
+                                            <Image Width="20" Height="20" Source="/Assets/Play.ico" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Header="Add to Current List" Name="AddToCurrentList" ToolTip="Ajouter cette chanson à la liste de lecture en cours" Command="{Binding AddToCurrentListCMD}">
+                                        <MenuItem.Icon>
+                                            <Image Width="20" Height="20" Source="/Assets/Add.ico" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Header="Add to playlist" Name="AddToPlaylist2" ItemsSource="{Binding PlaylistsMenuItemList, Source={StaticResource ViewModelLibrary}}" Background="White" BorderThickness="0" Foreground="#FF1F477C">
+                                        <MenuItem.Icon>
+                                            <Image Width="20" Height="20" Source="/Assets/Add.ico" />
+                                        </MenuItem.Icon>
                                         <MenuItem.ItemTemplate>
                                             <DataTemplate>
                                                 <TextBlock Text="{Binding Name}" />
@@ -1901,8 +1924,16 @@
                                             </Style>
                                         </MenuItem.ItemContainerStyle>
                                     </MenuItem>
-                                    <MenuItem Header="Open in Explorer" Name="OpenInexplorer" ToolTip="Ouvrir dans l'explorateur Windows" Command="{Binding OpenFileInExplorerCMD}"/>
-                                    <MenuItem Header="Delete" Command="{Binding DeleteFileCMD}"/>
+                                    <MenuItem Header="Open in Explorer" Name="OpenInexplorer" ToolTip="Ouvrir dans l'explorateur Windows" Command="{Binding OpenFileInExplorerCMD}">
+                                        <MenuItem.Icon>
+                                            <Image Width="20" Height="20" Source="/Assets/Explorer.ico" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Header="Delete" Command="{Binding DeleteFileCMD}">
+                                        <MenuItem.Icon>
+                                            <Image Width="20" Height="20" Source="/Assets/Delete.ico" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
 
                                 </ContextMenu>
                             </ListView.ContextMenu>
@@ -1958,6 +1989,25 @@
             			</LinearGradientBrush>
             		</Grid.Background>
                     <ListBox x:Name="VideoList" BorderThickness="0" Margin="0,0,0,51.78" Background="{x:Null}"  ItemTemplate="{DynamicResource LibraryListBoxItemTemplate}" ItemsSource="{Binding VideosList}" SelectedItem="{Binding SelectedVideo}">
+                        <ListBox.ContextMenu>
+                            <ContextMenu Name="contextMenuVideo" Background="White" BorderThickness="0" Foreground="#FF1F477C">
+                                <MenuItem Header="Play" Command="{Binding PlayVideoItemCMD}">
+                                    <MenuItem.Icon>
+                                        <Image Width="20" Height="20" Source="/Assets/Play.ico" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="Add to CurrentList" Command="{Binding AddVideoCurrentListCMD}">
+                                    <MenuItem.Icon>
+                                        <Image Width="20" Height="20" Source="/Assets/Add.ico" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="Delete" Command="{Binding DeleteVideoItemCMD}">
+                                    <MenuItem.Icon>
+                                        <Image Width="20" Height="20" Source="/Assets/Delete.ico" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseDoubleClick">
                                 <i:InvokeCommandAction Command="{Binding PlayVideoItemCMD}"/>
@@ -1993,6 +2043,25 @@
             			</LinearGradientBrush>
             		</Grid.Background>
                     <ListBox x:Name="PictureList" BorderThickness="0" Margin="0,0,0,55.78" Background="{x:Null}" ItemTemplate="{DynamicResource PictureLibraryListBoxItemTemplate}" ItemsSource="{Binding PicturesList}"  SelectedItem="{Binding SelectedPicture}" HorizontalAlignment="Stretch">
+                        <ListBox.ContextMenu>
+                            <ContextMenu Name="contextMenuPicture" Background="White" BorderThickness="0" Foreground="#FF1F477C">
+                                <MenuItem Header="Play" Command="{Binding PlayPictureItemCMD}">
+                                    <MenuItem.Icon>
+                                        <Image Width="20" Height="20" Source="/Assets/Play.ico" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="Add to CurrentList" Command="{Binding AddPictureCurrentListCMD}">
+                                    <MenuItem.Icon>
+                                        <Image Width="20" Height="20" Source="/Assets/Add.ico" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="Delete" Command="{Binding DeletePictureItemCMD}">
+                                    <MenuItem.Icon>
+                                        <Image Width="20" Height="20" Source="/Assets/Delete.ico" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseDoubleClick">
                                 <i:InvokeCommandAction Command="{Binding PlayPictureItemCMD}"/>

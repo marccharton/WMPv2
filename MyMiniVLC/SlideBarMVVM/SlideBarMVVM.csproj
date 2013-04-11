@@ -197,6 +197,20 @@
   <ItemGroup>
     <Resource Include="Assets\NoMute.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Add.ico" />
+    <Resource Include="Assets\Delete.ico" />
+    <Resource Include="Assets\Play.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Explorer.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Playlist.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Rename.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\.NETFramework\v4.0\Microsoft.Expression.Blend.WPF.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

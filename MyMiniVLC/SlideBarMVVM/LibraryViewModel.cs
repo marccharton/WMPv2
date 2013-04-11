@@ -406,17 +406,23 @@ namespace SlideBarMVVM
         public ICommand ImportDirectoryCMD { get; set; }
         public ICommand ImportFileCMD { get; set; }
 
-        public ICommand PlaySongItemCMD { get; set; }
-        public ICommand PlayVideoItemCMD { get; set; }
-        public ICommand PlayPictureItemCMD { get; set; }
+
         
         public ICommand AllGenresCMD { get; set; }
         public ICommand AllArtistsCMD { get; set; }
         public ICommand AllAlbumsCMD { get; set; }
-        
+
+        public ICommand PlaySongItemCMD { get; set; }
+        public ICommand PlayVideoItemCMD { get; set; }
+        public ICommand PlayPictureItemCMD { get; set; }
         
         public ICommand DeleteFileCMD { get; set; }
+        public ICommand DeleteVideoItemCMD { get; set; }
+        public ICommand DeletePictureItemCMD { get; set; }
+
         public ICommand AddToCurrentListCMD { get; set; }
+        public ICommand AddVideoCurrentListCMD { get; set; }
+        public ICommand AddPictureCurrentListCMD { get; set; }
         
 
         public ICommand ShowPlaylistsListCMD { get; set; }
@@ -612,25 +618,6 @@ namespace SlideBarMVVM
             #endregion
 
 
-            #region Show Playlists List
-
-            ShowPlaylistsListCMD = new Command(new Action(() =>
-            {
-                IsPlaylistMode = true;
-                SongsLIST = null;
-                PlaylistName = "Select your playlist";
-                ShowPlaylistList = true;
-                ShowFilters = false;
-                GenresLIST = null;
-                ArtistsLIST = null;
-                AlbumsLIST = null;
-                //AllGenresText = "Ouech";
-                //AllArtistsText = "TonTon";
-                //AllAlbumsText = " ! ! !";
-            }));
-
-            #endregion
-
 
             #region Play Song Item
 
@@ -679,6 +666,117 @@ namespace SlideBarMVVM
             #endregion
 
 
+            
+            #region Delete File
+
+            DeleteFileCMD = new Command(new Action(() =>
+            {
+                if (SelectedSong != null)
+                {
+                    MessageBoxResult yo = MessageBox.Show("This file will be deleted from you library\nDo you want to delete the file from your computer?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (yo == MessageBoxResult.Yes)
+                    {
+                        File.Delete(Path.GetFullPath(SelectedSong.Path));
+                    }
+                    if (IsPlaylistMode == false)
+                    {
+                        Lib.Songs.Remove(SelectedSong);
+                        RefreshFirstDatas();
+                    }
+                    else
+                    {
+                        SelectedPlaylist.Songs.Remove(SelectedSong);
+                        Lib.MediaPaths.Remove(SelectedSong.Path);
+                        SongsLIST = null;
+                        SongsLIST = SelectedPlaylist.Songs;
+                    }
+                }
+            }));
+
+            #endregion
+
+            #region Delete Video Item
+            
+            DeleteVideoItemCMD = new Command(new Action(() =>
+            {
+                if (SelectedVideo != null)
+                {
+                    MessageBoxResult yo = MessageBox.Show("This file will be deleted from you library\nDo you want to delete the file from your computer?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (yo == MessageBoxResult.Yes)
+                    {
+                        try 
+                        {
+                            File.Delete(Path.GetFullPath(SelectedVideo.PathOfFile));
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "A problem occurred");
+                        }
+                    }
+                    Lib.Videos.Remove(SelectedVideo);
+                    Lib.MediaPaths.Remove(SelectedVideo.PathOfFile);
+                    VideosList = null;
+                    VideosList = Lib.Videos;
+                    
+                }
+            }));
+
+            #endregion
+
+            #region Delete Picture Item
+
+            DeletePictureItemCMD = new Command(new Action(() =>
+            {
+                if (SelectedPicture != null)
+                {
+                    MessageBoxResult yo = MessageBox.Show("This file will be deleted from you library\nDo you want to delete the file from your computer?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (yo == MessageBoxResult.Yes)
+                    {
+                        try
+                        {
+                            File.Delete(Path.GetFullPath(SelectedPicture.PathOfFile));
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "A problem occurred");
+                        }
+                    }
+                    Lib.Pictures.Remove(SelectedPicture);
+                    Lib.MediaPaths.Remove(SelectedPicture.PathOfFile);
+                    PicturesList = null;
+                    PicturesList = Lib.Pictures;
+                }
+            }));
+
+            #endregion
+
+
+
+            #region Add to current List
+            AddToCurrentListCMD = new Command(new Action(() =>
+            {
+                CurrentList.getInstance().addElement(Path.GetFullPath(SelectedSong.Path));
+            }));
+            #endregion
+
+            #region Add Video current List
+            AddVideoCurrentListCMD = new Command(new Action(() =>
+            {
+                if (SelectedVideo != null)
+                    CurrentList.getInstance().addElement(Path.GetFullPath(SelectedVideo.PathOfFile));
+            }));
+            #endregion
+
+            #region Add Picture current List
+            AddPictureCurrentListCMD = new Command(new Action(() =>
+            {
+                if (SelectedPicture != null)
+                    CurrentList.getInstance().addElement(Path.GetFullPath(SelectedPicture.PathOfFile));
+            }));
+            #endregion
+
+
+
             #region Filters All
 
             AllGenresCMD = new Command(new Action(() =>
@@ -721,6 +819,9 @@ namespace SlideBarMVVM
                 OpenFileDialog ofd = new OpenFileDialog();
                 ofd.Multiselect = true;
                 ofd.Filter = "All files (*.*)|*.*";
+                ofd.Filter += "|Music Files (*.mp3,*.m4a,*.wma)|*.mp3,*.m4a,*.wma";
+                ofd.Filter += "|Video Files (*.mp4,*.avi,*.mov)|*.mp4,*.avi,*.mov";
+                ofd.Filter += "|Picture Files (*.jpg,*.bmp,*.png,*.tif,*.gif)|*.jpg,*.bmp,*.png,*.tif,*.gif";
                 try
                 {
                     if (ofd.ShowDialog() == true)
@@ -738,39 +839,7 @@ namespace SlideBarMVVM
 
             #endregion
 
-            #region Delete File
-
-            DeleteFileCMD = new Command(new Action(() =>
-            {
-                if (SelectedSong != null)
-                {
-                    MessageBoxResult yo = MessageBox.Show("This will be deleted from you library\nDo you want to delete the file from your computer?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    if (yo == MessageBoxResult.Yes)
-                    {
-                        File.Delete(Path.GetFullPath(SelectedSong.Path));
-                    }
-                    if (IsPlaylistMode == false)
-                    {
-                        Lib.Songs.Remove(SelectedSong);
-                        RefreshFirstDatas();
-                    }
-                    else
-                    {
-                        SelectedPlaylist.Songs.Remove(SelectedSong);
-                        SongsLIST = null;
-                        SongsLIST = SelectedPlaylist.Songs;
-                    }
-                }
-            }));
-
-            #endregion
-
-            #region Add to current List
-            AddToCurrentListCMD = new Command(new Action(() =>
-            {
-                CurrentList.getInstance().addElement(Path.GetFullPath(SelectedSong.Path));
-            }));
-            #endregion
+            
 
             #region Open Explorer
             OpenFileInExplorerCMD = new Command(new Action(() =>
@@ -778,7 +847,6 @@ namespace SlideBarMVVM
                 Process.Start(Path.GetDirectoryName(SelectedSong.Path));
             }));
             #endregion
-
             
             #region Add to Playlist
             AddToPlaylistCMD = new CommandWithParameter(new Action<object>((o) =>
@@ -795,6 +863,26 @@ namespace SlideBarMVVM
                 }));
             #endregion
 
+
+
+            #region Show Playlists List
+
+            ShowPlaylistsListCMD = new Command(new Action(() =>
+            {
+                IsPlaylistMode = true;
+                SongsLIST = null;
+                PlaylistName = "Select your playlist";
+                ShowPlaylistList = true;
+                ShowFilters = false;
+                GenresLIST = null;
+                ArtistsLIST = null;
+                AlbumsLIST = null;
+                //AllGenresText = "Ouech";
+                //AllArtistsText = "TonTon";
+                //AllAlbumsText = " ! ! !";
+            }));
+
+            #endregion
 
             #region Add Playlist
 
