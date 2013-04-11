@@ -5,5 +5,9 @@
   <Description />
   <CreationDate>2013-04-11T14:51:32.0871718+02:00</CreationDate>
   <Like>0</Like>
-  <Songs />
+  <Songs>
+    <Song>
+      <Path>E:\Programs Files\Itunes\Music\Creedence Clearwater Revival\Cosmo's Factory\01 Ramble Tamble.mp3</Path>
+    </Song>
+  </Songs>
 </Playlist>

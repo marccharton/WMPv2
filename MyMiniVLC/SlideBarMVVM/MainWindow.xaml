@@ -1306,6 +1306,11 @@
                 <Button Content="{Binding Name}" Template="{DynamicResource ListLibraryButtonTemplate}" Command="{Binding Path=DataContext.LoadArtistCMD, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}"/>
             </Grid>
         </DataTemplate>
+        <DataTemplate x:Key="ListPlaylistsItemTemplate">
+            <Grid Width="150" Height="17">
+                <Button Content="{Binding Name}" Template="{DynamicResource ListLibraryButtonTemplate}" Command="{Binding Path=DataContext.LoadPlaylistCMD, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}"/>
+            </Grid>
+        </DataTemplate>
         <DataTemplate x:Key="ListAlbumsItemTemplate">
             <Grid Width="193" Height="17">
                 <Button Content="{Binding Name}" Template="{DynamicResource ListLibraryButtonTemplate}" Command="{Binding Path=DataContext.LoadAlbumCMD, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}"/>
@@ -1523,11 +1528,31 @@
     			<EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0"/>
     		</ThicknessAnimationUsingKeyFrames>
     	</Storyboard>
+        <Storyboard x:Key="OnPlaylistButtonClick">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="playlistListBox">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1.022"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.021"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="playlistListBox">
+                <EasingDoubleKeyFrame KeyTime="0" Value="4.417"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="4.251"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="playlistListBox">
+                <EasingThicknessKeyFrame KeyTime="0" Value="8,111,8,470"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="8,111,8,200"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="playlistListBox">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.1" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:1" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>-->
+        </Storyboard>
         <!-- ************************ Fin de Storyboard ************************** -->
 
         <!-- ******************************* Misc ******************************** -->
         <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
         <System:Double x:Key="DoubleSpeedRatio">1</System:Double>
+        
         <!-- *************************** Fin de Misc ***************************** -->
 	
 	</Window.Resources>
@@ -1546,6 +1571,9 @@
 		</EventTrigger>
 		<EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="gridCurrentList">
 			<BeginStoryboard Storyboard="{StaticResource OnMouseLeave}"/>
+		</EventTrigger>
+		<EventTrigger RoutedEvent="ButtonBase.Click" SourceName="playlistTitle">
+			<BeginStoryboard x:Name="OnPlaylistButtonClick_BeginStoryboard" Storyboard="{StaticResource OnPlaylistButtonClick}"/>
 		</EventTrigger>
     </Window.Triggers>
     
@@ -1738,21 +1766,32 @@
 					</Grid.ColumnDefinitions>
 
                     <Button x:Name="playlistTitle" Command="{Binding ShowPlaylistsListCMD}" Content="Playlists" HorizontalAlignment="Left" Margin="15,42.52,0,0"  Width="119" VerticalAlignment="Top" Template="{DynamicResource LibraryButtonTemplate}"/>
-                    
-					<ListBox Visibility="{Binding Path=ShowPlaylistList,Converter={StaticResource booleanToVisibilityConverter}}" Margin="8,111,8,63" BorderThickness="0" Background="#39FFFFFF" ItemsSource="{Binding PlaylistsLIST}" SelectedItem="{Binding SelectedPlaylist}" Foreground="White" BorderBrush="#92328BC4">
-                        <ListBox.ContextMenu>
-                            <ContextMenu Name="contextMenuPlaylist" Background="White" BorderThickness="0" Foreground="#FF1F477C">
-                                <MenuItem Header="Play" Command="{Binding PlayPlaylistCMD}"/>
-                                <MenuItem Header="Rename" Command="{Binding RenamePlaylistCMD}"/>
-                                <MenuItem Header="Delete" Command="{Binding DeletePlaylistCMD}"/>
-                            </ContextMenu>
-                        </ListBox.ContextMenu>
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="MouseDoubleClick">
-                                <i:InvokeCommandAction Command="{Binding LoadPlaylistCMD}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </ListBox>
+
+
+                    <ListBox x:Name="playlistListBox" Visibility="{Binding Path=ShowPlaylistList,Converter={StaticResource booleanToVisibilityConverter}}" Margin="8,111,8,63" BorderThickness="0" Background="#39FFFFFF" ItemsSource="{Binding PlaylistsLIST}" SelectedItem="{Binding SelectedPlaylist}" Foreground="White" BorderBrush="#92328BC4" RenderTransformOrigin="0.5,0.5" ItemTemplate="{DynamicResource ListPlaylistsItemTemplate}">
+                            <ListBox.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ListBox.RenderTransform>
+                            <ListBox.ContextMenu>
+                                <ContextMenu Name="contextMenuPlaylist" Background="White" BorderThickness="0" Foreground="#FF1F477C">
+                                    <MenuItem Header="Play" Command="{Binding PlayPlaylistCMD}"/>
+                                    <MenuItem Header="Rename" Command="{Binding RenamePlaylistCMD}"/>
+                                    <MenuItem Header="Delete" Command="{Binding DeletePlaylistCMD}"/>
+                                </ContextMenu>
+                            </ListBox.ContextMenu>
+                            <!--<i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding LoadPlaylistCMD}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>-->
+                        </ListBox>
+                    <!--<Border BorderBrush="#FF000000" BorderThickness="1,1,1,1"  CornerRadius="10,10,10,10" Background="white">
+                    </Border>-->
 
 
                     <GridSplitter Grid.Column="1" x:Name="SplitterCentre" Width="1" ResizeBehavior="PreviousAndNext"

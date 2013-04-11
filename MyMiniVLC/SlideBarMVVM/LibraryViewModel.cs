@@ -20,7 +20,6 @@ namespace SlideBarMVVM
         Library Lib;
         
         public bool IsPlaylistMode = false;
-        public bool IsAddPlaylistMode = false;
         
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -458,25 +457,23 @@ namespace SlideBarMVVM
 
             #region Load Playlist
 
-            LoadPlaylistCMD = new Command(new Action(() =>
+            LoadPlaylistCMD = new CommandWithParameter(new Action<object>((o) =>
             {
-                if (IsAddPlaylistMode == false)
+                SelectedPlaylist = o as Playlist;
+                if (SelectedPlaylist != null)
                 {
-                    if (SelectedPlaylist != null)
-                    {
-                        SongsLIST = SelectedPlaylist.Songs;
-                        PlaylistName = SelectedPlaylist.Name;
-                    }
+                    SongsLIST = SelectedPlaylist.Songs;
+                    PlaylistName = SelectedPlaylist.Name;
                 }
-                else
-                {
-                    this.AddToPlaylistCMD.Execute("");
-                    ShowPlaylistList = false;
-                    IsAddPlaylistMode = false;
-                    if (SelectedPlaylist != null)
-                        MessageBox.Show("Song added to '" + SelectedPlaylist.Name + "'");
-                    PlaylistsLIST = Lib.Playlists;
-                }
+                //else
+                //{
+                //    this.AddToPlaylistCMD.Execute("");
+                //    ShowPlaylistList = false;
+                //    IsAddPlaylistMode = false;
+                //    if (SelectedPlaylist != null)
+                //        MessageBox.Show("Song added to '" + SelectedPlaylist.Name + "'");
+                //    PlaylistsLIST = Lib.Playlists;
+                //}
             }));
 
             #endregion
@@ -791,20 +788,13 @@ namespace SlideBarMVVM
                     if (SelectedSong != null && SelectedPlaylist != null)
                     {
                         SelectedPlaylist.AddSong(SelectedSong);
-                        MessageBox.Show("Song added to '" + SelectedPlaylist.Name + "'");
+                        MessageBox.Show(SelectedSong.Title + " added to '" + SelectedPlaylist.Name + "'");
                     }
                     else
                         MessageBox.Show("SelectedSong : " + SelectedSong + "\nSelectedPlaylist" + SelectedPlaylist);
                 }));
             #endregion
 
-            #region Run Add Playlist Mode
-            RunAddPlaylistModeCMD = new Command(new Action(() =>
-                {
-                    IsAddPlaylistMode = true;
-                    ShowPlaylistList = true;
-                }));
-            #endregion
 
             #region Add Playlist
 
