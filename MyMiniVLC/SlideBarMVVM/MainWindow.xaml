@@ -1600,13 +1600,29 @@
         
         <Menu Height="20" Margin="0" VerticalAlignment="Top">
             <MenuItem Header="File" Height="20" Width="50">
-                <MenuItem Header="Open" Height="31" Width="170" Command="{Binding OpenDialogCommand, Source={StaticResource ViewModelDataSource}}"/>
-                <MenuItem Header="Close" Height="31" Width="170" Command="{Binding CloseWindow, Source={StaticResource ViewModelDataSource}}" />
+                <MenuItem Header="Open" Height="31" Width="170" Command="{Binding OpenDialogCommand, Source={StaticResource ViewModelDataSource}}">
+                    <MenuItem.Icon>
+                        <Image Width="20" Height="20" Source="/Assets/Open2.ico" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Close" Height="31" Width="170" Command="{Binding CloseWindow, Source={StaticResource ViewModelDataSource}}">
+                    <MenuItem.Icon>
+                        <Image Width="20" Height="20" Source="/Assets/Close.ico" />
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Edit" Height="20" Width="50"/>
             <MenuItem Header="Library" Height="20" Width="50"  DataContext="{Binding Source={StaticResource ViewModelLibrary}}">
-                <MenuItem Header="Import File" Height="31" Width="170" d:LayoutOverrides="Width" Command="{Binding ImportFileCMD}"/>
-                <MenuItem Header="Import Directory" Height="31" Command="{Binding ImportDirectoryCMD}"/>
+                <MenuItem Header="Import File" Height="31" Width="170" d:LayoutOverrides="Width" Command="{Binding ImportFileCMD}">
+                    <MenuItem.Icon>
+                        <Image Width="20" Height="20" Source="/Assets/ImportFile.ico" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Import Directory" Height="31" Command="{Binding ImportDirectoryCMD}">
+                    <MenuItem.Icon>
+                        <Image Width="20" Height="20" Source="/Assets/ImportDirectory.ico" />
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
         </Menu>
 
