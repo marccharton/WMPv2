@@ -1245,10 +1245,10 @@
     		</Grid>
     	</DataTemplate>
     	<DataTemplate x:Key="LibraryListBoxItemTemplate">
-            <Grid Height="142.667" Width="450">
+            <Grid Height="142.667" Width="280">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.307*"/>
-                    <ColumnDefinition Width="0.693*"/>
+                    <ColumnDefinition Width="0.499*"/>
+                    <ColumnDefinition Width="0.501*"/>
                 </Grid.ColumnDefinitions>
                 <Image Margin="8" Source="20-03-2013 18-17-01.png" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto"/>
                 <Grid Grid.Column="1">
@@ -1258,21 +1258,21 @@
                         <RowDefinition Height="0.25*"/>
                         <RowDefinition Height="0.25*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Nom :" Width="106.517" Height="20" VerticalAlignment="Stretch" FontSize="13.333" Foreground="White" Margin="16.333,8,0,7.667"/>
-                    <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding Name}" Width="189" Height="20" VerticalAlignment="Center" Foreground="#FFD0D0D0"/>
-                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Extension :" Width="106.517" Height="20" VerticalAlignment="Stretch" FontSize="13.333" Foreground="White" Margin="16.333,8,0,7.501" Grid.Row="1"/>
-                    <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding Extension}" Width="189" Height="20" VerticalAlignment="Stretch" Foreground="#FFD0D0D0" Margin="0,8,0,7.667" Grid.Row="1"/>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Nom :" Width="50" Height="20" VerticalAlignment="Stretch" FontSize="13.333" Foreground="White" Margin="16.333,8,0,7.667"/>
+                    <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding Name}" Width="81.384" Height="20" VerticalAlignment="Center" Foreground="#FFD0D0D0"/>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Ext :" Width="50" Height="20" VerticalAlignment="Stretch" FontSize="13.333" Foreground="White" Margin="16.333,8,0,7.501" Grid.Row="1"/>
+                    <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding Extension}" Width="81.384" Height="20" VerticalAlignment="Stretch" Foreground="#FFD0D0D0" Margin="0,7.999,0,7.667" Grid.Row="1"/>
                 </Grid>
             </Grid>
         </DataTemplate>
 		<DataTemplate x:Key="PictureLibraryListBoxItemTemplate">
-            <Grid Height="142.667" Width="450">
+            <Grid Height="142.667" Width="316">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.307*"/>
-                    <ColumnDefinition Width="0.693*"/>
+                    <ColumnDefinition Width="0.408*"/>
+                    <ColumnDefinition Width="0.592*"/>
                 </Grid.ColumnDefinitions>
                 <Image Margin="8" Source="{Binding PathOfFile}" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto"/>
-                <Grid Grid.Column="1">
+                <Grid Grid.Column="1" Margin="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.25*"/>
                         <RowDefinition Height="0.25*"/>
@@ -1280,9 +1280,9 @@
                         <RowDefinition Height="0.25*"/>
                     </Grid.RowDefinitions>
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Nom :" Width="106.517" Height="20" VerticalAlignment="Stretch" FontSize="13.333" Foreground="White" Margin="16.333,8,0,7.667"/>
-                    <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding Name}" Width="189" Height="20" VerticalAlignment="Center" Foreground="#FFD0D0D0"/>
+                    <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding Name}" Width="102" Height="20" VerticalAlignment="Center" Foreground="#FFD0D0D0" d:LayoutOverrides="HorizontalAlignment"/>
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Extension :" Width="106.517" Height="20" VerticalAlignment="Stretch" FontSize="13.333" Foreground="White" Margin="16.333,8,0,7.501" Grid.Row="1"/>
-                    <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding Extension}" Width="189" Height="20" VerticalAlignment="Stretch" Foreground="#FFD0D0D0" Margin="0,8,0,7.667" Grid.Row="1"/>
+                    <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding Extension}" Width="102" Height="20" VerticalAlignment="Stretch" Foreground="#FFD0D0D0" Margin="0,7.999,0,7.667" Grid.Row="1" d:LayoutOverrides="HorizontalAlignment"/>
                 </Grid>
             </Grid>
         </DataTemplate>
@@ -1479,7 +1479,7 @@
         	</Grid>
         </ControlTemplate>
         <ControlTemplate x:Key="ActionButtonTemplate" TargetType="{x:Type Button}">
-            <Grid x:Name="grid" Margin="3,0,-90,0">
+            <Grid x:Name="grid" Margin="3,0">
                 <Grid.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#4F3F3F3F" Offset="1"/>
@@ -1552,6 +1552,12 @@
         <!-- ******************************* Misc ******************************** -->
         <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
         <System:Double x:Key="DoubleSpeedRatio">1</System:Double>
+        <ItemsPanelTemplate x:Key="ItemsPanelLayoutPictureTemplate">
+        	<WrapPanel Height="Auto"/>
+        </ItemsPanelTemplate>
+        <ItemsPanelTemplate x:Key="ItemsPanelLayoutVideoTemplate1">
+        	<WrapPanel Height="Auto"/>
+        </ItemsPanelTemplate>
         
         <!-- *************************** Fin de Misc ***************************** -->
 	
@@ -1981,7 +1987,7 @@
                         <TextBlock x:Name="PlaylistName" TextWrapping="Wrap" Height="20" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10,0,0,10" Text="{Binding PlaylistName}" Style="{DynamicResource simpleTextStyle}" />
                     </Grid>
                     <Button x:Name="libraryTitle" Command="{Binding LoadLibraryCMD}" Content="Library" HorizontalAlignment="Left" Margin="15,8,61.595,0"  Width="119" VerticalAlignment="Top" Template="{DynamicResource LibraryButtonTemplate}" />
-                    <Button Content="New Playlist" BorderThickness="0" Height="23.54" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" Margin="5,81,0,0" Template="{DynamicResource ActionButtonTemplate}" Command="{Binding AddPlaylistCMD}"/>
+                    <Button Content="New Playlist" BorderThickness="0" Height="23.54" VerticalAlignment="Top" HorizontalAlignment="Stretch" Width="auto" Margin="5,81,0,0" Template="{DynamicResource ActionButtonTemplate}" Command="{Binding AddPlaylistCMD}"/>
                 </Grid>
 			</TabItem>
 
@@ -2009,7 +2015,7 @@
             				<GradientStop Color="#FF0062FF"/>
             			</LinearGradientBrush>
             		</Grid.Background>
-                    <ListBox x:Name="VideoList" BorderThickness="0" Margin="0,0,0,51.78" Background="{x:Null}"  ItemTemplate="{DynamicResource LibraryListBoxItemTemplate}" ItemsSource="{Binding VideosList}" SelectedItem="{Binding SelectedVideo}">
+                    <ListBox x:Name="VideoList" BorderThickness="0" Margin="0,0,0,51.78" Background="{x:Null}"  ItemTemplate="{DynamicResource LibraryListBoxItemTemplate}" ItemsSource="{Binding VideosList}" SelectedItem="{Binding SelectedVideo}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsPanel="{DynamicResource ItemsPanelLayoutVideoTemplate1}">
                         <ListBox.ContextMenu>
                             <ContextMenu Name="contextMenuVideo" Background="White" BorderThickness="0" Foreground="#FF1F477C">
                                 <MenuItem Header="Play" Command="{Binding PlayVideoItemCMD}">
@@ -2063,7 +2069,7 @@
             				<GradientStop Color="#FF0062FF"/>
             			</LinearGradientBrush>
             		</Grid.Background>
-                    <ListBox x:Name="PictureList" BorderThickness="0" Margin="0,0,0,55.78" Background="{x:Null}" ItemTemplate="{DynamicResource PictureLibraryListBoxItemTemplate}" ItemsSource="{Binding PicturesList}"  SelectedItem="{Binding SelectedPicture}" HorizontalAlignment="Stretch">
+                    <ListBox x:Name="PictureList" BorderThickness="0" Margin="0,0,0,55.78" Background="{x:Null}" ItemTemplate="{DynamicResource PictureLibraryListBoxItemTemplate}" ItemsSource="{Binding PicturesList}"  SelectedItem="{Binding SelectedPicture}" HorizontalAlignment="Stretch" ItemsPanel="{DynamicResource ItemsPanelLayoutPictureTemplate}" ScrollViewer.CanContentScroll="True" VerticalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ListBox.ContextMenu>
                             <ContextMenu Name="contextMenuPicture" Background="White" BorderThickness="0" Foreground="#FF1F477C">
                                 <MenuItem Header="Play" Command="{Binding PlayPictureItemCMD}">
