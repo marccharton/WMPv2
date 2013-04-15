@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/open.ico")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("wmp2.ico")]
 
 
