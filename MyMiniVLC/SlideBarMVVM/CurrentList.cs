@@ -125,7 +125,7 @@ namespace SlideBarMVVM
                                 this.ResetList();
                             this.ChangedEvent(this, null);
                         }
-                        else 
+                        else
                         {
                             this._idx = this._list.FindIndex(song => song == this._shuffleList.ElementAt(_shuffleIdx));
                             if (this._idx == -1)
@@ -387,6 +387,11 @@ namespace SlideBarMVVM
                 this._list.Insert(idxto, cur);
                 if (cur.IsPlaying)
                     this._idx = idxto;
+                else if (idxto < this._idx || (this._idx == 0 && idxto == 0))
+                    this._idx++;
+                else
+                    this._idx--;
+                this.Random();
                 this.ModifiedEvent(this, null);
             }
         }
