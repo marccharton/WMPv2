@@ -858,8 +858,8 @@ namespace SlideBarMVVM
                 OpenFileDialog ofd = new OpenFileDialog();
                 ofd.Multiselect = true;
                 ofd.Filter = "All files (*.*)|*.*";
-                ofd.Filter += "|Music Files (*.mp3;*.m4a;*.wma)|*.mp3;*.m4a;*.wma";
-                ofd.Filter += "|Video Files (*.mp4;*.avi;*.mov)|*.mp4;*.avi;*.mov";
+                ofd.Filter += "|Music Files (*.mp3;*.m4a;*.wma;*.wav;*.flac)|*.mp3;*.m4a;*.wma;*.wav;*.flac";
+                ofd.Filter += "|Video Files (*.mp4;*.avi;*.mov;*.mpg)|*.mp4;*.avi;*.mov;*.mpg";
                 ofd.Filter += "|Picture Files (*.jpg;*.bmp;*.png;*.tif;*.gif)|*.jpg;*.bmp;*.png;*.tif;*.gif";
                 try
                 {
