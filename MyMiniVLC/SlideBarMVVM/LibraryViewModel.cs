@@ -394,7 +394,24 @@ namespace SlideBarMVVM
                 }
             }
         }
-        
+
+
+        private List<Song> _selectedSongItems;
+        public List<Song> SelectedSongItems 
+        {
+            get
+            {
+                return _selectedSongItems;
+            }
+            set
+            {
+                if (_selectedSongItems != value)
+                {
+                    _selectedSongItems = value;
+                    NotifyPropertyChanged("SelectedSongItems");
+                }
+            }
+        }
 
 
         public ICommand LoadGenreCMD { get; set; }
@@ -439,6 +456,8 @@ namespace SlideBarMVVM
 
         public LibraryViewModel()
         {
+            SelectedSongItems = new List<Song>();
+            
             LoadLibrary();
             LoadPlaylistModule();
 
@@ -471,15 +490,6 @@ namespace SlideBarMVVM
                     SongsLIST = SelectedPlaylist.Songs;
                     PlaylistName = SelectedPlaylist.Name;
                 }
-                //else
-                //{
-                //    this.AddToPlaylistCMD.Execute("");
-                //    ShowPlaylistList = false;
-                //    IsAddPlaylistMode = false;
-                //    if (SelectedPlaylist != null)
-                //        MessageBox.Show("Song added to '" + SelectedPlaylist.Name + "'");
-                //    PlaylistsLIST = Lib.Playlists;
-                //}
             }));
 
             #endregion
@@ -623,6 +633,11 @@ namespace SlideBarMVVM
 
             PlaySongItemCMD = new Command(new Action(() =>
             {
+                if (SelectedSongItems.Count > 0)
+                {
+                    MessageBox.Show("Ma liste n'est pas vide : count = " + SelectedSongItems.Count);
+                }
+                
                 if (SelectedSong != null)
                 {
                     //MessageBox.Show("YO MON GARS CA PETE !!");
@@ -678,17 +693,17 @@ namespace SlideBarMVVM
                     {
                         File.Delete(Path.GetFullPath(SelectedSong.Path));
                     }
-                    if (IsPlaylistMode == false)
+                    if (IsPlaylistMode == true)
                     {
-                        Lib.Songs.Remove(SelectedSong);
-                        RefreshFirstDatas();
+                        SelectedPlaylist.Songs.Remove(SelectedSong);
+                        SongsLIST = null;
+                        SongsLIST = SelectedPlaylist.Songs;
                     }
                     else
                     {
-                        SelectedPlaylist.Songs.Remove(SelectedSong);
+                        Lib.Songs.Remove(SelectedSong);
                         Lib.MediaPaths.Remove(SelectedSong.Path);
-                        SongsLIST = null;
-                        SongsLIST = SelectedPlaylist.Songs;
+                        RefreshFirstDatas();
                     }
                 }
             }));
@@ -776,6 +791,29 @@ namespace SlideBarMVVM
             #endregion
 
 
+            #region Open Explorer
+            OpenFileInExplorerCMD = new Command(new Action(() =>
+            {
+                Process.Start(Path.GetDirectoryName(SelectedSong.Path));
+            }));
+            #endregion
+
+            #region Add to Playlist
+            AddToPlaylistCMD = new CommandWithParameter(new Action<object>((o) =>
+            {
+                if (o != null)
+                    SelectedPlaylist = o as Playlist;
+                if (SelectedSong != null && SelectedPlaylist != null)
+                {
+                    SelectedPlaylist.AddSong(SelectedSong);
+                    MessageBox.Show(SelectedSong.Title + " added to '" + SelectedPlaylist.Name + "'");
+                }
+                else
+                    MessageBox.Show("SelectedSong : " + SelectedSong + "\nSelectedPlaylist" + SelectedPlaylist);
+            }));
+            #endregion
+
+
 
             #region Filters All
 
@@ -794,6 +832,7 @@ namespace SlideBarMVVM
                 this.LoadArtistCMD.Execute(null);
             }));
             #endregion
+
 
 
             #region Import Directory
@@ -819,9 +858,9 @@ namespace SlideBarMVVM
                 OpenFileDialog ofd = new OpenFileDialog();
                 ofd.Multiselect = true;
                 ofd.Filter = "All files (*.*)|*.*";
-                ofd.Filter += "|Music Files (*.mp3,*.m4a,*.wma)|*.mp3,*.m4a,*.wma";
-                ofd.Filter += "|Video Files (*.mp4,*.avi,*.mov)|*.mp4,*.avi,*.mov";
-                ofd.Filter += "|Picture Files (*.jpg,*.bmp,*.png,*.tif,*.gif)|*.jpg,*.bmp,*.png,*.tif,*.gif";
+                ofd.Filter += "|Music Files (*.mp3;*.m4a;*.wma)|*.mp3;*.m4a;*.wma";
+                ofd.Filter += "|Video Files (*.mp4;*.avi;*.mov)|*.mp4;*.avi;*.mov";
+                ofd.Filter += "|Picture Files (*.jpg;*.bmp;*.png;*.tif;*.gif)|*.jpg;*.bmp;*.png;*.tif;*.gif";
                 try
                 {
                     if (ofd.ShowDialog() == true)
@@ -841,27 +880,7 @@ namespace SlideBarMVVM
 
             
 
-            #region Open Explorer
-            OpenFileInExplorerCMD = new Command(new Action(() =>
-            {
-                Process.Start(Path.GetDirectoryName(SelectedSong.Path));
-            }));
-            #endregion
             
-            #region Add to Playlist
-            AddToPlaylistCMD = new CommandWithParameter(new Action<object>((o) =>
-                {
-                    if (o != null)
-                        SelectedPlaylist = o as Playlist;
-                    if (SelectedSong != null && SelectedPlaylist != null)
-                    {
-                        SelectedPlaylist.AddSong(SelectedSong);
-                        MessageBox.Show(SelectedSong.Title + " added to '" + SelectedPlaylist.Name + "'");
-                    }
-                    else
-                        MessageBox.Show("SelectedSong : " + SelectedSong + "\nSelectedPlaylist" + SelectedPlaylist);
-                }));
-            #endregion
 
 
 
@@ -871,15 +890,17 @@ namespace SlideBarMVVM
             {
                 IsPlaylistMode = true;
                 SongsLIST = null;
-                PlaylistName = "Select your playlist";
+                PlaylistName = "There's no playlist";
+                if (Lib.Playlists.Count > 0)
+                {
+                    SongsLIST = Lib.Playlists.First().Songs;
+                    PlaylistName = Lib.Playlists.First().Name;
+                }
                 ShowPlaylistList = true;
                 ShowFilters = false;
                 GenresLIST = null;
                 ArtistsLIST = null;
                 AlbumsLIST = null;
-                //AllGenresText = "Ouech";
-                //AllArtistsText = "TonTon";
-                //AllAlbumsText = " ! ! !";
             }));
 
             #endregion

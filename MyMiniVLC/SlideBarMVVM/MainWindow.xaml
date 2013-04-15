@@ -1784,42 +1784,45 @@
                     <Button x:Name="playlistTitle" Command="{Binding ShowPlaylistsListCMD}" Content="Playlists" HorizontalAlignment="Left" Margin="15,42.52,0,0"  Width="119" VerticalAlignment="Top" Template="{DynamicResource LibraryButtonTemplate}"/>
 
 
-                    <ListBox x:Name="playlistListBox" Visibility="{Binding Path=ShowPlaylistList,Converter={StaticResource booleanToVisibilityConverter}}" Margin="8,111,8,63" BorderThickness="0" Background="#39FFFFFF" ItemsSource="{Binding PlaylistsLIST}" SelectedItem="{Binding SelectedPlaylist}" Foreground="White" BorderBrush="#92328BC4" RenderTransformOrigin="0.5,0.5" ItemTemplate="{DynamicResource ListPlaylistsItemTemplate}">
-                            <ListBox.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </ListBox.RenderTransform>
-                            <ListBox.ContextMenu>
-                                <ContextMenu Name="contextMenuPlaylist" Background="White" BorderThickness="0" Foreground="#FF1F477C">
-                                    <MenuItem Header="Play" Command="{Binding PlayPlaylistCMD}">
-                                        <MenuItem.Icon>
-                                            <Image Width="20" Height="20" Source="/Assets/Play.ico" />
-                                        </MenuItem.Icon>
-                                    </MenuItem>
-                                    <MenuItem Header="Rename" Command="{Binding RenamePlaylistCMD}">
-                                        <MenuItem.Icon>
-                                            <Image Width="20" Height="20" Source="/Assets/Rename.ico" />
-                                        </MenuItem.Icon>
-                                    </MenuItem>
-                                    <MenuItem Header="Delete" Command="{Binding DeletePlaylistCMD}">
-                                        <MenuItem.Icon>
-                                            <Image Width="20" Height="20" Source="/Assets/Delete.ico" />
-                                        </MenuItem.Icon>
-                                    </MenuItem>
-                                </ContextMenu>
-                            </ListBox.ContextMenu>
-                            <!--<i:Interaction.Triggers>
-                                <i:EventTrigger EventName="MouseDoubleClick">
-                                    <i:InvokeCommandAction Command="{Binding LoadPlaylistCMD}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>-->
-                        </ListBox>
-                    <!--<Border BorderBrush="#FF000000" BorderThickness="1,1,1,1"  CornerRadius="10,10,10,10" Background="white">
+                    <!--<Border BorderBrush="#FF000000" BorderThickness="1,1,1,1"  CornerRadius="10,10,10,10" Background="Transparent" Margin="8,108.54,8,0" Height="91" VerticalAlignment="Top">
                     </Border>-->
+                    <ListBox x:Name="playlistListBox" Visibility="{Binding Path=ShowPlaylistList,Converter={StaticResource booleanToVisibilityConverter}}" Margin="8,111,8,63" BorderThickness="0" Background="#39FFFFFF" ItemsSource="{Binding PlaylistsLIST}" SelectedItem="{Binding SelectedPlaylist}" Foreground="White" BorderBrush="#92328BC4" RenderTransformOrigin="0.5,0.5" ItemTemplate="{DynamicResource ListPlaylistsItemTemplate}">
+                        <ListBox.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ListBox.RenderTransform>
+                        <ListBox.ContextMenu>
+                            <ContextMenu Name="contextMenuPlaylist" Background="White" BorderThickness="0" Foreground="#FF1F477C">
+                                <MenuItem Header="Play" Command="{Binding PlayPlaylistCMD}">
+                                    <MenuItem.Icon>
+                                        <Image Width="20" Height="20" Source="/Assets/Play.ico" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="Rename" Command="{Binding RenamePlaylistCMD}">
+                                    <MenuItem.Icon>
+                                        <Image Width="20" Height="20" Source="/Assets/Rename.ico" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="Delete" Command="{Binding DeletePlaylistCMD}">
+                                    <MenuItem.Icon>
+                                        <Image Width="20" Height="20" Source="/Assets/Delete.ico" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
+                        <!--<i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding LoadPlaylistCMD}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>-->
+                    </ListBox>
+                    
+                    
+						
 
 
                     <GridSplitter Grid.Column="1" x:Name="SplitterCentre" Width="1" ResizeBehavior="PreviousAndNext"
@@ -1906,8 +1909,11 @@
                     			</RadialGradientBrush>
                     		</GridSplitter.Background>
                     	</GridSplitter>
-                    	<ListView Grid.Row="2" x:Name="listViewSongs" ItemsSource="{Binding SongsLIST}" SelectedItem="{Binding SelectedSong}" d:LayoutOverrides="HorizontalAlignment" Margin="0,4,0,53.017" Background="{x:Null}" BorderBrush="#FF698ED0" BorderThickness="0" Foreground="#FFD4D4D6">
-                    		<i:Interaction.Triggers>
+                        <ListView Grid.Row="2" x:Name="listViewSongs" ItemsSource="{Binding SongsLIST}" SelectedItem="{Binding SelectedSong}" d:LayoutOverrides="HorizontalAlignment" Margin="0,4,0,53.017" Background="{x:Null}" BorderBrush="#FF698ED0" BorderThickness="0" Foreground="#FFD4D4D6">
+                            <i:Interaction.Behaviors>
+                                <local:MultiSelectionBehavior x:Name="MultiSelectionBehavior" SelectedItems="{Binding SelectedSongItems}"/>
+                            </i:Interaction.Behaviors>
+                            <i:Interaction.Triggers>
                     			<i:EventTrigger EventName="MouseDoubleClick">
                                     <i:InvokeCommandAction Command="{Binding PlaySongItemCMD}" />
                     			</i:EventTrigger>
@@ -1972,11 +1978,10 @@
                     		</ListView.View>
                     	</ListView>
                     	<TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="MUSIC" VerticalAlignment="Bottom" Foreground="White" FontWeight="Bold" Grid.Row="2" Margin="0,0,8,3.237" Style="{DynamicResource TitleTextStyle}"/>
+                        <TextBlock x:Name="PlaylistName" TextWrapping="Wrap" Height="20" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10,0,0,10" Text="{Binding PlaylistName}" Style="{DynamicResource simpleTextStyle}" />
                     </Grid>
                     <Button x:Name="libraryTitle" Command="{Binding LoadLibraryCMD}" Content="Library" HorizontalAlignment="Left" Margin="15,8,61.595,0"  Width="119" VerticalAlignment="Top" Template="{DynamicResource LibraryButtonTemplate}" />
-                    <Button Content="New Playlist" BorderThickness="0" Height="23.54" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84" Margin="5,81,0,0" Template="{DynamicResource ActionButtonTemplate}" Command="{Binding AddPlaylistCMD}"/>
-                    <!--<TextBlock x:Name="PlaylistName" Text="COUCOU LES AMIS" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="89,64,0,502" Height="24" Grid.ColumnSpan="2" >
-                    </TextBlock>-->
+                    <Button Content="New Playlist" BorderThickness="0" Height="23.54" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" Margin="5,81,0,0" Template="{DynamicResource ActionButtonTemplate}" Command="{Binding AddPlaylistCMD}"/>
                 </Grid>
 			</TabItem>
 

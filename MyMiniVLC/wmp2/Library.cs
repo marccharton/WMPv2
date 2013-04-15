@@ -69,12 +69,13 @@ namespace wmp2
                     { error += "..."; i++; }
                 }
             }
-            
             return error;
         }
 
         public bool Serialize()
         {
+            if (File.Exists(PathOfLibFile))
+                File.Delete(PathOfLibFile);
             Serializer.Serialize(MediaPaths, PathOfLibFile, FileMode.OpenOrCreate, typeof(List<string>));
             return true;
         }
