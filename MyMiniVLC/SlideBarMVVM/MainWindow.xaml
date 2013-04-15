@@ -1594,6 +1594,8 @@
 
     <Window.InputBindings>
     	<KeyBinding Command="{Binding OpenDialogCommand, Source={StaticResource ViewModelDataSource}}"   Key="O" Modifiers="Control"/>
+        <KeyBinding Command="{Binding ImportFileCMD, Source={StaticResource ViewModelLibrary}}"  Key="I" Modifiers="Control"/>
+        <KeyBinding Command="{Binding ImportDirectoryCMD, Source={StaticResource ViewModelLibrary}}"  Key="I" Modifiers="Control+Shift"/>
     </Window.InputBindings>
 
 
@@ -1606,7 +1608,7 @@
         
         <Menu Height="20" Margin="0" VerticalAlignment="Top">
             <MenuItem Header="File" Height="20" Width="50">
-                <MenuItem Header="Open" Height="31" Width="170" Command="{Binding OpenDialogCommand, Source={StaticResource ViewModelDataSource}}">
+                <MenuItem Header="Open (Ctrl + O)" Height="31" Width="170" Command="{Binding OpenDialogCommand, Source={StaticResource ViewModelDataSource}}">
                     <MenuItem.Icon>
                         <Image Width="20" Height="20" Source="/Assets/Open2.ico" />
                     </MenuItem.Icon>
@@ -1619,12 +1621,12 @@
             </MenuItem>
             <MenuItem Header="Edit" Height="20" Width="50"/>
             <MenuItem Header="Library" Height="20" Width="50"  DataContext="{Binding Source={StaticResource ViewModelLibrary}}">
-                <MenuItem Header="Import File" Height="31" Width="170" d:LayoutOverrides="Width" Command="{Binding ImportFileCMD}">
+                <MenuItem Header="Import File (Ctrl + I)" Height="31" d:LayoutOverrides="Width" Command="{Binding ImportFileCMD}">
                     <MenuItem.Icon>
                         <Image Width="20" Height="20" Source="/Assets/ImportFile.ico" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Import Directory" Height="31" Command="{Binding ImportDirectoryCMD}">
+                <MenuItem Header="Import Directory (Ctrl + Shift + I)" Height="31" Command="{Binding ImportDirectoryCMD}">
                     <MenuItem.Icon>
                         <Image Width="20" Height="20" Source="/Assets/ImportDirectory.ico" />
                     </MenuItem.Icon>
@@ -1916,6 +1918,13 @@
                     		</GridSplitter.Background>
                     	</GridSplitter>
                         <ListView Grid.Row="2" x:Name="listViewSongs" ItemsSource="{Binding SongsLIST}" SelectedItem="{Binding SelectedSong}" d:LayoutOverrides="HorizontalAlignment" Margin="0,4,0,53.017" Background="{x:Null}" BorderBrush="#FF698ED0" BorderThickness="0" Foreground="#FFD4D4D6">
+                            <ListView.InputBindings>
+                                <KeyBinding Command="{Binding DeleteFileCMD}"  Key="Delete"/>
+                                <KeyBinding Command="{Binding RealDeleteFileCMD}"  Key="Delete" Modifiers="Shift"/>
+                                <KeyBinding Command="{Binding PlaySongItemCMD}"  Key="Enter"/>
+                                <KeyBinding Command="{Binding AddToCurrentListCMD}"  Key="Enter" Modifiers="Control"/>
+                                <KeyBinding Command="{Binding OpenFileInExplorerCMD}"  Key="E" Modifiers="Control"/>
+                            </ListView.InputBindings>
                             <i:Interaction.Behaviors>
                                 <local:MultiSelectionBehavior x:Name="MultiSelectionBehavior" SelectedItems="{Binding SelectedSongItems}"/>
                             </i:Interaction.Behaviors>
@@ -1926,7 +1935,7 @@
                     		</i:Interaction.Triggers>
                             <ListView.ContextMenu>
                                 <ContextMenu Name="contextMenu" Background="White" BorderThickness="0" Foreground="#FF1F477C">
-                                    <MenuItem Header="Play" Name="PlaySongItem" ToolTip="Lire cette chanson" Command="{Binding PlaySongItemCMD}">
+                                    <MenuItem Header="Play (Enter)" Name="PlaySongItem" ToolTip="Lire cette chanson" Command="{Binding PlaySongItemCMD}">
                                         <MenuItem.Icon>
                                             <Image Width="20" Height="20" Source="/Assets/Play.ico" />
                                         </MenuItem.Icon>
@@ -1952,12 +1961,12 @@
                                             </Style>
                                         </MenuItem.ItemContainerStyle>
                                     </MenuItem>
-                                    <MenuItem Header="Open in Explorer" Name="OpenInexplorer" ToolTip="Ouvrir dans l'explorateur Windows" Command="{Binding OpenFileInExplorerCMD}">
+                                    <MenuItem Header="Open in Explorer (Ctrl + E)" Name="OpenInexplorer" ToolTip="Ouvrir dans l'explorateur Windows" Command="{Binding OpenFileInExplorerCMD}">
                                         <MenuItem.Icon>
                                             <Image Width="20" Height="20" Source="/Assets/Explorer.ico" />
                                         </MenuItem.Icon>
                                     </MenuItem>
-                                    <MenuItem Header="Delete" Command="{Binding DeleteFileCMD}">
+                                    <MenuItem Header="Delete (Suppr)" Command="{Binding DeleteFileCMD}">
                                         <MenuItem.Icon>
                                             <Image Width="20" Height="20" Source="/Assets/Delete.ico" />
                                         </MenuItem.Icon>

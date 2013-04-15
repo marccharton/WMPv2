@@ -434,6 +434,7 @@ namespace SlideBarMVVM
         public ICommand PlayPictureItemCMD { get; set; }
         
         public ICommand DeleteFileCMD { get; set; }
+        public ICommand RealDeleteFileCMD { get; set; }
         public ICommand DeleteVideoItemCMD { get; set; }
         public ICommand DeletePictureItemCMD { get; set; }
 
@@ -691,7 +692,7 @@ namespace SlideBarMVVM
                     MessageBoxResult yo = MessageBox.Show("This file will be deleted from you library\nDo you want to delete the file from your computer?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (yo == MessageBoxResult.Yes)
                     {
-                        File.Delete(Path.GetFullPath(SelectedSong.Path));
+                        this.RealDeleteFileCMD.Execute(null);
                     }
                     if (IsPlaylistMode == true)
                     {
@@ -705,6 +706,23 @@ namespace SlideBarMVVM
                         Lib.MediaPaths.Remove(SelectedSong.Path);
                         RefreshFirstDatas();
                     }
+                }
+            }));
+
+            #endregion
+
+
+            #region Real Delete File
+
+            RealDeleteFileCMD = new Command(new Action(() =>
+            {
+                if (SelectedSong != null)
+                {
+                    MessageBoxResult yo = MessageBox.Show("Do you really want to delete this file from yout computer?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (yo == MessageBoxResult.Yes)
+                    {
+                        File.Delete(Path.GetFullPath(SelectedSong.Path));
+                    } 
                 }
             }));
 
